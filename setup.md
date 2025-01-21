@@ -146,7 +146,6 @@ Next, we'll install a few useful extensions. On the left-hand side of VSCode, yo
 :alt: vscodeextensions
 :width: 400px
 :align: left
-:figclass: margin
 ```
 
  - Python
