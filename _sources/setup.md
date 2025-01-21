@@ -33,8 +33,8 @@ Your computer is organized as a tree of *directories* (aka folders) which contai
 
 ```{figure} ./images/filestructure.png
 :alt: filestructure
-:width: 450px
-:align: right
+:width: 350px
+:align: left
 :figclass: margin
 
 An example folder heirarchy for MacOS. credit: Daniel J. Barrett
@@ -128,7 +128,42 @@ If you have any of the following already, you should skip those steps. These ins
 
  VSCode is pretty nice right out of the box, but it has some useful (and necessary) extensions and settings you'll want/need for this class.
 
- 
+  - First, we'll change a setting so that VSCode opens in your Data Science folder by default. Open settings, (<kbd>Ctrl</kbd>+<kbd>,</kbd> on PC, <kbd>Cmd</kbd>+<kbd>,</kbd> on Mac) or through the top menu bar Code > Settings > Settings.
+  - At the top of Settings is a search bar. Type "dialog default path". You should see this:
+  
+  ```{figure} ./images/VSCodeDefaultFolder.png
+:alt: vscodefolder
+:width: 700px
+:align: center
+```
+
+  - Enter (copy and paste) the path for your DS325 directory (in your OneDrive!) into the text field. To get the path for that directory:
+    - On PC, right-click on the folder you created and click "Copy as path".
+    - On Mac, right-click on the folder you created, and select "Get info". This opens a pop-up with information about the file/folder you've selected. Near the top, there is a field named "Where". Right-click this field and select "Copy Pathname".
+
+
+Next, we'll install a few useful extensions. On the left-hand side of VSCode, you should see a stack of icons. Select the extensions tab (looks like stacking blocks). You'll search for and install the following extensions:
+
+```{figure} ./images/VSCodeExtensions.png
+:alt: vscodeextensions
+:width: 350px
+:align: left
+:figclass: margin
+```
+
+ - Python
+ - PyLance - it may install with Python above, if so it will show as already installed.
+ - Python Indent
+ - Jupyter
+ - Data Wrangler - a colorful viewer for .csvs and other data table formats.
+ - GitHub Repositories - will allow you to clone, commit, and push repositories from VSCode
+ - GitHub Copilot - an LLM for coding
+
+
+
+
+
+
 
 
 
