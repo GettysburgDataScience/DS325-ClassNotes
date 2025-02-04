@@ -166,8 +166,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
-    <p class="title logo__title">My sample book</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -417,8 +423,8 @@ y_i = \theta_0 + \theta_1 \cdot x_i + \epsilon_i
 \]</div>
 <p>Notice, this is the equation of the line:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(w_1\)</span> is the coefficient of <span class="math notranslate nohighlight">\(x\)</span> (the slope)</p></li>
-<li><p><span class="math notranslate nohighlight">\(w_0\)</span> is the intercept</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_1\)</span> is the coefficient of <span class="math notranslate nohighlight">\(x\)</span> (the slope)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_0\)</span> is the intercept</p></li>
 <li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> is the modeling error or residual</p></li>
 </ul>
 <p>When we start the modeling process, we have our data (<span class="math notranslate nohighlight">\(x_i\)</span>, <span class="math notranslate nohighlight">\(y_i\)</span>) and we train the model to find the “best” values for the parameters <span class="math notranslate nohighlight">\(\theta_i\)</span>. Once trained (we’ve fit values for <span class="math notranslate nohighlight">\(\theta_0\)</span> and <span class="math notranslate nohighlight">\(\theta_1\)</span>), we predict an outcome as:</p>
@@ -631,7 +637,7 @@ y_i - \hat{y}_i = \epsilon
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.int64(28), np.int64(8))
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_92989/2395495076.py:25: UserWarning: The following kwargs were not used by contour: &#39;shading&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_41935/2395495076.py:25: UserWarning: The following kwargs were not used by contour: &#39;shading&#39;
   c = ax.contourf(Theta_1, Theta_0, MSE, shading=&#39;auto&#39;)
 </pre></div>
 </div>
@@ -699,7 +705,7 @@ y_i - \hat{y}_i = \epsilon
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sk</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sk</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">sort_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">sort_idx</span><span class="p">]</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">sort_idx</span><span class="p">]</span>
@@ -711,7 +717,7 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/caf6ed111a91a9f64c7d4b732f30836a27e5a083a9bda146edebeb3733a8725d.png" src="_images/caf6ed111a91a9f64c7d4b732f30836a27e5a083a9bda146edebeb3733a8725d.png" />
+<img alt="_images/4a9d7c7ba83a6af00e1db4cd2da47f9555146ea1dd42903ada6fd0ed5a291791.png" src="_images/4a9d7c7ba83a6af00e1db4cd2da47f9555146ea1dd42903ada6fd0ed5a291791.png" />
 </div>
 </div>
 <section id="modeling-process">
@@ -753,9 +759,9 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model coefficients: [37.25659143], 1.5238512830236814
-MSE_test = 225.47, MSE_train = 395.73
-R2_test = 0.74, R2_train = 0.74
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model coefficients: [46.1808004], -0.21479415831364035
+MSE_test = 987.10, MSE_train = 753.65
+R2_test = 0.61, R2_train = 0.71
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;fit_intercept&#39;: True,
@@ -763,10 +769,10 @@ R2_test = 0.74, R2_train = 0.74
  &#39;n_jobs&#39;: None,
  &#39;positive&#39;: False,
  &#39;n_features_in_&#39;: 1,
- &#39;coef_&#39;: array([37.25659143]),
+ &#39;coef_&#39;: array([46.1808004]),
  &#39;rank_&#39;: 1,
- &#39;singular_&#39;: array([9.96060424]),
- &#39;intercept_&#39;: np.float64(1.5238512830236814)}
+ &#39;singular_&#39;: array([14.28453481]),
+ &#39;intercept_&#39;: np.float64(-0.21479415831364035)}
 </pre></div>
 </div>
 </div>
@@ -787,7 +793,7 @@ R2_test = 0.74, R2_train = 0.74
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/864e2de61d29eaca4760a3075d3b6c481bf476f32d57ef9923c3369c9b54701f.png" src="_images/864e2de61d29eaca4760a3075d3b6c481bf476f32d57ef9923c3369c9b54701f.png" />
+<img alt="_images/16a993f500e5d1464013a43b5b60d9bb05e2f336e08b815cf2840dd2e7a0fb82.png" src="_images/16a993f500e5d1464013a43b5b60d9bb05e2f336e08b815cf2840dd2e7a0fb82.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -806,7 +812,7 @@ R2_test = 0.74, R2_train = 0.74
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ce9af2062f7848a338c0b6c235cdb05a7f272af41ce8c411584061045698d5ba.png" src="_images/ce9af2062f7848a338c0b6c235cdb05a7f272af41ce8c411584061045698d5ba.png" />
+<img alt="_images/09475103aa824a0f42db5dde7ee8c81d21534a67c9bd5572fae2e671ad82ef4e.png" src="_images/09475103aa824a0f42db5dde7ee8c81d21534a67c9bd5572fae2e671ad82ef4e.png" />
 </div>
 </div>
 </section>
@@ -834,14 +840,14 @@ R2_test = 0.74, R2_train = 0.74
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Residuals&#39;</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;skyblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.2</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Histogram of residuals</span><span class="se">\n</span><span class="s1"> Do they look normally distributed?&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/74f420b1e38c515f42e92e48ab10dbede4daca8382a2b67a18ec33156f0f63f1.png" src="_images/74f420b1e38c515f42e92e48ab10dbede4daca8382a2b67a18ec33156f0f63f1.png" />
+<img alt="_images/1c7bb3d9c373a5eab158e73a4c751d314e9c88425b795eb647f8bb25f6ba6336.png" src="_images/1c7bb3d9c373a5eab158e73a4c751d314e9c88425b795eb647f8bb25f6ba6336.png" />
 </div>
 </div>
 </section>
