@@ -6,3 +6,4 @@ root: intro
 chapters:
 - file: setup
 - file: linear_regression_01
+- file: linear_regression_02
