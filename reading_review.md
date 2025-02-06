@@ -35,7 +35,7 @@
     - ?
     - ?
 
-4. **What is a cost function? What cost functions are typically used for linear and logistic regression? (p134, p165)
+4. **What is a cost function? What cost functions are typically used for linear and logistic regression?** (p134, p165)
     - Linear - 
     - Logistic -
 
