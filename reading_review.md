@@ -40,4 +40,4 @@
     - Logistic -
 
 5. **What does a Softmax regression tell us?** (p 170)
-    - 
+    - ?
