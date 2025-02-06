@@ -69,7 +69,7 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reading_review';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reading_review_filled';</script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/searchtools.js?v=63a53a7d"></script>
@@ -87,7 +87,6 @@
     <script src="_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Linear Regression (Part 2)" href="linear_regression_02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -138,6 +137,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -191,11 +192,11 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setting Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_regression_01.html">Linear Regression (Part 1)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="linear_regression_02.html">Linear Regression (Part 2)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Reading Assignments Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reading_review.html">Reading Assignments Review</a></li>
 </ul>
 
     </div>
@@ -272,7 +273,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Freading_review.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Freading_review_filled.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -302,7 +303,7 @@
       
       
       
-      <li><a href="_sources/reading_review.md" target="_blank"
+      <li><a href="_sources/reading_review_filled.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -408,32 +409,32 @@
 <ol class="arabic simple">
 <li><p><strong>Give two examples of supervised learning tasks:</strong> (p 10)</p>
 <ul class="simple">
-<li><p>?</p></li>
-<li><p>?</p></li>
+<li><p>Regression</p></li>
+<li><p>Classification</p></li>
 </ul>
 </li>
 <li><p><strong>Give two examples of unsupervised learning tasks:</strong> (p 11)</p>
 <ul class="simple">
-<li><p>?</p></li>
-<li><p>?</p></li>
+<li><p>Clustering</p></li>
+<li><p>Dimensionality Reduction</p></li>
 </ul>
 </li>
 <li><p><strong>Briefly explain the roles of training, validation, and test sets in developing a machine learning model.</strong> (p 10, p 34-37)</p>
 <ul class="simple">
-<li><p>training - ?</p></li>
-<li><p>validation - ?</p></li>
-<li><p>testing - ?</p></li>
+<li><p>training - We use the training set to find the parameters of the model</p></li>
+<li><p>validation - We use a validation set to select between different candidate models. Candidate models may be of different learning algorithms (e.g. linear regression vs decision tree regression) or variations of the same learning algorithm (different hyper-parameters). We split the training set into a smaller training set and a validation set (using train_test_split for example). We select the model that performs best on the validation set(s).</p></li>
+<li><p>testing - We use the testing set to evaluate the performance of the model on ‘unseen’ data (an indication of how the model will perform in the wild)</p></li>
 </ul>
 </li>
 <li><p><strong>What are parameters and hyper-parameters of a machine learning model?</strong> (p 32)</p>
 <ul class="simple">
-<li><p>parameters - ?</p></li>
-<li><p>hyper-parameters - ?</p></li>
+<li><p>parameters - these are the unknown variables that are fit during training (e.g. the weights and bias in linear regression)</p></li>
+<li><p>hyper-parameters - these are parameters of the learning algorithm, set by the user before training the model</p></li>
 </ul>
 </li>
 <li><p><strong>What is linear regression?</strong> (p 132)</p>
 <ul class="simple">
-<li><p>?</p></li>
+<li><p>Regression is a family of methods for predicting a continuous valued target from data. Linear regression assumes that the relationship between the target and the features is linear, that is, y = bias + weight * x.</p></li>
 </ul>
 </li>
 </ol>
@@ -443,31 +444,32 @@
 <ol class="arabic simple">
 <li><p><strong>Briefly define bias and variance.</strong> (p 155)</p>
 <ul class="simple">
-<li><p>Bias - ?</p></li>
-<li><p>Variance - ?</p></li>
+<li><p>Bias - Errors that come from bad assumptions in our model. Bias manifests as larger error (residuals) in your training set. Bias often results from under-fitting the data.</p></li>
+<li><p>Variance - Errors that arise from fitting noise or variation in a particular training set. If the model is too specific (too many parameters), the values of the parameters will change significantly depending on the training data. Variance often results from over-fitting the data (a model with too many parameters).</p></li>
 </ul>
 </li>
 <li><p><strong>What is regularization and why do we use it?</strong> (p 32, p 155)</p>
 <ul class="simple">
-<li><p>?</p></li>
+<li><p>A technique to prevent over-fitting of a machine learning model.</p></li>
 </ul>
 </li>
 <li><p><strong>List three flavors of regression that use regularization.</strong> (p 156-161)</p>
 <ul class="simple">
-<li><p>?</p></li>
-<li><p>?</p></li>
-<li><p>?</p></li>
+<li><p>Ridge Regression</p></li>
+<li><p>Lasso Regression</p></li>
+<li><p>Elastic Net Regression</p></li>
 </ul>
 </li>
-<li><p><strong>What is a cost function? What cost functions are typically used for linear and logistic regression?</strong> (p134, p165)</p>
+<li><p><strong>What is a cost function? What cost functions are typically used for linear and logistic regression?</strong> (p134, p165)
+A cost function is how we penalize residuals between predicted and actual values. We use cost functions to select the “best” fit model.</p>
 <ul class="simple">
-<li><p>Linear - ?</p></li>
-<li><p>Logistic - ?</p></li>
+<li><p>Linear - Mean Squared Error</p></li>
+<li><p>Logistic - Log Loss</p></li>
 </ul>
 </li>
 <li><p><strong>What does a Softmax regression tell us?</strong> (p 170)</p>
 <ul class="simple">
-<li><p>?</p></li>
+<li><p>Softmax regression allows for multi-class logistic regression and tells us the probability of a data point belonging to one of several classes.</p></li>
 </ul>
 </li>
 </ol>
@@ -504,15 +506,6 @@
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="linear_regression_02.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Linear Regression (Part 2)</p>
-      </div>
-    </a>
 </div>
                 </footer>
               

@@ -24,8 +24,8 @@
 ## 2. HOML Ch 4 (p 148-173)
 
 1. **Briefly define bias and variance.** (p 155)
-    - Bias - 
-    - Variance -
+    - Bias - ?
+    - Variance - ?
 
 2. **What is regularization and why do we use it?** (p 32, p 155)
     - ?
@@ -35,9 +35,10 @@
     - ?
     - ?
 
-4. **What is a cost function? What cost functions are typically used for linear and logistic regression? (p134, p165)
-    - Linear - 
-    - Logistic -
+4. **What is a cost function? What cost functions are typically used for linear and logistic regression?** (p134, p165)
+    
+    - Linear - ?
+    - Logistic - ?
 
 5. **What does a Softmax regression tell us?** (p 170)
-    - 
+    - ?
