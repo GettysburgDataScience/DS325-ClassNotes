@@ -69,6 +69,8 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reading_review';</script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
@@ -405,36 +407,38 @@
 <h1>Reading Assignments Review<a class="headerlink" href="#reading-assignments-review" title="Link to this heading">#</a></h1>
 <section id="homl-ch-1-p-3-37-ch-4-p-131-148">
 <h2>1. HOML Ch 1 (p 3-37), Ch 4 (p 131-148)<a class="headerlink" href="#homl-ch-1-p-3-37-ch-4-p-131-148" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><p><strong>Give two examples of supervised learning tasks:</strong> (p 10)</p>
 <ul class="simple">
-<li><p>?</p></li>
-<li><p>?</p></li>
+<li><p>Regression</p></li>
+<li><p>Classification</p></li>
 </ul>
 </li>
 <li><p><strong>Give two examples of unsupervised learning tasks:</strong> (p 11)</p>
 <ul class="simple">
-<li><p>?</p></li>
-<li><p>?</p></li>
+<li><p>Clustering</p></li>
+<li><p>Anamoly detection</p></li>
+<li><p>Dimensionality reduction</p></li>
 </ul>
 </li>
 <li><p><strong>Briefly explain the roles of training, validation, and test sets in developing a machine learning model.</strong> (p 10, p 34-37)</p>
 <ul class="simple">
-<li><p>training - ?</p></li>
-<li><p>validation - ?</p></li>
-<li><p>testing - ?</p></li>
+<li><p>training - The data set used to train the model (ie. find the optimized parameters).</p></li>
+<li><p>validation - The validation set is a subset of the training data (we can use train_test_split for example) used to compare performance of candidate models to select a model.</p></li>
+<li><p>testing - Separate data set of ‘unseen’ data used to evaluate performance of the model. This gives an idea of how the model will perform in the wild.</p></li>
 </ul>
 </li>
 <li><p><strong>What are parameters and hyper-parameters of a machine learning model?</strong> (p 32)</p>
 <ul class="simple">
-<li><p>parameters - ?</p></li>
-<li><p>hyper-parameters - ?</p></li>
+<li><p>parameters - variables of the model that are optimized during training/fitting.</p></li>
+<li><p>hyper-parameters - variables of the learning algorithm that we choose before training (e.g. for a Decision Tree, hyper-parameters include max_depth, purity function, min points per leaf, etc.)</p></li>
 </ul>
 </li>
 <li><p><strong>What is linear regression?</strong> (p 132)</p>
 <ul class="simple">
-<li><p>?</p></li>
+<li><p>Regression refers to machine learning algorithms that map the features to a continuous-valued (as opposed to discrete categories) target. Linear regression assumes a linear relationship between the features and the target, that is the parameters are a bias (<span class="math notranslate nohighlight">\(\theta_0\)</span>) and a weight for each feature (<span class="math notranslate nohighlight">\(\theta_n\)</span>).</p></li>
 </ul>
+<p><span class="math notranslate nohighlight">\( y = \theta_0 + \theta_1 \cdot x_1 + \theta_2 \cdot x_2 + \cdots \theta_n \cdot x_n\)</span></p>
 </li>
 </ol>
 </section>
@@ -443,29 +447,33 @@
 <ol class="arabic">
 <li><p><strong>Briefly define bias and variance.</strong> (p 155)</p>
 <ul class="simple">
-<li><p>Bias -</p></li>
-<li><p>Variance -</p></li>
+<li><p>Bias - error that results from fitting the wrong kind of model or an inadequate model to the data. Generally, too simple a model cannot capture the important trends in the data. This can be observed in that your model will do a poor job fitting the training data.</p></li>
+<li><p>Variance - error that results from over-sensitivity to variation in the training data. That is given different training sets (subsets of the same data), the best-fit model parameters will be very different. This can be observed in a model that fits the training set very well, but performs significantly worse on the test set.</p></li>
 </ul>
 </li>
 <li><p><strong>What is regularization and why do we use it?</strong> (p 32, p 155)</p>
 <ul class="simple">
-<li><p>?</p></li>
+<li><p>Regularization describes a bunch of techniques that constrain models to be simpler. We use regularization to prevent over-fitting.</p></li>
 </ul>
 </li>
 <li><p><strong>List three flavors of regression that use regularization.</strong> (p 156-161)</p>
 <ul class="simple">
-<li><p>?</p></li>
-<li><p>?</p></li>
-<li><p>?</p></li>
+<li><p>Ridge Regression - penalizes the size of parameters</p></li>
+<li><p>Lasso Regression - penalizes the number parameters</p></li>
+<li><p>Elastic Net Regression - a bit of both Ridge and Lasso penalties</p></li>
 </ul>
 </li>
-<li><p>**What is a cost function? What cost functions are typically used for linear and logistic regression? (p134, p165)</p>
+<li><p><strong>What is a cost function? What cost functions are typically used for linear and logistic regression?</strong> (p134, p165)</p>
+<p>A cost function is a penalty on the residuals between our data and our model predictions. We use a cost function to optimize the parameters of our model (optimized to minimize the value of the cost function).</p>
 <ul class="simple">
-<li><p>Linear -</p></li>
-<li><p>Logistic -</p></li>
+<li><p>Linear - Mean Squared Error</p></li>
+<li><p>Logistic - Log Loss</p></li>
 </ul>
 </li>
-<li><h2 class="rubric" id="what-does-a-softmax-regression-tell-us-p-170"><strong>What does a Softmax regression tell us?</strong> (p 170)</h2>
+<li><p><strong>What does a Softmax regression tell us?</strong> (p 170)</p>
+<ul class="simple">
+<li><p>Softmax is a variation of logistic regression. It can be used for multi-class classification and tells us the probability of a data point belonging to each candidate category.</p></li>
+</ul>
 </li>
 </ol>
 </section>
