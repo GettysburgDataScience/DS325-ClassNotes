@@ -8,4 +8,5 @@ chapters:
 - file: linear_regression_01
 - file: linear_regression_02
 - file: regularization
+- file: polynomial_regression
 - file: reading_review
