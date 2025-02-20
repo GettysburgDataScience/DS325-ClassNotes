@@ -764,15 +764,31 @@ Name: target, dtype: float64
 <section id="binary-classification-metrics">
 <h3><span class="section-number">6.1.3. </span>Binary classification metrics<a class="headerlink" href="#binary-classification-metrics" title="Link to this heading">#</a></h3>
 <p>There are also several metrics commonly used in binary classification: Accuracy, Precision, Recall, F1 score</p>
-<ul class="simple">
-<li><p><em>Accuracy</em> - The percentage of correct predictions overall
-$<span class="math notranslate nohighlight">\( \text{Accuracy} = \frac{TP + TN}{TP+TN+FP+FN}\)</span>$</p></li>
-<li><p><em>Precision</em> - The percentage of positive predictions that were correct
-$<span class="math notranslate nohighlight">\( \text{Precision} = \frac{TP}{TP + FP}\)</span>$</p></li>
-<li><p><em>Recall</em> - The percentage of positive cases predicted correctly
-$<span class="math notranslate nohighlight">\( \text{Recall} = \frac{TP}{TP+FN}\)</span>$</p></li>
-<li><p><em>F1 score</em> - A hybrid metric comprising precision and recall
-$<span class="math notranslate nohighlight">\( \text{F1} = \frac{2 \cdot Precision \cdot Recall}{Precision + Recall} = \frac{2 \cdot TP}{2 \cdot TP + FP + FN}\)</span>$</p></li>
+<ul>
+<li><p><em>Accuracy</em> - The percentage of correct predictions overall</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{Accuracy} = \frac{TP + TN}{TP+TN+FP+FN}
+    \]</div>
+</li>
+<li><p><em>Precision</em> - The percentage of positive predictions that were correct</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{Precision} = \frac{TP}{TP + FP}
+    \]</div>
+</li>
+<li><p><em>Recall</em> - The percentage of positive cases predicted correctly</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{Recall} = \frac{TP}{TP+FN}
+    \]</div>
+</li>
+<li><p><em>F1 score</em> - A hybrid metric comprising precision and recall</p>
+<div class="math notranslate nohighlight">
+\[ 
+    \text{F1} = \frac{2 \cdot Precision \cdot Recall}{Precision + Recall} = \frac{2 \cdot TP}{2 \cdot TP + FP + FN}
+    \]</div>
+</li>
 </ul>
 <p><strong>Now you try</strong></p>
 <p>Calculate the accuracy, precision, recall, and F1 score (by hand) for the confusion matrix above. Which metric is most useful/appropriate for this classification problem.</p>
