@@ -15,7 +15,7 @@ parts:
     - file: 01_LinearRegression/03_regularization
     - file: 01_LinearRegression/04_polynomial_regression
     - file: 01_LinearRegression/05_reading_review
- -  caption: Classification
+  - caption: Classification
     numbered: True
     chapters:
     - file: 02_Classification/01_classification_intro
