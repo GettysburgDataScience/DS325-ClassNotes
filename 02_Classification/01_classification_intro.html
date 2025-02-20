@@ -747,8 +747,9 @@ Name: target, dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> 
-                                        <span class="n">normalize</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span><span class="p">,</span>
-                                        <span class="n">display_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Benign&#39;</span><span class="p">,</span> <span class="s1">&#39;Malignant&#39;</span><span class="p">],</span>
+                                        <span class="c1">#normalize = &#39;true&#39;,</span>
+                                        <span class="n">display_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Malignant&#39;</span><span class="p">,</span> <span class="s1">&#39;Benign&#39;</span><span class="p">],</span>
+                                        <span class="c1"># display_labels = [&#39;Neg&#39;, &#39;Pos&#39;],</span>
                                         <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;GnBu&#39;</span>
                                         <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -756,7 +757,7 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/600b6266b4bbf70f307dec439d2a6ac1836dfc28f77e73f4a2e246e649865d64.png" src="../_images/600b6266b4bbf70f307dec439d2a6ac1836dfc28f77e73f4a2e246e649865d64.png" />
+<img alt="../_images/207ba96ba480e1148e1090bc0ea1c5ea8053ba48f0ff442576f4848bb8ac5b9d.png" src="../_images/207ba96ba480e1148e1090bc0ea1c5ea8053ba48f0ff442576f4848bb8ac5b9d.png" />
 </div>
 </div>
 </section>
