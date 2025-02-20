@@ -3,10 +3,19 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: setup
-- file: linear_regression_01
-- file: linear_regression_02
-- file: regularization
-- file: polynomial_regression
-- file: reading_review
+parts:
+  - caption: Setting Up and Resources
+    chapters:
+    - file: 00_Resources/setup
+  - caption: Linear Regression
+    numbered: True
+    chapters:
+    - file: 01_LinearRegression/01_linear_regression_01
+    - file: 01_LinearRegression/02_linear_regression_02
+    - file: 01_LinearRegression/03_regularization
+    - file: 01_LinearRegression/04_polynomial_regression
+    - file: 01_LinearRegression/05_reading_review
+ -  caption: Classification
+    numbered: True
+    chapters:
+    - file: 02_Classification/01_classification_intro
