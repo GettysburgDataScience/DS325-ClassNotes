@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Classification &#8212; My sample book</title>
+    <title>7. Classification &#8212; My sample book</title>
   
   
   
@@ -89,7 +89,7 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="5. Reading Assignments Review" href="../01_LinearRegression/05_reading_review.html" />
+    <link rel="prev" title="6. Exam 1 Review" href="../01_LinearRegression/06_exam_review.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -200,10 +200,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">3. Bias, Variance, and Regularization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">4. Polynomial Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/05_reading_review.html">5. Reading Assignments Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/06_exam_review.html">6. Exam 1 Review</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Classification</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Classification</a></li>
 </ul>
 
     </div>
@@ -396,10 +397,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">6.1. Binary classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">6.1.1. An example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">6.1.2. Confusion Matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-metrics">6.1.3. Binary classification metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">7.1. Binary classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">7.1.1. An example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">7.1.2. Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-metrics">7.1.3. Binary classification metrics</a></li>
 </ul>
 </li>
 </ul>
@@ -414,11 +415,11 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="classification">
-<h1><span class="section-number">6. </span>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">7. </span>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h1>
 <p>Classification tasks predict the categories, classes, or bins that data fall into. Classification tasks can be binary (e.g. deciding whether a product review was written by an actual customer or is AI-generated/paid review, identifying bank transactaions as legitimate or fraud, predicting how a registered voter will vote…assuming two political parties, etc.) or multi-class (e.g. what bird is making that call, what varietal of wine goes best with this meal, what major should a student pursue, etc).</p>
 <p>We’ll start by focusing on binary classification tasks, introducing some concepts that apply to all such tasks. We’ll introduce some ways we assess classification models.</p>
 <section id="binary-classification">
-<h2><span class="section-number">6.1. </span>Binary classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.1. </span>Binary classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h2>
 <p>Binary classification assigns each data point (feature vector) to one of two categories, often referred to as <em>Positive</em> and <em>Negative</em>. It is important to define which of the two categories corresponds to Positive and which to Negative.</p>
 <ul class="simple">
 <li><p>Mushroom id: P = poisonous, N = edible</p></li>
@@ -443,7 +444,7 @@
 <li><p>Come up with two novel examples, one in which FP is the worse error and another in which FN is the worse error? Can you think of a general rule for which kind of error should be avoided?</p></li>
 </ul>
 <section id="an-example">
-<h3><span class="section-number">6.1.1. </span>An example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.1.1. </span>An example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h3>
 <p>In the following example, we’ll use Logistic Regression (we’ll go into detail about this algorithm in the next lecture) to classify breast tumors as malignant or benign based on the physical properties of the tumor (e.g. size, shape, texture).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -741,7 +742,7 @@ Name: target, dtype: float64
 </div>
 </section>
 <section id="confusion-matrix">
-<h3><span class="section-number">6.1.2. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.1.2. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
 <p>The <em>Confusion Matrix</em> is a graphical representation of the predictions a classifier has made on the data set. The confusion matrix is an nxn grid where n is the number of categories; for binary classification, the confusion matrix is always 2x2.</p>
 <p>Let’s look at the confusion matrix for the breast tumor classification above.</p>
 <div class="cell docutils container">
@@ -762,7 +763,7 @@ Name: target, dtype: float64
 </div>
 </section>
 <section id="binary-classification-metrics">
-<h3><span class="section-number">6.1.3. </span>Binary classification metrics<a class="headerlink" href="#binary-classification-metrics" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.1.3. </span>Binary classification metrics<a class="headerlink" href="#binary-classification-metrics" title="Link to this heading">#</a></h3>
 <p>There are also several metrics commonly used in binary classification: Accuracy, Precision, Recall, F1 score</p>
 <ul>
 <li><p><em>Accuracy</em> - The percentage of correct predictions overall</p>
@@ -827,12 +828,12 @@ Name: target, dtype: float64
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../01_LinearRegression/05_reading_review.html"
+       href="../01_LinearRegression/06_exam_review.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Reading Assignments Review</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Exam 1 Review</p>
       </div>
     </a>
 </div>
@@ -852,10 +853,10 @@ Name: target, dtype: float64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">6.1. Binary classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">6.1.1. An example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">6.1.2. Confusion Matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-metrics">6.1.3. Binary classification metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">7.1. Binary classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">7.1.1. An example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">7.1.2. Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-metrics">7.1.3. Binary classification metrics</a></li>
 </ul>
 </li>
 </ul>
