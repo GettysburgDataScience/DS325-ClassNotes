@@ -5,6 +5,7 @@ format: jb-book
 root: intro
 parts:
   - caption: Setting Up and Resources
+    numbered: True
     chapters:
     - file: 00_Resources/setup
   - caption: Linear Regression
@@ -20,3 +21,4 @@ parts:
     numbered: True
     chapters:
     - file: 02_Classification/01_classification_intro
+    - file: 02_Classification/02_logistic_regression
