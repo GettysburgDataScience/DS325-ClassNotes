@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Linear Regression (Part 2) &#8212; My sample book</title>
+    <title>3. Linear Regression (Part 2) &#8212; My sample book</title>
   
   
   
@@ -89,8 +89,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Bias, Variance, and Regularization" href="03_regularization.html" />
-    <link rel="prev" title="1. Linear Regression (Part 1)" href="01_linear_regression_01.html" />
+    <link rel="next" title="4. Bias, Variance, and Regularization" href="03_regularization.html" />
+    <link rel="prev" title="2. Linear Regression (Part 1)" href="01_linear_regression_01.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -194,13 +194,23 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_linear_regression_01.html">1. Linear Regression (Part 1)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Linear Regression (Part 2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_regularization.html">3. Bias, Variance, and Regularization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_polynomial_regression.html">4. Polynomial Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_reading_review.html">5. Reading Assignments Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Linear Regression (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_regularization.html">4. Bias, Variance, and Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_polynomial_regression.html">5. Polynomial Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_reading_review.html">6. Reading Assignments Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_exam_review.html">7. Exam 1 Review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/01_classification_intro.html">8. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/02_logistic_regression.html">9. Logistic Regression</a></li>
 </ul>
 
     </div>
@@ -393,22 +403,22 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression-recap">2.1. Simple Linear Regression (Recap)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-linear-model">2.1.1. Fitting a linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression-recap">3.1. Simple Linear Regression (Recap)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-linear-model">3.1.1. Fitting a linear model</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">2.2. Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modeling-process">2.2.1. The modeling process</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-synthetic-data">2.2.1.1. Creating synthetic data</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">2.2.1.2. Fitting the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">3.2. Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modeling-process">3.2.1. The modeling process</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-synthetic-data">3.2.1.1. Creating synthetic data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">3.2.1.2. Fitting the model</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-very-briefly">2.2.2. Gradient Descent (Very briefly)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-very-briefly">3.2.2. Gradient Descent (Very briefly)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">2.3. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">2.3.1. Assumptions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-features">2.3.2. Selecting features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">3.3. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">3.3.1. Assumptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-features">3.3.2. Selecting features</a></li>
 </ul>
 </li>
 </ul>
@@ -423,9 +433,9 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="linear-regression-part-2">
-<h1><span class="section-number">2. </span>Linear Regression (Part 2)<a class="headerlink" href="#linear-regression-part-2" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">3. </span>Linear Regression (Part 2)<a class="headerlink" href="#linear-regression-part-2" title="Link to this heading">#</a></h1>
 <section id="simple-linear-regression-recap">
-<h2><span class="section-number">2.1. </span>Simple Linear Regression (Recap)<a class="headerlink" href="#simple-linear-regression-recap" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>Simple Linear Regression (Recap)<a class="headerlink" href="#simple-linear-regression-recap" title="Link to this heading">#</a></h2>
 <p>A simple linear model relating a single feature, <span class="math notranslate nohighlight">\(x\)</span>, to an outcome <span class="math notranslate nohighlight">\(y\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -433,7 +443,7 @@ y_i = \underbrace{\theta_0}_{\text{y intercept}} + \underbrace{\theta_1}_{\text{
 \]</div>
 <p>This is the equation of a line.</p>
 <section id="fitting-a-linear-model">
-<h3><span class="section-number">2.1.1. </span>Fitting a linear model<a class="headerlink" href="#fitting-a-linear-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.1.1. </span>Fitting a linear model<a class="headerlink" href="#fitting-a-linear-model" title="Link to this heading">#</a></h3>
 <p><strong>Goal</strong>
 <span class="math notranslate nohighlight">\(\theta_0\)</span> and <span class="math notranslate nohighlight">\(\theta_1\)</span> are our parameters; they are unknown. We want to find the values of <span class="math notranslate nohighlight">\(\theta_0\)</span> and <span class="math notranslate nohighlight">\(\theta_1\)</span> that <em>best fit</em> our data.</p>
 <p><strong>Goodness of Fit</strong></p>
@@ -446,10 +456,10 @@ y_i = \underbrace{\theta_0}_{\text{y intercept}} + \underbrace{\theta_1}_{\text{
 </section>
 </section>
 <section id="linear-regression-with-scikit-learn">
-<h2><span class="section-number">2.2. </span>Linear Regression with Scikit-learn<a class="headerlink" href="#linear-regression-with-scikit-learn" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>Linear Regression with Scikit-learn<a class="headerlink" href="#linear-regression-with-scikit-learn" title="Link to this heading">#</a></h2>
 <p>In the last class, we fit a linear regression from scratch, using only the <code class="docutils literal notranslate"><span class="pre">numpy</span></code> package. Scikit-learn (<code class="docutils literal notranslate"><span class="pre">sklearn</span></code>) is a Python package for machine learning. Let’s see how we would fit a model in practice. For this example, I’ll again use a synthetic dataset.</p>
 <section id="the-modeling-process">
-<h3><span class="section-number">2.2.1. </span>The modeling process<a class="headerlink" href="#the-modeling-process" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.2.1. </span>The modeling process<a class="headerlink" href="#the-modeling-process" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Explore data (skip for now)</p></li>
 <li><p>Clean data (skip for now)</p></li>
@@ -476,7 +486,7 @@ y_i = \underbrace{\theta_0}_{\text{y intercept}} + \underbrace{\theta_1}_{\text{
 </div>
 </div>
 <section id="creating-synthetic-data">
-<h4><span class="section-number">2.2.1.1. </span>Creating synthetic data<a class="headerlink" href="#creating-synthetic-data" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">3.2.1.1. </span>Creating synthetic data<a class="headerlink" href="#creating-synthetic-data" title="Link to this heading">#</a></h4>
 <p>For a simple linear regression, we creat a data set with just one feature and one target.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -513,7 +523,7 @@ y_i = \underbrace{\theta_0}_{\text{y intercept}} + \underbrace{\theta_1}_{\text{
 </div>
 </section>
 <section id="fitting-the-model">
-<h4><span class="section-number">2.2.1.2. </span>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">3.2.1.2. </span>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Link to this heading">#</a></h4>
 <p>In the cell block below, we do the following steps:</p>
 <ul class="simple">
 <li><p>Split data into training and testing sets. Typically, we save 20% of the data for training.</p></li>
@@ -591,7 +601,7 @@ R2_test = 0.68, R2_train = 0.69
 </section>
 </section>
 <section id="gradient-descent-very-briefly">
-<h3><span class="section-number">2.2.2. </span>Gradient Descent (Very briefly)<a class="headerlink" href="#gradient-descent-very-briefly" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.2.2. </span>Gradient Descent (Very briefly)<a class="headerlink" href="#gradient-descent-very-briefly" title="Link to this heading">#</a></h3>
 <p>In the last class, we just tried a lot of different values for <span class="math notranslate nohighlight">\(\theta_0\)</span> and <span class="math notranslate nohighlight">\(\theta_1\)</span> (we tried about 1000 pairs) and picked the values that gave the lowest MSE. This is a brute force method and as our models get even slightly more complex, this method becomes impractical. So how does Scikit-learn fit models?</p>
 <p>Recall that when we plot the MSE versus <span class="math notranslate nohighlight">\(\theta_0\)</span> and <span class="math notranslate nohighlight">\(\theta_1\)</span> we got a bowl shape. The minimum MSE (produced by the best model) is at the bottom of the bowl. Can we find the bottom of the bowl without knowing the entire bowl shape? Yes!</p>
 <p><span class="math notranslate nohighlight">\(\underbrace{\Theta_{new}}_{\text{our new guess}} = \underbrace{\Theta_{old}}_{\text{our old guess}} + \underbrace{\gamma}_{\text{learning rate}} \cdot \underbrace{\nabla J(\Theta)}_{\text{gradient of cost}}\)</span></p>
@@ -617,7 +627,7 @@ R2_test = 0.68, R2_train = 0.69
 </section>
 </section>
 <section id="multiple-linear-regression">
-<h2><span class="section-number">2.3. </span>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>Multiple Linear Regression<a class="headerlink" href="#multiple-linear-regression" title="Link to this heading">#</a></h2>
 <p>In Multiple Linear Regression, we predict the target <span class="math notranslate nohighlight">\(y\)</span> using multiple features <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p><span class="math notranslate nohighlight">\(y = \theta_0 + \theta_1 \cdot x_1 + \theta_2 \cdot x_2 + \cdots + \theta_n \cdot x_n + \epsilon\)</span></p>
 <p>The process is very similar to simple linear regression. Let’s make some synthetic data with 2 features and 1 target.</p>
@@ -736,7 +746,7 @@ Best-fit Model:
 </div>
 </div>
 <section id="assumptions">
-<h3><span class="section-number">2.3.1. </span>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.3.1. </span>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><em>Linearity</em> - the independent and dependent variables are actually linearly related</p></li>
 <li><p><em>Independence</em> - the observations (samples) are independent of each other</p></li>
@@ -770,7 +780,7 @@ Best-fit Model:
 </div>
 </section>
 <section id="selecting-features">
-<h3><span class="section-number">2.3.2. </span>Selecting features<a class="headerlink" href="#selecting-features" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.3.2. </span>Selecting features<a class="headerlink" href="#selecting-features" title="Link to this heading">#</a></h3>
 <p>When we have many features, we may want to select only a subset of features to use. How would we decide which features to use?</p>
 <p><em>Correlation</em> between two variables conveys the extent of a linear relationship between the two variables. The *correlation coefficient *, <span class="math notranslate nohighlight">\(\rho\)</span>, ranges from -1 to 1.</p>
 <ul class="simple">
@@ -826,7 +836,7 @@ Best-fit Model:
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Linear Regression (Part 1)</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Linear Regression (Part 1)</p>
       </div>
     </a>
     <a class="right-next"
@@ -834,7 +844,7 @@ Best-fit Model:
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Bias, Variance, and Regularization</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Bias, Variance, and Regularization</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -855,22 +865,22 @@ Best-fit Model:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression-recap">2.1. Simple Linear Regression (Recap)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-linear-model">2.1.1. Fitting a linear model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression-recap">3.1. Simple Linear Regression (Recap)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-linear-model">3.1.1. Fitting a linear model</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">2.2. Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modeling-process">2.2.1. The modeling process</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-synthetic-data">2.2.1.1. Creating synthetic data</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">2.2.1.2. Fitting the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">3.2. Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-modeling-process">3.2.1. The modeling process</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-synthetic-data">3.2.1.1. Creating synthetic data</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">3.2.1.2. Fitting the model</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-very-briefly">2.2.2. Gradient Descent (Very briefly)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent-very-briefly">3.2.2. Gradient Descent (Very briefly)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">2.3. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">2.3.1. Assumptions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-features">2.3.2. Selecting features</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-linear-regression">3.3. Multiple Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">3.3.1. Assumptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selecting-features">3.3.2. Selecting features</a></li>
 </ul>
 </li>
 </ul>

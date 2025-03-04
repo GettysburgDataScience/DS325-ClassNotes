@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Bias, Variance, and Regularization &#8212; My sample book</title>
+    <title>4. Bias, Variance, and Regularization &#8212; My sample book</title>
   
   
   
@@ -89,8 +89,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="4. Polynomial Regression" href="04_polynomial_regression.html" />
-    <link rel="prev" title="2. Linear Regression (Part 2)" href="02_linear_regression_02.html" />
+    <link rel="next" title="5. Polynomial Regression" href="04_polynomial_regression.html" />
+    <link rel="prev" title="3. Linear Regression (Part 2)" href="02_linear_regression_02.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -194,13 +194,23 @@
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_linear_regression_01.html">1. Linear Regression (Part 1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_linear_regression_02.html">2. Linear Regression (Part 2)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Bias, Variance, and Regularization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_polynomial_regression.html">4. Polynomial Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_reading_review.html">5. Reading Assignments Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Bias, Variance, and Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_polynomial_regression.html">5. Polynomial Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_reading_review.html">6. Reading Assignments Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_exam_review.html">7. Exam 1 Review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/01_classification_intro.html">8. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/02_logistic_regression.html">9. Logistic Regression</a></li>
 </ul>
 
     </div>
@@ -393,10 +403,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">3.1. The Bias-Variance Tradeoff</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symptoms-of-under-and-over-fitting">3.2. Symptoms of Under- and Over-fitting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">3.3. Regularization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">3.4. Feature Scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">4.1. The Bias-Variance Tradeoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symptoms-of-under-and-over-fitting">4.2. Symptoms of Under- and Over-fitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">4.3. Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">4.4. Feature Scaling</a></li>
 </ul>
             </nav>
         </div>
@@ -409,20 +419,20 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="bias-variance-and-regularization">
-<h1><span class="section-number">3. </span>Bias, Variance, and Regularization<a class="headerlink" href="#bias-variance-and-regularization" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">4. </span>Bias, Variance, and Regularization<a class="headerlink" href="#bias-variance-and-regularization" title="Link to this heading">#</a></h1>
 <p>The rule of thumb is that simpler models are preferable. However, a model that is too simple won’t do a good job approximating the trends in the data.</p>
 <p><em>Underfitting</em> refers to the selection of a model structure that is too simple to usefully describe trends in the data.</p>
 <p>In contrast, <em>overfitting</em> refers to models that are too complex, models that mistake randomness in a sample of data as trends.</p>
 <p>We want to hit a sweet spot, choosing an appropriate model that is neither under- or over-fit. But how?</p>
 <section id="the-bias-variance-tradeoff">
-<h2><span class="section-number">3.1. </span>The Bias-Variance Tradeoff<a class="headerlink" href="#the-bias-variance-tradeoff" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>The Bias-Variance Tradeoff<a class="headerlink" href="#the-bias-variance-tradeoff" title="Link to this heading">#</a></h2>
 <p>The rule of thumb is that simpler models are preferable. This guiding principle is a summary (possibly an over-simplification) of the Bias-Variance tradeoff.</p>
 <p>Bias and variance refer to two sources of error that arise in fitting machine learning models.</p>
 <p><em>Bias error</em> are errors in model fit. Typically, bias results from using a model that is too simple to capture the relationships in the data, namely <em>under-fitting</em>.</p>
 <p><em>Variance</em> refers to errors that arise from models that capture the specific fluctuations or noise in the training data that don’t generalize to other data. Using such a model that is too complex and hence to specific to the training data, is called <em>over-fitting</em>.</p>
 </section>
 <section id="symptoms-of-under-and-over-fitting">
-<h2><span class="section-number">3.2. </span>Symptoms of Under- and Over-fitting<a class="headerlink" href="#symptoms-of-under-and-over-fitting" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.2. </span>Symptoms of Under- and Over-fitting<a class="headerlink" href="#symptoms-of-under-and-over-fitting" title="Link to this heading">#</a></h2>
 <p><strong>Under-fitting</strong></p>
 <ul class="simple">
 <li><p>High bias (fitting or classification error) in both training and testing sets.</p></li>
@@ -435,7 +445,7 @@
 </ul>
 </section>
 <section id="regularization">
-<h2><span class="section-number">3.3. </span>Regularization<a class="headerlink" href="#regularization" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3. </span>Regularization<a class="headerlink" href="#regularization" title="Link to this heading">#</a></h2>
 <p>When we explored Multiple Linear Regression, we tried to select features by inspecting correlations between a feature and the target as well as between features. But how did we know if we were using the right features and the right number of features? We didn’t.</p>
 <p><em>Regularization</em> is a tool for automatically emphasizing the features that are informative as you fit the model. Recall, in fitting linear regression models, we are minimizing the mean-squared error between our predictions and the true values. The cost function has the form:</p>
 <div class="math notranslate nohighlight">
@@ -479,7 +489,7 @@ J_{\text{elastic net}}(\Theta) = \underbrace{\frac{1}{m}\sum_{i=0}^m(y_i - \hat{
 <p>However, we generally don’t know in advance how our features will contribute to the model, so best to try both and compare.</p>
 </section>
 <section id="feature-scaling">
-<h2><span class="section-number">3.4. </span>Feature Scaling<a class="headerlink" href="#feature-scaling" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.4. </span>Feature Scaling<a class="headerlink" href="#feature-scaling" title="Link to this heading">#</a></h2>
 <p>In many cases, the scale of our features affects the learning algorithm. The regularization methods above are sensitive to the relative sizes of the features. Why?</p>
 <p>Consider a model that predicts the rent for an apartment based on square footage and number of bedrooms.</p>
 <div class="math notranslate nohighlight">
@@ -554,7 +564,7 @@ J_{\text{elastic net}}(\Theta) = \underbrace{\frac{1}{m}\sum_{i=0}^m(y_i - \hat{
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Linear Regression (Part 2)</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Linear Regression (Part 2)</p>
       </div>
     </a>
     <a class="right-next"
@@ -562,7 +572,7 @@ J_{\text{elastic net}}(\Theta) = \underbrace{\frac{1}{m}\sum_{i=0}^m(y_i - \hat{
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Polynomial Regression</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Polynomial Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -583,10 +593,10 @@ J_{\text{elastic net}}(\Theta) = \underbrace{\frac{1}{m}\sum_{i=0}^m(y_i - \hat{
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">3.1. The Bias-Variance Tradeoff</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symptoms-of-under-and-over-fitting">3.2. Symptoms of Under- and Over-fitting</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">3.3. Regularization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">3.4. Feature Scaling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bias-variance-tradeoff">4.1. The Bias-Variance Tradeoff</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#symptoms-of-under-and-over-fitting">4.2. Symptoms of Under- and Over-fitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">4.3. Regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">4.4. Feature Scaling</a></li>
 </ul>
   </nav></div>
 
