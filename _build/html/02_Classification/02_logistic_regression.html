@@ -466,7 +466,7 @@
 <span class="n">bc_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">y</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">bc_df</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
-<span class="n">display</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">bc_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -709,14 +709,14 @@
 </table>
 <p>8 rows × 31 columns</p>
 </div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    569.000000
-mean       0.627417
+mean       0.372583
 std        0.483918
 min        0.000000
 25%        0.000000
-50%        1.000000
+50%        0.000000
 75%        1.000000
 max        1.000000
-Name: target, dtype: float64
+Name: y, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -1179,7 +1179,7 @@ c(\Theta) =
 <p>The <em>cost function</em> minimized for logistic regression is the <em>log-loss</em> function.</p>
 <div class="math notranslate nohighlight">
 \[
-J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]b
+J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}_i) + (1 - y_i) \log(1 - \hat{p}_i) \right]
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1212,6 +1212,8 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">bc_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">bc_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+
 
 <span class="c1"># Split the dataset into training and testing sets</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
@@ -1233,67 +1235,6 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">X</span> <span class="o">=</span> <span class="n">bc_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># Split the dataset into training and testing sets</span>
-<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="c1"># Scale the data, since we are using multiple features</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">ss</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
-
-<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/_param_validation.py:216,</span> in <span class="ni">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">210</span> <span class="k">try</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">211</span>     <span class="k">with</span> <span class="n">config_context</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">212</span>         <span class="n">skip_parameter_validation</span><span class="o">=</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">213</span>             <span class="n">prefer_skip_nested_validation</span> <span class="ow">or</span> <span class="n">global_skip_validation</span>
-<span class="g g-Whitespace">    </span><span class="mi">214</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">215</span>     <span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">216</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">217</span> <span class="k">except</span> <span class="n">InvalidParameterError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">218</span>     <span class="c1"># When the function is just a wrapper around an estimator, we allow</span>
-<span class="g g-Whitespace">    </span><span class="mi">219</span>     <span class="c1"># the function to delegate validation to the estimator, but we replace</span>
-<span class="g g-Whitespace">    </span><span class="mi">220</span>     <span class="c1"># the name of the estimator by the name of the function in the error</span>
-<span class="g g-Whitespace">    </span><span class="mi">221</span>     <span class="c1"># message to avoid confusion.</span>
-<span class="g g-Whitespace">    </span><span class="mi">222</span>     <span class="n">msg</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">223</span>         <span class="sa">r</span><span class="s2">&quot;parameter of \w+ must be&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">224</span>         <span class="sa">f</span><span class="s2">&quot;parameter of </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__qualname__</span><span class="si">}</span><span class="s2"> must be&quot;</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">225</span>         <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">),</span>
-<span class="g g-Whitespace">    </span><span class="mi">226</span>     <span class="p">)</span>
-
-<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/model_selection/_split.py:2848,</span> in <span class="ni">train_test_split</span><span class="nt">(test_size, train_size, random_state, shuffle, stratify, *arrays)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2845</span> <span class="k">if</span> <span class="n">n_arrays</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">2846</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;At least one array required as input&quot;</span><span class="p">)</span>
-<span class="ne">-&gt; </span><span class="mi">2848</span> <span class="n">arrays</span> <span class="o">=</span> <span class="n">indexable</span><span class="p">(</span><span class="o">*</span><span class="n">arrays</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2850</span> <span class="n">n_samples</span> <span class="o">=</span> <span class="n">_num_samples</span><span class="p">(</span><span class="n">arrays</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<span class="g g-Whitespace">   </span><span class="mi">2851</span> <span class="n">n_train</span><span class="p">,</span> <span class="n">n_test</span> <span class="o">=</span> <span class="n">_validate_shuffle_split</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2852</span>     <span class="n">n_samples</span><span class="p">,</span> <span class="n">test_size</span><span class="p">,</span> <span class="n">train_size</span><span class="p">,</span> <span class="n">default_test_size</span><span class="o">=</span><span class="mf">0.25</span>
-<span class="g g-Whitespace">   </span><span class="mi">2853</span> <span class="p">)</span>
-
-<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/validation.py:532,</span> in <span class="ni">indexable</span><span class="nt">(*iterables)</span>
-<span class="g g-Whitespace">    </span><span class="mi">502</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Make arrays indexable for cross-validation.</span>
-<span class="g g-Whitespace">    </span><span class="mi">503</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">504</span><span class="sd"> Checks consistent length, passes through None, and ensures that everything</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">528</span><span class="sd"> [[1, 2, 3], array([2, 3, 4]), None, &lt;...Sparse...dtype &#39;int64&#39;...shape (3, 1)&gt;]</span>
-<span class="g g-Whitespace">    </span><span class="mi">529</span><span class="sd"> &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">531</span> <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">_make_indexable</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">iterables</span><span class="p">]</span>
-<span class="ne">--&gt; </span><span class="mi">532</span> <span class="n">check_consistent_length</span><span class="p">(</span><span class="o">*</span><span class="n">result</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">533</span> <span class="k">return</span> <span class="n">result</span>
-
-<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/validation.py:475,</span> in <span class="ni">check_consistent_length</span><span class="nt">(*arrays)</span>
-<span class="g g-Whitespace">    </span><span class="mi">473</span> <span class="n">uniques</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">lengths</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">474</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">uniques</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">475</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">476</span>         <span class="s2">&quot;Found input variables with inconsistent numbers of samples: </span><span class="si">%r</span><span class="s2">&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">477</span>         <span class="o">%</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">lengths</span><span class="p">]</span>
-<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="p">)</span>
-
-<span class="ne">ValueError</span>: Found input variables with inconsistent numbers of samples: [569, 1100]
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1311,6 +1252,9 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ae1500d36b799f430dc79c2539687a53edec9d9e5806f9fc1c30bcc086297faa.png" src="../_images/ae1500d36b799f430dc79c2539687a53edec9d9e5806f9fc1c30bcc086297faa.png" />
 </div>
 </div>
 <section id="assessing-the-model">
@@ -1332,6 +1276,9 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bf6ac7d4dda051df75a08fd9d89eb29e433415329652d67cf2530713af75e3a2.png" src="../_images/bf6ac7d4dda051df75a08fd9d89eb29e433415329652d67cf2530713af75e3a2.png" />
 </div>
 </div>
 </section>
@@ -1389,11 +1336,50 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/a1a3f9cfbd589bfefb0507e02069eb30b38637c90cebe035281abd6a500be7fb.png" src="../_images/a1a3f9cfbd589bfefb0507e02069eb30b38637c90cebe035281abd6a500be7fb.png" />
+</div>
 </div>
 </section>
 <section id="id1">
 <h3><span class="section-number">9.5.2. </span>Assessing the model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>What were our most significant features?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_LogReg_Ridge</span><span class="o">.</span><span class="vm">__dict__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;penalty&#39;: &#39;l2&#39;,
+ &#39;dual&#39;: False,
+ &#39;tol&#39;: 0.0001,
+ &#39;C&#39;: 0.1,
+ &#39;fit_intercept&#39;: True,
+ &#39;intercept_scaling&#39;: 1,
+ &#39;class_weight&#39;: None,
+ &#39;random_state&#39;: None,
+ &#39;solver&#39;: &#39;lbfgs&#39;,
+ &#39;max_iter&#39;: 10000,
+ &#39;multi_class&#39;: &#39;deprecated&#39;,
+ &#39;verbose&#39;: 0,
+ &#39;warm_start&#39;: False,
+ &#39;n_jobs&#39;: None,
+ &#39;l1_ratio&#39;: None,
+ &#39;n_features_in_&#39;: 30,
+ &#39;classes_&#39;: array([0, 1]),
+ &#39;n_iter_&#39;: array([13], dtype=int32),
+ &#39;coef_&#39;: array([[ 0.37087111,  0.4192871 ,  0.35886982,  0.355747  ,  0.14327852,
+         -0.01300224,  0.35494654,  0.46485547,  0.02751616, -0.1944205 ,
+          0.46217896, -0.0351985 ,  0.32444403,  0.34457813,  0.06423173,
+         -0.25745119, -0.05938632,  0.11795601, -0.17901571, -0.26046698,
+          0.48940432,  0.60052475,  0.43407476,  0.43543002,  0.37447289,
+          0.14985419,  0.40737255,  0.46444327,  0.47890389,  0.10609777]]),
+ &#39;intercept_&#39;: array([-0.63452897])}
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span> <span class="o">=</span> <span class="n">model_LogReg_Ridge</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1404,13 +1390,221 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>features</th>
+      <th>weights</th>
+      <th>abs weights</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>21</th>
+      <td>worst texture</td>
+      <td>0.600525</td>
+      <td>0.600525</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>worst radius</td>
+      <td>0.489404</td>
+      <td>0.489404</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>worst symmetry</td>
+      <td>0.478904</td>
+      <td>0.478904</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>mean concave points</td>
+      <td>0.464855</td>
+      <td>0.464855</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>worst concave points</td>
+      <td>0.464443</td>
+      <td>0.464443</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>radius error</td>
+      <td>0.462179</td>
+      <td>0.462179</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>worst area</td>
+      <td>0.435430</td>
+      <td>0.435430</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>worst perimeter</td>
+      <td>0.434075</td>
+      <td>0.434075</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean texture</td>
+      <td>0.419287</td>
+      <td>0.419287</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>worst concavity</td>
+      <td>0.407373</td>
+      <td>0.407373</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>worst smoothness</td>
+      <td>0.374473</td>
+      <td>0.374473</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>mean radius</td>
+      <td>0.370871</td>
+      <td>0.370871</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mean perimeter</td>
+      <td>0.358870</td>
+      <td>0.358870</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>mean area</td>
+      <td>0.355747</td>
+      <td>0.355747</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>mean concavity</td>
+      <td>0.354947</td>
+      <td>0.354947</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>area error</td>
+      <td>0.344578</td>
+      <td>0.344578</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>perimeter error</td>
+      <td>0.324444</td>
+      <td>0.324444</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>fractal dimension error</td>
+      <td>-0.260467</td>
+      <td>0.260467</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>compactness error</td>
+      <td>-0.257451</td>
+      <td>0.257451</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>mean fractal dimension</td>
+      <td>-0.194421</td>
+      <td>0.194421</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>symmetry error</td>
+      <td>-0.179016</td>
+      <td>0.179016</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>worst compactness</td>
+      <td>0.149854</td>
+      <td>0.149854</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>mean smoothness</td>
+      <td>0.143279</td>
+      <td>0.143279</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>concave points error</td>
+      <td>0.117956</td>
+      <td>0.117956</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>worst fractal dimension</td>
+      <td>0.106098</td>
+      <td>0.106098</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>smoothness error</td>
+      <td>0.064232</td>
+      <td>0.064232</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>concavity error</td>
+      <td>-0.059386</td>
+      <td>0.059386</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>texture error</td>
+      <td>-0.035199</td>
+      <td>0.035199</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>mean symmetry</td>
+      <td>0.027516</td>
+      <td>0.027516</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>mean compactness</td>
+      <td>-0.013002</td>
+      <td>0.013002</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
 </section>
 <section id="another-example-classifying-wines">
 <h2><span class="section-number">9.6. </span>Another Example: Classifying Wines<a class="headerlink" href="#another-example-classifying-wines" title="Link to this heading">#</a></h2>
 <p>In this classification problem, we are given chemical properties of wine as well as a target value corresponding to the vineyard the wine came from. Can we identify which vineyard a wine came from by analyzing the chemical content of the wine itself?</p>
-<p>There are three categories of wine in this classification (0,1,2). We’ll convert this problem into a binary classification, identifying if the wine is from vineyard 1 or not (either vineyard 1 or 2).</p>
+<p>There are three categories of wine in this classification (0,1,2). We’ll convert this problem into a binary classification, identifying if the wine is from vineyard 1 or not (either vineyard 0 or 2).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_wine</span>
@@ -1422,6 +1616,130 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alcohol</th>
+      <th>malic_acid</th>
+      <th>ash</th>
+      <th>alcalinity_of_ash</th>
+      <th>magnesium</th>
+      <th>total_phenols</th>
+      <th>flavanoids</th>
+      <th>nonflavanoid_phenols</th>
+      <th>proanthocyanins</th>
+      <th>color_intensity</th>
+      <th>hue</th>
+      <th>od280/od315_of_diluted_wines</th>
+      <th>proline</th>
+      <th>y</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>14.23</td>
+      <td>1.71</td>
+      <td>2.43</td>
+      <td>15.6</td>
+      <td>127.0</td>
+      <td>2.80</td>
+      <td>3.06</td>
+      <td>0.28</td>
+      <td>2.29</td>
+      <td>5.64</td>
+      <td>1.04</td>
+      <td>3.92</td>
+      <td>1065.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13.20</td>
+      <td>1.78</td>
+      <td>2.14</td>
+      <td>11.2</td>
+      <td>100.0</td>
+      <td>2.65</td>
+      <td>2.76</td>
+      <td>0.26</td>
+      <td>1.28</td>
+      <td>4.38</td>
+      <td>1.05</td>
+      <td>3.40</td>
+      <td>1050.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13.16</td>
+      <td>2.36</td>
+      <td>2.67</td>
+      <td>18.6</td>
+      <td>101.0</td>
+      <td>2.80</td>
+      <td>3.24</td>
+      <td>0.30</td>
+      <td>2.81</td>
+      <td>5.68</td>
+      <td>1.03</td>
+      <td>3.17</td>
+      <td>1185.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>14.37</td>
+      <td>1.95</td>
+      <td>2.50</td>
+      <td>16.8</td>
+      <td>113.0</td>
+      <td>3.85</td>
+      <td>3.49</td>
+      <td>0.24</td>
+      <td>2.18</td>
+      <td>7.80</td>
+      <td>0.86</td>
+      <td>3.45</td>
+      <td>1480.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>13.24</td>
+      <td>2.59</td>
+      <td>2.87</td>
+      <td>21.0</td>
+      <td>118.0</td>
+      <td>2.80</td>
+      <td>2.69</td>
+      <td>0.39</td>
+      <td>1.82</td>
+      <td>4.32</td>
+      <td>1.04</td>
+      <td>2.93</td>
+      <td>735.0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1431,6 +1749,12 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}
 <span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2]
+[0 1]
 </pre></div>
 </div>
 </div>
