@@ -22,3 +22,4 @@ parts:
     chapters:
     - file: 02_Classification/01_classification_intro
     - file: 02_Classification/02_logistic_regression
+    - file: 02_Classification/03_trees_encoding
