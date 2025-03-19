@@ -461,9 +461,9 @@
 <li><p>One-Hot encoding creates a new feature for each possible value. Each row will have a 1 in a single column and 0 in the others, hence <em>one hot</em>.</p></li>
 </ul>
 </li>
-<li><p>[LabelEncoder()] (<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html">https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html</a>)- <strong>for categorical data</strong>. Label encoding is intended to be used only on the label/target y, hence can only be applied to one column at a time. However, we will use Label encoding to transform any binary string data (e.g. Sex = [‘M’,’F’]—&gt;[0,1]) instead of one-hot encoding</p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html">LabelEncoder()</a>- <strong>for categorical data</strong>. Label encoding is intended to be used only on the label/target y, hence can only be applied to one column at a time.</p></li>
 </ul>
-<p>We can apply different transforms to different columns of our data using [ColumnTransformer()] (<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html">https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html</a>).</p>
+<p>We can apply different transforms to different columns of our data using <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html">ColumnTransformer()</a>.</p>
 <p>Let’s look at an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -561,7 +561,7 @@
 
 <span class="n">coltrans</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
     <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
-        <span class="p">(</span><span class="s2">&quot;ord&quot;</span><span class="p">,</span> <span class="n">ordEnc</span><span class="p">,</span> <span class="n">ord_features</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">&quot;ord&quot;</span><span class="p">,</span> <span class="n">ordEnc</span><span class="p">,</span> <span class="n">ord_features</span><span class="p">),</span>   <span class="c1"># (nickname, transformer object variable, which columns to apply to)</span>
         <span class="p">(</span><span class="s2">&quot;onehot&quot;</span><span class="p">,</span> <span class="n">oneHotEnc</span><span class="p">,</span> <span class="n">cat_features</span><span class="p">)</span>
         <span class="p">],</span>
     <span class="n">remainder</span> <span class="o">=</span> <span class="s1">&#39;passthrough&#39;</span><span class="p">,</span>
@@ -775,15 +775,6 @@ IG(p) = H_{\text{parent}}(p) - \sum H_{\text{children}}(p)
 <p>The dataset summarizes the demographics and health condition of 200 patients (Age, sex, blood, pressure, cholesterol, and sodium/potassium ratio) as well as which of five drugs had best results with the patient. The goal is to build a classifier to choose which drug to prescribe to a future patient.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drugs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/kvinlazy/Dataset/refs/heads/master/drug200.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -893,48 +884,208 @@ memory usage: 9.5+ KB
 </div>
 <section id="transform-encode-the-data">
 <h3><span class="section-number">10.4.1. </span>Transform (Encode) the data<a class="headerlink" href="#transform-encode-the-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">drugs_df</span><span class="p">[</span><span class="s1">&#39;Drug&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">drugs_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;Drug&#39;</span><span class="p">)</span>
+
+<span class="n">ord_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sex&#39;</span><span class="p">,</span> <span class="s1">&#39;BP&#39;</span><span class="p">,</span> <span class="s1">&#39;Cholesterol&#39;</span><span class="p">]</span>
+<span class="n">ordEnc</span> <span class="o">=</span> <span class="n">OrdinalEncoder</span><span class="p">(</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;LOW&#39;</span><span class="p">,</span> <span class="s1">&#39;NORMAL&#39;</span><span class="p">,</span> <span class="s1">&#39;HIGH&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;NORMAL&#39;</span><span class="p">,</span> <span class="s1">&#39;HIGH&#39;</span><span class="p">]])</span>
+
+
+<span class="n">num_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Na_to_K&#39;</span><span class="p">]</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="c1"># Encode Features</span>
+
+<span class="n">ct</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span><span class="n">transformers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s1">&#39;ord&#39;</span><span class="p">,</span> <span class="n">ordEnc</span><span class="p">,</span> <span class="n">ord_features</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ss&#39;</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">num_features</span><span class="p">)</span>
+<span class="p">],</span>
+                       <span class="n">remainder</span> <span class="o">=</span> <span class="s1">&#39;passthrough&#39;</span><span class="p">,</span>
+                       <span class="n">verbose_feature_names_out</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">X_trans</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">X_trans</span>
+
+<span class="c1"># Encode output</span>
+
+<span class="n">labEnc</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y_trans</span> <span class="o">=</span> <span class="n">labEnc</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_names</span> <span class="o">=</span> <span class="n">labEnc</span><span class="o">.</span><span class="n">classes_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">feature_names</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">()</span>
+<span class="n">X_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_trans</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">)</span>
+<span class="n">X_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sex</th>
+      <th>BP</th>
+      <th>Cholesterol</th>
+      <th>Age</th>
+      <th>Na_to_K</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>-1.291591</td>
+      <td>1.286522</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.162699</td>
+      <td>-0.415145</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.162699</td>
+      <td>-0.828558</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>-0.988614</td>
+      <td>-1.149963</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.011034</td>
+      <td>0.271794</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.708057</td>
+      <td>-0.626917</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>-1.715759</td>
+      <td>-0.565995</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.465676</td>
+      <td>-0.859089</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>-1.291591</td>
+      <td>-0.286500</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-0.261469</td>
+      <td>-0.657170</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 5 columns</p>
+</div></div></div>
+</div>
 </section>
 <section id="fit-a-decision-tree-model">
 <h3><span class="section-number">10.4.2. </span>Fit a decision tree model<a class="headerlink" href="#fit-a-decision-tree-model" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">plot_tree</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_df</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
 
 <span class="n">tree_clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+
 <span class="n">tree_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plot_tree</span><span class="p">(</span><span class="n">tree_clf</span><span class="p">,</span>
-          <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">,</span>
-          <span class="n">class_names</span> <span class="o">=</span> <span class="n">class_names</span><span class="p">,</span>
-          <span class="n">filled</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">plot_tree</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">tree_clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">tree_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">plot_tree</span><span class="p">(</span><span class="n">tree_clf</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span>           <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span>           <span class="n">class_names</span> <span class="o">=</span> <span class="n">class_names</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">10</span>           <span class="n">filled</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;X_train&#39; is not defined
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tree_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">clf_tree</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">plot_tree</span><span class="p">(</span><span class="n">tree_clf</span><span class="p">,</span>
+          <span class="n">filled</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">9</span><span class="p">,</span>
+          <span class="n">feature_names</span> <span class="o">=</span> <span class="n">feature_names</span><span class="p">,</span> <span class="n">class_names</span> <span class="o">=</span> <span class="n">label_names</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4b2b00aac2ae0a4197943013eea145ff782608454ebbaeb8ee3b847fa52b793b.png" src="../_images/4b2b00aac2ae0a4197943013eea145ff782608454ebbaeb8ee3b847fa52b793b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -942,7 +1093,21 @@ memory usage: 9.5+ KB
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span>
 
 <span class="n">cfm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
-<span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">cfm</span><span class="p">,</span> <span class="n">display_labels</span> <span class="o">=</span> <span class="n">y_label</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">cfm</span><span class="p">,</span> <span class="n">display_labels</span> <span class="o">=</span> <span class="n">class_names</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">cfm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">cfm</span><span class="p">,</span> <span class="n">display_labels</span> <span class="o">=</span> <span class="n">class_names</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="ne">NameError</span>: name &#39;class_names&#39; is not defined
 </pre></div>
 </div>
 </div>
