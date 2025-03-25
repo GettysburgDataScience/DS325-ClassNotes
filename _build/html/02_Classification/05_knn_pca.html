@@ -213,7 +213,6 @@
 <li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">12. K-Nearest Neighbors (and PCA)</a></li>
-
 </ul>
 
     </div>
@@ -406,20 +405,16 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">12. K-Nearest Neighbors (and PCA)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-component-analysis-pca">12.1. Principle Component Analysis (PCA)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">12.1.1. Example</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">12.2. K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">12.2.1. Eager vs Lazy models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">12.2.2. Hyper parameters of KNN</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">13. K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">13.1. Eager vs Lazy models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">13.2. Hyper parameters of KNN</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -704,7 +699,7 @@
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/4f4dd40869c86e1c221412457ed8b2b056724fa6199dea2419ad4382cb936260.png" src="../_images/4f4dd40869c86e1c221412457ed8b2b056724fa6199dea2419ad4382cb936260.png" />
-<img alt="../_images/dfa011e26582e42a4110b0ba0391025ef0de9a7701fb63077b28537c875add3e.png" src="../_images/dfa011e26582e42a4110b0ba0391025ef0de9a7701fb63077b28537c875add3e.png" />
+<img alt="../_images/57067546513d6108828cf0c69d21e640f957845fbaf160ccbc679c807236c5c4.png" src="../_images/57067546513d6108828cf0c69d21e640f957845fbaf160ccbc679c807236c5c4.png" />
 </div>
 </div>
 <p>And we’ll use a decision tree to model.</p>
@@ -738,8 +733,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f15422dd49df462fbb7d6f3bed8b2a031449b056f37e2c13c40476ee0280dcd7.png" src="../_images/f15422dd49df462fbb7d6f3bed8b2a031449b056f37e2c13c40476ee0280dcd7.png" />
-<img alt="../_images/6a55ef42d7c5dd8f849638ecad8aab29baa06b72aa85f63e736a5288422575e1.png" src="../_images/6a55ef42d7c5dd8f849638ecad8aab29baa06b72aa85f63e736a5288422575e1.png" />
+<img alt="../_images/f9dd8a6777130fd6c296b07337777b8ebe9eecdf3735e494adb66849f3763280.png" src="../_images/f9dd8a6777130fd6c296b07337777b8ebe9eecdf3735e494adb66849f3763280.png" />
+<img alt="../_images/a6d385ea7b0ca35a044929fd156d6b927fab959fd286f3561f47ec47a534666c.png" src="../_images/a6d385ea7b0ca35a044929fd156d6b927fab959fd286f3561f47ec47a534666c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -781,19 +776,18 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d5f9ce8fe997e0e0035b8cf8506b682fb30da2cb12230a264edbdbe1b2d0386b.png" src="../_images/d5f9ce8fe997e0e0035b8cf8506b682fb30da2cb12230a264edbdbe1b2d0386b.png" />
+<img alt="../_images/5f7a4a7b0b44a72a6487884ed29e1dd4177a7923b36df0efb2985744fb87318a.png" src="../_images/5f7a4a7b0b44a72a6487884ed29e1dd4177a7923b36df0efb2985744fb87318a.png" />
 </div>
 </div>
 </section>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="k-nearest-neighbors-knn-a-lazy-learner">
-<h1><span class="section-number">13. </span>K-Nearest Neighbors (KNN) (a lazy learner)<a class="headerlink" href="#k-nearest-neighbors-knn-a-lazy-learner" title="Link to this heading">#</a></h1>
+<section id="k-nearest-neighbors-knn-a-lazy-learner">
+<h2><span class="section-number">12.2. </span>K-Nearest Neighbors (KNN) (a lazy learner)<a class="headerlink" href="#k-nearest-neighbors-knn-a-lazy-learner" title="Link to this heading">#</a></h2>
 <p>A K-Nearest Neighbors classifier doesn’t really learn a model at all. Instead, to determine the label for an unknown sample, it finds the K data points from the training set closest to the unlabeled sample (the K nearest neighbors) and assigns the majority label among the nearest neighbors.</p>
 <img src="knn_cartoon.png" style = "width: 40vw" alt="image credit: JC Chouinard" />
 image credit: JC Chouinard
 <section id="eager-vs-lazy-models">
-<h2><span class="section-number">13.1. </span>Eager vs Lazy models<a class="headerlink" href="#eager-vs-lazy-models" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">12.2.1. </span>Eager vs Lazy models<a class="headerlink" href="#eager-vs-lazy-models" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><em>Eager learners</em> spend more time and resources training a <em>simple</em> model that generalizes and prediction is quick and not computationally intensive (simple, quick, and computationally intensive are all relative).</p></li>
 <li><p><em>Lazy learners</em> store data and do most of the computation at the time of prediction. Lazy learners are slower to predict, but they are also adaptable to new data because the training overhead is low.</p></li>
@@ -801,7 +795,7 @@ image credit: JC Chouinard
 <p><strong>KNN is a very lazy learner!</strong></p>
 </section>
 <section id="hyper-parameters-of-knn">
-<h2><span class="section-number">13.2. </span>Hyper parameters of KNN<a class="headerlink" href="#hyper-parameters-of-knn" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">12.2.2. </span>Hyper parameters of KNN<a class="headerlink" href="#hyper-parameters-of-knn" title="Link to this heading">#</a></h3>
 <p><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html"> sklearn.neighbors.KNeighborsClassifier </a></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> - number of neighbors (why not k?! come on sklearn devs!). <strong>Rule of thumb, start with square root of number of samples.</strong></p>
@@ -924,87 +918,87 @@ image credit: JC Chouinard
  &#39;random_state&#39;: None,
  &#39;n_features_in_&#39;: 64,
  &#39;_fit_svd_solver&#39;: &#39;covariance_eigh&#39;,
- &#39;mean_&#39;: array([0.00000000e+00, 3.16631872e-01, 5.26443981e+00, 1.18893528e+01,
-        1.18107168e+01, 5.78009743e+00, 1.38065414e+00, 1.24565066e-01,
-        6.95894224e-03, 2.02574809e+00, 1.03883090e+01, 1.20744607e+01,
-        1.02985386e+01, 8.10368824e+00, 1.84690327e+00, 1.04384134e-01,
-        3.47947112e-03, 2.65274878e+00, 9.95546277e+00, 7.01739736e+00,
-        7.00974252e+00, 7.69937370e+00, 1.83228949e+00, 5.49756437e-02,
-        1.39178845e-03, 2.47807933e+00, 9.14544189e+00, 8.81558803e+00,
-        9.90187891e+00, 7.53931802e+00, 2.36882394e+00, 2.08768267e-03,
-        0.00000000e+00, 2.33611691e+00, 7.70006959e+00, 9.08350731e+00,
-        1.03159360e+01, 8.81210856e+00, 2.91718859e+00, 0.00000000e+00,
-        9.74251914e-03, 1.59707724e+00, 6.90257481e+00, 7.32289492e+00,
-        7.63674322e+00, 8.22199026e+00, 3.46485734e+00, 2.78357690e-02,
-        9.04662491e-03, 7.39735560e-01, 7.52261656e+00, 9.62978427e+00,
-        9.44258873e+00, 8.73973556e+00, 3.70424495e+00, 1.92066806e-01,
-        6.95894224e-04, 3.01322199e-01, 5.62839248e+00, 1.20932498e+01,
-        1.17794015e+01, 6.75017397e+00, 2.02157272e+00, 3.11064718e-01]),
+ &#39;mean_&#39;: array([0.00000000e+00, 3.10368824e-01, 5.19345859e+00, 1.17884482e+01,
+        1.17974948e+01, 5.88308977e+00, 1.44537230e+00, 1.36395268e-01,
+        2.78357690e-03, 1.96033403e+00, 1.02881002e+01, 1.20257481e+01,
+        1.02366040e+01, 8.13778706e+00, 1.93528184e+00, 1.23869172e-01,
+        2.08768267e-03, 2.52748782e+00, 9.90187891e+00, 7.08629088e+00,
+        7.06889353e+00, 7.79192763e+00, 1.84064022e+00, 5.70633264e-02,
+        1.39178845e-03, 2.43423800e+00, 9.05915101e+00, 8.87613083e+00,
+        9.99373695e+00, 7.65901183e+00, 2.35699374e+00, 2.08768267e-03,
+        0.00000000e+00, 2.28322895e+00, 7.66945024e+00, 9.10090466e+00,
+        1.03270703e+01, 8.71537926e+00, 2.88656924e+00, 0.00000000e+00,
+        8.35073069e-03, 1.53444676e+00, 6.75156576e+00, 7.31663187e+00,
+        7.81071677e+00, 8.13152401e+00, 3.38830898e+00, 2.99234516e-02,
+        8.35073069e-03, 7.03549061e-01, 7.36604036e+00, 9.56715379e+00,
+        9.43632568e+00, 8.64370216e+00, 3.71120390e+00, 2.11551844e-01,
+        6.95894224e-04, 2.83228949e-01, 5.53027140e+00, 1.19888657e+01,
+        1.17056367e+01, 6.70285317e+00, 2.07863605e+00, 3.83437717e-01]),
  &#39;noise_variance_&#39;: 0.0,
  &#39;n_samples_&#39;: 1437,
  &#39;n_components_&#39;: 64,
- &#39;components_&#39;: array([[ 0.00000000e+00, -1.90087952e-02, -2.33033232e-01, ...,
-         -9.19952374e-02, -3.63819668e-02, -9.80761012e-03],
-        [ 0.00000000e+00,  1.04452955e-02,  4.93775997e-02, ...,
-         -1.95339155e-01, -2.90930277e-02,  3.66402933e-03],
-        [ 0.00000000e+00, -1.97548297e-02, -1.21677963e-01, ...,
-         -2.26940581e-01, -1.59682027e-01, -2.82889745e-02],
+ &#39;components_&#39;: array([[ 0.00000000e+00, -1.88834865e-02, -2.31752197e-01, ...,
+         -8.42032660e-02, -4.46587690e-02, -1.54013090e-02],
+        [ 0.00000000e+00,  8.78396374e-03,  3.51560066e-02, ...,
+         -2.03801873e-01, -3.33672891e-02,  2.47247478e-03],
+        [ 0.00000000e+00, -1.85798903e-02, -1.30322569e-01, ...,
+         -2.01876072e-01, -1.54774207e-01, -3.25756758e-02],
         ...,
-        [-0.00000000e+00, -0.00000000e+00, -3.46463299e-15, ...,
-         -1.35932975e-15,  4.89383509e-16, -3.43272828e-16],
-        [-0.00000000e+00, -0.00000000e+00, -6.62942891e-15, ...,
-         -2.74227843e-15,  3.71916907e-16, -8.09057512e-16],
+        [-0.00000000e+00, -0.00000000e+00,  5.55734741e-15, ...,
+          2.93047463e-15,  4.89862790e-15, -1.39281661e-15],
         [ 1.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
-          0.00000000e+00,  0.00000000e+00,  0.00000000e+00]],
+          0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
+        [-0.00000000e+00, -0.00000000e+00,  4.09896970e-15, ...,
+          2.00642902e-15, -4.23431264e-15,  2.18848901e-15]],
        shape=(64, 64)),
- &#39;explained_variance_&#39;: array([1.82055219e+02, 1.62162198e+02, 1.42834426e+02, 1.00002508e+02,
-        7.09315753e+01, 5.94116434e+01, 5.05949109e+01, 4.44357289e+01,
-        4.05047135e+01, 3.73309622e+01, 2.78192047e+01, 2.69266434e+01,
-        2.26256666e+01, 2.07609646e+01, 1.82427225e+01, 1.71405205e+01,
-        1.60578975e+01, 1.49431652e+01, 1.20598103e+01, 1.10572672e+01,
-        1.08003605e+01, 9.38198572e+00, 9.08442770e+00, 8.73196262e+00,
-        8.32179869e+00, 7.24737152e+00, 6.99856880e+00, 6.16346863e+00,
-        5.82432247e+00, 5.17551444e+00, 4.61028685e+00, 4.26199992e+00,
-        4.07472010e+00, 3.84661164e+00, 3.77277955e+00, 3.66148946e+00,
-        3.09126566e+00, 2.77159537e+00, 2.66606334e+00, 2.55103295e+00,
-        2.23834022e+00, 1.91809571e+00, 1.81344939e+00, 1.66554567e+00,
-        1.42493360e+00, 1.28494773e+00, 1.16722498e+00, 8.46373881e-01,
-        6.70118989e-01, 4.50832454e-01, 2.24534388e-01, 9.74170450e-02,
-        6.68395059e-02, 6.32924666e-02, 4.82320399e-02, 1.75429955e-02,
-        1.02746006e-02, 4.47227520e-03, 1.20093569e-03, 8.20688343e-04,
-        4.85071473e-04, 1.58773130e-15, 7.22929519e-16, 0.00000000e+00]),
- &#39;explained_variance_ratio_&#39;: array([1.51089395e-01, 1.34579984e-01, 1.18539678e-01, 8.29930527e-02,
-        5.88668035e-02, 4.93063000e-02, 4.19892081e-02, 3.68776431e-02,
-        3.36152552e-02, 3.09813282e-02, 2.30874283e-02, 2.23466829e-02,
-        1.87772605e-02, 1.72297262e-02, 1.51398126e-02, 1.42250845e-02,
-        1.33266052e-02, 1.24014779e-02, 1.00085537e-02, 9.17653350e-03,
-        8.96332412e-03, 7.78620110e-03, 7.53925480e-03, 7.24674061e-03,
-        6.90634158e-03, 6.01466403e-03, 5.80818024e-03, 5.11512249e-03,
-        4.83366180e-03, 4.29520971e-03, 3.82612185e-03, 3.53707514e-03,
-        3.38164979e-03, 3.19234037e-03, 3.13106640e-03, 3.03870567e-03,
-        2.56547140e-03, 2.30017392e-03, 2.21259187e-03, 2.11712703e-03,
-        1.85762030e-03, 1.59184626e-03, 1.50499926e-03, 1.38225253e-03,
-        1.18256624e-03, 1.06639060e-03, 9.68691353e-04, 7.02413906e-04,
-        5.56138259e-04, 3.74150234e-04, 1.86343270e-04, 8.08473521e-05,
-        5.54707553e-05, 5.25270329e-05, 4.00282385e-05, 1.45591024e-05,
-        8.52699084e-06, 3.71158463e-06, 9.96668196e-07, 6.81097229e-07,
-        4.02565528e-07, 1.31767363e-18, 5.99966231e-19, 0.00000000e+00]),
- &#39;singular_values_&#39;: array([5.11303524e+02, 4.82560791e+02, 4.52890976e+02, 3.78950658e+02,
-        3.19151597e+02, 2.92087521e+02, 2.69544601e+02, 2.52605833e+02,
-        2.41173731e+02, 2.31532420e+02, 1.99870903e+02, 1.96638399e+02,
-        1.80251095e+02, 1.72663676e+02, 1.61853482e+02, 1.56887818e+02,
-        1.51852365e+02, 1.46486809e+02, 1.31597445e+02, 1.26008872e+02,
-        1.24536411e+02, 1.16071235e+02, 1.14215753e+02, 1.11978115e+02,
-        1.09316526e+02, 1.02015810e+02, 1.00249413e+02, 9.40783766e+01,
-        9.14534147e+01, 8.62092729e+01, 8.13656679e+01, 7.82319109e+01,
-        7.64937779e+01, 7.43218293e+01, 7.36051047e+01, 7.25113706e+01,
-        6.66262522e+01, 6.30873280e+01, 6.18746067e+01, 6.05250635e+01,
-        5.66944139e+01, 5.24822393e+01, 5.10305136e+01, 4.89052511e+01,
-        4.52349936e+01, 4.29556159e+01, 4.09406287e+01, 3.48624855e+01,
-        3.10208135e+01, 2.54439660e+01, 1.79563744e+01, 1.18275474e+01,
-        9.79701641e+00, 9.53351887e+00, 8.32233197e+00, 5.01913753e+00,
-        3.84113609e+00, 2.53420346e+00, 1.31321881e+00, 1.08559130e+00,
-        8.34603280e-01, 1.50996097e-06, 1.01888507e-06, 0.00000000e+00])}
+ &#39;explained_variance_&#39;: array([1.78929629e+02, 1.61503910e+02, 1.45711412e+02, 1.01797111e+02,
+        7.03385990e+01, 5.98778313e+01, 5.42484725e+01, 4.38783756e+01,
+        4.02474320e+01, 3.69487070e+01, 2.77598714e+01, 2.71808082e+01,
+        2.23597459e+01, 2.19585197e+01, 1.79135732e+01, 1.70912569e+01,
+        1.63269959e+01, 1.52994661e+01, 1.23700073e+01, 1.10180389e+01,
+        1.04939817e+01, 9.50081414e+00, 9.12799660e+00, 8.61808252e+00,
+        8.29759118e+00, 7.30195464e+00, 6.92983544e+00, 6.39878143e+00,
+        5.77447922e+00, 5.15097073e+00, 4.50257857e+00, 4.30928193e+00,
+        4.01955980e+00, 3.82243209e+00, 3.66643541e+00, 3.54334151e+00,
+        3.13664256e+00, 2.78726638e+00, 2.76264994e+00, 2.49212064e+00,
+        2.25316528e+00, 1.95633482e+00, 1.80734437e+00, 1.75119052e+00,
+        1.47104542e+00, 1.33917949e+00, 1.14872697e+00, 9.77443621e-01,
+        6.65533930e-01, 4.36878700e-01, 2.68138363e-01, 9.83270794e-02,
+        6.12427015e-02, 5.83379762e-02, 4.78525506e-02, 1.55316603e-02,
+        3.92042306e-03, 3.88774547e-03, 1.03253860e-03, 6.74917840e-04,
+        4.51807348e-04, 2.27530418e-15, 0.00000000e+00, 0.00000000e+00]),
+ &#39;explained_variance_ratio_&#39;: array([1.47904721e-01, 1.33500476e-01, 1.20446266e-01, 8.41463390e-02,
+        5.81424714e-02, 4.94955138e-02, 4.48422389e-02, 3.62702305e-02,
+        3.32688623e-02, 3.05421088e-02, 2.29465408e-02, 2.24678823e-02,
+        1.84827521e-02, 1.81510952e-02, 1.48075087e-02, 1.41277752e-02,
+        1.34960307e-02, 1.26466661e-02, 1.02251510e-02, 9.10760263e-03,
+        8.67441263e-03, 7.85345205e-03, 7.54527797e-03, 7.12377874e-03,
+        6.85885793e-03, 6.03585648e-03, 5.72825966e-03, 5.28928599e-03,
+        4.77323259e-03, 4.25783528e-03, 3.72186892e-03, 3.56208831e-03,
+        3.32260159e-03, 3.15965418e-03, 3.03070603e-03, 2.92895558e-03,
+        2.59277485e-03, 2.30397759e-03, 2.28362943e-03, 2.06000766e-03,
+        1.86248518e-03, 1.61712264e-03, 1.49396590e-03, 1.44754866e-03,
+        1.21597839e-03, 1.10697692e-03, 9.49547274e-04, 8.07963033e-04,
+        5.50135886e-04, 3.61127570e-04, 2.21645403e-04, 8.12779823e-05,
+        5.06237268e-05, 4.82226567e-05, 3.95553166e-05, 1.28385997e-05,
+        3.24065433e-06, 3.21364276e-06, 8.53505001e-07, 5.57892705e-07,
+        3.73467715e-07, 1.88078538e-18, 0.00000000e+00, 0.00000000e+00]),
+ &#39;singular_values_&#39;: array([5.06895401e+02, 4.81580331e+02, 4.57429325e+02, 3.82335783e+02,
+        3.17814770e+02, 2.93231250e+02, 2.79107160e+02, 2.51016628e+02,
+        2.40406556e+02, 2.30343967e+02, 1.99657645e+02, 1.97564270e+02,
+        1.79188714e+02, 1.77573743e+02, 1.60386692e+02, 1.56662200e+02,
+        1.53119450e+02, 1.48222918e+02, 1.33279145e+02, 1.25785149e+02,
+        1.22757312e+02, 1.16803977e+02, 1.14489314e+02, 1.11245524e+02,
+        1.09157414e+02, 1.02399252e+02, 9.97559206e+01, 9.58574469e+01,
+        9.10612550e+01, 8.60046160e+01, 8.04095941e+01, 7.86646607e+01,
+        7.59742580e+01, 7.40878700e+01, 7.25603283e+01, 7.13318891e+01,
+        6.71134764e+01, 6.32654292e+01, 6.29854373e+01, 5.98221132e+01,
+        5.68818543e+01, 5.30027999e+01, 5.09445436e+01, 5.01468802e+01,
+        4.59610838e+01, 4.38527280e+01, 4.06149225e+01, 3.74647706e+01,
+        3.09145067e+01, 2.50471119e+01, 1.96226066e+01, 1.18826633e+01,
+        9.37787392e+00, 9.15277738e+00, 8.28952729e+00, 4.72265436e+00,
+        2.37270468e+00, 2.36279548e+00, 1.21767214e+00, 9.84470426e-01,
+        8.05478337e-01, 1.80757761e-06, 0.00000000e+00, 0.00000000e+00])}
 </pre></div>
 </div>
 </div>
@@ -1029,10 +1023,10 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11b216350&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11ab89bd0&gt;]
 </pre></div>
 </div>
-<img alt="../_images/b8a0cf7be4179bd55c889dc55925dea6758736701d7a9e2b0c1a3dfa48e9553b.png" src="../_images/b8a0cf7be4179bd55c889dc55925dea6758736701d7a9e2b0c1a3dfa48e9553b.png" />
+<img alt="../_images/d69edca203b33185adf7c1694d85416104a6c85fa304eeefca98ea1c0eeeddbc.png" src="../_images/d69edca203b33185adf7c1694d85416104a6c85fa304eeefca98ea1c0eeeddbc.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1048,7 +1042,7 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/197586064b00adec333c262830859b428f383d920c513e1bec9547a7578bf6ef.png" src="../_images/197586064b00adec333c262830859b428f383d920c513e1bec9547a7578bf6ef.png" />
+<img alt="../_images/96779eb6ca0166ef10d6cf079dac55210c29deb443330f2a013810430b6aa9c6.png" src="../_images/96779eb6ca0166ef10d6cf079dac55210c29deb443330f2a013810430b6aa9c6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1086,26 +1080,27 @@ image credit: JC Chouinard
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-           0       0.97      0.97      0.97        38
-           1       0.98      0.89      0.93        46
-           2       0.97      0.91      0.94        32
-           3       0.89      0.89      0.89        35
-           4       0.91      0.97      0.94        30
-           5       0.97      0.93      0.95        30
-           6       1.00      0.94      0.97        34
-           7       0.97      1.00      0.99        34
-           8       0.83      0.93      0.88        46
-           9       0.89      0.89      0.89        35
+           0       1.00      1.00      1.00        49
+           1       0.89      1.00      0.94        34
+           2       0.88      0.88      0.88        25
+           3       0.98      0.89      0.93        46
+           4       0.92      0.97      0.94        35
+           5       0.97      0.94      0.95        33
+           6       1.00      1.00      1.00        36
+           7       0.82      0.93      0.88        30
+           8       0.89      0.70      0.78        44
+           9       0.78      0.89      0.83        28
 
-    accuracy                           0.93       360
-   macro avg       0.94      0.93      0.93       360
-weighted avg       0.93      0.93      0.93       360
+    accuracy                           0.92       360
+   macro avg       0.91      0.92      0.91       360
+weighted avg       0.92      0.92      0.92       360
 </pre></div>
 </div>
-<img alt="../_images/d36b5fcdd7254ed0612e1c272cb907f5f041c421f2b21ab86898bc06b70b44c3.png" src="../_images/d36b5fcdd7254ed0612e1c272cb907f5f041c421f2b21ab86898bc06b70b44c3.png" />
+<img alt="../_images/ca573e6d854f2cd8f54a7d252c31630581ce9261b141d93b0eab1a9dc4c50922.png" src="../_images/ca573e6d854f2cd8f54a7d252c31630581ce9261b141d93b0eab1a9dc4c50922.png" />
 </div>
 </div>
 <p>What could we do to make the predictions better?</p>
+</section>
 </section>
 </section>
 
@@ -1165,20 +1160,16 @@ weighted avg       0.93      0.93      0.93       360
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">12. K-Nearest Neighbors (and PCA)</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-component-analysis-pca">12.1. Principle Component Analysis (PCA)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">12.1.1. Example</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">12.2. K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">12.2.1. Eager vs Lazy models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">12.2.2. Hyper parameters of KNN</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">13. K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">13.1. Eager vs Lazy models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">13.2. Hyper parameters of KNN</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
