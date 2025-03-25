@@ -24,3 +24,6 @@ parts:
     - file: 02_Classification/02_logistic_regression
     - file: 02_Classification/03_trees_encoding
     - file: 02_Classification/04_trees_gridcv
+    - file: 02_Classification/05_knn_pca
+    
+
