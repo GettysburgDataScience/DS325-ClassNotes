@@ -89,6 +89,7 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="13. K-Means Clustering" href="06_kmeans.html" />
     <link rel="prev" title="11. Ensemble Tree Methods (continued)" href="04_trees_gridcv.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -213,6 +214,7 @@
 <li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">12. K-Nearest Neighbors (and PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_kmeans.html">13. K-Means Clustering</a></li>
 </ul>
 
     </div>
@@ -412,6 +414,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">12.2. K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">12.2.1. Eager vs Lazy models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">12.2.2. Hyper parameters of KNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mnist">12.2.3. Example: MNIST</a></li>
 </ul>
 </li>
 </ul>
@@ -698,15 +701,17 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4f4dd40869c86e1c221412457ed8b2b056724fa6199dea2419ad4382cb936260.png" src="../_images/4f4dd40869c86e1c221412457ed8b2b056724fa6199dea2419ad4382cb936260.png" />
-<img alt="../_images/57067546513d6108828cf0c69d21e640f957845fbaf160ccbc679c807236c5c4.png" src="../_images/57067546513d6108828cf0c69d21e640f957845fbaf160ccbc679c807236c5c4.png" />
+<img alt="../_images/81c067959f31a7103795f6ee7c797e83b9606bf65d6aa9eda7633c4d6d2ed52b.png" src="../_images/81c067959f31a7103795f6ee7c797e83b9606bf65d6aa9eda7633c4d6d2ed52b.png" />
+<img alt="../_images/7b6bd8d7998ab07d291732f8d1072f96351c4738d0692d50522bcb5a3177537e.png" src="../_images/7b6bd8d7998ab07d291732f8d1072f96351c4738d0692d50522bcb5a3177537e.png" />
 </div>
 </div>
 <p>And we’ll use a decision tree to model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fitting the model on Original Data</span>
-<span class="n">tree_clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_depth</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1"># Fitting the model on Original Data</span>
+<span class="n">tree_clf</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="n">tree_depth</span><span class="p">)</span>
 <span class="n">tree_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -714,12 +719,12 @@
           <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
           <span class="n">feature_names</span><span class="o">=</span><span class="n">features_to_use</span><span class="p">,</span>
           <span class="n">class_names</span> <span class="o">=</span> <span class="n">label_names</span><span class="p">,</span>
-          <span class="n">filled</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+          <span class="n">filled</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
 <span class="c1"># Fitting the model on PCA-transformed data</span>
-<span class="n">tree_clf2</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">tree_clf2</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="n">tree_depth</span><span class="p">)</span>
 <span class="n">tree_clf2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">P_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -727,14 +732,14 @@
           <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
           <span class="n">feature_names</span><span class="o">=</span><span class="n">pca_cols</span><span class="p">,</span>
           <span class="n">class_names</span> <span class="o">=</span> <span class="n">label_names</span><span class="p">,</span>
-          <span class="n">filled</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+          <span class="n">filled</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f9dd8a6777130fd6c296b07337777b8ebe9eecdf3735e494adb66849f3763280.png" src="../_images/f9dd8a6777130fd6c296b07337777b8ebe9eecdf3735e494adb66849f3763280.png" />
-<img alt="../_images/a6d385ea7b0ca35a044929fd156d6b927fab959fd286f3561f47ec47a534666c.png" src="../_images/a6d385ea7b0ca35a044929fd156d6b927fab959fd286f3561f47ec47a534666c.png" />
+<img alt="../_images/b8d8b04381a82e88fdc941374ded72fac29ae680afb5168de0ae745aa9a4c40e.png" src="../_images/b8d8b04381a82e88fdc941374ded72fac29ae680afb5168de0ae745aa9a4c40e.png" />
+<img alt="../_images/8c10169b4da37b8ac5f912e82c34e893386ad9410b072b84f76b0da256a98069.png" src="../_images/8c10169b4da37b8ac5f912e82c34e893386ad9410b072b84f76b0da256a98069.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -776,7 +781,44 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5f7a4a7b0b44a72a6487884ed29e1dd4177a7923b36df0efb2985744fb87318a.png" src="../_images/5f7a4a7b0b44a72a6487884ed29e1dd4177a7923b36df0efb2985744fb87318a.png" />
+<img alt="../_images/52a075485a0d41de023712c9656b34d17c0358bab6ab82b176255e8da978c157.png" src="../_images/52a075485a0d41de023712c9656b34d17c0358bab6ab82b176255e8da978c157.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">knn_boundaries</span> <span class="o">=</span> <span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span><span class="n">knn</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+                                                         <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">&#39;bill_length_mm&#39;</span><span class="p">,</span>
+                                                         <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">,</span>
+                                                         <span class="n">response_method</span> <span class="o">=</span> <span class="s1">&#39;predict&#39;</span><span class="p">,</span>
+                                                         <span class="n">cmap</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                                                         <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">],</span> 
+            <span class="n">c</span> <span class="o">=</span> <span class="n">z_train</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span>
+            <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">label_names</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;bill_length_mm&#39;</span><span class="p">],</span> <span class="n">X_test</span><span class="p">[</span><span class="s1">&#39;bill_depth_mm&#39;</span><span class="p">],</span> 
+            <span class="n">c</span> <span class="o">=</span> <span class="n">z_test</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">cmap</span><span class="p">,</span>
+            <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/neighbors/_classification.py:239: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
+  return self._fit(X, y)
+</pre></div>
+</div>
+<img alt="../_images/2e74e8ad60ed374a83634ec6c182c176f1dfcc82066121c3c7e2f35b67d292e5.png" src="../_images/2e74e8ad60ed374a83634ec6c182c176f1dfcc82066121c3c7e2f35b67d292e5.png" />
 </div>
 </div>
 </section>
@@ -811,13 +853,9 @@ image credit: JC Chouinard
 </ul>
 </li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Example: MNIST</span>
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="example-mnist">
+<h3><span class="section-number">12.2.3. </span>Example: MNIST<a class="headerlink" href="#example-mnist" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_digits</span>
@@ -836,7 +874,7 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ff013acbc82a79303a035dc53d3ab40f23ebf45378656e8057f8db50206d0a70.png" src="../_images/ff013acbc82a79303a035dc53d3ab40f23ebf45378656e8057f8db50206d0a70.png" />
+<img alt="../_images/d782b4201fd6bd8f28848f716b724d156c2427a3bcdb9c9afd2be5fc9867e4a8.png" src="../_images/d782b4201fd6bd8f28848f716b724d156c2427a3bcdb9c9afd2be5fc9867e4a8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -882,8 +920,8 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d16b9061ad2470081143b3c9f6343477f20e774249d2dc185757ed631984b509.png" src="../_images/d16b9061ad2470081143b3c9f6343477f20e774249d2dc185757ed631984b509.png" />
-<img alt="../_images/6eeb5753e379afe96ca6fe1fd9f5c8345e27c8eeccdcacc6c3991741df5112b7.png" src="../_images/6eeb5753e379afe96ca6fe1fd9f5c8345e27c8eeccdcacc6c3991741df5112b7.png" />
+<img alt="../_images/da1fd18dbe5a8726b9295c365dd138c2b2aae39decbc7b29423db759c21aa5a2.png" src="../_images/da1fd18dbe5a8726b9295c365dd138c2b2aae39decbc7b29423db759c21aa5a2.png" />
+<img alt="../_images/c57ead572bdd8109e4016411a845bb603def4fa344baa2925b97e2c5af414ed3.png" src="../_images/c57ead572bdd8109e4016411a845bb603def4fa344baa2925b97e2c5af414ed3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -918,87 +956,87 @@ image credit: JC Chouinard
  &#39;random_state&#39;: None,
  &#39;n_features_in_&#39;: 64,
  &#39;_fit_svd_solver&#39;: &#39;covariance_eigh&#39;,
- &#39;mean_&#39;: array([0.00000000e+00, 3.10368824e-01, 5.19345859e+00, 1.17884482e+01,
-        1.17974948e+01, 5.88308977e+00, 1.44537230e+00, 1.36395268e-01,
-        2.78357690e-03, 1.96033403e+00, 1.02881002e+01, 1.20257481e+01,
-        1.02366040e+01, 8.13778706e+00, 1.93528184e+00, 1.23869172e-01,
-        2.08768267e-03, 2.52748782e+00, 9.90187891e+00, 7.08629088e+00,
-        7.06889353e+00, 7.79192763e+00, 1.84064022e+00, 5.70633264e-02,
-        1.39178845e-03, 2.43423800e+00, 9.05915101e+00, 8.87613083e+00,
-        9.99373695e+00, 7.65901183e+00, 2.35699374e+00, 2.08768267e-03,
-        0.00000000e+00, 2.28322895e+00, 7.66945024e+00, 9.10090466e+00,
-        1.03270703e+01, 8.71537926e+00, 2.88656924e+00, 0.00000000e+00,
-        8.35073069e-03, 1.53444676e+00, 6.75156576e+00, 7.31663187e+00,
-        7.81071677e+00, 8.13152401e+00, 3.38830898e+00, 2.99234516e-02,
-        8.35073069e-03, 7.03549061e-01, 7.36604036e+00, 9.56715379e+00,
-        9.43632568e+00, 8.64370216e+00, 3.71120390e+00, 2.11551844e-01,
-        6.95894224e-04, 2.83228949e-01, 5.53027140e+00, 1.19888657e+01,
-        1.17056367e+01, 6.70285317e+00, 2.07863605e+00, 3.83437717e-01]),
+ &#39;mean_&#39;: array([0.00000000e+00, 3.21503132e-01, 5.22407794e+00, 1.17752262e+01,
+        1.18420320e+01, 5.82881002e+00, 1.38135003e+00, 1.32915797e-01,
+        5.56715379e-03, 2.01878914e+00, 1.03903967e+01, 1.19826026e+01,
+        1.02498260e+01, 8.08489910e+00, 1.86430063e+00, 1.13430759e-01,
+        1.39178845e-03, 2.61029923e+00, 9.99860821e+00, 7.02226862e+00,
+        7.05915101e+00, 7.67153793e+00, 1.83020181e+00, 5.49756437e-02,
+        6.95894224e-04, 2.51913709e+00, 9.25330550e+00, 8.83368128e+00,
+        9.85594990e+00, 7.48225470e+00, 2.31663187e+00, 2.78357690e-03,
+        0.00000000e+00, 2.36604036e+00, 7.78914405e+00, 9.19554628e+00,
+        1.03646486e+01, 8.70842032e+00, 2.86082116e+00, 0.00000000e+00,
+        1.11343076e-02, 1.59498956e+00, 6.91092554e+00, 7.25539318e+00,
+        7.74599861e+00, 8.16214335e+00, 3.45163535e+00, 2.78357690e-02,
+        9.04662491e-03, 6.97286013e-01, 7.47181628e+00, 9.47529576e+00,
+        9.39944328e+00, 8.73764788e+00, 3.71120390e+00, 2.01113431e-01,
+        6.95894224e-04, 2.97842728e-01, 5.58872651e+00, 1.20167015e+01,
+        1.17954071e+01, 6.77800974e+00, 2.08768267e+00, 3.41684064e-01]),
  &#39;noise_variance_&#39;: 0.0,
  &#39;n_samples_&#39;: 1437,
  &#39;n_components_&#39;: 64,
- &#39;components_&#39;: array([[ 0.00000000e+00, -1.88834865e-02, -2.31752197e-01, ...,
-         -8.42032660e-02, -4.46587690e-02, -1.54013090e-02],
-        [ 0.00000000e+00,  8.78396374e-03,  3.51560066e-02, ...,
-         -2.03801873e-01, -3.33672891e-02,  2.47247478e-03],
-        [ 0.00000000e+00, -1.85798903e-02, -1.30322569e-01, ...,
-         -2.01876072e-01, -1.54774207e-01, -3.25756758e-02],
+ &#39;components_&#39;: array([[ 0.00000000e+00, -2.07596508e-02, -2.39311324e-01, ...,
+         -4.44569436e-02, -2.73402705e-02, -1.05418500e-02],
+        [ 0.00000000e+00,  5.65098689e-03,  6.10742603e-04, ...,
+         -2.00056687e-01, -2.70542423e-02,  4.21879084e-03],
+        [ 0.00000000e+00, -1.74336494e-02, -1.17547658e-01, ...,
+         -2.30210050e-01, -1.71309912e-01, -3.29568257e-02],
         ...,
-        [-0.00000000e+00, -0.00000000e+00,  5.55734741e-15, ...,
-          2.93047463e-15,  4.89862790e-15, -1.39281661e-15],
         [ 1.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
           0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
-        [-0.00000000e+00, -0.00000000e+00,  4.09896970e-15, ...,
-          2.00642902e-15, -4.23431264e-15,  2.18848901e-15]],
+        [-0.00000000e+00, -0.00000000e+00,  9.84835962e-17, ...,
+          1.71673387e-17,  1.83819649e-16, -2.42264637e-16],
+        [-0.00000000e+00, -0.00000000e+00, -1.28385884e-15, ...,
+         -6.77942238e-16, -2.63478435e-15,  1.12189731e-15]],
        shape=(64, 64)),
- &#39;explained_variance_&#39;: array([1.78929629e+02, 1.61503910e+02, 1.45711412e+02, 1.01797111e+02,
-        7.03385990e+01, 5.98778313e+01, 5.42484725e+01, 4.38783756e+01,
-        4.02474320e+01, 3.69487070e+01, 2.77598714e+01, 2.71808082e+01,
-        2.23597459e+01, 2.19585197e+01, 1.79135732e+01, 1.70912569e+01,
-        1.63269959e+01, 1.52994661e+01, 1.23700073e+01, 1.10180389e+01,
-        1.04939817e+01, 9.50081414e+00, 9.12799660e+00, 8.61808252e+00,
-        8.29759118e+00, 7.30195464e+00, 6.92983544e+00, 6.39878143e+00,
-        5.77447922e+00, 5.15097073e+00, 4.50257857e+00, 4.30928193e+00,
-        4.01955980e+00, 3.82243209e+00, 3.66643541e+00, 3.54334151e+00,
-        3.13664256e+00, 2.78726638e+00, 2.76264994e+00, 2.49212064e+00,
-        2.25316528e+00, 1.95633482e+00, 1.80734437e+00, 1.75119052e+00,
-        1.47104542e+00, 1.33917949e+00, 1.14872697e+00, 9.77443621e-01,
-        6.65533930e-01, 4.36878700e-01, 2.68138363e-01, 9.83270794e-02,
-        6.12427015e-02, 5.83379762e-02, 4.78525506e-02, 1.55316603e-02,
-        3.92042306e-03, 3.88774547e-03, 1.03253860e-03, 6.74917840e-04,
-        4.51807348e-04, 2.27530418e-15, 0.00000000e+00, 0.00000000e+00]),
- &#39;explained_variance_ratio_&#39;: array([1.47904721e-01, 1.33500476e-01, 1.20446266e-01, 8.41463390e-02,
-        5.81424714e-02, 4.94955138e-02, 4.48422389e-02, 3.62702305e-02,
-        3.32688623e-02, 3.05421088e-02, 2.29465408e-02, 2.24678823e-02,
-        1.84827521e-02, 1.81510952e-02, 1.48075087e-02, 1.41277752e-02,
-        1.34960307e-02, 1.26466661e-02, 1.02251510e-02, 9.10760263e-03,
-        8.67441263e-03, 7.85345205e-03, 7.54527797e-03, 7.12377874e-03,
-        6.85885793e-03, 6.03585648e-03, 5.72825966e-03, 5.28928599e-03,
-        4.77323259e-03, 4.25783528e-03, 3.72186892e-03, 3.56208831e-03,
-        3.32260159e-03, 3.15965418e-03, 3.03070603e-03, 2.92895558e-03,
-        2.59277485e-03, 2.30397759e-03, 2.28362943e-03, 2.06000766e-03,
-        1.86248518e-03, 1.61712264e-03, 1.49396590e-03, 1.44754866e-03,
-        1.21597839e-03, 1.10697692e-03, 9.49547274e-04, 8.07963033e-04,
-        5.50135886e-04, 3.61127570e-04, 2.21645403e-04, 8.12779823e-05,
-        5.06237268e-05, 4.82226567e-05, 3.95553166e-05, 1.28385997e-05,
-        3.24065433e-06, 3.21364276e-06, 8.53505001e-07, 5.57892705e-07,
-        3.73467715e-07, 1.88078538e-18, 0.00000000e+00, 0.00000000e+00]),
- &#39;singular_values_&#39;: array([5.06895401e+02, 4.81580331e+02, 4.57429325e+02, 3.82335783e+02,
-        3.17814770e+02, 2.93231250e+02, 2.79107160e+02, 2.51016628e+02,
-        2.40406556e+02, 2.30343967e+02, 1.99657645e+02, 1.97564270e+02,
-        1.79188714e+02, 1.77573743e+02, 1.60386692e+02, 1.56662200e+02,
-        1.53119450e+02, 1.48222918e+02, 1.33279145e+02, 1.25785149e+02,
-        1.22757312e+02, 1.16803977e+02, 1.14489314e+02, 1.11245524e+02,
-        1.09157414e+02, 1.02399252e+02, 9.97559206e+01, 9.58574469e+01,
-        9.10612550e+01, 8.60046160e+01, 8.04095941e+01, 7.86646607e+01,
-        7.59742580e+01, 7.40878700e+01, 7.25603283e+01, 7.13318891e+01,
-        6.71134764e+01, 6.32654292e+01, 6.29854373e+01, 5.98221132e+01,
-        5.68818543e+01, 5.30027999e+01, 5.09445436e+01, 5.01468802e+01,
-        4.59610838e+01, 4.38527280e+01, 4.06149225e+01, 3.74647706e+01,
-        3.09145067e+01, 2.50471119e+01, 1.96226066e+01, 1.18826633e+01,
-        9.37787392e+00, 9.15277738e+00, 8.28952729e+00, 4.72265436e+00,
-        2.37270468e+00, 2.36279548e+00, 1.21767214e+00, 9.84470426e-01,
-        8.05478337e-01, 1.80757761e-06, 0.00000000e+00, 0.00000000e+00])}
+ &#39;explained_variance_&#39;: array([1.80232810e+02, 1.62600094e+02, 1.43657382e+02, 1.01836730e+02,
+        7.03220422e+01, 5.95095274e+01, 5.12861374e+01, 4.45206546e+01,
+        4.01399223e+01, 3.74474830e+01, 2.89400498e+01, 2.77136014e+01,
+        2.21706258e+01, 2.11308294e+01, 1.76754655e+01, 1.67533061e+01,
+        1.57197809e+01, 1.49060056e+01, 1.24447724e+01, 1.11925670e+01,
+        1.08563100e+01, 9.74175130e+00, 9.04031340e+00, 8.86072415e+00,
+        8.29953423e+00, 7.16090276e+00, 6.86869110e+00, 6.17545106e+00,
+        5.81299039e+00, 5.16279734e+00, 4.52538087e+00, 4.23606972e+00,
+        4.06800371e+00, 3.98316325e+00, 3.77540557e+00, 3.59965011e+00,
+        3.06986705e+00, 2.74694410e+00, 2.62556790e+00, 2.49725641e+00,
+        2.25039354e+00, 1.92246586e+00, 1.83119443e+00, 1.71477653e+00,
+        1.39305384e+00, 1.26057062e+00, 1.16226198e+00, 9.48886252e-01,
+        6.75544965e-01, 4.93867739e-01, 2.86051519e-01, 1.07204705e-01,
+        6.94937067e-02, 6.77608084e-02, 4.76835084e-02, 1.82780866e-02,
+        9.21521629e-03, 1.53201204e-03, 8.76270496e-04, 6.67513661e-04,
+        5.07093484e-04, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00]),
+ &#39;explained_variance_ratio_&#39;: array([1.49252616e-01, 1.34650786e-01, 1.18964134e-01, 8.43320280e-02,
+        5.82343957e-02, 4.92804427e-02, 4.24705701e-02, 3.68680052e-02,
+        3.32402764e-02, 3.10106402e-02, 2.39655485e-02, 2.29499141e-02,
+        1.83597199e-02, 1.74986539e-02, 1.46372321e-02, 1.38735826e-02,
+        1.30177098e-02, 1.23438143e-02, 1.03056422e-02, 9.26867818e-03,
+        8.99022036e-03, 8.06724297e-03, 7.48637514e-03, 7.33765546e-03,
+        6.87292840e-03, 5.93001614e-03, 5.68803271e-03, 5.11395360e-03,
+        4.81379625e-03, 4.27536479e-03, 3.74751375e-03, 3.50793226e-03,
+        3.36875509e-03, 3.29849785e-03, 3.12645161e-03, 2.98090673e-03,
+        2.54218801e-03, 2.27477225e-03, 2.17425938e-03, 2.06800334e-03,
+        1.86357370e-03, 1.59201346e-03, 1.51643066e-03, 1.42002383e-03,
+        1.15360200e-03, 1.04389130e-03, 9.62480925e-04, 7.85782321e-04,
+        5.59425632e-04, 4.08976880e-04, 2.36882161e-04, 8.87773028e-05,
+        5.75484427e-05, 5.61134121e-05, 3.94871965e-05, 1.51362687e-05,
+        7.63121399e-06, 1.26867469e-06, 7.25648477e-07, 5.52774827e-07,
+        4.19929252e-07, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00]),
+ &#39;singular_values_&#39;: array([508.73796332, 483.21189487, 454.19379232, 382.41017797,
+        317.77736319, 292.32803729, 271.37961111, 252.84710784,
+        240.08525232, 231.89347906, 203.85757653, 199.49118168,
+        178.4293098 , 174.19492244, 159.31719429, 155.10560136,
+        150.24515082, 146.30455923, 133.68131216, 126.77746749,
+        124.8585649 , 118.27575771, 113.9380974 , 112.8007087 ,
+        109.17019351, 101.405406  ,  99.31485501,  94.16978136,
+         91.36440335,  86.10329249,  80.61294514,  77.99356462,
+         76.43070931,  75.62950764,  73.63071638,  71.89643633,
+         66.39524891,  62.80614403,  61.40289491,  59.88372232,
+         56.84685676,  52.54199254,  51.27957878,  49.622768  ,
+         44.72611439,  42.5462032 ,  40.85349685,  36.91342112,
+         31.14614856,  26.63069796,  20.26746113,  12.40749599,
+          9.98964278,   9.86430539,   8.27487269,   5.12321504,
+          3.63772602,   1.48322934,   1.12175061,   0.97905547,
+          0.85333829,   0.        ,   0.        ,   0.        ])}
 </pre></div>
 </div>
 </div>
@@ -1018,22 +1056,29 @@ image credit: JC Chouinard
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">singular_values_</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Principle Component&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Singular Value&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Principle Component&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Explained Variance&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x11ab89bd0&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Explained Variance&#39;)
 </pre></div>
 </div>
-<img alt="../_images/d69edca203b33185adf7c1694d85416104a6c85fa304eeefca98ea1c0eeeddbc.png" src="../_images/d69edca203b33185adf7c1694d85416104a6c85fa304eeefca98ea1c0eeeddbc.png" />
+<img alt="../_images/0422c53d5625656ea0f431dc25cda2a3202b293e3ca1b2e29c93ae7f38a91048.png" src="../_images/0422c53d5625656ea0f431dc25cda2a3202b293e3ca1b2e29c93ae7f38a91048.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="n">image</span> <span class="o">=</span> <span class="n">refurl_imageset</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">image_cmap</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PC </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -1042,19 +1087,7 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/96779eb6ca0166ef10d6cf079dac55210c29deb443330f2a013810430b6aa9c6.png" src="../_images/96779eb6ca0166ef10d6cf079dac55210c29deb443330f2a013810430b6aa9c6.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">P_train</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1437, 64)
-</pre></div>
-</div>
+<img alt="../_images/4388c3c7f8dd7b84a9ead35ce7e5d81aff35d6573be5fda28b3d6824e7b47c41.png" src="../_images/4388c3c7f8dd7b84a9ead35ce7e5d81aff35d6573be5fda28b3d6824e7b47c41.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1065,41 +1098,66 @@ image credit: JC Chouinard
 <span class="n">P_train</span> <span class="o">=</span> <span class="n">P_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 <span class="n">P_test</span> <span class="o">=</span> <span class="n">P_test</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
 
-<span class="n">knn_clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">knn_clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 
 <span class="n">knn_clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">P_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">knn_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">P_train</span><span class="p">)</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">knn_clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">P_test</span><span class="p">)</span>
 
 <span class="n">cfm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span> <span class="o">=</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">)</span>
 <span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">cfm</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;TRAINING REPORT:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;TESTING REPORT:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TRAINING REPORT:
+              precision    recall  f1-score   support
 
-           0       1.00      1.00      1.00        49
-           1       0.89      1.00      0.94        34
-           2       0.88      0.88      0.88        25
-           3       0.98      0.89      0.93        46
-           4       0.92      0.97      0.94        35
-           5       0.97      0.94      0.95        33
-           6       1.00      1.00      1.00        36
-           7       0.82      0.93      0.88        30
-           8       0.89      0.70      0.78        44
-           9       0.78      0.89      0.83        28
+           0       0.98      0.99      0.99       138
+           1       0.97      0.99      0.98       143
+           2       0.96      0.95      0.96       140
+           3       0.93      0.92      0.93       142
+           4       0.97      0.97      0.97       148
+           5       0.97      0.98      0.98       148
+           6       0.99      0.98      0.99       152
+           7       0.95      0.94      0.95       142
+           8       0.90      0.92      0.91       141
+           9       0.92      0.90      0.91       143
+
+    accuracy                           0.95      1437
+   macro avg       0.95      0.95      0.95      1437
+weighted avg       0.95      0.95      0.95      1437
+
+TESTING REPORT:
+              precision    recall  f1-score   support
+
+           0       1.00      0.97      0.99        40
+           1       0.97      0.97      0.97        39
+           2       0.94      0.89      0.92        37
+           3       0.89      0.78      0.83        41
+           4       0.94      1.00      0.97        33
+           5       1.00      0.91      0.95        34
+           6       0.97      1.00      0.98        29
+           7       0.97      0.95      0.96        37
+           8       0.77      0.82      0.79        33
+           9       0.77      0.92      0.84        37
 
     accuracy                           0.92       360
-   macro avg       0.91      0.92      0.91       360
+   macro avg       0.92      0.92      0.92       360
 weighted avg       0.92      0.92      0.92       360
 </pre></div>
 </div>
-<img alt="../_images/ca573e6d854f2cd8f54a7d252c31630581ce9261b141d93b0eab1a9dc4c50922.png" src="../_images/ca573e6d854f2cd8f54a7d252c31630581ce9261b141d93b0eab1a9dc4c50922.png" />
+<img alt="../_images/2ec82565e046c57699ff2068eab837a5345603fd70eecae96706ac83c45f3bfe.png" src="../_images/2ec82565e046c57699ff2068eab837a5345603fd70eecae96706ac83c45f3bfe.png" />
 </div>
 </div>
-<p>What could we do to make the predictions better?</p>
+<p>What could we try to improve the prediction?</p>
 </section>
 </section>
 </section>
@@ -1143,6 +1201,15 @@ weighted avg       0.92      0.92      0.92       360
         <p class="prev-next-title"><span class="section-number">11. </span>Ensemble Tree Methods (continued)</p>
       </div>
     </a>
+    <a class="right-next"
+       href="06_kmeans.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>K-Means Clustering</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1167,6 +1234,7 @@ weighted avg       0.92      0.92      0.92       360
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">12.2. K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">12.2.1. Eager vs Lazy models</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">12.2.2. Hyper parameters of KNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mnist">12.2.3. Example: MNIST</a></li>
 </ul>
 </li>
 </ul>
