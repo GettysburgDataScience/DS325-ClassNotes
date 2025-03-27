@@ -28,31 +28,35 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-import requests
-from PIL import Image
-import numpy as np
 
-url = "https://raw.githubusercontent.com/YugeTen/Computer-vision-CLAB2/master/peppers.png"
+# introspect the images arrays to find the shapes (for plotting)
+n_samples, h, w = lfw_people.images.shape
 
-peppers_image = Image.open(url)
- 
-    
+# for machine learning we use the 2 data directly (as relative pixel
+# positions info is ignored by this model)
+X = lfw_people.data
+n_features = X.shape[1]
+
+# the label to predict is the id of the person
+y = lfw_people.target
+target_names = lfw_people.target_names
+n_classes = target_names.shape[0]
+
+print("Total dataset size:")
+print("n_samples: %d" % n_samples)
+print("n_features: %d" % n_features)
+print("n_classes: %d" % n_classes)
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [0;32mIn[1], line 7[0m
-[1;32m      3[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumpy[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mnp[39;00m
-[1;32m      5[0m url [38;5;241m=[39m [38;5;124m"[39m[38;5;124mhttps://raw.githubusercontent.com/YugeTen/Computer-vision-CLAB2/master/peppers.png[39m[38;5;124m"[39m
-[0;32m----> 7[0m peppers_image [38;5;241m=[39m [43mImage[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43murl[49m[43m)[49m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[12], line 2[0m
+[1;32m      1[0m [38;5;66;03m# introspect the images arrays to find the shapes (for plotting)[39;00m
+[0;32m----> 2[0m n_samples, h, w [38;5;241m=[39m [43mlfw_people[49m[38;5;241m.[39mimages[38;5;241m.[39mshape
+[1;32m      4[0m [38;5;66;03m# for machine learning we use the 2 data directly (as relative pixel[39;00m
+[1;32m      5[0m [38;5;66;03m# positions info is ignored by this model)[39;00m
+[1;32m      6[0m X [38;5;241m=[39m lfw_people[38;5;241m.[39mdata
 
-File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/PIL/Image.py:3465[0m, in [0;36mopen[0;34m(fp, mode, formats)[0m
-[1;32m   3462[0m     filename [38;5;241m=[39m os[38;5;241m.[39mfspath(fp)
-[1;32m   3464[0m [38;5;28;01mif[39;00m filename:
-[0;32m-> 3465[0m     fp [38;5;241m=[39m [43mbuiltins[49m[38;5;241;43m.[39;49m[43mopen[49m[43m([49m[43mfilename[49m[43m,[49m[43m [49m[38;5;124;43m"[39;49m[38;5;124;43mrb[39;49m[38;5;124;43m"[39;49m[43m)[49m
-[1;32m   3466[0m     exclusive_fp [38;5;241m=[39m [38;5;28;01mTrue[39;00m
-[1;32m   3467[0m [38;5;28;01melse[39;00m:
-
-[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: 'https://raw.githubusercontent.com/YugeTen/Computer-vision-CLAB2/master/peppers.png'
+[0;31mNameError[0m: name 'lfw_people' is not defined
 
