@@ -49,8 +49,8 @@ nbclient.exceptions.CellTimeoutError: A cell timed out while it was being execut
 The message was: Cell execution timed out.
 Here is a preview of the cell contents:
 -------------------
-['import requests', 'from PIL import Image', 'from io import BytesIO', '', 'from matplotlib.colors import ListedColormap']
-...
-['print(peppers.shape)', 'h, w = peppers.shape[:2]', '', 'plt.imshow(peppers)', 'plt.show()']
+obesity_df = pd.read_csv('https://raw.githubusercontent.com/pymche/Machine-Learning-Obesity-Classification/refs/heads/master/ObesityDataSet_raw_and_data_sinthetic.csv')
+obesity_df.head()
+
 -------------------
 

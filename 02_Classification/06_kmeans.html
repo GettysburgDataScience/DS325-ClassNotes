@@ -87,6 +87,7 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="14. Classification and Clustering Exercises" href="07_classification_exercises.html" />
     <link rel="prev" title="12. K-Nearest Neighbors (and PCA)" href="05_knn_pca.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -212,6 +213,8 @@
 <li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">13. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">14. Classification and Clustering Exercises</a></li>
+
 </ul>
 
     </div>
@@ -381,7 +384,9 @@
 <button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
 </button>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -397,6 +402,19 @@
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">13.1. An Example with Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">13.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">13.2.1. Example: Extracting a Color Palette from a Photo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">13.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -408,7 +426,15 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="k-means-clustering">
 <h1><span class="section-number">13. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h1>
-<p>(in progress)</p>
+<p>Clustering refers to an <em>unsupervised</em> learning algorithms that partition data into groups by similarity. Clustering can be used to identify categories from and assign classes/labels to unlabeled data (perhaps for classification).</p>
+<p>We’ll only introduce K-means clustering, but alternative clustering methods include:</p>
+<ul class="simple">
+<li><p>DBScan (Density-Based Spacial Clustering of Applications with Noise)</p></li>
+<li><p>Agglomerative Clustering (Hierarchical Clustering)</p></li>
+</ul>
+<section id="an-example-with-synthetic-data">
+<h2><span class="section-number">13.1. </span>An Example with Synthetic Data<a class="headerlink" href="#an-example-with-synthetic-data" title="Link to this heading">#</a></h2>
+<p>To demonstrate K-Means, we’ll first create a synthetic dataset of 5 clusters using the sklearn make_blobs function. Remember, because we create this dataset, we know it should have 5 clusters. BUT that does not mean that the best partitioning will be into 5 groupings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -425,7 +451,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">centers</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">cluster_std</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">centers</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">cluster_std</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -433,25 +459,59 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/10d479f2f6d8ebde4aeaaa3090ad45f443a302009b2de3d79933da5bdbdb2534.png" src="../_images/10d479f2f6d8ebde4aeaaa3090ad45f443a302009b2de3d79933da5bdbdb2534.png" />
+<img alt="../_images/a4f0dd9630cef54855d49c280c554c04197773bca5c49d79c9b143325ef195eb.png" src="../_images/a4f0dd9630cef54855d49c280c554c04197773bca5c49d79c9b143325ef195eb.png" />
 </div>
 </div>
+<p>If we squint at the data above, we see two clear groupings, and possibly 3 or 4. Two of the clusters have melded into a single blob.</p>
+<p>So how do we know how many groupings there should be?</p>
+<p><strong>Silhouette Score</strong></p>
+<p>Silhouette Score assigns a number to each data point that describes how similar it is to the other members of its group. Silhouette score ranges from [-1, 1].</p>
+<ul class="simple">
+<li><p><em>0 &lt; score &lt; 1</em> - the data point is more like its own group than any other</p></li>
+<li><p><em>score = 0</em> - the data point is on the boundary between belonging to one of two (or more) groups</p></li>
+<li><p><em>-1 &lt; score &lt; 0</em> - the data point is likely in the wrong group</p></li>
+</ul>
+<p>Since we are not classifying unknown data, all of our scores will be in the [0, 1] range. We take the average of all silhouette scores to assess the clustering. A general guideline for assessing groupings:</p>
+<ul class="simple">
+<li><p><em>score &gt; 0.75</em> - high confidence in groupings</p></li>
+<li><p><em>0.5 &lt; score &lt; 0.75</em> - good confidence in groupings</p></li>
+<li><p><em>0 &lt; score &lt; 0.5</em> - weak confidence in groupings</p></li>
+</ul>
+<p><strong>K-Means</strong></p>
+<p>K-Means takes as a hyper-parameter the number of groupings to assign to the data. We’ll try several values, calculating the silhouette score for each. We choose the partitioning with the highest silhouette score.</p>
+<p>Once we’ve picked our best model, we inspect the cluster assignments and cluster centers (centroids).</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">km.labels_</span></code> - an array assigning each data point to the cluster it belongs to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">km.cluster_centers_</span></code> - an array of the center point of each cluster</p></li>
+</ul>
+<p>Let’s see this in action…</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">km</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">km</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the list of cluster numbers to evaluate</span>
+<span class="n">n_clusters</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
 
-<span class="n">labels</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span>
-<span class="n">centroids</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="n">labels</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;rx&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">nc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">n_clusters</span><span class="p">):</span>
+    <span class="n">km</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">nc</span><span class="p">)</span>
+    <span class="n">km</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span>
+    <span class="n">centroids</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="n">labels</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">centroids</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">centroids</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;rx&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s1">0.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/80d63b29f09ff209b99c74ababac2a9a98249efc1695241fcc6584beb9bf20d9.png" src="../_images/80d63b29f09ff209b99c74ababac2a9a98249efc1695241fcc6584beb9bf20d9.png" />
+<img alt="../_images/448ac65579aa92d458f2483e0b773a12d355e57b53e2c97bb3b0fcaae7d01648.png" src="../_images/448ac65579aa92d458f2483e0b773a12d355e57b53e2c97bb3b0fcaae7d01648.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -462,6 +522,11 @@
 </div>
 </div>
 </div>
+</section>
+<section id="example-color-extraction-and-image-segmentation">
+<h2><span class="section-number">13.2. </span>Example: Color Extraction and Image Segmentation<a class="headerlink" href="#example-color-extraction-and-image-segmentation" title="Link to this heading">#</a></h2>
+<p>In this example, we’ll apply K-Means to image data. First, we’ll use K-Means to extract a color palette for a photograph. Then we’ll use K-Means to do a crude segmentation of the image, identifying the pixels that belong to different objects in the image.</p>
+<p>First, let’s inspect the image and describe our features.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
@@ -480,22 +545,155 @@
 <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">peppers</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">peppers</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(384, 512, 3)
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">line</span> <span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListedColormap</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/YugeTen/Computer-vision-CLAB2/master/peppers.png&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">peppers_image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">peppers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">peppers_image</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/requests/api.py:73,</span> in <span class="ni">get</span><span class="nt">(url, params, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">62</span> <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="g g-Whitespace">     </span><span class="mi">63</span><span class="w">     </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Sends a GET request.</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span><span class="sd"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span><span class="sd">     :param url: URL for the new :class:`Request` object.</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span><span class="sd">     :rtype: requests.Response</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">73</span>     <span class="k">return</span> <span class="n">request</span><span class="p">(</span><span class="s2">&quot;get&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/requests/api.py:59,</span> in <span class="ni">request</span><span class="nt">(method, url, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="c1"># By using the &#39;with&#39; statement we are sure the session is closed, thus we</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="c1"># avoid leaving sockets open which can trigger a ResourceWarning in some</span>
+<span class="g g-Whitespace">     </span><span class="mi">57</span> <span class="c1"># cases, and look like a memory leak in others.</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="k">with</span> <span class="n">sessions</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">59</span>     <span class="k">return</span> <span class="n">session</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/requests/sessions.py:589,</span> in <span class="ni">Session.request</span><span class="nt">(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)</span>
+<span class="g g-Whitespace">    </span><span class="mi">584</span> <span class="n">send_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+<span class="g g-Whitespace">    </span><span class="mi">585</span>     <span class="s2">&quot;timeout&quot;</span><span class="p">:</span> <span class="n">timeout</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">586</span>     <span class="s2">&quot;allow_redirects&quot;</span><span class="p">:</span> <span class="n">allow_redirects</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">587</span> <span class="p">}</span>
+<span class="g g-Whitespace">    </span><span class="mi">588</span> <span class="n">send_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">589</span> <span class="n">resp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">prep</span><span class="p">,</span> <span class="o">**</span><span class="n">send_kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">591</span> <span class="k">return</span> <span class="n">resp</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/requests/sessions.py:746,</span> in <span class="ni">Session.send</span><span class="nt">(self, request, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">743</span>         <span class="k">pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">745</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">stream</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">746</span>     <span class="n">r</span><span class="o">.</span><span class="n">content</span>
+<span class="g g-Whitespace">    </span><span class="mi">748</span> <span class="k">return</span> <span class="n">r</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/requests/models.py:902,</span> in <span class="ni">Response.content</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">900</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_content</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">901</span>     <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">902</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_content</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">CONTENT_CHUNK_SIZE</span><span class="p">))</span> <span class="ow">or</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">904</span> <span class="bp">self</span><span class="o">.</span><span class="n">_content_consumed</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="g g-Whitespace">    </span><span class="mi">905</span> <span class="c1"># don&#39;t need to release the connection; that&#39;s been handled by urllib3</span>
+<span class="g g-Whitespace">    </span><span class="mi">906</span> <span class="c1"># since we exhausted the data.</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/requests/models.py:820,</span> in <span class="ni">Response.iter_content.&lt;locals&gt;.generate</span><span class="nt">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">818</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="s2">&quot;stream&quot;</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">819</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">820</span>         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">decode_content</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">821</span>     <span class="k">except</span> <span class="n">ProtocolError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">822</span>         <span class="k">raise</span> <span class="n">ChunkedEncodingError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/urllib3/response.py:1066,</span> in <span class="ni">HTTPResponse.stream</span><span class="nt">(self, amt, decode_content)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1064</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1065</span>     <span class="k">while</span> <span class="ow">not</span> <span class="n">is_fp_closed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decoded_buffer</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1066</span>         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="o">=</span><span class="n">amt</span><span class="p">,</span> <span class="n">decode_content</span><span class="o">=</span><span class="n">decode_content</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1068</span>         <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1069</span>             <span class="k">yield</span> <span class="n">data</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/urllib3/response.py:955,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt, decode_content, cache_content)</span>
+<span class="g g-Whitespace">    </span><span class="mi">952</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decoded_buffer</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">amt</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">953</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_decoded_buffer</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">955</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw_read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">957</span> <span class="n">flush_decoder</span> <span class="o">=</span> <span class="n">amt</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">amt</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">959</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decoded_buffer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/urllib3/response.py:879,</span> in <span class="ni">HTTPResponse._raw_read</span><span class="nt">(self, amt, read1)</span>
+<span class="g g-Whitespace">    </span><span class="mi">876</span> <span class="n">fp_closed</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="p">,</span> <span class="s2">&quot;closed&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">878</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error_catcher</span><span class="p">():</span>
+<span class="ne">--&gt; </span><span class="mi">879</span>     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp_read</span><span class="p">(</span><span class="n">amt</span><span class="p">,</span> <span class="n">read1</span><span class="o">=</span><span class="n">read1</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">fp_closed</span> <span class="k">else</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">880</span>     <span class="k">if</span> <span class="n">amt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">amt</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">881</span>         <span class="c1"># Platform-specific: Buggy versions of Python.</span>
+<span class="g g-Whitespace">    </span><span class="mi">882</span>         <span class="c1"># Close the connection when no data is returned</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">887</span>         <span class="c1"># not properly close the connection in all cases. There is</span>
+<span class="g g-Whitespace">    </span><span class="mi">888</span>         <span class="c1"># no harm in redundantly calling close.</span>
+<span class="g g-Whitespace">    </span><span class="mi">889</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/urllib3/response.py:862,</span> in <span class="ni">HTTPResponse._fp_read</span><span class="nt">(self, amt, read1)</span>
+<span class="g g-Whitespace">    </span><span class="mi">859</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">read1</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span> <span class="k">if</span> <span class="n">amt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">read1</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>     <span class="c1"># StringIO doesn&#39;t like amt=None</span>
+<span class="ne">--&gt; </span><span class="mi">862</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span> <span class="k">if</span> <span class="n">amt</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/http/client.py:479,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">amt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span>     <span class="c1"># clip the read to the &quot;end of response&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="n">amt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">length</span>
+<span class="ne">--&gt; </span><span class="mi">479</span> <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">s</span> <span class="ow">and</span> <span class="n">amt</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">481</span>     <span class="c1"># Ideally, we would raise IncompleteRead if the content-length</span>
+<span class="g g-Whitespace">    </span><span class="mi">482</span>     <span class="c1"># wasn&#39;t satisfied, but it might break compatibility.</span>
+<span class="g g-Whitespace">    </span><span class="mi">483</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/socket.py:719,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">717</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;cannot read from timed out object&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">718</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">719</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">720</span> <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/ssl.py:1304,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1300</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1301</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1302</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+<span class="g g-Whitespace">   </span><span class="mi">1303</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1304</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1305</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1306</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/ssl.py:1138,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1136</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1137</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1138</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1139</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1140</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x11bbf8ec0&gt;
-</pre></div>
-</div>
-<img alt="../_images/98400f82063f9bba52a5e6bf7e0f9b9b7a0bf2ac1891d77437869c84d60cf7ca.png" src="../_images/98400f82063f9bba52a5e6bf7e0f9b9b7a0bf2ac1891d77437869c84d60cf7ca.png" />
 </div>
 </div>
+<p>This image of the pepper is stored as a numpy array of size (384, 512, 3). What does this shape correspond to?</p>
+<p>Each pixel in this image will be a single data point. There are 384 x 512 pixels in this image.</p>
+<ul class="simple">
+<li><p>384 is the height of the image or the y-dimension.</p></li>
+<li><p>512 is the height of the image or the x-dimension.</p></li>
+</ul>
+<p>NOTE: For images, the origin is in the upper left corner and the y-coordinate increases downwards. This convention parallels the indices of a matrix.</p>
+<p>The last dimension (3) corresponds to the color of the pixel as R, G, and B values.</p>
+<p>So each pixel has five features: y-position, x-position, R, G, B</p>
+<p>Below we take a closer look.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a meshgrid of x and y coordinates for the image dimensions</span>
+<span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+
+<span class="c1"># Flatten the meshgrid arrays to create a list of coordinates</span>
+<span class="n">x_coords_flat</span> <span class="o">=</span> <span class="n">x_coords</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">y_coords_flat</span> <span class="o">=</span> <span class="n">y_coords</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 
 <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">200</span>
 <span class="n">y_min</span><span class="p">,</span> <span class="n">y_max</span> <span class="o">=</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">118</span>
@@ -507,12 +705,14 @@
     <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)):</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">,</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">,</span> 
                  <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ha</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span><span class="p">)</span>
+        
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;A close-up from Peppers.png with coordinates&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/498ea7d3e36818a604de08eb00a291a722b767e3ce0ae720673c9835b14bb2b5.png" src="../_images/498ea7d3e36818a604de08eb00a291a722b767e3ce0ae720673c9835b14bb2b5.png" />
+<img alt="../_images/3b1c5a456b238b51f800b103ac30dd83dcb38078f504d4272def287507ea3b9b.png" src="../_images/3b1c5a456b238b51f800b103ac30dd83dcb38078f504d4272def287507ea3b9b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -531,28 +731,17 @@
 
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">peppers</span><span class="p">[:,:,</span><span class="n">n</span><span class="p">],</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">RGB</span><span class="p">[</span><span class="n">n</span><span class="p">])</span>
-    
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;R, G, and B channels of Peppers.png&#39;</span><span class="p">)</span>   
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/144d497b98a0f988ac87980026da519e3d484f1d606416293d85f78d7c0cfb9e.png" src="../_images/144d497b98a0f988ac87980026da519e3d484f1d606416293d85f78d7c0cfb9e.png" />
+<img alt="../_images/8d5ba21d93d75616317e78fae9f267c724815b64a714047a6ecbec209063a2da.png" src="../_images/8d5ba21d93d75616317e78fae9f267c724815b64a714047a6ecbec209063a2da.png" />
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">centers</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">cluster_std</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/10d479f2f6d8ebde4aeaaa3090ad45f443a302009b2de3d79933da5bdbdb2534.png" src="../_images/10d479f2f6d8ebde4aeaaa3090ad45f443a302009b2de3d79933da5bdbdb2534.png" />
-</div>
-</div>
+<p>Now we’ll create a dataframe of these data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peppers_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
@@ -648,70 +837,506 @@
 </table>
 </div></div></div>
 </div>
+<section id="example-extracting-a-color-palette-from-a-photo">
+<h3><span class="section-number">13.2.1. </span>Example: Extracting a Color Palette from a Photo<a class="headerlink" href="#example-extracting-a-color-palette-from-a-photo" title="Link to this heading">#</a></h3>
+<p>If you look at the photograph, you see various shades of reds, yellows, greens, whites, and purples. A color palette represents the colors in the image as a discrete set of representative colors. To build this palette, we’ll apply K-means to the color of each pixel and extract the centroids.</p>
+<p>Let’s see.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">subplot_kw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;projection&#39;</span><span class="p">:</span><span class="s1">&#39;3d&#39;</span><span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">peppers_df</span><span class="p">[[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">peppers_df</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">],</span> <span class="n">peppers_df</span><span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">],</span> <span class="n">peppers_df</span><span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="n">peppers_df</span><span class="p">[</span><span class="s1">&#39;RGB&#39;</span><span class="p">],</span>
-           <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">n_colors</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">km</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">n_colors</span><span class="p">)</span>
+<span class="n">km</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span>
+<span class="n">centroids</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span>
+
+<span class="n">centroids</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_colors</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n_colors</span><span class="p">),</span> <span class="n">c</span> <span class="o">=</span> <span class="n">centroids</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span>
+            <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f1d034a54bf98efce03d14b78cbf4ced0c4458f5d761550f53562777f55bfb20.png" src="../_images/f1d034a54bf98efce03d14b78cbf4ced0c4458f5d761550f53562777f55bfb20.png" />
+<img alt="../_images/2512d61aec12c874f3cadfaba19eb4647bf73f6c04a9dbe78e172974c5ec5b5f.png" src="../_images/2512d61aec12c874f3cadfaba19eb4647bf73f6c04a9dbe78e172974c5ec5b5f.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">peppers_df</span><span class="p">[[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;B&#39;</span><span class="p">]]</span>
-<span class="n">km</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
-
-<span class="n">km</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-
-<span class="n">labels</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span>
-<span class="n">centroids</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># introspect the images arrays to find the shapes (for plotting)</span>
-<span class="n">n_samples</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">lfw_people</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span>
-
-<span class="c1"># for machine learning we use the 2 data directly (as relative pixel</span>
-<span class="c1"># positions info is ignored by this model)</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">lfw_people</span><span class="o">.</span><span class="n">data</span>
-<span class="n">n_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="c1"># the label to predict is the id of the person</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">lfw_people</span><span class="o">.</span><span class="n">target</span>
-<span class="n">target_names</span> <span class="o">=</span> <span class="n">lfw_people</span><span class="o">.</span><span class="n">target_names</span>
-<span class="n">n_classes</span> <span class="o">=</span> <span class="n">target_names</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total dataset size:&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n_samples: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_samples</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n_features: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_features</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;n_classes: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">n_classes</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peppers_df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+<span class="n">peppers_df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">12</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># introspect the images arrays to find the shapes (for plotting)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">lfw_people</span><span class="o">.</span><span class="n">images</span><span class="o">.</span><span class="n">shape</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># for machine learning we use the 2 data directly (as relative pixel</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="c1"># positions info is ignored by this model)</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">X</span> <span class="o">=</span> <span class="n">lfw_people</span><span class="o">.</span><span class="n">data</span>
-
-<span class="ne">NameError</span>: name &#39;lfw_people&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label
+3    99600
+4    29376
+1    24812
+2    22621
+0    11825
+5     8374
+Name: count, dtype: int64
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">color_palette</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;label&#39;</span><span class="p">:</span><span class="nb">range</span><span class="p">(</span><span class="n">n_colors</span><span class="p">),</span> <span class="s1">&#39;CR&#39;</span><span class="p">:</span> <span class="n">centroids</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;CG&#39;</span><span class="p">:</span> <span class="n">centroids</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="s1">&#39;CB&#39;</span><span class="p">:</span><span class="n">centroids</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">255</span><span class="p">})</span>
+<span class="n">color_palette</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>label</th>
+      <th>CR</th>
+      <th>CG</th>
+      <th>CB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0.494885</td>
+      <td>0.336475</td>
+      <td>0.520150</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0.477107</td>
+      <td>0.448937</td>
+      <td>0.099581</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>0.937079</td>
+      <td>0.488336</td>
+      <td>0.125469</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0.680561</td>
+      <td>0.126741</td>
+      <td>0.122454</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>0.928970</td>
+      <td>0.811037</td>
+      <td>0.670245</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Now we can merge our pixel labels to the palette colors, assigning to each pixel the palette color it’s nearest too. If we again show the image replacing each pixel color with the associated palette color, we get a posterizing effect (like would be done for screen printing).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peppers_df</span> <span class="o">=</span> <span class="n">peppers_df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">color_palette</span><span class="p">,</span> <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;label&#39;</span><span class="p">)</span>
+<span class="n">peppers_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R</th>
+      <th>G</th>
+      <th>B</th>
+      <th>x</th>
+      <th>y</th>
+      <th>RGB</th>
+      <th>label</th>
+      <th>CR</th>
+      <th>CG</th>
+      <th>CB</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>62</td>
+      <td>29</td>
+      <td>64</td>
+      <td>0</td>
+      <td>0</td>
+      <td>[0.24313725490196078, 0.11372549019607843, 0.2...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>63</td>
+      <td>31</td>
+      <td>64</td>
+      <td>1</td>
+      <td>0</td>
+      <td>[0.24705882352941178, 0.12156862745098039, 0.2...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>63</td>
+      <td>34</td>
+      <td>64</td>
+      <td>2</td>
+      <td>0</td>
+      <td>[0.24705882352941178, 0.13333333333333333, 0.2...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>65</td>
+      <td>30</td>
+      <td>60</td>
+      <td>3</td>
+      <td>0</td>
+      <td>[0.2549019607843137, 0.11764705882352941, 0.23...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>66</td>
+      <td>27</td>
+      <td>59</td>
+      <td>4</td>
+      <td>0</td>
+      <td>[0.25882352941176473, 0.10588235294117647, 0.2...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>196603</th>
+      <td>43</td>
+      <td>20</td>
+      <td>44</td>
+      <td>507</td>
+      <td>383</td>
+      <td>[0.16862745098039217, 0.0784313725490196, 0.17...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>196604</th>
+      <td>41</td>
+      <td>19</td>
+      <td>39</td>
+      <td>508</td>
+      <td>383</td>
+      <td>[0.1607843137254902, 0.07450980392156863, 0.15...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>196605</th>
+      <td>40</td>
+      <td>20</td>
+      <td>41</td>
+      <td>509</td>
+      <td>383</td>
+      <td>[0.1568627450980392, 0.0784313725490196, 0.160...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>196606</th>
+      <td>42</td>
+      <td>21</td>
+      <td>45</td>
+      <td>510</td>
+      <td>383</td>
+      <td>[0.16470588235294117, 0.08235294117647059, 0.1...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+    <tr>
+      <th>196607</th>
+      <td>46</td>
+      <td>23</td>
+      <td>49</td>
+      <td>511</td>
+      <td>383</td>
+      <td>[0.1803921568627451, 0.09019607843137255, 0.19...</td>
+      <td>3</td>
+      <td>0.265965</td>
+      <td>0.145974</td>
+      <td>0.238651</td>
+    </tr>
+  </tbody>
+</table>
+<p>196608 rows × 10 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peppers_poster</span> <span class="o">=</span> <span class="n">peppers_df</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;CR&#39;</span><span class="p">,</span><span class="s1">&#39;CG&#39;</span><span class="p">,</span><span class="s1">&#39;CB&#39;</span><span class="p">]]</span>
+
+<span class="n">reshaped_image</span> <span class="o">=</span> <span class="n">peppers_poster</span><span class="p">[[</span><span class="s1">&#39;CR&#39;</span><span class="p">,</span> <span class="s1">&#39;CG&#39;</span><span class="p">,</span> <span class="s1">&#39;CB&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">reshaped_image</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cfac3e57cec9cab7a38da798bae1fb03a21ad8b42181e48655704f14c62a39a1.png" src="../_images/cfac3e57cec9cab7a38da798bae1fb03a21ad8b42181e48655704f14c62a39a1.png" />
+</div>
+</div>
+</section>
+<section id="example-segmenting-objects-in-an-image-kinda">
+<h3><span class="section-number">13.2.2. </span>Example: Segmenting Objects in an Image (kinda)<a class="headerlink" href="#example-segmenting-objects-in-an-image-kinda" title="Link to this heading">#</a></h3>
+<p>Image segmentation refers to the process of partitioning an image into the objects in the image. We’ll attempt an image segmentation by incorporating pixel position and pixel color. The idea is that an object is represented by a blob of pixels that are near each other and of similar color.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peppers_df</span> <span class="o">=</span> <span class="n">peppers_df</span><span class="p">[[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]]</span>
+<span class="n">peppers_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>R</th>
+      <th>G</th>
+      <th>B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>62</td>
+      <td>29</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+      <td>63</td>
+      <td>31</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>0</td>
+      <td>63</td>
+      <td>34</td>
+      <td>64</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>0</td>
+      <td>65</td>
+      <td>30</td>
+      <td>60</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>0</td>
+      <td>66</td>
+      <td>27</td>
+      <td>59</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>196603</th>
+      <td>507</td>
+      <td>383</td>
+      <td>43</td>
+      <td>20</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <th>196604</th>
+      <td>508</td>
+      <td>383</td>
+      <td>41</td>
+      <td>19</td>
+      <td>39</td>
+    </tr>
+    <tr>
+      <th>196605</th>
+      <td>509</td>
+      <td>383</td>
+      <td>40</td>
+      <td>20</td>
+      <td>41</td>
+    </tr>
+    <tr>
+      <th>196606</th>
+      <td>510</td>
+      <td>383</td>
+      <td>42</td>
+      <td>21</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>196607</th>
+      <td>511</td>
+      <td>383</td>
+      <td>46</td>
+      <td>23</td>
+      <td>49</td>
+    </tr>
+  </tbody>
+</table>
+<p>196608 rows × 5 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
+
+<span class="n">mm</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">peppers_scaled</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">peppers_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n_objects</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">km</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span> <span class="o">=</span> <span class="n">n_objects</span><span class="p">)</span>
+
+<span class="n">km</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">peppers_scaled</span><span class="p">)</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">labels_</span>
+<span class="n">centroids</span> <span class="o">=</span> <span class="n">km</span><span class="o">.</span><span class="n">cluster_centers_</span>
+
+<span class="n">peppers_df</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+<span class="n">peppers_df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;tab20&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_inverted</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_39193/4191165465.py:9: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row_indexer,col_indexer] = value instead
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  peppers_df[&#39;label&#39;] = labels
+</pre></div>
+</div>
+<img alt="../_images/4bb7355deb11558ab623c7b827f0e1ad4141283759b314ea784be059aa6e9c67.png" src="../_images/4bb7355deb11558ab623c7b827f0e1ad4141283759b314ea784be059aa6e9c67.png" />
+</div>
+</div>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -753,12 +1378,42 @@
         <p class="prev-next-title"><span class="section-number">12. </span>K-Nearest Neighbors (and PCA)</p>
       </div>
     </a>
+    <a class="right-next"
+       href="07_classification_exercises.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">14. </span>Classification and Clustering Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">13.1. An Example with Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">13.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">13.2.1. Example: Extracting a Color Palette from a Photo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">13.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

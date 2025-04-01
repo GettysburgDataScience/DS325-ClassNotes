@@ -215,6 +215,8 @@
 <li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">12. K-Nearest Neighbors (and PCA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06_kmeans.html">13. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">14. Classification and Clustering Exercises</a></li>
+
 </ul>
 
     </div>
@@ -702,10 +704,11 @@
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/81c067959f31a7103795f6ee7c797e83b9606bf65d6aa9eda7633c4d6d2ed52b.png" src="../_images/81c067959f31a7103795f6ee7c797e83b9606bf65d6aa9eda7633c4d6d2ed52b.png" />
-<img alt="../_images/7b6bd8d7998ab07d291732f8d1072f96351c4738d0692d50522bcb5a3177537e.png" src="../_images/7b6bd8d7998ab07d291732f8d1072f96351c4738d0692d50522bcb5a3177537e.png" />
+<img alt="../_images/2df16393ea86436dc0c648161869cf4bc059ab242b0d6935e87a45e264246f2e.png" src="../_images/2df16393ea86436dc0c648161869cf4bc059ab242b0d6935e87a45e264246f2e.png" />
 </div>
 </div>
-<p>And we’ll use a decision tree to model.</p>
+<p>Notice that in the original data, the distributions (density plots) for both features overlap significantly for at least two groups. After we’ve applied PCA, the distribution for the first principle component shows more separated peaks. The distribution for the second component overlaps MORE, but we would be discarding that feature if we were using PCA for dimensionality reduction.</p>
+<p>Now let’s apply a decision tree to model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tree_depth</span> <span class="o">=</span> <span class="mi">10</span>
@@ -738,8 +741,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b8d8b04381a82e88fdc941374ded72fac29ae680afb5168de0ae745aa9a4c40e.png" src="../_images/b8d8b04381a82e88fdc941374ded72fac29ae680afb5168de0ae745aa9a4c40e.png" />
-<img alt="../_images/8c10169b4da37b8ac5f912e82c34e893386ad9410b072b84f76b0da256a98069.png" src="../_images/8c10169b4da37b8ac5f912e82c34e893386ad9410b072b84f76b0da256a98069.png" />
+<img alt="../_images/f1d6b0330c2336850045962ca5d2f35602113661bd891f24db3cf3dbbadf7879.png" src="../_images/f1d6b0330c2336850045962ca5d2f35602113661bd891f24db3cf3dbbadf7879.png" />
+<img alt="../_images/a5a02e6f80fc0401aa14c813e29bb3d204c23e9f17d80e30db5d22fc164bbcf1.png" src="../_images/a5a02e6f80fc0401aa14c813e29bb3d204c23e9f17d80e30db5d22fc164bbcf1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -781,9 +784,43 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/52a075485a0d41de023712c9656b34d17c0358bab6ab82b176255e8da978c157.png" src="../_images/52a075485a0d41de023712c9656b34d17c0358bab6ab82b176255e8da978c157.png" />
+<img alt="../_images/3fdc751cefa6d88e0dcfe0f2d0a6960254e7f7c8ef81103b7520f2837100a7cb.png" src="../_images/3fdc751cefa6d88e0dcfe0f2d0a6960254e7f7c8ef81103b7520f2837100a7cb.png" />
 </div>
 </div>
+<p>Decision trees dissect the feature space with horizontal and vertical lines. In the original data, the boundaries between groups are oriented on a diagonal; as a result, the decision tree creates a stair-step partition of the space.</p>
+<p>The PCA-transformed data is oriented more vertically, allowing for more continuous and straight boundaries.</p>
+</section>
+</section>
+<section id="k-nearest-neighbors-knn-a-lazy-learner">
+<h2><span class="section-number">12.2. </span>K-Nearest Neighbors (KNN) (a lazy learner)<a class="headerlink" href="#k-nearest-neighbors-knn-a-lazy-learner" title="Link to this heading">#</a></h2>
+<p>A K-Nearest Neighbors classifier doesn’t really learn a model at all. Instead, to determine the label for an unknown sample, it finds the K data points from the training set closest to the unlabeled sample (the K nearest neighbors) and assigns the majority label among the nearest neighbors.</p>
+<img src="knn.png" style = "width: 40vw" alt="image credit: JC Chouinard" />
+image credit: JC Chouinard
+<section id="eager-vs-lazy-models">
+<h3><span class="section-number">12.2.1. </span>Eager vs Lazy models<a class="headerlink" href="#eager-vs-lazy-models" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><em>Eager learners</em> spend more time and resources training a <em>simple</em> model that generalizes and prediction is quick and not computationally intensive (simple, quick, and computationally intensive are all relative).</p></li>
+<li><p><em>Lazy learners</em> store data and do most of the computation at the time of prediction. Lazy learners are slower to predict, but they are also adaptable to new data because the training overhead is low.</p></li>
+</ul>
+<p><strong>KNN is a very lazy learner!</strong></p>
+</section>
+<section id="hyper-parameters-of-knn">
+<h3><span class="section-number">12.2.2. </span>Hyper parameters of KNN<a class="headerlink" href="#hyper-parameters-of-knn" title="Link to this heading">#</a></h3>
+<p><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html"> sklearn.neighbors.KNeighborsClassifier </a></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> - number of neighbors (why not k?! come on sklearn devs!). <strong>Rule of thumb, start with square root of number of samples.</strong></p>
+<ul>
+<li><p>If k is too small, the model will be too specific and won’t generalize well to new data. The classifier will fit the training data well, but fail to generalize to the test set. This is called <em>overfitting</em>.</p></li>
+<li><p>If k is too large, the model will fail to predict correct labels in the training set. This is called <em>underfitting</em>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">metric</span></code> - the metric is how distance is calculated between samples. Two common metrics to use:</p>
+<ul>
+<li><p>Euclidean distance - “euclidean” - <span class="math notranslate nohighlight">\(d(p,q) = \sqrt{(p_1-q_1)^2 + (p_2-q_2)^2 + \cdots + (p_m-q_m)^2 }\)</span></p></li>
+<li><p>Manhattan distance - “manhattan” - <span class="math notranslate nohighlight">\(d(p,q) = |p_1-q_1| + |p_2-q_2| + \cdots + |p_m-q_m|^2\)</span></p></li>
+</ul>
+</li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
@@ -818,44 +855,13 @@
   return self._fit(X, y)
 </pre></div>
 </div>
-<img alt="../_images/2e74e8ad60ed374a83634ec6c182c176f1dfcc82066121c3c7e2f35b67d292e5.png" src="../_images/2e74e8ad60ed374a83634ec6c182c176f1dfcc82066121c3c7e2f35b67d292e5.png" />
+<img alt="../_images/a4cf307e3e50dfa76448fd25fdd1576e6277ad7cf668c7783e83fe00bb9837e4.png" src="../_images/a4cf307e3e50dfa76448fd25fdd1576e6277ad7cf668c7783e83fe00bb9837e4.png" />
 </div>
 </div>
-</section>
-</section>
-<section id="k-nearest-neighbors-knn-a-lazy-learner">
-<h2><span class="section-number">12.2. </span>K-Nearest Neighbors (KNN) (a lazy learner)<a class="headerlink" href="#k-nearest-neighbors-knn-a-lazy-learner" title="Link to this heading">#</a></h2>
-<p>A K-Nearest Neighbors classifier doesn’t really learn a model at all. Instead, to determine the label for an unknown sample, it finds the K data points from the training set closest to the unlabeled sample (the K nearest neighbors) and assigns the majority label among the nearest neighbors.</p>
-<img src="knn_cartoon.png" style = "width: 40vw" alt="image credit: JC Chouinard" />
-image credit: JC Chouinard
-<section id="eager-vs-lazy-models">
-<h3><span class="section-number">12.2.1. </span>Eager vs Lazy models<a class="headerlink" href="#eager-vs-lazy-models" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><em>Eager learners</em> spend more time and resources training a <em>simple</em> model that generalizes and prediction is quick and not computationally intensive (simple, quick, and computationally intensive are all relative).</p></li>
-<li><p><em>Lazy learners</em> store data and do most of the computation at the time of prediction. Lazy learners are slower to predict, but they are also adaptable to new data because the training overhead is low.</p></li>
-</ul>
-<p><strong>KNN is a very lazy learner!</strong></p>
-</section>
-<section id="hyper-parameters-of-knn">
-<h3><span class="section-number">12.2.2. </span>Hyper parameters of KNN<a class="headerlink" href="#hyper-parameters-of-knn" title="Link to this heading">#</a></h3>
-<p><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html"> sklearn.neighbors.KNeighborsClassifier </a></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> - number of neighbors (why not k?! come on sklearn devs!). <strong>Rule of thumb, start with square root of number of samples.</strong></p>
-<ul>
-<li><p>If k is too small, the model will be too specific and won’t generalize well to new data. The classifier will fit the training data well, but fail to generalize to the test set. This is called <em>overfitting</em>.</p></li>
-<li><p>If k is too large, the model will fail to predict correct labels in the training set. This is called <em>underfitting</em>.</p></li>
-</ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">metric</span></code> - the metric is how distance is calculated between samples. Two common metrics to use:</p>
-<ul>
-<li><p>Euclidean distance - “euclidean” - <span class="math notranslate nohighlight">\(d(p,q) = \sqrt{(p_1-q_1)^2 + (p_2-q_2)^2 + \cdots + (p_m-q_m)^2 }\)</span></p></li>
-<li><p>Manhattan distance - “manhattan” - <span class="math notranslate nohighlight">\(d(p,q) = |p_1-q_1| + |p_2-q_2| + \cdots + |p_m-q_m|^2\)</span></p></li>
-</ul>
-</li>
-</ul>
 </section>
 <section id="example-mnist">
 <h3><span class="section-number">12.2.3. </span>Example: MNIST<a class="headerlink" href="#example-mnist" title="Link to this heading">#</a></h3>
+<p>The MNIST data set comprises small images (8x8 pixels) of hand-written digits. We’ll apply KNN as a classifier to determine which digit a hand-written image represents.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_digits</span>
@@ -877,6 +883,8 @@ image credit: JC Chouinard
 <img alt="../_images/d782b4201fd6bd8f28848f716b724d156c2427a3bcdb9c9afd2be5fc9867e4a8.png" src="../_images/d782b4201fd6bd8f28848f716b724d156c2427a3bcdb9c9afd2be5fc9867e4a8.png" />
 </div>
 </div>
+<p>Each image is composed of 64 pixels with values from 0-15. Each image is a data point and each pixel value will be a feature of our data. To work with these images, we’ll want to unfurl them from an 8x8 square matrix to an array of 64 elements.</p>
+<p>The custom functions unfurl_imageset and refurl_imageset will let us go back and forth between the image and vector formats.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">unfurl_imageset</span><span class="p">(</span><span class="n">image_set</span><span class="p">):</span>
@@ -956,87 +964,87 @@ image credit: JC Chouinard
  &#39;random_state&#39;: None,
  &#39;n_features_in_&#39;: 64,
  &#39;_fit_svd_solver&#39;: &#39;covariance_eigh&#39;,
- &#39;mean_&#39;: array([0.00000000e+00, 3.21503132e-01, 5.22407794e+00, 1.17752262e+01,
-        1.18420320e+01, 5.82881002e+00, 1.38135003e+00, 1.32915797e-01,
-        5.56715379e-03, 2.01878914e+00, 1.03903967e+01, 1.19826026e+01,
-        1.02498260e+01, 8.08489910e+00, 1.86430063e+00, 1.13430759e-01,
-        1.39178845e-03, 2.61029923e+00, 9.99860821e+00, 7.02226862e+00,
-        7.05915101e+00, 7.67153793e+00, 1.83020181e+00, 5.49756437e-02,
-        6.95894224e-04, 2.51913709e+00, 9.25330550e+00, 8.83368128e+00,
-        9.85594990e+00, 7.48225470e+00, 2.31663187e+00, 2.78357690e-03,
-        0.00000000e+00, 2.36604036e+00, 7.78914405e+00, 9.19554628e+00,
-        1.03646486e+01, 8.70842032e+00, 2.86082116e+00, 0.00000000e+00,
-        1.11343076e-02, 1.59498956e+00, 6.91092554e+00, 7.25539318e+00,
-        7.74599861e+00, 8.16214335e+00, 3.45163535e+00, 2.78357690e-02,
-        9.04662491e-03, 6.97286013e-01, 7.47181628e+00, 9.47529576e+00,
-        9.39944328e+00, 8.73764788e+00, 3.71120390e+00, 2.01113431e-01,
-        6.95894224e-04, 2.97842728e-01, 5.58872651e+00, 1.20167015e+01,
-        1.17954071e+01, 6.77800974e+00, 2.08768267e+00, 3.41684064e-01]),
+ &#39;mean_&#39;: array([0.00000000e+00, 3.08281141e-01, 5.19763396e+00, 1.17633960e+01,
+        1.18649965e+01, 5.83716075e+00, 1.33681280e+00, 9.81210856e-02,
+        5.56715379e-03, 1.98121086e+00, 1.03208072e+01, 1.19603340e+01,
+        1.03103688e+01, 8.14474600e+00, 1.86082116e+00, 9.18580376e-02,
+        3.47947112e-03, 2.55184412e+00, 9.82602644e+00, 7.10160056e+00,
+        7.12386917e+00, 7.75574113e+00, 1.75643702e+00, 4.38413361e-02,
+        1.39178845e-03, 2.43075852e+00, 9.03340292e+00, 8.87195546e+00,
+        9.89979123e+00, 7.46694502e+00, 2.25678497e+00, 2.08768267e-03,
+        0.00000000e+00, 2.28114127e+00, 7.64300626e+00, 9.13709116e+00,
+        1.03479471e+01, 8.70981211e+00, 2.83646486e+00, 0.00000000e+00,
+        7.65483646e-03, 1.56924148e+00, 6.90187891e+00, 7.32498260e+00,
+        7.68684760e+00, 8.22059847e+00, 3.44258873e+00, 2.50521921e-02,
+        9.04662491e-03, 7.23034099e-01, 7.51774530e+00, 9.52818372e+00,
+        9.45650661e+00, 8.70911621e+00, 3.79819068e+00, 1.83020181e-01,
+        6.95894224e-04, 2.89491997e-01, 5.52748782e+00, 1.20382742e+01,
+        1.18225470e+01, 6.82324287e+00, 2.06889353e+00, 3.16631872e-01]),
  &#39;noise_variance_&#39;: 0.0,
  &#39;n_samples_&#39;: 1437,
  &#39;n_components_&#39;: 64,
- &#39;components_&#39;: array([[ 0.00000000e+00, -2.07596508e-02, -2.39311324e-01, ...,
-         -4.44569436e-02, -2.73402705e-02, -1.05418500e-02],
-        [ 0.00000000e+00,  5.65098689e-03,  6.10742603e-04, ...,
-         -2.00056687e-01, -2.70542423e-02,  4.21879084e-03],
-        [ 0.00000000e+00, -1.74336494e-02, -1.17547658e-01, ...,
-         -2.30210050e-01, -1.71309912e-01, -3.29568257e-02],
+ &#39;components_&#39;: array([[ 0.00000000e+00, -1.67403927e-02, -2.20937346e-01, ...,
+         -8.10913616e-02, -2.62786219e-02, -9.97523055e-03],
+        [ 0.00000000e+00,  1.02001471e-02,  4.29170974e-02, ...,
+         -1.88885663e-01, -3.34647132e-02,  4.56942145e-03],
+        [ 0.00000000e+00, -2.01972460e-02, -1.42616001e-01, ...,
+         -2.10805349e-01, -1.55941847e-01, -2.89857495e-02],
         ...,
+        [-0.00000000e+00, -0.00000000e+00,  2.29830282e-15, ...,
+          2.35981438e-15,  3.38478958e-16,  1.74865954e-16],
         [ 1.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
           0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
-        [-0.00000000e+00, -0.00000000e+00,  9.84835962e-17, ...,
-          1.71673387e-17,  1.83819649e-16, -2.42264637e-16],
-        [-0.00000000e+00, -0.00000000e+00, -1.28385884e-15, ...,
-         -6.77942238e-16, -2.63478435e-15,  1.12189731e-15]],
+        [-0.00000000e+00, -0.00000000e+00, -4.09679868e-15, ...,
+         -3.98136914e-15, -1.11967046e-15, -5.25448881e-16]],
        shape=(64, 64)),
- &#39;explained_variance_&#39;: array([1.80232810e+02, 1.62600094e+02, 1.43657382e+02, 1.01836730e+02,
-        7.03220422e+01, 5.95095274e+01, 5.12861374e+01, 4.45206546e+01,
-        4.01399223e+01, 3.74474830e+01, 2.89400498e+01, 2.77136014e+01,
-        2.21706258e+01, 2.11308294e+01, 1.76754655e+01, 1.67533061e+01,
-        1.57197809e+01, 1.49060056e+01, 1.24447724e+01, 1.11925670e+01,
-        1.08563100e+01, 9.74175130e+00, 9.04031340e+00, 8.86072415e+00,
-        8.29953423e+00, 7.16090276e+00, 6.86869110e+00, 6.17545106e+00,
-        5.81299039e+00, 5.16279734e+00, 4.52538087e+00, 4.23606972e+00,
-        4.06800371e+00, 3.98316325e+00, 3.77540557e+00, 3.59965011e+00,
-        3.06986705e+00, 2.74694410e+00, 2.62556790e+00, 2.49725641e+00,
-        2.25039354e+00, 1.92246586e+00, 1.83119443e+00, 1.71477653e+00,
-        1.39305384e+00, 1.26057062e+00, 1.16226198e+00, 9.48886252e-01,
-        6.75544965e-01, 4.93867739e-01, 2.86051519e-01, 1.07204705e-01,
-        6.94937067e-02, 6.77608084e-02, 4.76835084e-02, 1.82780866e-02,
-        9.21521629e-03, 1.53201204e-03, 8.76270496e-04, 6.67513661e-04,
-        5.07093484e-04, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00]),
- &#39;explained_variance_ratio_&#39;: array([1.49252616e-01, 1.34650786e-01, 1.18964134e-01, 8.43320280e-02,
-        5.82343957e-02, 4.92804427e-02, 4.24705701e-02, 3.68680052e-02,
-        3.32402764e-02, 3.10106402e-02, 2.39655485e-02, 2.29499141e-02,
-        1.83597199e-02, 1.74986539e-02, 1.46372321e-02, 1.38735826e-02,
-        1.30177098e-02, 1.23438143e-02, 1.03056422e-02, 9.26867818e-03,
-        8.99022036e-03, 8.06724297e-03, 7.48637514e-03, 7.33765546e-03,
-        6.87292840e-03, 5.93001614e-03, 5.68803271e-03, 5.11395360e-03,
-        4.81379625e-03, 4.27536479e-03, 3.74751375e-03, 3.50793226e-03,
-        3.36875509e-03, 3.29849785e-03, 3.12645161e-03, 2.98090673e-03,
-        2.54218801e-03, 2.27477225e-03, 2.17425938e-03, 2.06800334e-03,
-        1.86357370e-03, 1.59201346e-03, 1.51643066e-03, 1.42002383e-03,
-        1.15360200e-03, 1.04389130e-03, 9.62480925e-04, 7.85782321e-04,
-        5.59425632e-04, 4.08976880e-04, 2.36882161e-04, 8.87773028e-05,
-        5.75484427e-05, 5.61134121e-05, 3.94871965e-05, 1.51362687e-05,
-        7.63121399e-06, 1.26867469e-06, 7.25648477e-07, 5.52774827e-07,
-        4.19929252e-07, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00]),
- &#39;singular_values_&#39;: array([508.73796332, 483.21189487, 454.19379232, 382.41017797,
-        317.77736319, 292.32803729, 271.37961111, 252.84710784,
-        240.08525232, 231.89347906, 203.85757653, 199.49118168,
-        178.4293098 , 174.19492244, 159.31719429, 155.10560136,
-        150.24515082, 146.30455923, 133.68131216, 126.77746749,
-        124.8585649 , 118.27575771, 113.9380974 , 112.8007087 ,
-        109.17019351, 101.405406  ,  99.31485501,  94.16978136,
-         91.36440335,  86.10329249,  80.61294514,  77.99356462,
-         76.43070931,  75.62950764,  73.63071638,  71.89643633,
-         66.39524891,  62.80614403,  61.40289491,  59.88372232,
-         56.84685676,  52.54199254,  51.27957878,  49.622768  ,
-         44.72611439,  42.5462032 ,  40.85349685,  36.91342112,
-         31.14614856,  26.63069796,  20.26746113,  12.40749599,
-          9.98964278,   9.86430539,   8.27487269,   5.12321504,
-          3.63772602,   1.48322934,   1.12175061,   0.97905547,
-          0.85333829,   0.        ,   0.        ,   0.        ])}
+ &#39;explained_variance_&#39;: array([1.81140648e+02, 1.59326028e+02, 1.44195552e+02, 1.03914668e+02,
+        6.82106319e+01, 6.02347863e+01, 4.99923338e+01, 4.50565170e+01,
+        4.02260004e+01, 3.77468305e+01, 2.86771141e+01, 2.72424976e+01,
+        2.16423428e+01, 2.08373698e+01, 1.72770406e+01, 1.68137954e+01,
+        1.57699822e+01, 1.47171333e+01, 1.21678892e+01, 1.07720122e+01,
+        1.05247233e+01, 9.43507734e+00, 9.01332529e+00, 8.42533450e+00,
+        8.24725250e+00, 7.12319496e+00, 6.83239172e+00, 6.14600358e+00,
+        5.91032091e+00, 5.01636907e+00, 4.53504640e+00, 4.32492152e+00,
+        4.07259264e+00, 3.87261270e+00, 3.64135137e+00, 3.43128038e+00,
+        3.10731448e+00, 2.81694717e+00, 2.65270942e+00, 2.52166581e+00,
+        2.26340288e+00, 1.91156775e+00, 1.81688081e+00, 1.62066195e+00,
+        1.37012164e+00, 1.28318809e+00, 1.13167120e+00, 8.06082216e-01,
+        6.92335762e-01, 3.86897491e-01, 2.41067613e-01, 9.52635265e-02,
+        5.70876207e-02, 5.30050226e-02, 4.68610671e-02, 1.26426908e-02,
+        9.46060781e-03, 4.35685423e-03, 1.12032467e-03, 8.11187651e-04,
+        4.66360553e-04, 3.85069864e-16, 0.00000000e+00, 0.00000000e+00]),
+ &#39;explained_variance_ratio_&#39;: array([1.50772558e-01, 1.32615142e-01, 1.20021279e-01, 8.64934539e-02,
+        5.67751720e-02, 5.01364708e-02, 4.16111576e-02, 3.75028267e-02,
+        3.34821424e-02, 3.14186034e-02, 2.38694180e-02, 2.26753138e-02,
+        1.80140207e-02, 1.73440008e-02, 1.43805580e-02, 1.39949756e-02,
+        1.31261568e-02, 1.22498172e-02, 1.01279519e-02, 8.96609262e-03,
+        8.76026156e-03, 7.85329390e-03, 7.50224825e-03, 7.01283366e-03,
+        6.86460697e-03, 5.92899682e-03, 5.68694651e-03, 5.11563082e-03,
+        4.91946017e-03, 4.17537866e-03, 3.77474936e-03, 3.59985176e-03,
+        3.38982562e-03, 3.22337217e-03, 3.03088162e-03, 2.85602887e-03,
+        2.58637560e-03, 2.34468815e-03, 2.20798473e-03, 2.09891048e-03,
+        1.88394513e-03, 1.59109489e-03, 1.51228215e-03, 1.34895923e-03,
+        1.14042180e-03, 1.06806259e-03, 9.41947397e-04, 6.70943153e-04,
+        5.76266205e-04, 3.22034425e-04, 2.00652814e-04, 7.92926697e-05,
+        4.75169251e-05, 4.41187714e-05, 3.90048453e-05, 1.05231534e-05,
+        7.87454420e-06, 3.62643098e-06, 9.32503106e-07, 6.75192667e-07,
+        3.88175565e-07, 3.20513198e-19, 0.00000000e+00, 0.00000000e+00]),
+ &#39;singular_values_&#39;: array([5.10017618e+02, 4.78322252e+02, 4.55043748e+02, 3.86291940e+02,
+        3.12970394e+02, 2.94103984e+02, 2.67934677e+02, 2.54364224e+02,
+        2.40342540e+02, 2.32818488e+02, 2.02929386e+02, 1.97788338e+02,
+        1.76290681e+02, 1.72981106e+02, 1.57511365e+02, 1.55385360e+02,
+        1.50484865e+02, 1.45374700e+02, 1.32185812e+02, 1.24372865e+02,
+        1.22936987e+02, 1.16399188e+02, 1.13767900e+02, 1.09994456e+02,
+        1.08825799e+02, 1.01138064e+02, 9.90520798e+01, 9.39449900e+01,
+        9.21261137e+01, 8.48734704e+01, 8.06989878e+01, 7.88072795e+01,
+        7.64738061e+01, 7.45725945e+01, 7.23116904e+01, 7.01948618e+01,
+        6.67989790e+01, 6.36013847e+01, 6.17194517e+01, 6.01756770e+01,
+        5.70109335e+01, 5.23928554e+01, 5.10787710e+01, 4.82417927e+01,
+        4.43564502e+01, 4.29261936e+01, 4.03122791e+01, 3.40225523e+01,
+        3.15308445e+01, 2.35708463e+01, 1.86057274e+01, 1.16960858e+01,
+        9.05416055e+00, 8.72440327e+00, 8.20320013e+00, 4.26085719e+00,
+        3.68584221e+00, 2.50128820e+00, 1.26837937e+00, 1.07928933e+00,
+        8.18348186e-01, 7.43613021e-07, 0.00000000e+00, 0.00000000e+00])}
 </pre></div>
 </div>
 </div>
@@ -1071,7 +1079,7 @@ image credit: JC Chouinard
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Explained Variance&#39;)
 </pre></div>
 </div>
-<img alt="../_images/0422c53d5625656ea0f431dc25cda2a3202b293e3ca1b2e29c93ae7f38a91048.png" src="../_images/0422c53d5625656ea0f431dc25cda2a3202b293e3ca1b2e29c93ae7f38a91048.png" />
+<img alt="../_images/a7c41f2f27857a7032b6b76c52987f29275e58c68c61d1d14ae7e0c8aaecdbe2.png" src="../_images/a7c41f2f27857a7032b6b76c52987f29275e58c68c61d1d14ae7e0c8aaecdbe2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1087,7 +1095,7 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4388c3c7f8dd7b84a9ead35ce7e5d81aff35d6573be5fda28b3d6824e7b47c41.png" src="../_images/4388c3c7f8dd7b84a9ead35ce7e5d81aff35d6573be5fda28b3d6824e7b47c41.png" />
+<img alt="../_images/b9f509deba85511222f5d735b82962adf7c0a2b7f49e5a92ca92e9613d2cab79.png" src="../_images/b9f509deba85511222f5d735b82962adf7c0a2b7f49e5a92ca92e9613d2cab79.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1120,41 +1128,41 @@ image credit: JC Chouinard
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TRAINING REPORT:
               precision    recall  f1-score   support
 
-           0       0.98      0.99      0.99       138
-           1       0.97      0.99      0.98       143
-           2       0.96      0.95      0.96       140
-           3       0.93      0.92      0.93       142
-           4       0.97      0.97      0.97       148
-           5       0.97      0.98      0.98       148
-           6       0.99      0.98      0.99       152
-           7       0.95      0.94      0.95       142
-           8       0.90      0.92      0.91       141
-           9       0.92      0.90      0.91       143
+           0       0.99      1.00      0.99       134
+           1       0.97      0.99      0.98       151
+           2       0.94      0.94      0.94       143
+           3       0.90      0.91      0.90       150
+           4       0.98      0.97      0.97       145
+           5       0.98      0.95      0.96       147
+           6       0.99      0.98      0.99       149
+           7       0.93      0.95      0.94       131
+           8       0.87      0.90      0.89       146
+           9       0.90      0.87      0.88       141
 
-    accuracy                           0.95      1437
-   macro avg       0.95      0.95      0.95      1437
-weighted avg       0.95      0.95      0.95      1437
+    accuracy                           0.94      1437
+   macro avg       0.94      0.94      0.94      1437
+weighted avg       0.94      0.94      0.94      1437
 
 TESTING REPORT:
               precision    recall  f1-score   support
 
-           0       1.00      0.97      0.99        40
-           1       0.97      0.97      0.97        39
-           2       0.94      0.89      0.92        37
-           3       0.89      0.78      0.83        41
-           4       0.94      1.00      0.97        33
-           5       1.00      0.91      0.95        34
-           6       0.97      1.00      0.98        29
-           7       0.97      0.95      0.96        37
-           8       0.77      0.82      0.79        33
-           9       0.77      0.92      0.84        37
+           0       1.00      0.98      0.99        44
+           1       0.97      0.94      0.95        31
+           2       0.94      0.91      0.93        34
+           3       0.91      0.88      0.89        33
+           4       0.95      0.97      0.96        36
+           5       1.00      1.00      1.00        35
+           6       1.00      1.00      1.00        32
+           7       0.96      0.94      0.95        48
+           8       0.71      0.89      0.79        28
+           9       0.94      0.87      0.91        39
 
-    accuracy                           0.92       360
-   macro avg       0.92      0.92      0.92       360
-weighted avg       0.92      0.92      0.92       360
+    accuracy                           0.94       360
+   macro avg       0.94      0.94      0.94       360
+weighted avg       0.94      0.94      0.94       360
 </pre></div>
 </div>
-<img alt="../_images/2ec82565e046c57699ff2068eab837a5345603fd70eecae96706ac83c45f3bfe.png" src="../_images/2ec82565e046c57699ff2068eab837a5345603fd70eecae96706ac83c45f3bfe.png" />
+<img alt="../_images/03d56312124d458d73dd8ea449364a4742642f7045ae4cad3454b6f648167699.png" src="../_images/03d56312124d458d73dd8ea449364a4742642f7045ae4cad3454b6f648167699.png" />
 </div>
 </div>
 <p>What could we try to improve the prediction?</p>
