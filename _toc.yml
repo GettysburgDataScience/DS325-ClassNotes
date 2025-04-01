@@ -26,6 +26,9 @@ parts:
     - file: 02_Classification/04_trees_gridcv
     - file: 02_Classification/05_knn_pca
     - file: 02_Classification/06_kmeans
+    - file: 02_Classification/07_classification_exercises
+
+
 
 
 

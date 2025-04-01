@@ -1,4 +1,17 @@
 Traceback (most recent call last):
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 782, in _async_poll_for_reply
+    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 198, in ensure_async
+    result = await obj
+             ^^^^^^^^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_client/channels.py", line 313, in get_msg
+    raise Empty
+_queue.Empty
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
   File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
     ~~~~~~~~~^
@@ -22,41 +35,22 @@ Traceback (most recent call last):
     await self.async_execute_cell(
         cell, index, execution_count=self.code_cells_executed + 1
     )
-  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
-    await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
-    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
-nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
-------------------
-
-# introspect the images arrays to find the shapes (for plotting)
-n_samples, h, w = lfw_people.images.shape
-
-# for machine learning we use the 2 data directly (as relative pixel
-# positions info is ignored by this model)
-X = lfw_people.data
-n_features = X.shape[1]
-
-# the label to predict is the id of the person
-y = lfw_people.target
-target_names = lfw_people.target_names
-n_classes = target_names.shape[0]
-
-print("Total dataset size:")
-print("n_samples: %d" % n_samples)
-print("n_features: %d" % n_features)
-print("n_classes: %d" % n_classes)
-------------------
-
-
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[12], line 2[0m
-[1;32m      1[0m [38;5;66;03m# introspect the images arrays to find the shapes (for plotting)[39;00m
-[0;32m----> 2[0m n_samples, h, w [38;5;241m=[39m [43mlfw_people[49m[38;5;241m.[39mimages[38;5;241m.[39mshape
-[1;32m      4[0m [38;5;66;03m# for machine learning we use the 2 data directly (as relative pixel[39;00m
-[1;32m      5[0m [38;5;66;03m# positions info is ignored by this model)[39;00m
-[1;32m      6[0m X [38;5;241m=[39m lfw_people[38;5;241m.[39mdata
-
-[0;31mNameError[0m: name 'lfw_people' is not defined
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 1005, in async_execute_cell
+    exec_reply = await self.task_poll_for_reply
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 806, in _async_poll_for_reply
+    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 856, in _async_handle_timeout
+    raise CellTimeoutError.error_from_timeout_and_cell(
+        "Cell execution timed out", timeout, cell
+    )
+nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
+The message was: Cell execution timed out.
+Here is a preview of the cell contents:
+-------------------
+['import requests', 'from PIL import Image', 'from io import BytesIO', '', 'from matplotlib.colors import ListedColormap']
+...
+['print(peppers.shape)', 'h, w = peppers.shape[:2]', '', 'plt.imshow(peppers)', 'plt.show()']
+-------------------
 
