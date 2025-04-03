@@ -443,7 +443,12 @@
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-cell docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell content</span>
+<span class="expanded">Hide code cell content</span>
+</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plotPCA</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pca</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">num_components</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 
@@ -546,6 +551,7 @@
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <section id="example-0-synthetic-data-boxes">
 <h2><span class="section-number">13.1. </span>Example 0: Synthetic data (boxes)<a class="headerlink" href="#example-0-synthetic-data-boxes" title="Link to this heading">#</a></h2>
@@ -588,28 +594,28 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>2.421450</td>
-      <td>7.943869</td>
+      <td>0.103331</td>
+      <td>2.336030</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.924986</td>
-      <td>1.477761</td>
+      <td>4.044509</td>
+      <td>0.363975</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4.053488</td>
-      <td>7.568595</td>
+      <td>3.626667</td>
+      <td>9.542177</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1.304733</td>
-      <td>9.084030</td>
+      <td>4.338097</td>
+      <td>9.302513</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1.955466</td>
-      <td>5.455822</td>
+      <td>3.474532</td>
+      <td>9.630789</td>
     </tr>
     <tr>
       <th>...</th>
@@ -618,28 +624,28 @@
     </tr>
     <tr>
       <th>95</th>
-      <td>1.389443</td>
-      <td>8.739003</td>
+      <td>1.466037</td>
+      <td>9.374146</td>
     </tr>
     <tr>
       <th>96</th>
-      <td>4.995424</td>
-      <td>3.119915</td>
+      <td>4.284025</td>
+      <td>3.214741</td>
     </tr>
     <tr>
       <th>97</th>
-      <td>3.625797</td>
-      <td>3.507002</td>
+      <td>0.265872</td>
+      <td>8.422860</td>
     </tr>
     <tr>
       <th>98</th>
-      <td>3.453263</td>
-      <td>6.413822</td>
+      <td>3.516864</td>
+      <td>7.803655</td>
     </tr>
     <tr>
       <th>99</th>
-      <td>3.933673</td>
-      <td>9.538397</td>
+      <td>2.304461</td>
+      <td>1.867758</td>
     </tr>
   </tbody>
 </table>
@@ -686,48 +692,48 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>2.421450</td>
-      <td>7.943869</td>
-      <td>29.057399</td>
-      <td>95.326424</td>
-      <td>20.730637</td>
-      <td>248.767646</td>
+      <td>0.103331</td>
+      <td>2.336030</td>
+      <td>1.239974</td>
+      <td>28.032357</td>
+      <td>4.878722</td>
+      <td>58.544662</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.924986</td>
-      <td>1.477761</td>
-      <td>11.099835</td>
-      <td>17.733136</td>
-      <td>4.805495</td>
-      <td>57.665942</td>
+      <td>4.044509</td>
+      <td>0.363975</td>
+      <td>48.534103</td>
+      <td>4.367702</td>
+      <td>8.816967</td>
+      <td>105.803609</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4.053488</td>
-      <td>7.568595</td>
-      <td>48.641851</td>
-      <td>90.823143</td>
-      <td>23.244166</td>
-      <td>278.929988</td>
+      <td>3.626667</td>
+      <td>9.542177</td>
+      <td>43.520000</td>
+      <td>114.506122</td>
+      <td>26.337687</td>
+      <td>316.052243</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>1.304733</td>
-      <td>9.084030</td>
-      <td>15.656797</td>
-      <td>109.008357</td>
-      <td>20.777526</td>
-      <td>249.330308</td>
+      <td>4.338097</td>
+      <td>9.302513</td>
+      <td>52.057170</td>
+      <td>111.630155</td>
+      <td>27.281221</td>
+      <td>327.374649</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1.955466</td>
-      <td>5.455822</td>
-      <td>23.465587</td>
-      <td>65.469866</td>
-      <td>14.822575</td>
-      <td>177.870906</td>
+      <td>3.474532</td>
+      <td>9.630789</td>
+      <td>41.694383</td>
+      <td>115.569463</td>
+      <td>26.210641</td>
+      <td>314.527693</td>
     </tr>
     <tr>
       <th>...</th>
@@ -740,48 +746,48 @@
     </tr>
     <tr>
       <th>95</th>
-      <td>1.389443</td>
-      <td>8.739003</td>
-      <td>16.673312</td>
-      <td>104.868031</td>
-      <td>20.256891</td>
-      <td>243.082687</td>
+      <td>1.466037</td>
+      <td>9.374146</td>
+      <td>17.592438</td>
+      <td>112.489753</td>
+      <td>21.680365</td>
+      <td>260.164383</td>
     </tr>
     <tr>
       <th>96</th>
-      <td>4.995424</td>
-      <td>3.119915</td>
-      <td>59.945084</td>
-      <td>37.438983</td>
-      <td>16.230678</td>
-      <td>194.768133</td>
+      <td>4.284025</td>
+      <td>3.214741</td>
+      <td>51.408300</td>
+      <td>38.576887</td>
+      <td>14.997531</td>
+      <td>179.970373</td>
     </tr>
     <tr>
       <th>97</th>
-      <td>3.625797</td>
-      <td>3.507002</td>
-      <td>43.509568</td>
-      <td>42.084025</td>
-      <td>14.265599</td>
-      <td>171.187187</td>
+      <td>0.265872</td>
+      <td>8.422860</td>
+      <td>3.190468</td>
+      <td>101.074318</td>
+      <td>17.377464</td>
+      <td>208.529571</td>
     </tr>
     <tr>
       <th>98</th>
-      <td>3.453263</td>
-      <td>6.413822</td>
-      <td>41.439156</td>
-      <td>76.965865</td>
-      <td>19.734170</td>
-      <td>236.810042</td>
+      <td>3.516864</td>
+      <td>7.803655</td>
+      <td>42.202370</td>
+      <td>93.643864</td>
+      <td>22.641039</td>
+      <td>271.692468</td>
     </tr>
     <tr>
       <th>99</th>
-      <td>3.933673</td>
-      <td>9.538397</td>
-      <td>47.204071</td>
-      <td>114.460769</td>
-      <td>26.944140</td>
-      <td>323.329679</td>
+      <td>2.304461</td>
+      <td>1.867758</td>
+      <td>27.653527</td>
+      <td>22.413100</td>
+      <td>8.344438</td>
+      <td>100.133254</td>
     </tr>
   </tbody>
 </table>
@@ -796,7 +802,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/78077e2cf713a560eb191b087771afa6865e9f6629980f2aa47c8b1d17c97d77.png" src="../_images/78077e2cf713a560eb191b087771afa6865e9f6629980f2aa47c8b1d17c97d77.png" />
+<img alt="../_images/7098d1e84156cad34ea1be20c2a4846605447fbb8ae79244a4a372761af8a73c.png" src="../_images/7098d1e84156cad34ea1be20c2a4846605447fbb8ae79244a4a372761af8a73c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -811,7 +817,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ca64e054714f5375a49e6166915ce984cb7d0ca78dd7bf7d52275a4e757b9bfe.png" src="../_images/ca64e054714f5375a49e6166915ce984cb7d0ca78dd7bf7d52275a4e757b9bfe.png" />
+<img alt="../_images/04d0eb73d6ee173f8fa9b344e5426f977b0456ab9f5aa76567b0451794645bc7.png" src="../_images/04d0eb73d6ee173f8fa9b344e5426f977b0456ab9f5aa76567b0451794645bc7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -822,7 +828,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/095e4e433ffce9b240adeb3596b92e1e25516b59e19c9518da379ce553294ff9.png" src="../_images/095e4e433ffce9b240adeb3596b92e1e25516b59e19c9518da379ce553294ff9.png" />
+<img alt="../_images/e08c52c9f75fbbcd8e969cf39eb970fb2b06f8dd4957af7b7f662b832adaa618.png" src="../_images/e08c52c9f75fbbcd8e969cf39eb970fb2b06f8dd4957af7b7f662b832adaa618.png" />
 </div>
 </div>
 </section>
