@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>13. K-Means Clustering &#8212; My sample book</title>
+    <title>14. K-Means Clustering &#8212; My sample book</title>
   
   
   
@@ -87,8 +87,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. Classification and Clustering Exercises" href="07_classification_exercises.html" />
-    <link rel="prev" title="12. K-Nearest Neighbors (and PCA)" href="05_knn_pca.html" />
+    <link rel="next" title="15. Classification and Clustering Exercises" href="07_classification_exercises.html" />
+    <link rel="prev" title="13. PCA: Examples and Observations" href="05b_pca_examples.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -212,8 +212,9 @@
 <li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. K-Means Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">14. Classification and Clustering Exercises</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05b_pca_examples.html">13. PCA: Examples and Observations</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
 
 </ul>
 
@@ -407,10 +408,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">13.1. An Example with Synthetic Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">13.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">13.2.1. Example: Extracting a Color Palette from a Photo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">13.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">14.1. An Example with Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">14.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">14.2.1. Example: Extracting a Color Palette from a Photo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">14.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
 </ul>
 </li>
 </ul>
@@ -425,7 +426,7 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="k-means-clustering">
-<h1><span class="section-number">13. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">14. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h1>
 <p>Clustering refers to an <em>unsupervised</em> learning algorithms that partition data into groups by similarity. Clustering can be used to identify categories from and assign classes/labels to unlabeled data (perhaps for classification).</p>
 <p>We’ll only introduce K-means clustering, but alternative clustering methods include:</p>
 <ul class="simple">
@@ -433,7 +434,7 @@
 <li><p>Agglomerative Clustering (Hierarchical Clustering)</p></li>
 </ul>
 <section id="an-example-with-synthetic-data">
-<h2><span class="section-number">13.1. </span>An Example with Synthetic Data<a class="headerlink" href="#an-example-with-synthetic-data" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.1. </span>An Example with Synthetic Data<a class="headerlink" href="#an-example-with-synthetic-data" title="Link to this heading">#</a></h2>
 <p>To demonstrate K-Means, we’ll first create a synthetic dataset of 5 clusters using the sklearn make_blobs function. Remember, because we create this dataset, we know it should have 5 clusters. BUT that does not mean that the best partitioning will be into 5 groupings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -524,7 +525,7 @@
 </div>
 </section>
 <section id="example-color-extraction-and-image-segmentation">
-<h2><span class="section-number">13.2. </span>Example: Color Extraction and Image Segmentation<a class="headerlink" href="#example-color-extraction-and-image-segmentation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">14.2. </span>Example: Color Extraction and Image Segmentation<a class="headerlink" href="#example-color-extraction-and-image-segmentation" title="Link to this heading">#</a></h2>
 <p>In this example, we’ll apply K-Means to image data. First, we’ll use K-Means to extract a color palette for a photograph. Then we’ll use K-Means to do a crude segmentation of the image, identifying the pixels that belong to different objects in the image.</p>
 <p>First, let’s inspect the image and describe our features.</p>
 <div class="cell docutils container">
@@ -838,7 +839,7 @@
 </div></div></div>
 </div>
 <section id="example-extracting-a-color-palette-from-a-photo">
-<h3><span class="section-number">13.2.1. </span>Example: Extracting a Color Palette from a Photo<a class="headerlink" href="#example-extracting-a-color-palette-from-a-photo" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.1. </span>Example: Extracting a Color Palette from a Photo<a class="headerlink" href="#example-extracting-a-color-palette-from-a-photo" title="Link to this heading">#</a></h3>
 <p>If you look at the photograph, you see various shades of reds, yellows, greens, whites, and purples. A color palette represents the colors in the image as a discrete set of representative colors. To build this palette, we’ll apply K-means to the color of each pixel and extract the centroids.</p>
 <p>Let’s see.</p>
 <div class="cell docutils container">
@@ -1167,7 +1168,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="example-segmenting-objects-in-an-image-kinda">
-<h3><span class="section-number">13.2.2. </span>Example: Segmenting Objects in an Image (kinda)<a class="headerlink" href="#example-segmenting-objects-in-an-image-kinda" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">14.2.2. </span>Example: Segmenting Objects in an Image (kinda)<a class="headerlink" href="#example-segmenting-objects-in-an-image-kinda" title="Link to this heading">#</a></h3>
 <p>Image segmentation refers to the process of partitioning an image into the objects in the image. We’ll attempt an image segmentation by incorporating pixel position and pixel color. The idea is that an object is represented by a blob of pixels that are near each other and of similar color.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1370,12 +1371,12 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="05_knn_pca.html"
+       href="05b_pca_examples.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>K-Nearest Neighbors (and PCA)</p>
+        <p class="prev-next-title"><span class="section-number">13. </span>PCA: Examples and Observations</p>
       </div>
     </a>
     <a class="right-next"
@@ -1383,7 +1384,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>Classification and Clustering Exercises</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Classification and Clustering Exercises</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1404,10 +1405,10 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">13.1. An Example with Synthetic Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">13.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">13.2.1. Example: Extracting a Color Palette from a Photo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">13.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">14.1. An Example with Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">14.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">14.2.1. Example: Extracting a Color Palette from a Photo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">14.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
 </ul>
 </li>
 </ul>
