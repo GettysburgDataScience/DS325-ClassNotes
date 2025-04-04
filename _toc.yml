@@ -28,6 +28,8 @@ parts:
     - file: 02_Classification/05b_pca_examples
     - file: 02_Classification/06_kmeans
     - file: 02_Classification/07_classification_exercises
+    - file: 02_Classification/07_review_topics
+
 
 
 
