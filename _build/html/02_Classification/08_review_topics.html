@@ -409,23 +409,9 @@
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">17.1. General</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">17.2. Learning Algorithms for Classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">17.2.1. Logistic Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">17.2.2. Decision Trees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">17.2.3. Ensemble Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">17.2.3.1. Random Forest</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">17.2.3.2. Gradient Boosted Trees</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn">17.2.4. K-Nearest Neighbors (KNN)</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">17.2. Learning Algorithms for Classification</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">17.3. Clustering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">17.4. Pre-processing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">17.4.1. Scaling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">17.4.2. Encoding</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">17.4. Pre-processing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-topics">17.5. Other Topics</a></li>
 </ul>
             </nav>
@@ -443,76 +429,65 @@
 <section id="general">
 <h2><span class="section-number">17.1. </span>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p>What is classification? How is it different than regression? Examples of classification.</p></li>
+<li><p>What is classification? How is it different than regression?</p></li>
+<li><p>Examples of classification.</p></li>
 <li><p>Predictions and prediction errors</p>
 <ul>
 <li><p>TP, FP, TN, FN</p></li>
 <li><p>Type I (FP) and Type II (FN) errors</p></li>
-<li><p>Accuracy, Recall, Precision (I will provide equations, but know what these mean)</p></li>
-<li><p>Confusion Matrix</p></li>
 </ul>
 </li>
+<li><p>Accuracy, Recall, Precision (I will provide equations, but know what these mean)</p></li>
+<li><p>Confusion Matrix</p></li>
 </ul>
 </section>
 <section id="learning-algorithms-for-classification">
 <h2><span class="section-number">17.2. </span>Learning Algorithms for Classification<a class="headerlink" href="#learning-algorithms-for-classification" title="Link to this heading">#</a></h2>
-<section id="logistic-regression">
-<h3><span class="section-number">17.2.1. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h3>
+<p><strong>Logistic Regression</strong></p>
 <ul class="simple">
 <li><p>Why is it regression?</p></li>
 <li><p>How does it relate to Linear Regression?</p></li>
 <li><p>What are the parameters of Logistic Regression?</p></li>
 <li><p>How can you regularize Logistic Regression? What are some hyper-parameters? Ridge, Lasso, ElasticNet</p></li>
 </ul>
-</section>
-<section id="decision-trees">
-<h3><span class="section-number">17.2.2. </span>Decision Trees<a class="headerlink" href="#decision-trees" title="Link to this heading">#</a></h3>
+<p><strong>Decision Trees</strong></p>
 <ul class="simple">
 <li><p>Anatomy of a tree: root, decision, and leaf nodes, branches</p></li>
 <li><p>How to read the results of a tree? e.g. given a tree with the sample data at each node, calculate accuracy.</p></li>
 <li><p>Parameters? What kind of ‘questions’ can be at a node.</p></li>
 <li><p>hyper-parameters? over- and under-fitting</p></li>
 </ul>
-</section>
-<section id="ensemble-methods">
-<h3><span class="section-number">17.2.3. </span>Ensemble Methods<a class="headerlink" href="#ensemble-methods" title="Link to this heading">#</a></h3>
+<p><strong>Ensemble Methods</strong></p>
 <ul class="simple">
 <li><p>How can ensembles of weak learners (small trees) be better than one big decision tree?</p></li>
 <li><p>Bias vs Variance</p></li>
 <li><p>Random forest - low variance, ? bias</p></li>
 <li><p>Gradient Boosted Trees - high variance, low bias</p></li>
 </ul>
-<section id="random-forest">
-<h4><span class="section-number">17.2.3.1. </span>Random Forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h4>
+<p><em><strong>Random Forest</strong></em></p>
 <ul class="simple">
 <li><p>What is it? What are some hyper-parameters?</p></li>
 <li><p>Basic overview of what happens in training.</p></li>
-<li><p>Bagging</p></li>
+<li><p>Bagging (Bootstrapping/Aggregation)</p></li>
 <li><p>Hard vs soft voting</p></li>
 </ul>
-</section>
-<section id="gradient-boosted-trees">
-<h4><span class="section-number">17.2.3.2. </span>Gradient Boosted Trees<a class="headerlink" href="#gradient-boosted-trees" title="Link to this heading">#</a></h4>
+<p><em><strong>Gradient Boosted Trees</strong></em></p>
 <ul class="simple">
 <li><p>What is it? When to use?</p></li>
 <li><p>Basic overview of what happens in training.</p></li>
 <li><p>How is it different from Random Forest?</p></li>
 </ul>
-</section>
-</section>
-<section id="k-nearest-neighbors-knn">
-<h3><span class="section-number">17.2.4. </span>K-Nearest Neighbors (KNN)<a class="headerlink" href="#k-nearest-neighbors-knn" title="Link to this heading">#</a></h3>
+<p><strong>K-Nearest Neighbors (KNN)</strong></p>
 <ul class="simple">
 <li><p>What is it? How does it work?</p></li>
 <li><p>What are the parameters? (None) What are the hyper-parameters?</p></li>
 <li><p>Neighborhood size (over- and under-fitting)</p></li>
 </ul>
 </section>
-</section>
 <section id="clustering">
 <h2><span class="section-number">17.3. </span>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h2>
+<p><strong>K-Means</strong></p>
 <ul class="simple">
-<li><p>K-Means</p></li>
 <li><p>When would we use it? How does it relate to classification?</p></li>
 <li><p>Unsupervised learning</p></li>
 <li><p>How to find correct number of clusters? Silhouette score.</p></li>
@@ -520,29 +495,35 @@
 </section>
 <section id="pre-processing">
 <h2><span class="section-number">17.4. </span>Pre-processing<a class="headerlink" href="#pre-processing" title="Link to this heading">#</a></h2>
-<section id="scaling">
-<h3><span class="section-number">17.4.1. </span>Scaling<a class="headerlink" href="#scaling" title="Link to this heading">#</a></h3>
+<p><strong>Scaling</strong></p>
 <ul class="simple">
 <li><p>StandardScaler, MinMaxScaler</p></li>
 <li><p>Which algorithms require that features be scaled?</p></li>
 <li><p>basically, just tree methods don’t need it</p></li>
 <li><p>What could happen if you forget to scale?</p></li>
 </ul>
-</section>
-<section id="encoding">
-<h3><span class="section-number">17.4.2. </span>Encoding<a class="headerlink" href="#encoding" title="Link to this heading">#</a></h3>
+<p><strong>Encoding</strong></p>
 <ul class="simple">
 <li><p>When to use encoding</p></li>
 <li><p>Ordinal vs categorical vs numeric features</p></li>
 <li><p>One-hot vs Ordinal vs Label encoding</p></li>
 </ul>
 </section>
-</section>
 <section id="other-topics">
 <h2><span class="section-number">17.5. </span>Other Topics<a class="headerlink" href="#other-topics" title="Link to this heading">#</a></h2>
+<p><strong>Grid search</strong></p>
 <ul class="simple">
-<li><p>Grid search, what is it and why do we use it?</p></li>
-<li><p>Cross validation, what is k-fold cross validation and how does it work?</p></li>
+<li><p>what is it and why do we use it?</p></li>
+</ul>
+<p><strong>Cross validation</strong></p>
+<ul class="simple">
+<li><p>Why do we use validation?</p></li>
+<li><p>What is k-fold cross validation/how does it work?</p></li>
+</ul>
+<p><strong>Principle Component Analysis (PCA)</strong></p>
+<ul class="simple">
+<li><p>Why do we use it? Benefits?</p></li>
+<li><p>What is a principle component (PC) and how are they ordered.</p></li>
 </ul>
 </section>
 </section>
@@ -604,23 +585,9 @@
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">17.1. General</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">17.2. Learning Algorithms for Classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">17.2.1. Logistic Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">17.2.2. Decision Trees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">17.2.3. Ensemble Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">17.2.3.1. Random Forest</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">17.2.3.2. Gradient Boosted Trees</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn">17.2.4. K-Nearest Neighbors (KNN)</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">17.2. Learning Algorithms for Classification</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">17.3. Clustering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">17.4. Pre-processing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">17.4.1. Scaling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">17.4.2. Encoding</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">17.4. Pre-processing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-topics">17.5. Other Topics</a></li>
 </ul>
   </nav></div>
