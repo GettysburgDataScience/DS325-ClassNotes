@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Classification Topics - Exam 2 Review &#8212; My sample book</title>
+    <title>17. Classification Topics - Exam 2 Review &#8212; My sample book</title>
   
   
   
@@ -87,6 +87,7 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="15. Classification and Clustering Exercises" href="07_classification_exercises.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -137,8 +138,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -206,7 +205,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/06_exam_review.html">7. Exam 1 Review</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">8. Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">9. Logistic Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
@@ -216,6 +215,7 @@
 <li class="toctree-l1"><a class="reference internal" href="06_kmeans.html">14. K-Means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
 
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Classification Topics - Exam 2 Review</a></li>
 </ul>
 
     </div>
@@ -408,25 +408,25 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">Learning Algorithms for Classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">Decision Trees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">Ensemble Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">Random Forest</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">Gradient Boosted Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">17.1. General</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">17.2. Learning Algorithms for Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">17.2.1. Logistic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">17.2.2. Decision Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">17.2.3. Ensemble Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">17.2.3.1. Random Forest</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">17.2.3.2. Gradient Boosted Trees</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn">K-Nearest Neighbors (KNN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn">17.2.4. K-Nearest Neighbors (KNN)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">Clustering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">Pre-processing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">Scaling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">17.3. Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">17.4. Pre-processing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">17.4.1. Scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">17.4.2. Encoding</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-topics">Other Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-topics">17.5. Other Topics</a></li>
 </ul>
             </nav>
         </div>
@@ -439,9 +439,9 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="classification-topics-exam-2-review">
-<h1>Classification Topics - Exam 2 Review<a class="headerlink" href="#classification-topics-exam-2-review" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">17. </span>Classification Topics - Exam 2 Review<a class="headerlink" href="#classification-topics-exam-2-review" title="Link to this heading">#</a></h1>
 <section id="general">
-<h2>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.1. </span>General<a class="headerlink" href="#general" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>What is classification? How is it different than regression? Examples of classification.</p></li>
 <li><p>Predictions and prediction errors</p>
@@ -455,9 +455,9 @@
 </ul>
 </section>
 <section id="learning-algorithms-for-classification">
-<h2>Learning Algorithms for Classification<a class="headerlink" href="#learning-algorithms-for-classification" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.2. </span>Learning Algorithms for Classification<a class="headerlink" href="#learning-algorithms-for-classification" title="Link to this heading">#</a></h2>
 <section id="logistic-regression">
-<h3>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.2.1. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Why is it regression?</p></li>
 <li><p>How does it relate to Linear Regression?</p></li>
@@ -466,7 +466,7 @@
 </ul>
 </section>
 <section id="decision-trees">
-<h3>Decision Trees<a class="headerlink" href="#decision-trees" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.2.2. </span>Decision Trees<a class="headerlink" href="#decision-trees" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Anatomy of a tree: root, decision, and leaf nodes, branches</p></li>
 <li><p>How to read the results of a tree? e.g. given a tree with the sample data at each node, calculate accuracy.</p></li>
@@ -475,7 +475,7 @@
 </ul>
 </section>
 <section id="ensemble-methods">
-<h3>Ensemble Methods<a class="headerlink" href="#ensemble-methods" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.2.3. </span>Ensemble Methods<a class="headerlink" href="#ensemble-methods" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>How can ensembles of weak learners (small trees) be better than one big decision tree?</p></li>
 <li><p>Bias vs Variance</p></li>
@@ -483,7 +483,7 @@
 <li><p>Gradient Boosted Trees - high variance, low bias</p></li>
 </ul>
 <section id="random-forest">
-<h4>Random Forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">17.2.3.1. </span>Random Forest<a class="headerlink" href="#random-forest" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>What is it? What are some hyper-parameters?</p></li>
 <li><p>Basic overview of what happens in training.</p></li>
@@ -492,7 +492,7 @@
 </ul>
 </section>
 <section id="gradient-boosted-trees">
-<h4>Gradient Boosted Trees<a class="headerlink" href="#gradient-boosted-trees" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">17.2.3.2. </span>Gradient Boosted Trees<a class="headerlink" href="#gradient-boosted-trees" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>What is it? When to use?</p></li>
 <li><p>Basic overview of what happens in training.</p></li>
@@ -501,7 +501,7 @@
 </section>
 </section>
 <section id="k-nearest-neighbors-knn">
-<h3>K-Nearest Neighbors (KNN)<a class="headerlink" href="#k-nearest-neighbors-knn" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.2.4. </span>K-Nearest Neighbors (KNN)<a class="headerlink" href="#k-nearest-neighbors-knn" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>What is it? How does it work?</p></li>
 <li><p>What are the parameters? (None) What are the hyper-parameters?</p></li>
@@ -510,7 +510,7 @@
 </section>
 </section>
 <section id="clustering">
-<h2>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.3. </span>Clustering<a class="headerlink" href="#clustering" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>K-Means</p></li>
 <li><p>When would we use it? How does it relate to classification?</p></li>
@@ -519,9 +519,9 @@
 </ul>
 </section>
 <section id="pre-processing">
-<h2>Pre-processing<a class="headerlink" href="#pre-processing" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.4. </span>Pre-processing<a class="headerlink" href="#pre-processing" title="Link to this heading">#</a></h2>
 <section id="scaling">
-<h3>Scaling<a class="headerlink" href="#scaling" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.4.1. </span>Scaling<a class="headerlink" href="#scaling" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>StandardScaler, MinMaxScaler</p></li>
 <li><p>Which algorithms require that features be scaled?</p></li>
@@ -530,7 +530,7 @@
 </ul>
 </section>
 <section id="encoding">
-<h3>Encoding<a class="headerlink" href="#encoding" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.4.2. </span>Encoding<a class="headerlink" href="#encoding" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>When to use encoding</p></li>
 <li><p>Ordinal vs categorical vs numeric features</p></li>
@@ -539,7 +539,7 @@
 </section>
 </section>
 <section id="other-topics">
-<h2>Other Topics<a class="headerlink" href="#other-topics" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.5. </span>Other Topics<a class="headerlink" href="#other-topics" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Grid search, what is it and why do we use it?</p></li>
 <li><p>Cross validation, what is k-fold cross validation and how does it work?</p></li>
@@ -577,6 +577,15 @@
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="07_classification_exercises.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">15. </span>Classification and Clustering Exercises</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -594,25 +603,25 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">General</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">Learning Algorithms for Classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">Logistic Regression</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">Decision Trees</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">Ensemble Methods</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">Random Forest</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">Gradient Boosted Trees</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">17.1. General</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">17.2. Learning Algorithms for Classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-regression">17.2.1. Logistic Regression</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-trees">17.2.2. Decision Trees</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">17.2.3. Ensemble Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest">17.2.3.1. Random Forest</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">17.2.3.2. Gradient Boosted Trees</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn">K-Nearest Neighbors (KNN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn">17.2.4. K-Nearest Neighbors (KNN)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">Clustering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">Pre-processing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">Scaling</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">Encoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">17.3. Clustering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">17.4. Pre-processing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling">17.4.1. Scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoding">17.4.2. Encoding</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-topics">Other Topics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-topics">17.5. Other Topics</a></li>
 </ul>
   </nav></div>
 
