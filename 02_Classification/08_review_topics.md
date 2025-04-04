@@ -86,11 +86,11 @@
 What is the difference between classification and clustering?
 
 Which of the following is an example of ordinal discrete data?
- a. 'faculty', 'staff', 'students'
- b. 'high', 'low', 'medium', 'very high', 'very low'
- c. 1, 2.32, 2.98, 4.16, 7.73, 8.54
- d. 'data science', 'math', 'statistics', 'sociology'
- e. none of the above
+    a.  'faculty', 'staff', 'students'
+    b.  'high', 'low', 'medium', 'very high', 'very low'
+    c.  1, 2.32, 2.98, 4.16, 7.73, 8.54
+    d.  'data science', 'math', 'statistics', 'sociology'
+    e.  none of the above
 
  What models can be used for multi-class prediction?
  a. Random Forest
