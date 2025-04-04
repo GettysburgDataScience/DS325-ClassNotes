@@ -86,53 +86,53 @@
 What is the difference between classification and clustering?
 
 Which of the following is an example of ordinal discrete data?
-    a.  'faculty', 'staff', 'students'
-    b.  'high', 'low', 'medium', 'very high', 'very low'
-    c.  1, 2.32, 2.98, 4.16, 7.73, 8.54
-    d.  'data science', 'math', 'statistics', 'sociology'
-    e.  none of the above
+ - a.  'faculty', 'staff', 'students'
+ - b.  'high', 'low', 'medium', 'very high', 'very low'
+ - c.  1, 2.32, 2.98, 4.16, 7.73, 8.54
+ - d.  'data science', 'math', 'statistics', 'sociology'
+ - e.  none of the above
 
  What models can be used for multi-class prediction?
- a. Random Forest
- b. Logistic Regression
- c. Decision Tree
- d. A and B
- e. all of the above
+  - a. Random Forest
+  - b. Logistic Regression
+  - c. Decision Tree
+  - d. A and B
+  - e. all of the above
 
 ***"Medium"***
 In KNN, what happens if you set the K value of your model too low?
- a. the code won't run
- b. the model will under-fit the data
- c. the model will over-fit the data
- d. the model will predict mostly incorrect labels
- e. none of the above
+  - a. the code won't run
+  - b. the model will under-fit the data
+  - c. the model will over-fit the data
+  - d. the model will predict mostly incorrect labels
+  - e. none of the above
 
 How does KNN make a prediction?
 
 If a decision tree is overfitting, which of the following might fix the issue?
- a. increasing the max_depth hyper-parameter
- b. decreasing the max_depth hyper-parameter
- c. using a larger training data set
- d. applying Ridge regularization
- e. none of the above
+  - a. increasing the max_depth hyper-parameter
+  - b. decreasing the max_depth hyper-parameter
+  - c. using a larger training data set
+  - d. applying Ridge regularization
+  - e. none of the above
 
 Suppose you develop a classifier that detects mechanical faults in bridges based on a set of sensor measurements. Which classification metric is most applicable to this problem?
 
 ***"Hard"***
 
 Why/when is it recommended to apply StandardScaler before applying PCA?
- a. PCA does not handle integer values.
- b. to ensure features with large numeric ranges do not dominate the principal components
- c. normalizing data reduces run-time of PCA
- d. normalization should be used only when there are significant outliers.
- e. none of the above
+  - a. PCA does not handle integer values.
+  - b. to ensure features with large numeric ranges do not dominate the principal components
+  - c. normalizing data reduces run-time of PCA
+  - d. normalization should be used only when there are significant outliers.
+  - e. none of the above
 
 Why can Euclidean distance become unreliable as the number of dimensions/features increase?
- a. Euclidean distance becomes negative in high dimensions
- b. all points become nearly equidistant from eachother
- c. the algorithm requires more labeled data in high dimensions
- d. irrelevant features dominate the distance calculation
- e. none of the above
+  - a. Euclidean distance becomes negative in high dimensions
+  - b. all points become nearly equidistant from eachother
+  - c. the algorithm requires more labeled data in high dimensions
+  - d. irrelevant features dominate the distance calculation
+  - e. none of the above
 
 
 You are optimizing a decision tree using GridSearchCV with 5-fold cross validation. You define the following parameter candidates.
@@ -141,15 +141,15 @@ You are optimizing a decision tree using GridSearchCV with 5-fold cross validati
     min_samples = [5, 10]
 
 How many times are models fit for this search?
-a. 5
-b. 6
-c. 25
-d. 30
-e. 150
+ - a. 5
+ - b. 6
+ - c. 25
+ - d. 30
+ - e. 150
 
 Which of the following is TRUE regarding K-Means Clustering?
-a. K-means always converges to the globally optimal solution
-b. The algorithm performs well on non-linearly separable or arbitrarily shaped clusters
-c. Increasing K generally improves fit
-d. K-means struggles with clusters of varying densities and sizes, potentially leading to poor clustering results
-e. None of the above
+ - a. K-means always converges to the globally optimal solution
+ - b. The algorithm performs well on non-linearly separable or arbitrarily shaped clusters
+ - c. Increasing K generally improves fit
+ - d. K-means struggles with clusters of varying densities and sizes, potentially leading to poor clustering results
+ - e. None of the above
