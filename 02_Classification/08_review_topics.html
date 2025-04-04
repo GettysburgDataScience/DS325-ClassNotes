@@ -216,6 +216,7 @@
 <li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">17. Classification Topics - Exam 2 Review</a></li>
+
 </ul>
 
     </div>
@@ -408,12 +409,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">17. Classification Topics - Exam 2 Review</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">17.1. General</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">17.2. Learning Algorithms for Classification</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">17.3. Clustering</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">17.4. Pre-processing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-topics">17.5. Other Topics</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions-from-students-and-some-from-prof-roth">18. Practice Questions (from students and some from Prof Roth)</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -527,6 +533,68 @@
 </ul>
 </section>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="practice-questions-from-students-and-some-from-prof-roth">
+<h1><span class="section-number">18. </span>Practice Questions (from students and some from Prof Roth)<a class="headerlink" href="#practice-questions-from-students-and-some-from-prof-roth" title="Link to this heading">#</a></h1>
+<p><em><strong>“Easy”</strong></em>
+What is the difference between classification and clustering?</p>
+<p>Which of the following is an example of ordinal discrete data?
+a. ‘faculty’, ‘staff’, ‘students’
+b. ‘high’, ‘low’, ‘medium’, ‘very high’, ‘very low’
+c. 1, 2.32, 2.98, 4.16, 7.73, 8.54
+d. ‘data science’, ‘math’, ‘statistics’, ‘sociology’
+e. none of the above</p>
+<p>What models can be used for multi-class prediction?
+a. Random Forest
+b. Logistic Regression
+c. Decision Tree
+d. A and B
+e. all of the above</p>
+<p><em><strong>“Medium”</strong></em>
+In KNN, what happens if you set the K value of your model too low?
+a. the code won’t run
+b. the model will under-fit the data
+c. the model will over-fit the data
+d. the model will predict mostly incorrect labels
+e. none of the above</p>
+<p>How does KNN make a prediction?</p>
+<p>If a decision tree is overfitting, which of the following might fix the issue?
+a. increasing the max_depth hyper-parameter
+b. decreasing the max_depth hyper-parameter
+c. using a larger training data set
+d. applying Ridge regularization
+e. none of the above</p>
+<p>Suppose you develop a classifier that detects mechanical faults in bridges based on a set of sensor measurements. Which classification metric is most applicable to this problem?</p>
+<p><em><strong>“Hard”</strong></em></p>
+<p>Why/when is it recommended to apply StandardScaler before applying PCA?
+a. PCA does not handle integer values.
+b. to ensure features with large numeric ranges do not dominate the principal components
+c. normalizing data reduces run-time of PCA
+d. normalization should be used only when there are significant outliers.
+e. none of the above</p>
+<p>Why can Euclidean distance become unreliable as the number of dimensions/features increase?
+a. Euclidean distance becomes negative in high dimensions
+b. all points become nearly equidistant from eachother
+c. the algorithm requires more labeled data in high dimensions
+d. irrelevant features dominate the distance calculation
+e. none of the above</p>
+<p>You are optimizing a decision tree using GridSearchCV with 5-fold cross validation. You define the following parameter candidates.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>max_depth = [3, 6, 9]
+min_samples = [5, 10]
+</pre></div>
+</div>
+<p>How many times are models fit for this search?
+a. 5
+b. 6
+c. 25
+d. 30
+e. 150</p>
+<p>Which of the following is TRUE regarding K-Means Clustering?
+a. K-means always converges to the globally optimal solution
+b. The algorithm performs well on non-linearly separable or arbitrarily shaped clusters
+c. Increasing K generally improves fit
+d. K-means struggles with clusters of varying densities and sizes, potentially leading to poor clustering results
+e. None of the above</p>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -584,12 +652,17 @@
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">17. Classification Topics - Exam 2 Review</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#general">17.1. General</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-algorithms-for-classification">17.2. Learning Algorithms for Classification</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering">17.3. Clustering</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-processing">17.4. Pre-processing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-topics">17.5. Other Topics</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-questions-from-students-and-some-from-prof-roth">18. Practice Questions (from students and some from Prof Roth)</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
