@@ -29,6 +29,8 @@ parts:
     - file: 02_Classification/06_kmeans
     - file: 02_Classification/07_classification_exercises
     - file: 02_Classification/08_review_topics
+    - file: 02_Classification/09_modeling_process
+
 
 
 
