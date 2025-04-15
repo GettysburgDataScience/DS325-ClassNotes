@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>DS325 - Introduction to artificial Neural Networks &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=fb9458d3" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_NN/01_intro_intuition';</script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/searchtools.js?v=63a53a7d"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/language_data.js?v=d4673a71"></script>
+    <script src="../_static/copybutton_funcs.js?v=776a791e"></script>
+    <script src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/bootstrap.js?v=7583a70d"></script>
+    <script src="../_static/scripts/fontawesome.js?v=9b125980"></script>
+    <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to DS325 Applied Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">5. Polynomial Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/05_reading_review.html">6. Reading Assignments Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/06_exam_review.html">7. Exam 1 Review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/01_classification_intro.html">8. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/02_logistic_regression.html">9. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05b_pca_examples.html">13. PCA: Examples and Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/06_kmeans.html">14. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/09_modeling_process.html">19. Modeling process review</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F03_NN/01_intro_intuition.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/03_NN/01_intro_intuition.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>DS325 - Introduction to artificial Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DS325 - Introduction to artificial Neural Networks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-long-data-story-using-nns-10-15-mins">A long data story using NNs (10-15 mins)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tensorflow-nn-playground">The TensorFlow NN Playground</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="ds325-introduction-to-artificial-neural-networks">
+<h1>DS325 - Introduction to artificial Neural Networks<a class="headerlink" href="#ds325-introduction-to-artificial-neural-networks" title="Link to this heading">#</a></h1>
+<p>Class this week:</p>
+<ul class="simple">
+<li><p>Introduction to Neural Networks</p></li>
+<li><p>Multilayer Perceptrons applied to previous datasets</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="a-long-data-story-using-nns-10-15-mins">
+<h1>A long data story using NNs (10-15 mins)<a class="headerlink" href="#a-long-data-story-using-nns-10-15-mins" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://labs.waterdata.usgs.gov/visualizations/temperature-prediction/index.html?utm_source=reddit&amp;amp;utm_medium=dataisbeautiful&amp;amp;utm_campaign=bees#/modeling">USGS NN data story</a></p>
+<p>Lecture slides on NNs (10-15 mins)</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=aircAruvnKk">https://www.youtube.com/watch?v=aircAruvnKk</a> (Visualizing NNs - first 13 mins)</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-tensorflow-nn-playground">
+<h1>The TensorFlow NN Playground<a class="headerlink" href="#the-tensorflow-nn-playground" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://playground.tensorflow.org">TensorFlow NN Playground</a></p>
+<p>The TensorFlow Playground <a class="reference external" href="http://playground.tensorflow.org/">http://playground.tensorflow.org/</a> is a network simulator useful to get an idea of how it all works. Take some time to explore this tool until you have a better idea of how NNs work.</p>
+<ul class="simple">
+<li><p>First: options:  Reset/Run/Step
+** Epoch (solver uses Gradient Descent)
+** Learning rate (higher value means faster convergence but potentially more error)
+** Activation Function
+** Regularization of data and Rate (alpha)
+** Problem type (classification or regression)</p></li>
+<li><p>Second:  Choose your dataset and features
+** can modify train/test split, how noisy/spread-out the data is, and the batch size (used for first forward pass through network)</p></li>
+<li><p>Third:  Build your network- choose the number of hidden layers, and how many neurons per layer; since this is a binary classifier, there should be 2 output neurons</p></li>
+<li><p>Examine the loss as a function of epoch, the goal is to minimize the loss over each epoch when arriving at a final solution</p></li>
+<li><p>Examine the connections between neurons, and the resulting output boundaries:  blue are positive weights, orange are negative weights, and magnitude of the weight is indicated by the thickness of the connection.</p></li>
+</ul>
+<p>To explore, try the following:</p>
+<ul class="simple">
+<li><p>Click the <strong>Run</strong> button (top left), and notice how quickly it finds a good solution. Try replacing the <strong>tanh</strong> activation function with the <strong>ReLU</strong>. What do you notice about the boundaries of the final solution?</p></li>
+</ul>
+<p>Run it several times, you’ll notice it can get stuck in a local minima.</p>
+<p>Keep only 2 hidden layers of neurons. You’ll notice that for some datasets, the model is not capable of finding a good solution. The model has too few parameters and underfits the training set.</p>
+<p>Select a different dataset and repeat the above.</p>
+<p>Your turn!  Try to play with some of the model parameters</p>
+<ul class="simple">
+<li><p>number of features</p></li>
+<li><p>number of hidden layer neurons</p></li>
+<li><p>Activation</p></li>
+<li><p>Regularization</p></li>
+<li><p>try adjusting individual neuron weights and see how the model responds</p></li>
+</ul>
+<p>#Playground Exercises (Due at beginning of next class):</p>
+<p><strong>Instructions</strong></p>
+<p>Our goal with the following exercises will be to <em>create networks that can completely separate the data with the least complexity possible.</em>  In addition to the number of features, layers, and neurons, you should feel free to modify the activation function, learning rate, and regularization in your experimentation.</p>
+<p>The purpose of this activity is to explore NNs and get an intuitive feeling for how a NN works.  You may complete this activity by submitting the details of your solutions to the following questions to Moodle by the beginning of our next class period.  For each exercise and model, record the learning rate, activation function, regularization penalty, input features and network architecture (number of neurons in each layer), along with the network complexity defined above.  <strong>Presenting your data in tabular form is preferred.</strong></p>
+<p><strong>For each of the splits in exercises 1 and 2 (8 total), the fewest epochs for the least complex model that results in a cleanly separated (2D) dataset gets +1 Mastery Q points.  Mastery points are added onto your homework score at the end of the term</strong> (In order to qualify, your model and solution have to be reproducible, so be sure and screenshot your network parameters and solution)</p>
+<hr class="docutils" />
+<p>Let us define the <strong>complexity</strong> (<strong>Z</strong>) of a playground network with <em>d</em>-hidden layers, and <em>n</em>-neurons in the <em>i</em>-th layer, as:<br />
+\begin{gather}
+Z = (n_{feat} \times n_1) + \sum_{i=2}^d(n_{i+1} \times n_i)
+\end{gather}</p>
+<p><em>This definition requires only 1 hidden layer, which will encompass the most simple models, though you may find it difficult to solve each problem with i=1.</em></p>
+<p><strong>hint</strong> <em>In optimizing your network architecture, start with more layers and neurons than you think you need and examine the weights between layers.  Those weights which are low represent less important connections.  As your network’s complexity exceeds what is necessary, some neurons may become inactive showing that there may be too many neurons in that layer.</em></p>
+<p><strong>Exercises</strong></p>
+<ol class="arabic simple">
+<li><p>Using a 70/30 train/test split, what is the simplest network architecture (in terms of the complexity defined above) that can completely separate each dataset?  Record the number of features, neurons, and layers (the network architecture) for each model, and compute your model’s complexity.  At what epoch does the model completely separate the data?</p></li>
+<li><p>Repeat exercise 1 with a 50/50 train/test split, and again with a 90/10 train/test split.   Specifically discuss any significant differences in resulting model complexity and epoch of solution.</p></li>
+<li><p>Using a 70/30 split, explore bivariate models only to find the least complex model that can classify each data set (2 inputs, 2 outputs). Which 2 features and which architecture produce the best model for each data set?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># example</span>
+<span class="c1"># start with dataset 2 (4-corners), x1 and x2 as inputs, (3,2) hidden layers</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="arabic simple">
+<li><p>In dataset 2 with a 70% ratio of training to test data, I was able to separate the dataset in about 250 epochs. This used features X1 and X2, with 2 hidden layers with 3 neurons in each. This model had a complexity of 15, (2<em>6 + (3</em>3)).</p></li>
+<li><p>Using a 50% split, the model still worked but took as little longer than 250 epochs closer to 500. The 90% split was different it was only able to separate the data about 50% of the time, when it did it it only took about 200 epochs. Adding an extra neuron in the first layer made the model much more consistent and it split the data in less than 200 epochs, this raises the complexity to 20.</p></li>
+<li><p>Dataset 1, using X1^2 and X2^2 and 1 neuron in each layer sorts the data in 100 epochs. Complexity of 4.
+Dataset 2, using X1X2 and sin(X1) and 1 neuron in each layer sorts the data in 150 epochs. Complexity of 4.
+Dataset 3, using X1 and X2, and 1 neuron in each layer, sorts the data in 150 epochs. Complexity of 4.
+Dataset 4, I was unable to find a solution to correctly separate the data. While all the solutions above used Tanh activation and no regularization; modifying these did not help me solve the 4th set. By using more than 2 features (all except X1^2 and X2^2) and 6 neurons in each layer I could get it to split fairly well but there was still about .2 test loss.</p></li>
+</ol>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./03_NN"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DS325 - Introduction to artificial Neural Networks</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-long-data-story-using-nns-10-15-mins">A long data story using NNs (10-15 mins)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tensorflow-nn-playground">The TensorFlow NN Playground</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eatai Roth, Gettysburg College
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
