@@ -30,6 +30,11 @@ parts:
     - file: 02_Classification/07_classification_exercises
     - file: 02_Classification/08_review_topics
     - file: 02_Classification/09_modeling_process
+  - caption: Neural Networks
+    numbered: True
+    chapters:
+    - file: 03_NN/01_intro_intuition
+
 
 
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>DS325 - Introduction to artificial Neural Networks &#8212; My sample book</title>
+    <title>20. Neural Networks, Intro and Intuition &#8212; My sample book</title>
   
   
   
@@ -87,6 +87,7 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="19. Modeling process review" href="../02_Classification/09_modeling_process.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -137,8 +138,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -219,6 +218,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../02_Classification/08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../02_Classification/09_modeling_process.html">19. Modeling process review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">20. Neural Networks, Intro and Intuition</a></li>
+
+
 </ul>
 
     </div>
@@ -401,7 +406,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>DS325 - Introduction to artificial Neural Networks</h1>
+    <h1>Neural Networks, Intro and Intuition</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -411,9 +416,9 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DS325 - Introduction to artificial Neural Networks</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-long-data-story-using-nns-10-15-mins">A long data story using NNs (10-15 mins)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tensorflow-nn-playground">The TensorFlow NN Playground</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">20. Neural Networks, Intro and Intuition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-long-data-story-using-nns-10-15-mins">21. A long data story using NNs (10-15 mins)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tensorflow-nn-playground">22. The TensorFlow NN Playground</a></li>
 </ul>
 
             </nav>
@@ -426,22 +431,21 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="ds325-introduction-to-artificial-neural-networks">
-<h1>DS325 - Introduction to artificial Neural Networks<a class="headerlink" href="#ds325-introduction-to-artificial-neural-networks" title="Link to this heading">#</a></h1>
-<p>Class this week:</p>
-<ul class="simple">
-<li><p>Introduction to Neural Networks</p></li>
-<li><p>Multilayer Perceptrons applied to previous datasets</p></li>
-</ul>
+  <section class="tex2jax_ignore mathjax_ignore" id="neural-networks-intro-and-intuition">
+<h1><span class="section-number">20. </span>Neural Networks, Intro and Intuition<a class="headerlink" href="#neural-networks-intro-and-intuition" title="Link to this heading">#</a></h1>
+<p>Some resources to learn about Neural Networks:</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=aircAruvnKk&amp;amp;ab_channel=3Blue1Brown">But what is a Neural Network? - 3Blue1Brown</a></p>
+<p>Aurelion Geron, <em>Hands-On Machine Learning</em>, Chapter 10</p>
+<p><strong>The lecture below is courtesy of Prof Ryan Johnson.</strong></p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="a-long-data-story-using-nns-10-15-mins">
-<h1>A long data story using NNs (10-15 mins)<a class="headerlink" href="#a-long-data-story-using-nns-10-15-mins" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">21. </span>A long data story using NNs (10-15 mins)<a class="headerlink" href="#a-long-data-story-using-nns-10-15-mins" title="Link to this heading">#</a></h1>
 <p><a class="reference external" href="https://labs.waterdata.usgs.gov/visualizations/temperature-prediction/index.html?utm_source=reddit&amp;amp;utm_medium=dataisbeautiful&amp;amp;utm_campaign=bees#/modeling">USGS NN data story</a></p>
 <p>Lecture slides on NNs (10-15 mins)</p>
 <p><a class="reference external" href="https://www.youtube.com/watch?v=aircAruvnKk">https://www.youtube.com/watch?v=aircAruvnKk</a> (Visualizing NNs - first 13 mins)</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="the-tensorflow-nn-playground">
-<h1>The TensorFlow NN Playground<a class="headerlink" href="#the-tensorflow-nn-playground" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">22. </span>The TensorFlow NN Playground<a class="headerlink" href="#the-tensorflow-nn-playground" title="Link to this heading">#</a></h1>
 <p><a class="reference external" href="https://playground.tensorflow.org">TensorFlow NN Playground</a></p>
 <p>The TensorFlow Playground <a class="reference external" href="http://playground.tensorflow.org/">http://playground.tensorflow.org/</a> is a network simulator useful to get an idea of how it all works. Take some time to explore this tool until you have a better idea of how NNs work.</p>
 <ul class="simple">
@@ -538,6 +542,15 @@ Dataset 4, I was unable to find a solution to correctly separate the data. While
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../02_Classification/09_modeling_process.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">19. </span>Modeling process review</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -555,9 +568,9 @@ Dataset 4, I was unable to find a solution to correctly separate the data. While
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">DS325 - Introduction to artificial Neural Networks</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-long-data-story-using-nns-10-15-mins">A long data story using NNs (10-15 mins)</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tensorflow-nn-playground">The TensorFlow NN Playground</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">20. Neural Networks, Intro and Intuition</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-long-data-story-using-nns-10-15-mins">21. A long data story using NNs (10-15 mins)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-tensorflow-nn-playground">22. The TensorFlow NN Playground</a></li>
 </ul>
 
   </nav></div>
