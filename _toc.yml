@@ -34,6 +34,7 @@ parts:
     numbered: True
     chapters:
     - file: 03_NN/01_intro_intuition
+    - file: 03_NN/02_NN_example
 
 
 
