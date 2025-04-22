@@ -1,0 +1,1105 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>21. Neural Networks with Keras &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=fb9458d3" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_NN/02_NN_example';</script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/searchtools.js?v=63a53a7d"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/language_data.js?v=d4673a71"></script>
+    <script src="../_static/copybutton_funcs.js?v=776a791e"></script>
+    <script src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/bootstrap.js?v=7583a70d"></script>
+    <script src="../_static/scripts/fontawesome.js?v=9b125980"></script>
+    <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="20. Neural Networks, Intro and Intuition" href="01_intro_intuition.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to DS325 Applied Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">5. Polynomial Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/05_reading_review.html">6. Reading Assignments Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/06_exam_review.html">7. Exam 1 Review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/01_classification_intro.html">8. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/02_logistic_regression.html">9. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05b_pca_examples.html">13. PCA: Examples and Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/06_kmeans.html">14. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/09_modeling_process.html">19. Modeling process review</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">21. Neural Networks with Keras</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F03_NN/02_NN_example.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/03_NN/02_NN_example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Neural Networks with Keras</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-neural-networks">21.1. What are Neural Networks?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-neural-networks-over-other-models-the-pros">21.2. Why Neural Networks over other models? The PROs.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-neural-networks-the-cons">21.3. Why not Neural Networks? The CONs.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-anatomy-and-the-multi-layer-perceptron">21.4. Neural Network Anatomy and The Multi-Layer Perceptron</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">21.4.1. Activation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron-the-vanilla-nn">21.4.2. Multi-Layer Perceptron (the vanilla NN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-and-hyper-parameters">21.4.3. Architecture and Hyper-parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fashion-mnist-classifying-articles-of-clothing">21.5. Example: Fashion-MNIST, classifying articles of clothing</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="neural-networks-with-keras">
+<h1><span class="section-number">21. </span>Neural Networks with Keras<a class="headerlink" href="#neural-networks-with-keras" title="Link to this heading">#</a></h1>
+<p>First things first, I’m a realist…</p>
+<p>I added instructions to install Tensorflow and Keras (it doesn’t come pre-packaged with Anaconda). I’m assuming some have yet to do that, and these packages take time to install.</p>
+<p>Try to run the code block below. If it gives an error that Tensorflow or Keras aren’t found, you’ll need to install those packages. Uncomment the first line in the code block below and run it again.</p>
+<p>While that’s happening, we’ll go over some background and vocabulary relating to neural networks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!conda install tensorflow keras</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fashion_mnist</span>
+<span class="c1"># Load the Fashion-MNIST dataset</span>
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">fashion_mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#!conda install tensorflow keras</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fashion_mnist</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Load the Fashion-MNIST dataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">fashion_mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># DO NOT EDIT. Generated by api_gen.sh</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTypePolicy</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">FloatDTypePolicy</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;DO NOT EDIT.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> </span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> This file was autogenerated. Do not edit it by hand,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> since your modifications would be overwritten.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">activations</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">applications</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">backend</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">activations</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;DO NOT EDIT.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> </span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> This file was autogenerated. Do not edit it by hand,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> since your modifications would be overwritten.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">deserialize</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">activations</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">applications</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">backend</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">activations</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">types</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">celu</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">elu</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">exponential</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">activations</span><span class="o">/</span><span class="n">activations</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">backend</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">ops</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.dtypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">result_type</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.keras_tensor</span><span class="w"> </span><span class="kn">import</span> <span class="n">KerasTensor</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.keras_tensor</span><span class="w"> </span><span class="kn">import</span> <span class="n">any_symbolic_tensors</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">backend_utils</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.dtypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">result_type</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutocastScope</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span> <span class="k">as</span> <span class="n">KerasVariable</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">dtypes</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">standardize_dtype</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">BOOL_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;bool&quot;</span><span class="p">,)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">INT_TYPES</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="s2">&quot;uint8&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="s2">&quot;uint16&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="s2">&quot;int64&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">variables</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.stateless_scope</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_stateless_scope</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.stateless_scope</span><span class="w"> </span><span class="kn">import</span> <span class="n">in_stateless_scope</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.module_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.naming</span><span class="w"> </span><span class="kn">import</span> <span class="n">auto_name</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">class</span><span class="w"> </span><span class="nc">Variable</span><span class="p">:</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.audio_dataset_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">audio_dataset_from_directory</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.dataset_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">split_dataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_file</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">audio_dataset_utils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_utils</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.module_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.module_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensorflow_io</span> <span class="k">as</span> <span class="n">tfio</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">dataset_utils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing.pool</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPool</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">tree</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">io_utils</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree.tree_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">assert_same_paths</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree.tree_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">assert_same_structure</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree.tree_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">flatten</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">tree_api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.module_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">optree</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">if</span> <span class="n">optree</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">optree_impl</span> <span class="k">as</span> <span class="n">tree_impl</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">elif</span> <span class="n">dmtree</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">dmtree_impl</span> <span class="k">as</span> <span class="n">tree_impl</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">optree_impl</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">13</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Register backend-specific node classes</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">if</span> <span class="n">backend</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;tensorflow&quot;</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">13</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.trackable.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListWrapper</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.trackable.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">_DictWrapper</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">optree</span><span class="o">.</span><span class="n">register_pytree_node</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="n">ListWrapper</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>         <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>         <span class="k">lambda</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">children</span><span class="p">:</span> <span class="n">ListWrapper</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">children</span><span class="p">)),</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>         <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;keras&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;tensorflow&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="what-are-neural-networks">
+<h2><span class="section-number">21.1. </span>What are Neural Networks?<a class="headerlink" href="#what-are-neural-networks" title="Link to this heading">#</a></h2>
+<p>Neural networks are machine learning models (loosely) inspired by the structure of the human brain. Neural networks can be implemented for regression and classification tasks and are widely used in complex tasks such as image and speech processing, language translation, time-series modeling and forecasting, and anomaly detection. There are numerous variants of neural networks. Some notable examples:</p>
+<ul class="simple">
+<li><p>Multi-layer Percpetron (MLP) - the vanilla neural network we’ll use today</p></li>
+<li><p>Convolutional Neural Network (CNN) - are largely used in image and video processing, but can also be applied to time-series and forecasting problems</p></li>
+<li><p>Recurrent Neural Network (RNN) - used for time-series modeling and forecasting</p></li>
+<li><p>Long- Short-Term Memory Neural Network (LSTM) - an upgrade of RNN. This was the cutting edge of natural language processing before transformers (as in Generative Pre-trained Transformer) ushered in the age of LMMs.</p></li>
+<li><p>Generative Adversarial Networks (GANs) - used for generating novel data (i.e. a genAI model) and fraud detection. GANs comprise parallel neural networks, a generator (creating fake instances of data) and discriminator (trained to detect real data from fake).</p></li>
+</ul>
+</section>
+<section id="why-neural-networks-over-other-models-the-pros">
+<h2><span class="section-number">21.2. </span>Why Neural Networks over other models? The PROs.<a class="headerlink" href="#why-neural-networks-over-other-models-the-pros" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Ability to model complex nonlinear relationships: Neural networks can automatically learn and represent intricate, nonlinear patterns between inputs and outputs, which many traditional models (like linear regression) cannot do without extensive manual feature engineering.</p></li>
+<li><p>Handling of high-dimensional and unstructured data: NNs excel at processing large-scale, high-dimensional data (e.g. images, audio, and text) where other models often struggle.</p></li>
+<li><p>Feature extraction and automatic feature engineering: NNs ‘discover’ and construct relevant features from raw data, reducing the need for manual intervention and domain expertise in feature selection.</p></li>
+<li><p>Adaptability in deployment: NNs adapt to new data and improve performance over time, making them suitable for dynamic, real-world applications.</p></li>
+</ul>
+</section>
+<section id="why-not-neural-networks-the-cons">
+<h2><span class="section-number">21.3. </span>Why not Neural Networks? The CONs.<a class="headerlink" href="#why-not-neural-networks-the-cons" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Require large amounts of data: NNs have many many parameters, so they typically need thousands to millions of labeled examples to perform well. For smaller data sets, other ML models are more suitable.</p></li>
+<li><p>Lack interpretability (“black box”): For most NNs (especially deep NNs), we cannot gleen meaning from the parameters.</p></li>
+<li><p>High computational cost: Training neural networks, especially deep NNs, demands significant computational resources (powerful GPUs/TPUs) and can take much longer than training traditional models. Many such models are trained on remote cloud computing servers (pay per compute).</p></li>
+<li><p>Risk of overfitting: Neural networks, with their large number of parameters, are prone to overfitting if not properly regularized, especially when trained on small or noisy datasets.</p></li>
+<li><p>Complexity in development and tuning: Designing, training, and tuning neural networks (e.g., choosing architecture, hyperparameters) is often more complex and time-consuming than working with traditional models, which generally have fewer parameters and simpler structures.</p></li>
+</ul>
+</section>
+<section id="neural-network-anatomy-and-the-multi-layer-perceptron">
+<h2><span class="section-number">21.4. </span>Neural Network Anatomy and The Multi-Layer Perceptron<a class="headerlink" href="#neural-network-anatomy-and-the-multi-layer-perceptron" title="Link to this heading">#</a></h2>
+<p>The term <em>perceptron</em> has two common usages: a single artificial neuron or several artificial neurons arranged in a single layer. Either way, a perceptron is a sort of building block for more complex neural networks.</p>
+<p>First, let’s consider the single ‘neuron’ interpretation.</p>
+<p><img alt="perceptron, by Adam Weaver" src="../_images/perceptron.png" /></p>
+<p>In the diagram above, each input feature is assigned a weight (parameters) and a weighted sum of features and a bias term are fed through some non-linear activation function. The diagram above can be represented by the following equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = f(b + w_0 \cdot x_0 + w_1 \cdot x_1+ w_2 \cdot x_2 + w_3 \cdot x_3)
+\]</div>
+<section id="activation-functions">
+<h3><span class="section-number">21.4.1. </span>Activation Functions<a class="headerlink" href="#activation-functions" title="Link to this heading">#</a></h3>
+<p>Every perceptron that comprises a neural network has some activation function. Activiation functions are non-linear and without them, a neural network (regardless of size) could be reduced to a single linear neuron. These activation functions make it that for any given region of the feature space, only some neurons will participate and others will be dormant. So the feature space is parsed by different subsets of neurons.</p>
+<p>Some example activation functions are:</p>
+<ul class="simple">
+<li><p>Heaviside function - step function</p></li>
+<li><p>Sigmoid function - same as logit function from logistic regression</p></li>
+<li><p>Rectifying Linear Unit (ReLu) - linear for positive values and zero otherwise. This is the most common activation function.</p></li>
+<li><p>Tanh - hyperbolic tangent function, similar to sigmoid but ranges -1 to 1.</p></li>
+</ul>
+</section>
+<section id="multi-layer-perceptron-the-vanilla-nn">
+<h3><span class="section-number">21.4.2. </span>Multi-Layer Perceptron (the vanilla NN)<a class="headerlink" href="#multi-layer-perceptron-the-vanilla-nn" title="Link to this heading">#</a></h3>
+<p><img alt="MLP, Kishgore NG" src="../_images/MLP.jpeg" /></p>
+<p>A MLP comprises layers of perceptrons and each layer may itself contain numerous perceptrons. In this diagram, every neuron in one layer projects onto every neuron in the subsequent layer. These are called <em>dense</em> layers.</p>
+<p>Generally, in densely connected NNs, each perceptron in a layer is the same (same number of parameters and same activation function).</p>
+<p>Glossary:</p>
+<ul class="simple">
+<li><p>Input layer - This layer accepts the features</p></li>
+<li><p>Hidden layer - layers of perceptrons between input and output. <em>Deep</em> Neural Networks refer to NNs with many hidden layers. In the past, ‘many’ meant more than 3, but today, we have NNs with hundreds or thousands of layers. Deep is subjective and changes as technology improves.</p></li>
+<li><p>Output layer - the layer where predictions are made</p></li>
+<li><p>For regression, the output layer will have a single neuron for each predicted value (often one)</p></li>
+<li><p>For binary classification, the output layer may have one or two neurons.</p></li>
+<li><p>For multi-class classification, the output layer will have as many neurons as there are classes.</p></li>
+</ul>
+</section>
+<section id="architecture-and-hyper-parameters">
+<h3><span class="section-number">21.4.3. </span>Architecture and Hyper-parameters<a class="headerlink" href="#architecture-and-hyper-parameters" title="Link to this heading">#</a></h3>
+<p>When we first create the MLP, we have to decide on the architecture (how many layers, how many neurons per layer, activation functions, etc) and the hyper-parameters (regularization, batch size, epochs).</p>
+<p>We haven’t had to worry about training time and computational demands with the models we’ve used thus far, but NN’s complexity make these issues non-trivial.</p>
+<p>In fitting, we can adjust two hyper-parameters that govern learning: learning rate, batch size, and number of epochs.</p>
+<ul class="simple">
+<li><p><em>Learning Rate</em> - determines how much the parameters are adjusted at each update</p></li>
+<li><p><em>Batch</em> - a subset of the training data. The training data set is partitioned into batches and the parameters are updated after each batch is processed.</p></li>
+<li><p><em>Epoch</em> - Once through the entire training data. The training algorithm iterates through the entire training data set numerous times, each is an epoch.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Batch Size</p></th>
+<th class="head"><p>Training Speed</p></th>
+<th class="head"><p>Memory Usage</p></th>
+<th class="head"><p>Generalization</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Large</p></td>
+<td><p>Faster</p></td>
+<td><p>Higher</p></td>
+<td><p>Risk of Overfitting</p></td>
+</tr>
+<tr class="row-odd"><td><p>Small</p></td>
+<td><p>Slower</p></td>
+<td><p>Lower</p></td>
+<td><p>Regularized</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><em>Rule of thumb</em>: If we increase batch size, we should also increase learning rate.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">keras</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Flatten</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">accuracy_score</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="example-fashion-mnist-classifying-articles-of-clothing">
+<h2><span class="section-number">21.5. </span>Example: Fashion-MNIST, classifying articles of clothing<a class="headerlink" href="#example-fashion-mnist-classifying-articles-of-clothing" title="Link to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://keras.io/api/datasets/fashion_mnist/">Fashion-MNIST datase</a> comprises 60,000 28x28 pixel, gray-scale images of clothing items from one of the following categories.</p>
+<ul class="simple">
+<li><p>0	T-shirt/top</p></li>
+<li><p>1	Trouser</p></li>
+<li><p>2	Pullover</p></li>
+<li><p>3	Dress</p></li>
+<li><p>4	Coat</p></li>
+<li><p>5	Sandal</p></li>
+<li><p>6	Shirt</p></li>
+<li><p>7	Sneaker</p></li>
+<li><p>8	Bag</p></li>
+<li><p>9	Ankle boot</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_train</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(60000, 28, 28)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_samples</span> <span class="o">=</span> <span class="mi">25</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_samples</span><span class="p">):</span>
+    <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="mi">5</span><span class="p">),</span> <span class="n">k</span><span class="o">%</span><span class="k">5</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_train</span><span class="p">[</span><span class="n">k</span><span class="p">,:,:]</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4e116f33c824830a3ce40759bb5d0a5b022144c3361cba83b65488d49c34ad1b.png" src="../_images/4e116f33c824830a3ce40759bb5d0a5b022144c3361cba83b65488d49c34ad1b.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalize the data, pixel data is 0-255 (8-bit) but we want 0-1</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span> <span class="o">/</span> <span class="mf">255.0</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span> <span class="o">/</span> <span class="mf">255.0</span>
+
+<span class="c1"># Create a vanilla neural network</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">Flatten</span><span class="p">(</span><span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">)),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># Compile the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+              <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;sparse_categorical_crossentropy&#39;</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+
+<span class="c1"># Train the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/10
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.9.21/envs/tf/lib/python3.9/site-packages/keras/src/layers/reshaping/flatten.py:37: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(**kwargs)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 700us/step - accuracy: 0.7774 - loss: 0.6532 - val_accuracy: 0.8539 - val_loss: 0.4093
+Epoch 2/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 679us/step - accuracy: 0.8549 - loss: 0.3994 - val_accuracy: 0.8600 - val_loss: 0.3899
+Epoch 3/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 668us/step - accuracy: 0.8717 - loss: 0.3561 - val_accuracy: 0.8649 - val_loss: 0.3867
+Epoch 4/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 674us/step - accuracy: 0.8794 - loss: 0.3300 - val_accuracy: 0.8543 - val_loss: 0.4059
+Epoch 5/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 675us/step - accuracy: 0.8879 - loss: 0.3105 - val_accuracy: 0.8782 - val_loss: 0.3452
+Epoch 6/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 702us/step - accuracy: 0.8924 - loss: 0.2907 - val_accuracy: 0.8779 - val_loss: 0.3378
+Epoch 7/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 676us/step - accuracy: 0.8982 - loss: 0.2765 - val_accuracy: 0.8790 - val_loss: 0.3383
+Epoch 8/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 675us/step - accuracy: 0.9037 - loss: 0.2592 - val_accuracy: 0.8883 - val_loss: 0.3208
+Epoch 9/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 669us/step - accuracy: 0.9072 - loss: 0.2537 - val_accuracy: 0.8853 - val_loss: 0.3280
+Epoch 10/10
+<span class=" -Color -Color-Bold">1500/1500</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 686us/step - accuracy: 0.9085 - loss: 0.2457 - val_accuracy: 0.8884 - val_loss: 0.3202
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.history.History at 0x325029310&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">layers</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;Flatten name=flatten, built=True&gt;,
+ &lt;Dense name=dense, built=True&gt;,
+ &lt;Dense name=dense_1, built=True&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([[ 0.08085855, -0.14814568,  0.18496941, ..., -0.03571397,
+          0.14976683,  0.08547304],
+        [-0.06087153, -0.02746509,  0.06837885, ..., -0.04750165,
+          0.04113872, -0.04776509],
+        [ 0.0804701 , -0.1635437 , -0.10509501, ..., -0.0335681 ,
+          0.00870658, -0.05980233],
+        ...,
+        [-0.03822389, -0.28198832, -0.10777265, ..., -0.03772296,
+          0.34806684, -0.14317346],
+        [ 0.0399313 ,  0.04380609,  0.06157512, ..., -0.00806582,
+          0.1335292 , -0.11953935],
+        [ 0.03953132, -0.04701754,  0.25541812, ..., -0.1814157 ,
+          0.09321535,  0.08979132]], dtype=float32),
+ array([ 0.09647798, -0.01329397,  0.43153292,  0.3257448 , -0.11157256,
+         0.33067507,  0.39455765,  0.40837643,  0.17961682,  0.5299815 ,
+         0.24645121,  0.35475254, -0.01342771,  0.20736578,  0.18981878,
+         0.05769858,  0.38150322,  0.15325998,  0.28265432, -0.27716854,
+         0.5172499 ,  0.07852908, -0.01364137,  0.01035407, -0.01284401,
+         0.46556965, -0.02089204,  0.4487591 ,  0.3248141 ,  0.0517427 ,
+        -0.49262124,  0.39083457, -0.00410963, -0.26898053, -0.08707096,
+         0.34669477,  0.421585  ,  0.55977017,  0.04941317, -0.21548682,
+         0.3402468 ,  0.6468097 , -0.11814245,  0.31278318,  0.1747442 ,
+         0.00164819,  0.16582325,  0.31469256,  0.40809274,  0.1888475 ,
+         0.0146774 ,  0.24423991,  0.05808681, -0.02614455,  0.53380597,
+         0.03912321,  0.1887164 ,  0.1470009 ,  0.47360134,  0.33805144,
+        -0.1626122 ,  0.615046  ,  0.0103576 , -0.13841714,  0.40342632,
+         0.21741481, -0.02068434,  0.22475114, -0.09509431,  0.28781414,
+         0.3235689 , -0.20069423, -0.01635294,  0.29799163,  0.48395982,
+         0.16241391,  0.10014845,  0.191678  , -0.01249323,  0.18459378,
+         0.36342114,  0.3596068 , -0.34154862, -0.03570452,  0.20508274,
+        -0.0589801 ,  0.03682213,  0.4142458 , -0.23431194,  0.24697337,
+         0.05572968,  0.20722301,  0.28829628, -0.18348125,  0.65139717,
+        -0.38225284,  0.37008077, -0.02069985,  0.28729442, -0.01774079,
+        -0.2774144 ,  0.11956442, -0.10432932,  0.05420456, -0.54676557,
+         0.07781281,  0.44551483,  0.28106108, -0.15054475,  0.41695496,
+         0.2631976 ,  0.0556837 , -0.01862163,  0.4302167 ,  0.54341733,
+        -0.17858063,  0.00496114, -0.01183294,  0.00482917,  0.25510344,
+         0.13599905,  0.32833368,  0.2691748 ,  0.4248571 ,  0.41751176,
+         0.4804775 ,  0.42020214,  0.3455711 ], dtype=float32)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">biases</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">biases</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(784, 128)
+(128,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">sharex</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">weight</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">weights</span><span class="o">.</span><span class="n">transpose</span><span class="p">()):</span>
+    <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="mi">8</span><span class="p">),</span> <span class="n">k</span><span class="o">%</span><span class="k">8</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">weight</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/58488ecc7e10e618aa3e801a0402729e84aa2fd5eaad2cbef2dbdce2205821c8.png" src="../_images/58488ecc7e10e618aa3e801a0402729e84aa2fd5eaad2cbef2dbdce2205821c8.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Evaluate the model on the test set</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y_train_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">313/313</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 284us/step
+<span class=" -Color -Color-Bold">1875/1875</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 246us/step
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T-shirt/top&#39;</span><span class="p">,</span> <span class="s1">&#39;Trouser&#39;</span><span class="p">,</span> <span class="s1">&#39;Pullover&#39;</span><span class="p">,</span> <span class="s1">&#39;Dress&#39;</span><span class="p">,</span> <span class="s1">&#39;Coat&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;Sandal&#39;</span><span class="p">,</span> <span class="s1">&#39;Shirt&#39;</span><span class="p">,</span> <span class="s1">&#39;Sneaker&#39;</span><span class="p">,</span> <span class="s1">&#39;Bag&#39;</span><span class="p">,</span> <span class="s1">&#39;Ankle boot&#39;</span><span class="p">]</span>
+
+<span class="c1"># Create a confusion matrix</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">ConfusionMatrixDisplay</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">display_labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">60</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fbbf4523ab7bfda9be7e92a0523b19e99a35a41e52c97d45f73d096eca8be8a4.png" src="../_images/fbbf4523ab7bfda9be7e92a0523b19e99a35a41e52c97d45f73d096eca8be8a4.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;TRAINING REPORT:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_train_pred</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;TESTING REPORT:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TRAINING REPORT:
+              precision    recall  f1-score   support
+
+           0       0.79      0.94      0.86      6000
+           1       0.99      0.98      0.99      6000
+           2       0.87      0.81      0.84      6000
+           3       0.92      0.93      0.92      6000
+           4       0.87      0.81      0.84      6000
+           5       0.98      0.99      0.98      6000
+           6       0.76      0.72      0.74      6000
+           7       0.98      0.94      0.96      6000
+           8       0.99      0.98      0.99      6000
+           9       0.96      0.98      0.97      6000
+
+    accuracy                           0.91     60000
+   macro avg       0.91      0.91      0.91     60000
+weighted avg       0.91      0.91      0.91     60000
+
+TESTING REPORT:
+              precision    recall  f1-score   support
+
+           0       0.76      0.92      0.83      1000
+           1       0.99      0.97      0.98      1000
+           2       0.81      0.77      0.79      1000
+           3       0.89      0.89      0.89      1000
+           4       0.83      0.78      0.80      1000
+           5       0.96      0.97      0.97      1000
+           6       0.69      0.65      0.67      1000
+           7       0.95      0.92      0.94      1000
+           8       0.98      0.97      0.97      1000
+           9       0.94      0.96      0.95      1000
+
+    accuracy                           0.88     10000
+   macro avg       0.88      0.88      0.88     10000
+weighted avg       0.88      0.88      0.88     10000
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./03_NN"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_intro_intuition.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">20. </span>Neural Networks, Intro and Intuition</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-neural-networks">21.1. What are Neural Networks?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-neural-networks-over-other-models-the-pros">21.2. Why Neural Networks over other models? The PROs.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-not-neural-networks-the-cons">21.3. Why not Neural Networks? The CONs.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-anatomy-and-the-multi-layer-perceptron">21.4. Neural Network Anatomy and The Multi-Layer Perceptron</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions">21.4.1. Activation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron-the-vanilla-nn">21.4.2. Multi-Layer Perceptron (the vanilla NN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-and-hyper-parameters">21.4.3. Architecture and Hyper-parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-fashion-mnist-classifying-articles-of-clothing">21.5. Example: Fashion-MNIST, classifying articles of clothing</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eatai Roth, Gettysburg College
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
