@@ -35,6 +35,8 @@ parts:
     chapters:
     - file: 03_NN/01_intro_intuition
     - file: 03_NN/02_NN_example
+    - file: 03_NN/03_NN_example2
+
 
 
 
