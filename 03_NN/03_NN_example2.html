@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Setting Up &#8212; My sample book</title>
+    <title>22. Neural Networks Examples &#8212; My sample book</title>
   
   
   
@@ -66,7 +66,7 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '00_Resources/setup';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_NN/03_NN_example2';</script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/searchtools.js?v=63a53a7d"></script>
@@ -84,8 +84,7 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Linear Regression (Part 1)" href="../01_LinearRegression/01_linear_regression_01.html" />
-    <link rel="prev" title="Welcome to DS325 Applied Data Science" href="../intro.html" />
+    <link rel="prev" title="21. Neural Networks with Keras" href="02_NN_example.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -204,8 +203,8 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Setting Up</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
 <ul class="nav bd-sidenav">
@@ -232,10 +231,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../02_Classification/09_modeling_process.html">19. Modeling process review</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/02_NN_example.html">21. Neural Networks with Keras</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/03_NN_example2.html">22. Neural Networks Examples</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_NN_example.html">21. Neural Networks with Keras</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">22. Neural Networks Examples</a></li>
 </ul>
 
     </div>
@@ -307,7 +306,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F00_Resources/setup.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F03_NN/03_NN_example2.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -337,7 +336,7 @@
       
       
       
-      <li><a href="../_sources/00_Resources/setup.md" target="_blank"
+      <li><a href="../_sources/03_NN/03_NN_example2.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -347,7 +346,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -421,7 +420,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Setting Up</h1>
+    <h1>Neural Networks Examples</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -431,16 +430,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-your-computer-for-data-science">1.1. Setting Up Your Computer for Data Science</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda">1.1.1. Anaconda</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#onedrive">1.1.2. OneDrive</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github">1.1.3. GitHub</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vscode">1.1.4. VSCode</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-vscode-for-class">1.1.4.1. Setting up VSCode for class</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-regression-on-california-housing-dataset">22.1. Example 1: Regression on California Housing Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-predicting-forest-cover-type">22.2. Example 2: Predicting Forest Cover Type</a></li>
 </ul>
             </nav>
         </div>
@@ -452,147 +443,480 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="setting-up">
-<h1><span class="section-number">1. </span>Setting Up<a class="headerlink" href="#setting-up" title="Link to this heading">#</a></h1>
-<p>The following walks you through setting up Python and the programming environment for this course. You will be installing the following on your personal computer:</p>
-<ul class="simple">
-<li><p><strong>OneDrive</strong> - A cloud-based file-hosting service maintained by Microsoft. As a Gettysburg student, you get a 1TB OneDrive account. OneDrive allows you to sync files between computers and access your files from any web interface. Your classwork should be stored in a OneDrive directory, safeguarding your work against any mishaps that might befall your personal computer.</p></li>
-<li><p><strong>Anaconda</strong> - a distribution of Python targeted to a scientific (and data scientific) user base. Anaconda installs with most of the scientific packages you should need for this course. Those that do not come prepackaged, we can add using conda (Anaconda’s package management utility).</p></li>
-<li><p><strong>VS Code</strong> - VS (Visual Studio) Code is a Microsoft IDE (Integrated Development Environment) that supports numerous programming languages. IDEs provide added functionality to improve your coding quality and productivity. VS Code is one of many available IDEs and my personal preference.</p></li>
-<li><p><strong>GitHub</strong> - Github is a version control/code sharing platform maintained by Microsoft. Problem sets will be distributed and submitted via GitHub Classroom.</p></li>
-</ul>
-<p>If you already have a different Python installation and/or IDE set up on your computer, you do <em>not</em> need to additionally install the Anaconda package and VS Code. These are my recommendations for students starting out with these tools.</p>
-<div class="tip dropdown admonition">
-<p class="admonition-title">An Aside on File Systems</p>
-<p>I recently came to realize a disconnect between how I grew up using (and understanding) computers versus how your generation uses and understands computers (<a class="reference external" href="https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z">an interesting article about it</a>). For the entirety of your lives, computers have been searchable; files might reside anywhere on your computer and when you want a particular file or app, you ask for it.</p>
-<p>As we move towards data science projects, it will become increasingly important to understand the computer’s file structure: how are files and folders organized on your computer, how do we describe/prescribe the path/location of a file or folder, and what are best practices to organizing files and folders for data science?</p>
-<p><strong>Folder structures are heirarchical</strong></p>
-<p>Your computer is organized as a tree of <em>directories</em> (aka folders) which contain files and other <em>subdirectories</em> (which in turn contain files and subdirectories). At the top of this tree is the <em>root</em> directory.</p>
-<figure class="margin align-left" id="id1">
-<a class="reference internal image-reference" href="00_Resources/images/filestructure.png"><img alt="filestructure" src="00_Resources/images/filestructure.png" style="width: 350px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">An example folder heirarchy for MacOS. credit: Daniel J. Barrett</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>The next layer of the tree comprises folders that store files related to how your computer works (files relating to your operating system, hardware, applications, network connectivity, installed fonts, etc.) You won’t need to go into these folders often, if ever.</p>
-<p>The <em>Users</em> directory contains subdirectories for each user account on the machine and these user accounts have many of the folders you will likely interact with: Desktop, Downloads, Documents, Photos, Music, OneDrive etc.</p>
-<p>The names of these folders suggest their intended uses. The Downloads folder is where downloaded files go. The Desktop is for your most frequently used folder, what you would keep out on your desk. Documents for documents, photos for photos, Music for music.</p>
-<p><strong>File Paths</strong></p>
-<p>For any file or folder, we can describe its location by tracing out the path we traverse on the tree. For example, in the image above, the file <em>manual.pdf</em> is in the <em>Desktop</em> folder in the <em>smith</em> folder in the <em>Users</em> folder in the root folder. We indicate the path taken through the folder heirarchy using ‘/’ (for MacOs and Linux) or ‘’ (for Windows). This path which describes the location of a file or folder is called…the <em>path</em>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">smith</span><span class="o">/</span><span class="n">Desktop</span><span class="o">/</span><span class="n">manual</span><span class="o">.</span><span class="n">pdf</span>
+  <section class="tex2jax_ignore mathjax_ignore" id="neural-networks-examples">
+<h1><span class="section-number">22. </span>Neural Networks Examples<a class="headerlink" href="#neural-networks-examples" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_california_housing</span><span class="p">,</span> <span class="n">fetch_covtype</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">PolynomialFeatures</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="n">GradientBoostingClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span>
+
+<span class="c1"># from keras.datasets import california_housing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dense</span>
 </pre></div>
 </div>
-<p>(on Mac or Linux)</p>
-<p>When you open/create/work on a file, it’s as if you are at the location of the file. When I open that pdf, that program will treat you as if it is working out of that location. That is the <em>current working directory</em>.</p>
-<h3 class="rubric" id="absolute-and-relative-file-paths">Absolute and relative file paths</h3>
-<p>When the path starts at the root directory (or the drive directory on Windows), we call this an <em>absolute</em> path. But most of the time, we want to describe the location of a file with respect to the current working directory. We call those <em>relative</em> paths. For example, if I were in the ‘smith’ directory, the relative path of the manual.pdf file would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Desktop</span><span class="o">/</span><span class="n">manual</span><span class="o">.</span><span class="n">pdf</span>
+</div>
+</div>
+<section id="example-1-regression-on-california-housing-dataset">
+<h2><span class="section-number">22.1. </span>Example 1: Regression on California Housing Dataset<a class="headerlink" href="#example-1-regression-on-california-housing-dataset" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the California housing dataset</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">return_X_y</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">feature_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 </div>
-<p>There are some important file symbols that are important to know for relative paths:</p>
-<ul class="simple">
-<li><p>. - the current path</p></li>
-<li><p>.. - one folder up</p></li>
-<li><p>../.. - two folders up</p></li>
-<li><p>../../.. - three folders up, etc</p></li>
-</ul>
-<p>Suppose I’m working from my Desktop and want to direct my code to find a file in the Documents folder. That relative path would be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">..</span>\<span class="n">Documents</span>\<span class="n">file_name</span><span class="o">.</span><span class="n">ext</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MedInc</th>
+      <th>HouseAge</th>
+      <th>AveRooms</th>
+      <th>AveBedrms</th>
+      <th>Population</th>
+      <th>AveOccup</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8.3252</td>
+      <td>41.0</td>
+      <td>6.984127</td>
+      <td>1.023810</td>
+      <td>322.0</td>
+      <td>2.555556</td>
+      <td>37.88</td>
+      <td>-122.23</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8.3014</td>
+      <td>21.0</td>
+      <td>6.238137</td>
+      <td>0.971880</td>
+      <td>2401.0</td>
+      <td>2.109842</td>
+      <td>37.86</td>
+      <td>-122.22</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.2574</td>
+      <td>52.0</td>
+      <td>8.288136</td>
+      <td>1.073446</td>
+      <td>496.0</td>
+      <td>2.802260</td>
+      <td>37.85</td>
+      <td>-122.24</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.6431</td>
+      <td>52.0</td>
+      <td>5.817352</td>
+      <td>1.073059</td>
+      <td>558.0</td>
+      <td>2.547945</td>
+      <td>37.85</td>
+      <td>-122.25</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.8462</td>
+      <td>52.0</td>
+      <td>6.281853</td>
+      <td>1.081081</td>
+      <td>565.0</td>
+      <td>2.181467</td>
+      <td>37.85</td>
+      <td>-122.25</td>
+    </tr>
+  </tbody>
+</table>
+</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    4.526
+1    3.585
+2    3.521
+3    3.413
+4    3.422
+Name: MedHouseVal, dtype: float64
 </pre></div>
 </div>
-<p>Desktop and Documents are on the same level, so I had to take a step back out of the Desktop (to ‘smith’) and then back down into Documents.</p>
-<p><strong>Folder organization for Data Science</strong></p>
-<p>When you work on a project, you should contain it in a folder (preferably not your Downloads folder). In that project folder, you may want subfolders for Code, Data, Images, etc. In your code, you’ll often need to reference a path; for example when you need to save a figure or load data you tell your code where to save or where to look. You’ll want to use relative path naming. That way, when you share that project, another user can put that project folder where it makes sense to them and all the relative paths stay the same (even though the absolute path changes).</p>
-<p>When you work on your project, I recommend you have a separate folder to store the figures and documents you create, separate from your code.</p>
 </div>
-<section id="setting-up-your-computer-for-data-science">
-<h2><span class="section-number">1.1. </span>Setting Up Your Computer for Data Science<a class="headerlink" href="#setting-up-your-computer-for-data-science" title="Link to this heading">#</a></h2>
-<p>If you have any of the following already, you should skip those steps. These instructions should get you up and running from a blank slate.</p>
-<section id="anaconda">
-<h3><span class="section-number">1.1.1. </span>Anaconda<a class="headerlink" href="#anaconda" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.anaconda.com/download">Download Anaconda</a></p></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>For Mac Users
-If you are downloading Anaconda for Mac, be sure to select the <em>GRAPHICAL</em> installer that matches your CPU (Intel or Apple Silicon). If you don’t know which CPU your computer has, you can click the Apple icon in the upper left corner of your screen and select “About this Mac”; Intel Macbooks will say “Intel _____<em>” and Apple Silicon Macbooks will say “Apple M</em>”.</p>
 </div>
-<ul class="simple">
-<li><p>Run the Anaconda Installer.</p></li>
-</ul>
-</section>
-<section id="onedrive">
-<h3><span class="section-number">1.1.2. </span>OneDrive<a class="headerlink" href="#onedrive" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.microsoft.com/en-us/microsoft-365/onedrive/download">Download OneDrive</a></p></li>
-<li><p>Run the OneDrive installer. OneDrive creates a local folder on your machine, the contents of which are synced to your OneDrive on the Cloud. The installer asks where you want this folder to be; if you don’t know or don’t care, the default is fine. Once the OneDrive directory is created, you should not move or rename the folder.</p></li>
-<li><p>Find the OneDrive folder on your computer and create a new folder for this course, name it…say…’DS325’ or something similar. Avoid spaces in folder names (not a strict no-no but can cause headaches when coding).</p></li>
-<li><p>Visit <a class="reference external" href="http://OneDrive.com">OneDrive.com</a> and sign in with your Gettysburg College email. You should see the folder you created. Now your work is backed up on the cloud.</p></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>You <strong>MAY NOT</strong> work on any file that is in your Downloads folder. If Prof Roth sees you doing this, he will not help you and may further publicly shame you.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 20640 entries, 0 to 20639
+Data columns (total 8 columns):
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   MedInc      20640 non-null  float64
+ 1   HouseAge    20640 non-null  float64
+ 2   AveRooms    20640 non-null  float64
+ 3   AveBedrms   20640 non-null  float64
+ 4   Population  20640 non-null  float64
+ 5   AveOccup    20640 non-null  float64
+ 6   Latitude    20640 non-null  float64
+ 7   Longitude   20640 non-null  float64
+dtypes: float64(8)
+memory usage: 1.3 MB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>None
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MedInc</th>
+      <th>HouseAge</th>
+      <th>AveRooms</th>
+      <th>AveBedrms</th>
+      <th>Population</th>
+      <th>AveOccup</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+      <td>20640.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>3.870671</td>
+      <td>28.639486</td>
+      <td>5.429000</td>
+      <td>1.096675</td>
+      <td>1425.476744</td>
+      <td>3.070655</td>
+      <td>35.631861</td>
+      <td>-119.569704</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.899822</td>
+      <td>12.585558</td>
+      <td>2.474173</td>
+      <td>0.473911</td>
+      <td>1132.462122</td>
+      <td>10.386050</td>
+      <td>2.135952</td>
+      <td>2.003532</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.499900</td>
+      <td>1.000000</td>
+      <td>0.846154</td>
+      <td>0.333333</td>
+      <td>3.000000</td>
+      <td>0.692308</td>
+      <td>32.540000</td>
+      <td>-124.350000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.563400</td>
+      <td>18.000000</td>
+      <td>4.440716</td>
+      <td>1.006079</td>
+      <td>787.000000</td>
+      <td>2.429741</td>
+      <td>33.930000</td>
+      <td>-121.800000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>3.534800</td>
+      <td>29.000000</td>
+      <td>5.229129</td>
+      <td>1.048780</td>
+      <td>1166.000000</td>
+      <td>2.818116</td>
+      <td>34.260000</td>
+      <td>-118.490000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>4.743250</td>
+      <td>37.000000</td>
+      <td>6.052381</td>
+      <td>1.099526</td>
+      <td>1725.000000</td>
+      <td>3.282261</td>
+      <td>37.710000</td>
+      <td>-118.010000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>15.000100</td>
+      <td>52.000000</td>
+      <td>141.909091</td>
+      <td>34.066667</td>
+      <td>35682.000000</td>
+      <td>1243.333333</td>
+      <td>41.950000</td>
+      <td>-114.310000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 </section>
-<section id="github">
-<h3><span class="section-number">1.1.3. </span>GitHub<a class="headerlink" href="#github" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Go to <a class="reference external" href="https://github.com/">github.com</a> and create an account.</p></li>
-<li><p>Edit your github profile to include your full name.</p></li>
-</ul>
-</section>
-<section id="vscode">
-<h3><span class="section-number">1.1.4. </span>VSCode<a class="headerlink" href="#vscode" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p><a class="reference external" href="https://code.visualstudio.com/download">Download VSCode</a>
-Select a .zip installer unless you are comfortable with working in a terminal using command line interface (CLI).</p></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>For Mac Users
-See the warning above under “Anaconda”.</p>
+<section id="example-2-predicting-forest-cover-type">
+<h2><span class="section-number">22.2. </span>Example 2: Predicting Forest Cover Type<a class="headerlink" href="#example-2-predicting-forest-cover-type" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fetch_covtype</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
 </div>
-<ul class="simple">
-<li><p>Install VSCode.</p></li>
-</ul>
-<section id="setting-up-vscode-for-class">
-<h4><span class="section-number">1.1.4.1. </span>Setting up VSCode for class<a class="headerlink" href="#setting-up-vscode-for-class" title="Link to this heading">#</a></h4>
-<p>VSCode is pretty nice right out of the box, but it has some useful (and necessary) extensions and settings you’ll want/need for this class.</p>
-<ul class="simple">
-<li><p>First, we’ll change a setting so that VSCode opens in your Data Science folder by default. Open settings, (<kbd>Ctrl</kbd>+<kbd>,</kbd> on PC, <kbd>Cmd</kbd>+<kbd>,</kbd> on Mac) or through the top menu bar Code &gt; Settings &gt; Settings.</p></li>
-<li><p>At the top of Settings is a search bar. Type “dialog default path”. You should see this:</p></li>
-</ul>
-<figure class="align-center">
-<a class="reference internal image-reference" href="00_Resources/images/VSCodeDefaultFolder.png"><img alt="vscodefolder" src="00_Resources/images/VSCodeDefaultFolder.png" style="width: 700px;" />
-</a>
-</figure>
-<ul class="simple">
-<li><p>Enter (copy and paste) the path for your DS325 directory (in your OneDrive!) into the text field. To get the path for that directory:</p>
-<ul>
-<li><p>On PC, right-click on the folder you created and click “Copy as path”.</p></li>
-<li><p>On Mac, right-click on the folder you created, and select “Get info”. This opens a pop-up with information about the file/folder you’ve selected. Near the top, there is a field named “Where”. Right-click this field and select “Copy Pathname”.</p></li>
-</ul>
-</li>
-<li><p>Hover your cursor to the left of the top-left corner and you should see a gear icon. Click the icon and select “Apply to all profiles”.</p></li>
-</ul>
-<p>Next, we’ll install a few useful extensions. On the left-hand side of VSCode, you should see a stack of icons. Select the extensions tab (looks like stacking blocks). You’ll search for and install the following extensions:</p>
-<figure class="align-left">
-<a class="reference internal image-reference" href="00_Resources/images/VSCodeExtensions.png"><img alt="vscodeextensions" src="00_Resources/images/VSCodeExtensions.png" style="width: 400px;" />
-</a>
-</figure>
-<ul class="simple">
-<li><p>Python</p></li>
-<li><p>PyLance - it may install with Python above, if so it will show as already installed.</p></li>
-<li><p>Python Indent</p></li>
-<li><p>Jupyter</p></li>
-<li><p>Data Wrangler - a colorful viewer for .csvs and other data table formats.</p></li>
-<li><p>GitHub Repositories - will allow you to clone, commit, and push repositories from VSCode</p></li>
-<li><p>GitHub Copilot - an LLM for coding</p></li>
-</ul>
-</section>
-</section>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Elevation</th>
+      <th>Aspect</th>
+      <th>Slope</th>
+      <th>Horizontal_Distance_To_Hydrology</th>
+      <th>Vertical_Distance_To_Hydrology</th>
+      <th>Horizontal_Distance_To_Roadways</th>
+      <th>Hillshade_9am</th>
+      <th>Hillshade_Noon</th>
+      <th>Hillshade_3pm</th>
+      <th>Horizontal_Distance_To_Fire_Points</th>
+      <th>...</th>
+      <th>Soil_Type_30</th>
+      <th>Soil_Type_31</th>
+      <th>Soil_Type_32</th>
+      <th>Soil_Type_33</th>
+      <th>Soil_Type_34</th>
+      <th>Soil_Type_35</th>
+      <th>Soil_Type_36</th>
+      <th>Soil_Type_37</th>
+      <th>Soil_Type_38</th>
+      <th>Soil_Type_39</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2596.0</td>
+      <td>51.0</td>
+      <td>3.0</td>
+      <td>258.0</td>
+      <td>0.0</td>
+      <td>510.0</td>
+      <td>221.0</td>
+      <td>232.0</td>
+      <td>148.0</td>
+      <td>6279.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2590.0</td>
+      <td>56.0</td>
+      <td>2.0</td>
+      <td>212.0</td>
+      <td>-6.0</td>
+      <td>390.0</td>
+      <td>220.0</td>
+      <td>235.0</td>
+      <td>151.0</td>
+      <td>6225.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2804.0</td>
+      <td>139.0</td>
+      <td>9.0</td>
+      <td>268.0</td>
+      <td>65.0</td>
+      <td>3180.0</td>
+      <td>234.0</td>
+      <td>238.0</td>
+      <td>135.0</td>
+      <td>6121.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2785.0</td>
+      <td>155.0</td>
+      <td>18.0</td>
+      <td>242.0</td>
+      <td>118.0</td>
+      <td>3090.0</td>
+      <td>238.0</td>
+      <td>238.0</td>
+      <td>122.0</td>
+      <td>6211.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2595.0</td>
+      <td>45.0</td>
+      <td>2.0</td>
+      <td>153.0</td>
+      <td>-1.0</td>
+      <td>391.0</td>
+      <td>220.0</td>
+      <td>234.0</td>
+      <td>150.0</td>
+      <td>6172.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 54 columns</p>
+</div></div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    5
+1    5
+2    2
+3    2
+4    5
+Name: Cover_Type, dtype: int32
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
@@ -609,7 +933,7 @@ See the warning above under “Anaconda”.</p>
         },
         kernelOptions: {
             name: "python3",
-            path: "./00_Resources"
+            path: "./03_NN"
         },
         predefinedOutput: true
     }
@@ -627,22 +951,13 @@ See the warning above under “Anaconda”.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../intro.html"
+       href="02_NN_example.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Welcome to DS325 Applied Data Science</p>
+        <p class="prev-next-title"><span class="section-number">21. </span>Neural Networks with Keras</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="../01_LinearRegression/01_linear_regression_01.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Linear Regression (Part 1)</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -660,16 +975,8 @@ See the warning above under “Anaconda”.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-your-computer-for-data-science">1.1. Setting Up Your Computer for Data Science</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anaconda">1.1.1. Anaconda</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#onedrive">1.1.2. OneDrive</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github">1.1.3. GitHub</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vscode">1.1.4. VSCode</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up-vscode-for-class">1.1.4.1. Setting up VSCode for class</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-regression-on-california-housing-dataset">22.1. Example 1: Regression on California Housing Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-predicting-forest-cover-type">22.2. Example 2: Predicting Forest Cover Type</a></li>
 </ul>
   </nav></div>
 
