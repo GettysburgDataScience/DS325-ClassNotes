@@ -27,7 +27,7 @@ As we move towards data science projects, it will become increasingly important 
 
 Your computer is organized as a tree of *directories* (aka folders) which contain files and other *subdirectories* (which in turn contain files and subdirectories). At the top of this tree is the *root* directory.
 
-```{figure} ./images/filestructure.png
+```{figure} ../images/filestructure.png
 :alt: filestructure
 :width: 350px
 :align: left
@@ -128,7 +128,7 @@ If you have any of the following already, you should skip those steps. These ins
   - First, we'll change a setting so that VSCode opens in your Data Science folder by default. Open settings, (<kbd>Ctrl</kbd>+<kbd>,</kbd> on PC, <kbd>Cmd</kbd>+<kbd>,</kbd> on Mac) or through the top menu bar Code > Settings > Settings.
   - At the top of Settings is a search bar. Type "dialog default path". You should see this:
   
-  ```{figure} ./images/VSCodeDefaultFolder.png
+```{figure} ../images/VSCodeDefaultFolder.png
 :alt: vscodefolder
 :width: 700px
 :align: center
