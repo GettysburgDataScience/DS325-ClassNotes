@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Reading Assignments Review &#8212; My sample book</title>
+    <title>Reading Assignments Review &#8212; My sample book</title>
   
   
   
@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -45,10 +47,11 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -86,10 +89,9 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="7. Exam 1 Review" href="06_exam_review.html" />
-    <link rel="prev" title="5. Polynomial Regression" href="04_polynomial_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -105,19 +107,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -125,7 +116,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -133,8 +123,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -150,7 +140,10 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -180,21 +173,17 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -209,35 +198,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_regularization.html">4. Bias, Variance, and Regularization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_polynomial_regression.html">5. Polynomial Regression</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Reading Assignments Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_exam_review.html">7. Exam 1 Review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/01_classification_intro.html">8. Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/02_logistic_regression.html">9. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05b_pca_examples.html">13. PCA: Examples and Observations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/06_kmeans.html">14. K-Means Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/09_modeling_process.html">19. Modeling process review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/02_NN_example.html">21. Neural Networks with Keras</a></li>
-</ul>
 
     </div>
 </nav></div>
@@ -245,9 +205,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -391,24 +356,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -432,8 +389,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homl-ch-1-p-3-37-ch-4-p-131-148">6.1. 1. HOML Ch 1 (p 3-37), Ch 4 (p 131-148)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homl-ch-4-p-148-173">6.2. 2. HOML Ch 4 (p 148-173)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homl-ch-1-p-3-37-ch-4-p-131-148">1. HOML Ch 1 (p 3-37), Ch 4 (p 131-148)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homl-ch-4-p-148-173">2. HOML Ch 4 (p 148-173)</a></li>
 </ul>
             </nav>
         </div>
@@ -446,9 +403,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reading-assignments-review">
-<h1><span class="section-number">6. </span>Reading Assignments Review<a class="headerlink" href="#reading-assignments-review" title="Link to this heading">#</a></h1>
+<h1>Reading Assignments Review<a class="headerlink" href="#reading-assignments-review" title="Link to this heading">#</a></h1>
 <section id="homl-ch-1-p-3-37-ch-4-p-131-148">
-<h2><span class="section-number">6.1. </span>1. HOML Ch 1 (p 3-37), Ch 4 (p 131-148)<a class="headerlink" href="#homl-ch-1-p-3-37-ch-4-p-131-148" title="Link to this heading">#</a></h2>
+<h2>1. HOML Ch 1 (p 3-37), Ch 4 (p 131-148)<a class="headerlink" href="#homl-ch-1-p-3-37-ch-4-p-131-148" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><p><strong>Give two examples of supervised learning tasks:</strong> (p 10)</p>
 <ul class="simple">
@@ -485,7 +442,7 @@ document.write(`
 </ol>
 </section>
 <section id="homl-ch-4-p-148-173">
-<h2><span class="section-number">6.2. </span>2. HOML Ch 4 (p 148-173)<a class="headerlink" href="#homl-ch-4-p-148-173" title="Link to this heading">#</a></h2>
+<h2>2. HOML Ch 4 (p 148-173)<a class="headerlink" href="#homl-ch-4-p-148-173" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><p><strong>Briefly define bias and variance.</strong> (p 155)</p>
 <ul class="simple">
@@ -551,24 +508,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="04_polynomial_regression.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">5. </span>Polynomial Regression</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="06_exam_review.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Exam 1 Review</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -576,7 +515,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -585,8 +525,8 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homl-ch-1-p-3-37-ch-4-p-131-148">6.1. 1. HOML Ch 1 (p 3-37), Ch 4 (p 131-148)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homl-ch-4-p-148-173">6.2. 2. HOML Ch 4 (p 148-173)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homl-ch-1-p-3-37-ch-4-p-131-148">1. HOML Ch 1 (p 3-37), Ch 4 (p 131-148)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#homl-ch-4-p-148-173">2. HOML Ch 4 (p 148-173)</a></li>
 </ul>
   </nav></div>
 
@@ -635,8 +575,8 @@ By Eatai Roth, Gettysburg College
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

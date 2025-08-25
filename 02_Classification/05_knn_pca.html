@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>12. K-Nearest Neighbors (and PCA) &#8212; My sample book</title>
+    <title>K-Nearest Neighbors (and PCA) &#8212; My sample book</title>
   
   
   
@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -45,10 +47,11 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -86,10 +89,9 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="13. PCA: Examples and Observations" href="05b_pca_examples.html" />
-    <link rel="prev" title="11. Ensemble Tree Methods (continued)" href="04_trees_gridcv.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -105,19 +107,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -125,7 +116,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -133,8 +123,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -150,7 +140,10 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -180,21 +173,17 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -209,35 +198,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">5. Polynomial Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/05_reading_review.html">6. Reading Assignments Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/06_exam_review.html">7. Exam 1 Review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">8. Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">9. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. K-Nearest Neighbors (and PCA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05b_pca_examples.html">13. PCA: Examples and Observations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_kmeans.html">14. K-Means Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="09_modeling_process.html">19. Modeling process review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/02_NN_example.html">21. Neural Networks with Keras</a></li>
-</ul>
 
     </div>
 </nav></div>
@@ -245,9 +205,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -391,24 +356,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -432,14 +389,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-component-analysis-pca">12.1. Principle Component Analysis (PCA)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">12.1.1. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-component-analysis-pca">Principle Component Analysis (PCA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">12.2. K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">12.2.1. Eager vs Lazy models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">12.2.2. Hyper parameters of KNN</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mnist">12.2.3. Example: MNIST</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">Eager vs Lazy models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">Hyper parameters of KNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mnist">Example: MNIST</a></li>
 </ul>
 </li>
 </ul>
@@ -454,10 +411,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="k-nearest-neighbors-and-pca">
-<h1><span class="section-number">12. </span>K-Nearest Neighbors (and PCA)<a class="headerlink" href="#k-nearest-neighbors-and-pca" title="Link to this heading">#</a></h1>
+<h1>K-Nearest Neighbors (and PCA)<a class="headerlink" href="#k-nearest-neighbors-and-pca" title="Link to this heading">#</a></h1>
 <p>but first…</p>
 <section id="principle-component-analysis-pca">
-<h2><span class="section-number">12.1. </span>Principle Component Analysis (PCA)<a class="headerlink" href="#principle-component-analysis-pca" title="Link to this heading">#</a></h2>
+<h2>Principle Component Analysis (PCA)<a class="headerlink" href="#principle-component-analysis-pca" title="Link to this heading">#</a></h2>
 <p>Principle Component Analysis (PCA) is an algorithm for dimensionality reduction. When we have a feature vector describing a data point, we can think of each feature being an orthogonal (perpendicular) axis on a plot.</p>
 <p>PCA computes new axes as a linear combination of the existing axes and re-orients (or projects) the data onto these new axes.</p>
 <ul class="simple">
@@ -471,7 +428,7 @@ document.write(`
 <p>Because the PCs are ordered by their explanatory power, we can keep just a few and discard the less informative features.</p>
 <p>Let’s look at an example.</p>
 <section id="example">
-<h3><span class="section-number">12.1.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<h3>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>Lets revisit the Palmer’s Penguins dataset. Suppose we only had measurements of the bill to work with (length and depth).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -690,9 +647,9 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.9.21/envs/tf/lib/python3.9/site-packages/sklearn/preprocessing/_label.py:110: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/preprocessing/_label.py:110: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
   y = column_or_1d(y, warn=True)
-/Users/eatai/.pyenv/versions/3.9.21/envs/tf/lib/python3.9/site-packages/sklearn/preprocessing/_label.py:129: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/preprocessing/_label.py:129: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples, ), for example using ravel().
   y = column_or_1d(y, dtype=self.classes_.dtype, warn=True)
 </pre></div>
 </div>
@@ -726,8 +683,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/32c263e35cf8fdc51467589bb09f88259dafb287ccaa2bf7798525e5bbfddf4e.png" src="../_images/32c263e35cf8fdc51467589bb09f88259dafb287ccaa2bf7798525e5bbfddf4e.png" />
-<img alt="../_images/f02dce806f8489603040984b9a80352ec1dd7eaf6e1400c9cead4c39dd21e7b8.png" src="../_images/f02dce806f8489603040984b9a80352ec1dd7eaf6e1400c9cead4c39dd21e7b8.png" />
+<img alt="../_images/81c067959f31a7103795f6ee7c797e83b9606bf65d6aa9eda7633c4d6d2ed52b.png" src="../_images/81c067959f31a7103795f6ee7c797e83b9606bf65d6aa9eda7633c4d6d2ed52b.png" />
+<img alt="../_images/1eddc945b6086955a0a156229b316f8b960c006bc7ae21feee0399f7b1a701c6.png" src="../_images/1eddc945b6086955a0a156229b316f8b960c006bc7ae21feee0399f7b1a701c6.png" />
 </div>
 </div>
 <p>Notice that in the original data, the distributions (density plots) for both features overlap significantly for at least two groups. After we’ve applied PCA, the distribution for the first principle component shows more separated peaks. The distribution for the second component overlaps MORE, but we would be discarding that feature if we were using PCA for dimensionality reduction.</p>
@@ -764,8 +721,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4645e30bb4648f9c2e885c68482de2b02a95fc02f2e79f4b38b059be686d6503.png" src="../_images/4645e30bb4648f9c2e885c68482de2b02a95fc02f2e79f4b38b059be686d6503.png" />
-<img alt="../_images/2f68bd79e15037efc871a5e4e8d58751c445b5b5c4578c03a22539e426c2e427.png" src="../_images/2f68bd79e15037efc871a5e4e8d58751c445b5b5c4578c03a22539e426c2e427.png" />
+<img alt="../_images/1200933e4f79a62a508d357ba2e28c48536ec92697a605878384d67f7fbcc46b.png" src="../_images/1200933e4f79a62a508d357ba2e28c48536ec92697a605878384d67f7fbcc46b.png" />
+<img alt="../_images/d3b9a5858494b7f04fcc9e28c4c8ad0980b074f8eec3f770665e9076034e88c3.png" src="../_images/d3b9a5858494b7f04fcc9e28c4c8ad0980b074f8eec3f770665e9076034e88c3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -807,7 +764,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/537b246febf82a5d74bc17b2ecfcae1913cc3354d9740da425531bbce9e8cf7d.png" src="../_images/537b246febf82a5d74bc17b2ecfcae1913cc3354d9740da425531bbce9e8cf7d.png" />
+<img alt="../_images/bf765636c7c5ff5f542a53547d87f8041ead1307ef6e6aff94b11c55252125aa.png" src="../_images/bf765636c7c5ff5f542a53547d87f8041ead1307ef6e6aff94b11c55252125aa.png" />
 </div>
 </div>
 <p>Decision trees dissect the feature space with horizontal and vertical lines. In the original data, the boundaries between groups are oriented on a diagonal; as a result, the decision tree creates a stair-step partition of the space.</p>
@@ -815,12 +772,12 @@ document.write(`
 </section>
 </section>
 <section id="k-nearest-neighbors-knn-a-lazy-learner">
-<h2><span class="section-number">12.2. </span>K-Nearest Neighbors (KNN) (a lazy learner)<a class="headerlink" href="#k-nearest-neighbors-knn-a-lazy-learner" title="Link to this heading">#</a></h2>
+<h2>K-Nearest Neighbors (KNN) (a lazy learner)<a class="headerlink" href="#k-nearest-neighbors-knn-a-lazy-learner" title="Link to this heading">#</a></h2>
 <p>A K-Nearest Neighbors classifier doesn’t really learn a model at all. Instead, to determine the label for an unknown sample, it finds the K data points from the training set closest to the unlabeled sample (the K nearest neighbors) and assigns the majority label among the nearest neighbors.</p>
 <img src="knn.png" style = "width: 40vw" alt="image credit: JC Chouinard" />
 image credit: JC Chouinard
 <section id="eager-vs-lazy-models">
-<h3><span class="section-number">12.2.1. </span>Eager vs Lazy models<a class="headerlink" href="#eager-vs-lazy-models" title="Link to this heading">#</a></h3>
+<h3>Eager vs Lazy models<a class="headerlink" href="#eager-vs-lazy-models" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><em>Eager learners</em> spend more time and resources training a <em>simple</em> model that generalizes and prediction is quick and not computationally intensive (simple, quick, and computationally intensive are all relative).</p></li>
 <li><p><em>Lazy learners</em> store data and do most of the computation at the time of prediction. Lazy learners are slower to predict, but they are also adaptable to new data because the training overhead is low.</p></li>
@@ -828,7 +785,7 @@ image credit: JC Chouinard
 <p><strong>KNN is a very lazy learner!</strong></p>
 </section>
 <section id="hyper-parameters-of-knn">
-<h3><span class="section-number">12.2.2. </span>Hyper parameters of KNN<a class="headerlink" href="#hyper-parameters-of-knn" title="Link to this heading">#</a></h3>
+<h3>Hyper parameters of KNN<a class="headerlink" href="#hyper-parameters-of-knn" title="Link to this heading">#</a></h3>
 <p><a href = "https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html"> sklearn.neighbors.KNeighborsClassifier </a></p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">n_neighbors</span></code> - number of neighbors (why not k?! come on sklearn devs!). <strong>Rule of thumb, start with square root of number of samples.</strong></p>
@@ -874,16 +831,16 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.9.21/envs/tf/lib/python3.9/site-packages/sklearn/neighbors/_classification.py:239: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/neighbors/_classification.py:239: DataConversionWarning: A column-vector y was passed when a 1d array was expected. Please change the shape of y to (n_samples,), for example using ravel().
   return self._fit(X, y)
 </pre></div>
 </div>
-<img alt="../_images/f00ffa123cb60b170de13b1369a2f925b354336c2b44de104cc21a6926a79529.png" src="../_images/f00ffa123cb60b170de13b1369a2f925b354336c2b44de104cc21a6926a79529.png" />
+<img alt="../_images/e5c936c68fa8c965752345c1f573aa73c96f151047fd1fe68fcce8e6cf1d4b90.png" src="../_images/e5c936c68fa8c965752345c1f573aa73c96f151047fd1fe68fcce8e6cf1d4b90.png" />
 </div>
 </div>
 </section>
 <section id="example-mnist">
-<h3><span class="section-number">12.2.3. </span>Example: MNIST<a class="headerlink" href="#example-mnist" title="Link to this heading">#</a></h3>
+<h3>Example: MNIST<a class="headerlink" href="#example-mnist" title="Link to this heading">#</a></h3>
 <p>The MNIST data set comprises small images (8x8 pixels) of hand-written digits. We’ll apply KNN as a classifier to determine which digit a hand-written image represents.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -903,7 +860,7 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8fa7fcd78d5cf012c7bbbf7d77f5794d31eab3c0934b71eaca274c110f8fefb9.png" src="../_images/8fa7fcd78d5cf012c7bbbf7d77f5794d31eab3c0934b71eaca274c110f8fefb9.png" />
+<img alt="../_images/d782b4201fd6bd8f28848f716b724d156c2427a3bcdb9c9afd2be5fc9867e4a8.png" src="../_images/d782b4201fd6bd8f28848f716b724d156c2427a3bcdb9c9afd2be5fc9867e4a8.png" />
 </div>
 </div>
 <p>Each image is composed of 64 pixels with values from 0-15. Each image is a data point and each pixel value will be a feature of our data. To work with these images, we’ll want to unfurl them from an 8x8 square matrix to an array of 64 elements.</p>
@@ -951,8 +908,8 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b248c104887ff0db3a0e1d2eeb35e6224818bb46202886f8efece1e7bc52ff7c.png" src="../_images/b248c104887ff0db3a0e1d2eeb35e6224818bb46202886f8efece1e7bc52ff7c.png" />
-<img alt="../_images/039d2b3a41252db093115fae0f3d8d27f1c307351a86df1705cfb6778e466e50.png" src="../_images/039d2b3a41252db093115fae0f3d8d27f1c307351a86df1705cfb6778e466e50.png" />
+<img alt="../_images/da1fd18dbe5a8726b9295c365dd138c2b2aae39decbc7b29423db759c21aa5a2.png" src="../_images/da1fd18dbe5a8726b9295c365dd138c2b2aae39decbc7b29423db759c21aa5a2.png" />
+<img alt="../_images/c57ead572bdd8109e4016411a845bb603def4fa344baa2925b97e2c5af414ed3.png" src="../_images/c57ead572bdd8109e4016411a845bb603def4fa344baa2925b97e2c5af414ed3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -965,6 +922,40 @@ image credit: JC Chouinard
 <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span>
 <span class="n">P_train</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">P_test</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_pca.py:606: RuntimeWarning: divide by zero encountered in matmul
+  C = X.T @ X
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_pca.py:606: RuntimeWarning: overflow encountered in matmul
+  C = X.T @ X
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_pca.py:606: RuntimeWarning: invalid value encountered in matmul
+  C = X.T @ X
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: divide by zero encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: overflow encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: invalid value encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:155: RuntimeWarning: divide by zero encountered in matmul
+  X_transformed -= xp.reshape(self.mean_, (1, -1)) @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:155: RuntimeWarning: overflow encountered in matmul
+  X_transformed -= xp.reshape(self.mean_, (1, -1)) @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:155: RuntimeWarning: invalid value encountered in matmul
+  X_transformed -= xp.reshape(self.mean_, (1, -1)) @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: divide by zero encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: overflow encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: invalid value encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:155: RuntimeWarning: divide by zero encountered in matmul
+  X_transformed -= xp.reshape(self.mean_, (1, -1)) @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:155: RuntimeWarning: overflow encountered in matmul
+  X_transformed -= xp.reshape(self.mean_, (1, -1)) @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:155: RuntimeWarning: invalid value encountered in matmul
+  X_transformed -= xp.reshape(self.mean_, (1, -1)) @ self.components_.T
 </pre></div>
 </div>
 </div>
@@ -987,86 +978,87 @@ image credit: JC Chouinard
  &#39;random_state&#39;: None,
  &#39;n_features_in_&#39;: 64,
  &#39;_fit_svd_solver&#39;: &#39;covariance_eigh&#39;,
- &#39;mean_&#39;: array([0.00000000e+00, 2.98538622e-01, 5.23312457e+00, 1.18956159e+01,
-        1.18343772e+01, 5.77244259e+00, 1.37856646e+00, 1.35003479e-01,
-        5.56715379e-03, 2.00000000e+00, 1.04015310e+01, 1.18796103e+01,
-        1.03702157e+01, 8.28114127e+00, 1.81837161e+00, 1.05775922e-01,
-        2.78357690e-03, 2.61447460e+00, 9.74669450e+00, 6.95198330e+00,
-        7.22964509e+00, 7.84481559e+00, 1.72581768e+00, 4.24495477e-02,
-        1.39178845e-03, 2.47112039e+00, 8.91162143e+00, 8.77174669e+00,
-        9.93876131e+00, 7.47390397e+00, 2.30062630e+00, 2.08768267e-03,
-        0.00000000e+00, 2.25887265e+00, 7.58524704e+00, 9.21642310e+00,
-        1.03465553e+01, 8.61447460e+00, 2.88796103e+00, 0.00000000e+00,
-        7.65483646e-03, 1.54488518e+00, 6.85038274e+00, 7.28740431e+00,
-        7.69380654e+00, 8.12734864e+00, 3.38691719e+00, 2.78357690e-02,
-        8.35073069e-03, 6.99373695e-01, 7.50939457e+00, 9.54766875e+00,
-        9.40779402e+00, 8.80097425e+00, 3.67849687e+00, 2.01113431e-01,
-        6.95894224e-04, 2.74182324e-01, 5.62839248e+00, 1.21308281e+01,
-        1.17564370e+01, 6.75643702e+00, 2.07446068e+00, 3.74391093e-01]),
+ &#39;mean_&#39;: array([0.00000000e+00, 3.06193459e-01, 5.18580376e+00, 1.17877523e+01,
+        1.18914405e+01, 5.84133612e+00, 1.33681280e+00, 1.30132220e-01,
+        6.26304802e-03, 2.06193459e+00, 1.04029228e+01, 1.19805150e+01,
+        1.03208072e+01, 8.20528880e+00, 1.89909534e+00, 1.08559499e-01,
+        2.08768267e-03, 2.67849687e+00, 9.92205985e+00, 6.93667363e+00,
+        7.11760612e+00, 7.83994433e+00, 1.79888657e+00, 5.49756437e-02,
+        6.95894224e-04, 2.55741127e+00, 9.08211552e+00, 8.81141267e+00,
+        9.99443285e+00, 7.58733473e+00, 2.29714683e+00, 2.08768267e-03,
+        0.00000000e+00, 2.35908142e+00, 7.64161447e+00, 9.15240084e+00,
+        1.04057063e+01, 8.77105080e+00, 2.87613083e+00, 0.00000000e+00,
+        7.65483646e-03, 1.52748782e+00, 6.79749478e+00, 7.15448852e+00,
+        7.67780097e+00, 8.20946416e+00, 3.42588727e+00, 1.87891441e-02,
+        9.04662491e-03, 6.94502436e-01, 7.44954767e+00, 9.52748782e+00,
+        9.49617258e+00, 8.75365344e+00, 3.69589422e+00, 2.02505219e-01,
+        6.95894224e-04, 2.85316632e-01, 5.58315936e+00, 1.20473208e+01,
+        1.17898399e+01, 6.76200418e+00, 2.01809325e+00, 3.84133612e-01]),
  &#39;noise_variance_&#39;: 0.0,
  &#39;n_samples_&#39;: 1437,
  &#39;n_components_&#39;: 64,
- &#39;components_&#39;: array([[ 0.00000000e+00, -1.43132198e-02, -2.06540880e-01, ...,
-         -9.40487258e-02, -2.62426337e-02, -7.07548257e-03],
-        [ 0.00000000e+00,  1.19306875e-02,  8.19847328e-02, ...,
-         -1.56004651e-01, -9.41899132e-03,  7.72001337e-03],
-        [ 0.00000000e+00, -1.97459562e-02, -1.44834848e-01, ...,
-         -2.39082466e-01, -1.67936905e-01, -3.61967202e-02],
+ &#39;components_&#39;: array([[ 0.00000000e+00, -1.75586775e-02, -2.27772789e-01, ...,
+         -1.09526974e-01, -4.68670751e-02, -1.52408087e-02],
+        [ 0.00000000e+00,  1.09161789e-02,  5.20172970e-02, ...,
+         -1.80610420e-01, -2.33165365e-02,  6.58131464e-03],
+        [ 0.00000000e+00, -1.79679234e-02, -1.18300457e-01, ...,
+         -2.13129196e-01, -1.57197511e-01, -3.50462470e-02],
         ...,
-        [-0.00000000e+00, -0.00000000e+00, -6.70927313e-15, ...,
-         -1.27871754e-17,  1.86561419e-15,  4.71228460e-15],
         [ 1.00000000e+00,  0.00000000e+00,  0.00000000e+00, ...,
           0.00000000e+00,  0.00000000e+00,  0.00000000e+00],
-        [ 0.00000000e+00,  0.00000000e+00, -9.75154011e-17, ...,
-          3.36409305e-16,  2.84358584e-16,  3.36499285e-16]]),
- &#39;explained_variance_&#39;: array([1.74801214e+02, 1.66892290e+02, 1.41165879e+02, 1.00606031e+02,
-        6.99270375e+01, 5.93789400e+01, 5.28464257e+01, 4.42681616e+01,
-        4.00686877e+01, 3.65129981e+01, 2.86234874e+01, 2.75688102e+01,
-        2.19687892e+01, 2.15677805e+01, 1.72772499e+01, 1.69521228e+01,
-        1.55745560e+01, 1.49388331e+01, 1.22459116e+01, 1.09428995e+01,
-        1.08863164e+01, 9.59930653e+00, 9.26286645e+00, 8.75496577e+00,
-        8.25882668e+00, 7.01096498e+00, 6.91142399e+00, 6.09688174e+00,
-        5.85756261e+00, 5.09242365e+00, 4.32228686e+00, 4.19917287e+00,
-        4.05406601e+00, 3.88573828e+00, 3.67247478e+00, 3.52408362e+00,
-        3.05878814e+00, 2.80890438e+00, 2.67209216e+00, 2.55538833e+00,
-        2.24990327e+00, 1.88597671e+00, 1.79509062e+00, 1.62686074e+00,
-        1.40920502e+00, 1.29789029e+00, 1.16861514e+00, 9.48035155e-01,
-        5.79419788e-01, 4.98548807e-01, 2.16517070e-01, 9.75123663e-02,
-        6.81473530e-02, 4.77197028e-02, 3.67679346e-02, 1.01296205e-02,
-        9.04443175e-03, 4.16350084e-03, 8.72189928e-04, 7.57091487e-04,
-        4.33190967e-04, 2.82353339e-15, 0.00000000e+00, 0.00000000e+00]),
- &#39;explained_variance_ratio_&#39;: array([1.45599216e-01, 1.39011544e-01, 1.17582944e-01, 8.37989565e-02,
-        5.82451439e-02, 4.94591939e-02, 4.40179904e-02, 3.68727968e-02,
-        3.33748799e-02, 3.04131979e-02, 2.38416956e-02, 2.29632110e-02,
-        1.82987201e-02, 1.79647033e-02, 1.43909415e-02, 1.41201296e-02,
-        1.29726968e-02, 1.24431767e-02, 1.02001301e-02, 9.11479708e-03,
-        9.06766666e-03, 7.99566248e-03, 7.71542752e-03, 7.29237588e-03,
-        6.87912095e-03, 5.83972493e-03, 5.75681309e-03, 5.07834690e-03,
-        4.87900803e-03, 4.24169190e-03, 3.60021287e-03, 3.49766610e-03,
-        3.37680054e-03, 3.23659336e-03, 3.05895730e-03, 2.93535612e-03,
-        2.54779213e-03, 2.33965353e-03, 2.22569693e-03, 2.12848944e-03,
-        1.87403820e-03, 1.57090860e-03, 1.49520579e-03, 1.35508012e-03,
-        1.17378559e-03, 1.08106692e-03, 9.73388259e-04, 7.89657992e-04,
-        4.82622890e-04, 4.15262080e-04, 1.80346091e-04, 8.12221139e-05,
-        5.67627705e-05, 3.97477293e-05, 3.06255451e-05, 8.43738307e-06,
-        7.53348415e-06, 3.46795337e-06, 7.26483342e-07, 6.30613053e-07,
-        3.60822810e-07, 2.35183863e-18, 0.00000000e+00, 0.00000000e+00]),
- &#39;singular_values_&#39;: array([5.01013516e+02, 4.89548086e+02, 4.50237940e+02, 3.80092438e+02,
-        3.16883616e+02, 2.92007119e+02, 2.75476800e+02, 2.52129094e+02,
-        2.39872123e+02, 2.28981801e+02, 2.02739557e+02, 1.98969373e+02,
-        1.77615262e+02, 1.75986740e+02, 1.57512320e+02, 1.56023230e+02,
-        1.49549532e+02, 1.46465574e+02, 1.32608933e+02, 1.25355509e+02,
-        1.25030998e+02, 1.17407854e+02, 1.15332026e+02, 1.12125514e+02,
-        1.08902135e+02, 1.00338157e+02, 9.96233148e+01, 9.35688098e+01,
-        9.17140115e+01, 8.55144454e+01, 7.87832719e+01, 7.76531535e+01,
-        7.62996644e+01, 7.46988632e+01, 7.26200646e+01, 7.11377824e+01,
-        6.62753331e+01, 6.35105243e+01, 6.19445264e+01, 6.05767088e+01,
-        5.68406641e+01, 5.20409699e+01, 5.07715484e+01, 4.83339635e+01,
-        4.49846464e+01, 4.31714079e+01, 4.09650015e+01, 3.68968628e+01,
-        2.88452217e+01, 2.67566083e+01, 1.76328816e+01, 1.18333325e+01,
-        9.89240107e+00, 8.27801264e+00, 7.26627512e+00, 3.81393956e+00,
-        3.60385960e+00, 2.44515586e+00, 1.11913571e+00, 1.04268086e+00,
-        7.88709217e-01, 2.01360223e-06, 0.00000000e+00, 0.00000000e+00])}
+        [ 0.00000000e+00,  0.00000000e+00,  1.22575568e-16, ...,
+          1.15892759e-15, -1.63220115e-15,  1.45968796e-15],
+        [-0.00000000e+00, -0.00000000e+00, -7.62144631e-16, ...,
+         -2.21631473e-15,  3.31946746e-15, -5.20181545e-15]],
+       shape=(64, 64)),
+ &#39;explained_variance_&#39;: array([1.80188609e+02, 1.61179309e+02, 1.42021473e+02, 1.01680344e+02,
+        6.88041550e+01, 5.95311613e+01, 5.29396092e+01, 4.38414661e+01,
+        4.07291904e+01, 3.72685416e+01, 2.93317180e+01, 2.62458031e+01,
+        2.18155599e+01, 2.08343630e+01, 1.78594174e+01, 1.70302434e+01,
+        1.53929357e+01, 1.50134974e+01, 1.20291456e+01, 1.10493410e+01,
+        1.07357171e+01, 9.68429769e+00, 9.02619224e+00, 8.54324691e+00,
+        8.24201507e+00, 7.16565786e+00, 6.86637380e+00, 6.04958787e+00,
+        5.91609111e+00, 5.15219212e+00, 4.39134416e+00, 4.25647775e+00,
+        4.00340321e+00, 3.89715922e+00, 3.67208243e+00, 3.58828657e+00,
+        3.07111223e+00, 2.67406632e+00, 2.65983614e+00, 2.50088885e+00,
+        2.22886202e+00, 1.92460482e+00, 1.85195337e+00, 1.64196775e+00,
+        1.40943777e+00, 1.27631239e+00, 1.16887660e+00, 8.40556425e-01,
+        6.58303728e-01, 4.09210911e-01, 2.27734718e-01, 1.04900898e-01,
+        6.93245454e-02, 4.71000971e-02, 3.74789492e-02, 1.26855797e-02,
+        9.72676252e-03, 1.53474578e-03, 1.20481193e-03, 6.65761306e-04,
+        4.77564629e-04, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00]),
+ &#39;explained_variance_ratio_&#39;: array([1.50056533e-01, 1.34226066e-01, 1.18271904e-01, 8.46768279e-02,
+        5.72983662e-02, 4.95760507e-02, 4.40867723e-02, 3.65100680e-02,
+        3.39182432e-02, 3.10363022e-02, 2.44267155e-02, 2.18568433e-02,
+        1.81674484e-02, 1.73503324e-02, 1.48728727e-02, 1.41823575e-02,
+        1.28188489e-02, 1.25028622e-02, 1.00175693e-02, 9.20161273e-03,
+        8.94043460e-03, 8.06483904e-03, 7.51678540e-03, 7.11460070e-03,
+        6.86374242e-03, 5.96737927e-03, 5.71814305e-03, 5.03794431e-03,
+        4.92677157e-03, 4.29061574e-03, 3.65700074e-03, 3.54468739e-03,
+        3.33393329e-03, 3.24545597e-03, 3.05801769e-03, 2.98823462e-03,
+        2.55754486e-03, 2.22689504e-03, 2.21504450e-03, 2.08267720e-03,
+        1.85614012e-03, 1.60276239e-03, 1.54226009e-03, 1.36738935e-03,
+        1.17374425e-03, 1.06288079e-03, 9.73410972e-04, 6.99994206e-04,
+        5.48218753e-04, 3.40780533e-04, 1.89651733e-04, 8.73588238e-05,
+        5.77317341e-05, 3.92237737e-05, 3.12115243e-05, 1.05642310e-05,
+        8.10020268e-06, 1.27809760e-06, 1.00333701e-06, 5.54429236e-07,
+        3.97703787e-07, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00]),
+ &#39;singular_values_&#39;: array([508.67557755, 481.09613125, 451.60030533, 382.11644054,
+        314.32907374, 292.3811683 , 275.71956557, 250.91103058,
+        241.84109953, 231.33876846, 205.232422  , 194.13648102,
+        176.99475688, 172.96862518, 160.14407061, 156.38231846,
+        148.67499997, 146.83113518, 131.43003114, 125.96370001,
+        124.16315767, 117.92646644, 113.84907577, 110.76146695,
+        108.79123882, 101.43906886,  99.2981006 ,  93.20519397,
+         92.17107372,  86.01481198,  79.41013922,  78.18121286,
+         75.82141524,  74.8085599 ,  72.61618528,  71.78286364,
+         66.40871297,  61.96740466,  61.80230335,  59.92725917,
+         56.57425088,  52.57121378,  51.56941959,  48.55785912,
+         44.98836112,  42.8110335 ,  40.96958379,  34.74246719,
+         30.7461242 ,  24.24101623,  18.08388936,  12.27345466,
+          9.97747699,   8.22409505,   7.33619596,   4.2680783 ,
+          3.73732939,   1.4845521 ,   1.31533643,   0.97776952,
+          0.82812004,   0.        ,   0.        ,   0.        ])}
 </pre></div>
 </div>
 </div>
@@ -1101,7 +1093,7 @@ image credit: JC Chouinard
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Explained Variance&#39;)
 </pre></div>
 </div>
-<img alt="../_images/ae8ebe4598cab7bc40e6e3ca59f020c8f9371be0733c3d76f6984cd0e71d90da.png" src="../_images/ae8ebe4598cab7bc40e6e3ca59f020c8f9371be0733c3d76f6984cd0e71d90da.png" />
+<img alt="../_images/2f8f7200e342e976847139d74246677d8089530a4a3ca0170b2bd399ef1673b0.png" src="../_images/2f8f7200e342e976847139d74246677d8089530a4a3ca0170b2bd399ef1673b0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1117,7 +1109,7 @@ image credit: JC Chouinard
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e999a2dc4da6a0853d244f07e28e8f5104a7616f70bc1c8804049eb42d6f3cd2.png" src="../_images/e999a2dc4da6a0853d244f07e28e8f5104a7616f70bc1c8804049eb42d6f3cd2.png" />
+<img alt="../_images/f6d3d26a7d8736755e2bfe89def43539b2d978d3eacdcd4f78796729636f042b.png" src="../_images/f6d3d26a7d8736755e2bfe89def43539b2d978d3eacdcd4f78796729636f042b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1150,16 +1142,16 @@ image credit: JC Chouinard
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TRAINING REPORT:
               precision    recall  f1-score   support
 
-           0       1.00      0.99      1.00       142
-           1       0.96      0.98      0.97       153
-           2       0.94      0.94      0.94       146
-           3       0.93      0.89      0.91       148
-           4       0.96      0.98      0.97       134
-           5       0.96      0.96      0.96       141
-           6       0.99      0.99      0.99       142
-           7       0.93      0.95      0.94       150
-           8       0.90      0.90      0.90       143
-           9       0.89      0.91      0.90       138
+           0       0.99      0.99      0.99       139
+           1       0.96      0.98      0.97       145
+           2       0.97      0.96      0.96       141
+           3       0.93      0.92      0.92       153
+           4       0.97      0.99      0.98       147
+           5       0.99      0.97      0.98       146
+           6       0.99      0.99      0.99       140
+           7       0.93      0.97      0.95       145
+           8       0.92      0.87      0.90       139
+           9       0.88      0.91      0.90       142
 
     accuracy                           0.95      1437
    macro avg       0.95      0.95      0.95      1437
@@ -1168,23 +1160,23 @@ weighted avg       0.95      0.95      0.95      1437
 TESTING REPORT:
               precision    recall  f1-score   support
 
-           0       0.97      1.00      0.99        36
-           1       1.00      1.00      1.00        29
-           2       0.94      0.94      0.94        31
-           3       0.84      0.89      0.86        35
-           4       0.96      0.98      0.97        47
-           5       0.97      0.93      0.95        41
-           6       1.00      0.97      0.99        39
-           7       0.97      1.00      0.98        29
-           8       0.79      0.84      0.81        31
-           9       0.89      0.81      0.85        42
+           0       1.00      0.97      0.99        39
+           1       0.89      0.92      0.91        37
+           2       0.92      0.97      0.95        36
+           3       0.93      0.90      0.92        30
+           4       0.94      0.94      0.94        34
+           5       0.90      0.97      0.93        36
+           6       0.98      0.98      0.98        41
+           7       0.91      0.88      0.90        34
+           8       0.77      0.77      0.77        35
+           9       0.91      0.84      0.88        38
 
-    accuracy                           0.93       360
-   macro avg       0.93      0.93      0.93       360
-weighted avg       0.93      0.93      0.93       360
+    accuracy                           0.92       360
+   macro avg       0.92      0.92      0.91       360
+weighted avg       0.92      0.92      0.92       360
 </pre></div>
 </div>
-<img alt="../_images/f75a821ddc758ab116586d8673fef91a34933b5203289d2a37692151a344b3b0.png" src="../_images/f75a821ddc758ab116586d8673fef91a34933b5203289d2a37692151a344b3b0.png" />
+<img alt="../_images/65b1c8faf085ed84759f9e1d152a6485d07c26bbf83d4ab08661ab6dd5228827.png" src="../_images/65b1c8faf085ed84759f9e1d152a6485d07c26bbf83d4ab08661ab6dd5228827.png" />
 </div>
 </div>
 <p>What could we try to improve the prediction?</p>
@@ -1222,24 +1214,6 @@ weighted avg       0.93      0.93      0.93       360
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="04_trees_gridcv.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">11. </span>Ensemble Tree Methods (continued)</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="05b_pca_examples.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>PCA: Examples and Observations</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1247,7 +1221,8 @@ weighted avg       0.93      0.93      0.93       360
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1256,14 +1231,14 @@ weighted avg       0.93      0.93      0.93       360
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-component-analysis-pca">12.1. Principle Component Analysis (PCA)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">12.1.1. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#principle-component-analysis-pca">Principle Component Analysis (PCA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">12.2. K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">12.2.1. Eager vs Lazy models</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">12.2.2. Hyper parameters of KNN</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mnist">12.2.3. Example: MNIST</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#k-nearest-neighbors-knn-a-lazy-learner">K-Nearest Neighbors (KNN) (a lazy learner)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eager-vs-lazy-models">Eager vs Lazy models</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyper-parameters-of-knn">Hyper parameters of KNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-mnist">Example: MNIST</a></li>
 </ul>
 </li>
 </ul>
@@ -1314,8 +1289,8 @@ By Eatai Roth, Gettysburg College
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

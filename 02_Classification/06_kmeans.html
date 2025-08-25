@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>14. K-Means Clustering &#8212; My sample book</title>
+    <title>K-Means Clustering &#8212; My sample book</title>
   
   
   
@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -45,10 +47,11 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -84,10 +87,9 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="15. Classification and Clustering Exercises" href="07_classification_exercises.html" />
-    <link rel="prev" title="13. PCA: Examples and Observations" href="05b_pca_examples.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -103,19 +105,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -123,7 +114,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -131,8 +121,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -148,7 +138,10 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -178,21 +171,17 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -207,35 +196,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">5. Polynomial Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/05_reading_review.html">6. Reading Assignments Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/06_exam_review.html">7. Exam 1 Review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">8. Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">9. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05b_pca_examples.html">13. PCA: Examples and Observations</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">14. K-Means Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="09_modeling_process.html">19. Modeling process review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/02_NN_example.html">21. Neural Networks with Keras</a></li>
-</ul>
 
     </div>
 </nav></div>
@@ -243,9 +203,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -389,24 +354,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -430,10 +387,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">14.1. An Example with Synthetic Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">14.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">14.2.1. Example: Extracting a Color Palette from a Photo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">14.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">An Example with Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">Example: Extracting a Color Palette from a Photo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">Example: Segmenting Objects in an Image (kinda)</a></li>
 </ul>
 </li>
 </ul>
@@ -448,7 +405,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="k-means-clustering">
-<h1><span class="section-number">14. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h1>
+<h1>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h1>
 <p>Clustering refers to an <em>unsupervised</em> learning algorithms that partition data into groups by similarity. Clustering can be used to identify categories from and assign classes/labels to unlabeled data (perhaps for classification).</p>
 <p>We’ll only introduce K-means clustering, but alternative clustering methods include:</p>
 <ul class="simple">
@@ -456,7 +413,7 @@ document.write(`
 <li><p>Agglomerative Clustering (Hierarchical Clustering)</p></li>
 </ul>
 <section id="an-example-with-synthetic-data">
-<h2><span class="section-number">14.1. </span>An Example with Synthetic Data<a class="headerlink" href="#an-example-with-synthetic-data" title="Link to this heading">#</a></h2>
+<h2>An Example with Synthetic Data<a class="headerlink" href="#an-example-with-synthetic-data" title="Link to this heading">#</a></h2>
 <p>To demonstrate K-Means, we’ll first create a synthetic dataset of 5 clusters using the sklearn make_blobs function. Remember, because we create this dataset, we know it should have 5 clusters. BUT that does not mean that the best partitioning will be into 5 groupings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -482,7 +439,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/747eb4e836d713934560cfd68dee73555741f0871425dfad73345ed216841c3a.png" src="../_images/747eb4e836d713934560cfd68dee73555741f0871425dfad73345ed216841c3a.png" />
+<img alt="../_images/a4f0dd9630cef54855d49c280c554c04197773bca5c49d79c9b143325ef195eb.png" src="../_images/a4f0dd9630cef54855d49c280c554c04197773bca5c49d79c9b143325ef195eb.png" />
 </div>
 </div>
 <p>If we squint at the data above, we see two clear groupings, and possibly 3 or 4. Two of the clusters have melded into a single blob.</p>
@@ -534,7 +491,33 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e8acfe8f3138489d4292684786e1ee95e380ba9d95b76d901d1b115996a62e19.png" src="../_images/e8acfe8f3138489d4292684786e1ee95e380ba9d95b76d901d1b115996a62e19.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+  ret = a @ b
+</pre></div>
+</div>
+<img alt="../_images/cffeb7a2f71421a7845d6824d07e581dfe81a07bea691b571cc213a045241e6c.png" src="../_images/cffeb7a2f71421a7845d6824d07e581dfe81a07bea691b571cc213a045241e6c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -544,10 +527,26 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+  ret = a @ b
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="example-color-extraction-and-image-segmentation">
-<h2><span class="section-number">14.2. </span>Example: Color Extraction and Image Segmentation<a class="headerlink" href="#example-color-extraction-and-image-segmentation" title="Link to this heading">#</a></h2>
+<h2>Example: Color Extraction and Image Segmentation<a class="headerlink" href="#example-color-extraction-and-image-segmentation" title="Link to this heading">#</a></h2>
 <p>In this example, we’ll apply K-Means to image data. First, we’ll use K-Means to extract a color palette for a photograph. Then we’ll use K-Means to do a crude segmentation of the image, identifying the pixels that belong to different objects in the image.</p>
 <p>First, let’s inspect the image and describe our features.</p>
 <div class="cell docutils container">
@@ -576,7 +575,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(384, 512, 3)
 </pre></div>
 </div>
-<img alt="../_images/6b38fb060bf80f34744dd62c64fc09abfdad84a1fb96875e29aba99bb7c5b0bd.png" src="../_images/6b38fb060bf80f34744dd62c64fc09abfdad84a1fb96875e29aba99bb7c5b0bd.png" />
+<img alt="../_images/98400f82063f9bba52a5e6bf7e0f9b9b7a0bf2ac1891d77437869c84d60cf7ca.png" src="../_images/98400f82063f9bba52a5e6bf7e0f9b9b7a0bf2ac1891d77437869c84d60cf7ca.png" />
 </div>
 </div>
 <p>This image of the pepper is stored as a numpy array of size (384, 512, 3). What does this shape correspond to?</p>
@@ -615,7 +614,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/611350072de2c25b7606e133fc1ed04aceaec99df871c8d787687d4e7d0e412a.png" src="../_images/611350072de2c25b7606e133fc1ed04aceaec99df871c8d787687d4e7d0e412a.png" />
+<img alt="../_images/3b1c5a456b238b51f800b103ac30dd83dcb38078f504d4272def287507ea3b9b.png" src="../_images/3b1c5a456b238b51f800b103ac30dd83dcb38078f504d4272def287507ea3b9b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -641,7 +640,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0a27ff00ef7f3820fd22670da8c3cf5e6ae743496b142eae9f12e14a04682f57.png" src="../_images/0a27ff00ef7f3820fd22670da8c3cf5e6ae743496b142eae9f12e14a04682f57.png" />
+<img alt="../_images/8d5ba21d93d75616317e78fae9f267c724815b64a714047a6ecbec209063a2da.png" src="../_images/8d5ba21d93d75616317e78fae9f267c724815b64a714047a6ecbec209063a2da.png" />
 </div>
 </div>
 <p>Now we’ll create a dataframe of these data.</p>
@@ -741,7 +740,7 @@ document.write(`
 </div></div></div>
 </div>
 <section id="example-extracting-a-color-palette-from-a-photo">
-<h3><span class="section-number">14.2.1. </span>Example: Extracting a Color Palette from a Photo<a class="headerlink" href="#example-extracting-a-color-palette-from-a-photo" title="Link to this heading">#</a></h3>
+<h3>Example: Extracting a Color Palette from a Photo<a class="headerlink" href="#example-extracting-a-color-palette-from-a-photo" title="Link to this heading">#</a></h3>
 <p>If you look at the photograph, you see various shades of reds, yellows, greens, whites, and purples. A color palette represents the colors in the image as a discrete set of representative colors. To build this palette, we’ll apply K-means to the color of each pixel and extract the centroids.</p>
 <p>Let’s see.</p>
 <div class="cell docutils container">
@@ -764,7 +763,21 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/64dcdd781f16da4105927af144f9ad9afec585c67776ff1b1dd143a4c49f6ed2.png" src="../_images/64dcdd781f16da4105927af144f9ad9afec585c67776ff1b1dd143a4c49f6ed2.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: divide by zero encountered in matmul
+  current_pot = closest_dist_sq @ sample_weight
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: overflow encountered in matmul
+  current_pot = closest_dist_sq @ sample_weight
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: invalid value encountered in matmul
+  current_pot = closest_dist_sq @ sample_weight
+</pre></div>
+</div>
+<img alt="../_images/8825cf7a93b2ad50d9d5df7f204d99ad592a55ef04f0b31c9aa6994c00ad3293.png" src="../_images/8825cf7a93b2ad50d9d5df7f204d99ad592a55ef04f0b31c9aa6994c00ad3293.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -776,12 +789,12 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label
-1    99485
-2    29213
-3    24809
-5    22848
-4    11815
-0     8438
+1    99605
+2    29397
+5    24811
+0    22601
+3    11825
+4     8369
 Name: count, dtype: int64
 </pre></div>
 </div>
@@ -823,44 +836,44 @@ Name: count, dtype: int64
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>0.928569</td>
-      <td>0.810076</td>
-      <td>0.667198</td>
+      <td>0.937182</td>
+      <td>0.488815</td>
+      <td>0.125474</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.265980</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
-      <td>0.675812</td>
-      <td>0.124248</td>
-      <td>0.121607</td>
+      <td>0.680920</td>
+      <td>0.126982</td>
+      <td>0.122486</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
-      <td>0.477924</td>
-      <td>0.449846</td>
-      <td>0.100019</td>
+      <td>0.494849</td>
+      <td>0.336414</td>
+      <td>0.520139</td>
     </tr>
     <tr>
       <th>4</th>
       <td>4</td>
-      <td>0.494229</td>
-      <td>0.335703</td>
-      <td>0.520272</td>
+      <td>0.928921</td>
+      <td>0.811007</td>
+      <td>0.670364</td>
     </tr>
     <tr>
       <th>5</th>
       <td>5</td>
-      <td>0.936374</td>
-      <td>0.482551</td>
-      <td>0.125319</td>
+      <td>0.477072</td>
+      <td>0.448932</td>
+      <td>0.099590</td>
     </tr>
   </tbody>
 </table>
@@ -915,9 +928,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.24313725490196078, 0.11372549019607843, 0.2...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>1</th>
@@ -928,9 +941,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.24705882352941178, 0.12156862745098039, 0.2...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>2</th>
@@ -941,9 +954,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.24705882352941178, 0.13333333333333333, 0.2...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>3</th>
@@ -954,9 +967,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.2549019607843137, 0.11764705882352941, 0.23...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>4</th>
@@ -967,9 +980,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.25882352941176473, 0.10588235294117647, 0.2...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>...</th>
@@ -993,9 +1006,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.16862745098039217, 0.0784313725490196, 0.17...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>196604</th>
@@ -1006,9 +1019,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.1607843137254902, 0.07450980392156863, 0.15...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>196605</th>
@@ -1019,9 +1032,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.1568627450980392, 0.0784313725490196, 0.160...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>196606</th>
@@ -1032,9 +1045,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.16470588235294117, 0.08235294117647059, 0.1...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
     <tr>
       <th>196607</th>
@@ -1045,9 +1058,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.1803921568627451, 0.09019607843137255, 0.19...</td>
       <td>1</td>
-      <td>0.265641</td>
-      <td>0.146196</td>
-      <td>0.238846</td>
+      <td>0.26598</td>
+      <td>0.145962</td>
+      <td>0.238631</td>
     </tr>
   </tbody>
 </table>
@@ -1065,12 +1078,12 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/db1ab1f0613af810827d96c7ac14fa63f81f34b1192b8ca90d082b1be9061b73.png" src="../_images/db1ab1f0613af810827d96c7ac14fa63f81f34b1192b8ca90d082b1be9061b73.png" />
+<img alt="../_images/708edeb07595d166e8e70e0f772c565cd1f6e3594605c533be37f98f1b938a90.png" src="../_images/708edeb07595d166e8e70e0f772c565cd1f6e3594605c533be37f98f1b938a90.png" />
 </div>
 </div>
 </section>
 <section id="example-segmenting-objects-in-an-image-kinda">
-<h3><span class="section-number">14.2.2. </span>Example: Segmenting Objects in an Image (kinda)<a class="headerlink" href="#example-segmenting-objects-in-an-image-kinda" title="Link to this heading">#</a></h3>
+<h3>Example: Segmenting Objects in an Image (kinda)<a class="headerlink" href="#example-segmenting-objects-in-an-image-kinda" title="Link to this heading">#</a></h3>
 <p>Image segmentation refers to the process of partitioning an image into the objects in the image. We’ll attempt an image segmentation by incorporating pixel position and pixel color. The idea is that an object is represented by a blob of pixels that are near each other and of similar color.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1227,7 +1240,21 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_28841/4191165465.py:9: SettingWithCopyWarning: 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+  ret = a @ b
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: divide by zero encountered in matmul
+  current_pot = closest_dist_sq @ sample_weight
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: overflow encountered in matmul
+  current_pot = closest_dist_sq @ sample_weight
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: invalid value encountered in matmul
+  current_pot = closest_dist_sq @ sample_weight
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_51268/4191165465.py:9: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -1235,7 +1262,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   peppers_df[&#39;label&#39;] = labels
 </pre></div>
 </div>
-<img alt="../_images/ef346c2513501854a594fb25fbc327258978f10f09a60d489edb41af9ac7ece2.png" src="../_images/ef346c2513501854a594fb25fbc327258978f10f09a60d489edb41af9ac7ece2.png" />
+<img alt="../_images/cd30fc55968835f3dee7cb324d8dafcc23c9cf7e8606934b0e0806590e134535.png" src="../_images/cd30fc55968835f3dee7cb324d8dafcc23c9cf7e8606934b0e0806590e134535.png" />
 </div>
 </div>
 </section>
@@ -1272,24 +1299,6 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="05b_pca_examples.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">13. </span>PCA: Examples and Observations</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="07_classification_exercises.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">15. </span>Classification and Clustering Exercises</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1297,7 +1306,8 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1306,10 +1316,10 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">14.1. An Example with Synthetic Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">14.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">14.2.1. Example: Extracting a Color Palette from a Photo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">14.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">An Example with Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">Example: Extracting a Color Palette from a Photo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">Example: Segmenting Objects in an Image (kinda)</a></li>
 </ul>
 </li>
 </ul>
@@ -1360,8 +1370,8 @@ By Eatai Roth, Gettysburg College
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

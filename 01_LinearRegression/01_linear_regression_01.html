@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Linear Regression (Part 1) &#8212; My sample book</title>
+    <title>Linear Regression (Part 1) &#8212; My sample book</title>
   
   
   
@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -45,10 +47,11 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -86,10 +89,9 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Linear Regression (Part 2)" href="02_linear_regression_02.html" />
-    <link rel="prev" title="1. Setting Up" href="../00_Resources/setup.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -105,19 +107,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -125,7 +116,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -133,8 +123,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -150,7 +140,10 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -180,21 +173,17 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -209,35 +198,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Linear Regression (Part 1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_regularization.html">4. Bias, Variance, and Regularization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_polynomial_regression.html">5. Polynomial Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_reading_review.html">6. Reading Assignments Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_exam_review.html">7. Exam 1 Review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/01_classification_intro.html">8. Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/02_logistic_regression.html">9. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05b_pca_examples.html">13. PCA: Examples and Observations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/06_kmeans.html">14. K-Means Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/09_modeling_process.html">19. Modeling process review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/02_NN_example.html">21. Neural Networks with Keras</a></li>
-</ul>
 
     </div>
 </nav></div>
@@ -245,9 +205,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -391,24 +356,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -432,16 +389,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">2.1. Simple linear regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">2.1.1. Fitting the model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-functions">2.1.2. Cost functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">2.1.3. Assessing the model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-from-scratch">2.1.4. An Example from Scratch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple linear regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">Fitting the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-functions">Cost functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">Assessing the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-from-scratch">An Example from Scratch</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">2.2. Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-process">2.2.1. Modeling process</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">2.2.2. Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-process">Modeling process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
 </ul>
 </li>
 </ul>
@@ -456,10 +413,10 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="linear-regression-part-1">
-<h1><span class="section-number">2. </span>Linear Regression (Part 1)<a class="headerlink" href="#linear-regression-part-1" title="Link to this heading">#</a></h1>
+<h1>Linear Regression (Part 1)<a class="headerlink" href="#linear-regression-part-1" title="Link to this heading">#</a></h1>
 <p>Often we model the relationship between features and outcomes by fitting a mathematical function to the data. As the name suggests, linear regression fits linear (affine) functions.</p>
 <section id="simple-linear-regression">
-<h2><span class="section-number">2.1. </span>Simple linear regression<a class="headerlink" href="#simple-linear-regression" title="Link to this heading">#</a></h2>
+<h2>Simple linear regression<a class="headerlink" href="#simple-linear-regression" title="Link to this heading">#</a></h2>
 <p>A simple linear model relating a single feature to an outcome:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -483,11 +440,11 @@ y_i - \hat{y}_i = \epsilon
 \]</div>
 <p><em>Note</em>: A notational convention is to use lowercase letters with subscripts to denote individual values (e.g. <span class="math notranslate nohighlight">\(x_i\)</span>, <span class="math notranslate nohighlight">\(\theta_i\)</span>) and uppercase letters to represent an array/matrix of values (e.g. <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(\Theta\)</span>).</p>
 <section id="fitting-the-model">
-<h3><span class="section-number">2.1.1. </span>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Link to this heading">#</a></h3>
+<h3>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Link to this heading">#</a></h3>
 <p>We are looking for the “best” values for <span class="math notranslate nohighlight">\(\theta_i\)</span>, but how do we decide what is best?</p>
 </section>
 <section id="cost-functions">
-<h3><span class="section-number">2.1.2. </span>Cost functions<a class="headerlink" href="#cost-functions" title="Link to this heading">#</a></h3>
+<h3>Cost functions<a class="headerlink" href="#cost-functions" title="Link to this heading">#</a></h3>
 <p>The loss function for a linear regression model is typically either:</p>
 <ul class="simple">
 <li><p><em>squared error</em> (most common),  <span class="math notranslate nohighlight">\(L(\Theta) = (y_i - \hat{y}_i)^2\)</span>
@@ -502,7 +459,7 @@ y_i - \hat{y}_i = \epsilon
 </ul>
 </section>
 <section id="assessing-the-model">
-<h3><span class="section-number">2.1.3. </span>Assessing the model<a class="headerlink" href="#assessing-the-model" title="Link to this heading">#</a></h3>
+<h3>Assessing the model<a class="headerlink" href="#assessing-the-model" title="Link to this heading">#</a></h3>
 <p><em>Coefficient of determination (<span class="math notranslate nohighlight">\(R^2\)</span>)</em> quantifies how much of the variation in the data are explained by the linear model.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -523,7 +480,7 @@ y_i - \hat{y}_i = \epsilon
 </ul>
 </section>
 <section id="an-example-from-scratch">
-<h3><span class="section-number">2.1.4. </span>An Example from Scratch<a class="headerlink" href="#an-example-from-scratch" title="Link to this heading">#</a></h3>
+<h3>An Example from Scratch<a class="headerlink" href="#an-example-from-scratch" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -546,7 +503,7 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4e428b484bb4403dd8cc4c9e7fc01b25b95eaebe5ec7712e08799fc6c5bf1ca2.png" src="../_images/4e428b484bb4403dd8cc4c9e7fc01b25b95eaebe5ec7712e08799fc6c5bf1ca2.png" />
+<img alt="../_images/5593d0cdec4293661eba78d7e084def0721ce4fdbfa24d9ff80de4db254832f8.png" src="../_images/5593d0cdec4293661eba78d7e084def0721ce4fdbfa24d9ff80de4db254832f8.png" />
 </div>
 </div>
 <p>First, we’ll fit a model with just one parameter, <span class="math notranslate nohighlight">\(y_i = \theta_1 * x_i\)</span>. This is the equation of a line that passes through the origin (y-intercept is 0).</p>
@@ -580,7 +537,7 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a1c0978d701a2b0cebde3c8eea93bdf1be495538ce6501a2dbd98da3d5416b75.png" src="../_images/a1c0978d701a2b0cebde3c8eea93bdf1be495538ce6501a2dbd98da3d5416b75.png" />
+<img alt="../_images/5ddde613e1f56b0e86bee3783f1adfb97f0673113eefc0f35c07c0d9fb76f49e.png" src="../_images/5ddde613e1f56b0e86bee3783f1adfb97f0673113eefc0f35c07c0d9fb76f49e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -602,7 +559,7 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3276176351edaed82e179ab3119c675453844fc0a05ec0140aadad29f3469450.png" src="../_images/3276176351edaed82e179ab3119c675453844fc0a05ec0140aadad29f3469450.png" />
+<img alt="../_images/3ab44c2d88fa79cddbce21b1832b95446ee2b916378ed655389e2f7916d15562.png" src="../_images/3ab44c2d88fa79cddbce21b1832b95446ee2b916378ed655389e2f7916d15562.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -636,7 +593,7 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/bac3a4e59ab1fad83965863c14b8e3bf8defb8f33fc684046b672fd8ff8ca51c.png" src="../_images/bac3a4e59ab1fad83965863c14b8e3bf8defb8f33fc684046b672fd8ff8ca51c.png" />
+<img alt="../_images/62414b90762bfe9dd3ce300881bdb74069e446898815d1e30a99faa875499d48.png" src="../_images/62414b90762bfe9dd3ce300881bdb74069e446898815d1e30a99faa875499d48.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -681,11 +638,11 @@ y_i - \hat{y}_i = \epsilon
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.int64(28), np.int64(8))
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_28784/2395495076.py:25: UserWarning: The following kwargs were not used by contour: &#39;shading&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_51221/2395495076.py:25: UserWarning: The following kwargs were not used by contour: &#39;shading&#39;
   c = ax.contourf(Theta_1, Theta_0, MSE, shading=&#39;auto&#39;)
 </pre></div>
 </div>
-<img alt="../_images/4e51122be3f0722feb8eaa9060b0af078e8aca13b16bdd5d7c596c783a815040.png" src="../_images/4e51122be3f0722feb8eaa9060b0af078e8aca13b16bdd5d7c596c783a815040.png" />
+<img alt="../_images/042467886e6b2655c114201517c1ac78e5c9f74e1187ca26a34544845f1607ec.png" src="../_images/042467886e6b2655c114201517c1ac78e5c9f74e1187ca26a34544845f1607ec.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -707,7 +664,13 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c1d8d2c51b75579ed679750c2f3c6560a8a0a104744651a0a09837b486b49fad.png" src="../_images/c1d8d2c51b75579ed679750c2f3c6560a8a0a104744651a0a09837b486b49fad.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/mpl_toolkits/mplot3d/art3d.py:1403: RuntimeWarning: divide by zero encountered in matmul
+  shade = ((normals / np.linalg.norm(normals, axis=1, keepdims=True))
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/mpl_toolkits/mplot3d/art3d.py:1403: RuntimeWarning: overflow encountered in matmul
+  shade = ((normals / np.linalg.norm(normals, axis=1, keepdims=True))
+</pre></div>
+</div>
+<img alt="../_images/ef6c117b3f995a9c34ec71bc4336bd9a07a9c89724d98aa8ef01579484a68107.png" src="../_images/ef6c117b3f995a9c34ec71bc4336bd9a07a9c89724d98aa8ef01579484a68107.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -729,13 +692,13 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5a5596238f7e8a8665d9079ea784481aa579e186c6f879a75ab515aa732e157c.png" src="../_images/5a5596238f7e8a8665d9079ea784481aa579e186c6f879a75ab515aa732e157c.png" />
+<img alt="../_images/818a7f75be0fcc6d565a1da72bac5cceb1a313fc57d15c31360ba44b561106c5.png" src="../_images/818a7f75be0fcc6d565a1da72bac5cceb1a313fc57d15c31360ba44b561106c5.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="linear-regression-with-scikit-learn">
-<h2><span class="section-number">2.2. </span>Linear Regression with Scikit-learn<a class="headerlink" href="#linear-regression-with-scikit-learn" title="Link to this heading">#</a></h2>
+<h2>Linear Regression with Scikit-learn<a class="headerlink" href="#linear-regression-with-scikit-learn" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sk</span>
@@ -761,11 +724,11 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ae2406026196615c08f94fd2c6e4c5dada61dc2b5e0a7f216935b7d31543bfa7.png" src="../_images/ae2406026196615c08f94fd2c6e4c5dada61dc2b5e0a7f216935b7d31543bfa7.png" />
+<img alt="../_images/02f7698b052e4c67b5a23288dca49dde632e64bbca206647b6af30b68f91fd7a.png" src="../_images/02f7698b052e4c67b5a23288dca49dde632e64bbca206647b6af30b68f91fd7a.png" />
 </div>
 </div>
 <section id="modeling-process">
-<h3><span class="section-number">2.2.1. </span>Modeling process<a class="headerlink" href="#modeling-process" title="Link to this heading">#</a></h3>
+<h3>Modeling process<a class="headerlink" href="#modeling-process" title="Link to this heading">#</a></h3>
 <p>For this example, we are only fitting a simple linear regression. We are not comparing different candidate models, so we will not be conducting any model <em>validation</em>.</p>
 <ul class="simple">
 <li><p>Split the data into training and testing sets.</p></li>
@@ -803,7 +766,7 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model coefficients: [46.1808004], -0.21479415831363768
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model coefficients: [46.1808004], -0.21479415831364035
 MSE_test = 987.10, MSE_train = 753.65
 R2_test = 0.61, R2_train = 0.71
 </pre></div>
@@ -816,7 +779,7 @@ R2_test = 0.61, R2_train = 0.71
  &#39;coef_&#39;: array([46.1808004]),
  &#39;rank_&#39;: 1,
  &#39;singular_&#39;: array([14.28453481]),
- &#39;intercept_&#39;: np.float64(-0.21479415831363768)}
+ &#39;intercept_&#39;: np.float64(-0.21479415831364035)}
 </pre></div>
 </div>
 </div>
@@ -837,7 +800,7 @@ R2_test = 0.61, R2_train = 0.71
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a362d32e1e500c04669d76229e2a66503b15905dc230c61f86e5c8c5568b6bc0.png" src="../_images/a362d32e1e500c04669d76229e2a66503b15905dc230c61f86e5c8c5568b6bc0.png" />
+<img alt="../_images/5e43bebc37f8c41e1f4edbdac65eaeb6137eb10c619de246f6d169c1f79b4b69.png" src="../_images/5e43bebc37f8c41e1f4edbdac65eaeb6137eb10c619de246f6d169c1f79b4b69.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -856,12 +819,12 @@ R2_test = 0.61, R2_train = 0.71
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/93134a831065bf1c873c091d24eec48bd3615d29085114223ba03a3860336d08.png" src="../_images/93134a831065bf1c873c091d24eec48bd3615d29085114223ba03a3860336d08.png" />
+<img alt="../_images/bfc73ac08f871e61d918c83aff5b0dd6c1e64b7b283fcca6d14573f89236345c.png" src="../_images/bfc73ac08f871e61d918c83aff5b0dd6c1e64b7b283fcca6d14573f89236345c.png" />
 </div>
 </div>
 </section>
 <section id="assumptions">
-<h3><span class="section-number">2.2.2. </span>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
+<h3>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><em>Linearity</em> - the independent and dependent variables are actually linearly related</p></li>
 <li><p><em>Independence</em> - the observations (samples) are independent of each other</p></li>
@@ -891,7 +854,7 @@ R2_test = 0.61, R2_train = 0.71
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/404c680582efb2363157602584c1a2490a1f763e3068ae4b20f7ab445680b956.png" src="../_images/404c680582efb2363157602584c1a2490a1f763e3068ae4b20f7ab445680b956.png" />
+<img alt="../_images/ccf830e6ade21013305aac3f9ca24682fa717cee1145a15281e8114f082e3214.png" src="../_images/ccf830e6ade21013305aac3f9ca24682fa717cee1145a15281e8114f082e3214.png" />
 </div>
 </div>
 </section>
@@ -928,24 +891,6 @@ R2_test = 0.61, R2_train = 0.71
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../00_Resources/setup.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Setting Up</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="02_linear_regression_02.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Linear Regression (Part 2)</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -953,7 +898,8 @@ R2_test = 0.61, R2_train = 0.71
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -962,16 +908,16 @@ R2_test = 0.61, R2_train = 0.71
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">2.1. Simple linear regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">2.1.1. Fitting the model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-functions">2.1.2. Cost functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">2.1.3. Assessing the model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-from-scratch">2.1.4. An Example from Scratch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple linear regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">Fitting the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-functions">Cost functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">Assessing the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-from-scratch">An Example from Scratch</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">2.2. Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-process">2.2.1. Modeling process</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">2.2.2. Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-process">Modeling process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
 </ul>
 </li>
 </ul>
@@ -1022,8 +968,8 @@ By Eatai Roth, Gettysburg College
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

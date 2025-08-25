@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>13. PCA: Examples and Observations &#8212; My sample book</title>
+    <title>PCA: Examples and Observations &#8212; My sample book</title>
   
   
   
@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -45,10 +47,11 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -84,10 +87,9 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="14. K-Means Clustering" href="06_kmeans.html" />
-    <link rel="prev" title="12. K-Nearest Neighbors (and PCA)" href="05_knn_pca.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -103,19 +105,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -123,7 +114,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -131,8 +121,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -148,7 +138,10 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -178,21 +171,17 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -207,35 +196,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">5. Polynomial Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/05_reading_review.html">6. Reading Assignments Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/06_exam_review.html">7. Exam 1 Review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">8. Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">9. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">13. PCA: Examples and Observations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="06_kmeans.html">14. K-Means Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="09_modeling_process.html">19. Modeling process review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../03_NN/02_NN_example.html">21. Neural Networks with Keras</a></li>
-</ul>
 
     </div>
 </nav></div>
@@ -243,9 +203,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -389,24 +354,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -430,9 +387,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-0-synthetic-data-boxes">13.1. Example 0: Synthetic data (boxes)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-macro-nutrients">13.2. Example 1: Macro-nutrients</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-automobile-specs">13.3. Example 2: Automobile specs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-0-synthetic-data-boxes">Example 0: Synthetic data (boxes)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-macro-nutrients">Example 1: Macro-nutrients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-automobile-specs">Example 2: Automobile specs</a></li>
 </ul>
             </nav>
         </div>
@@ -445,7 +402,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="pca-examples-and-observations">
-<h1><span class="section-number">13. </span>PCA: Examples and Observations<a class="headerlink" href="#pca-examples-and-observations" title="Link to this heading">#</a></h1>
+<h1>PCA: Examples and Observations<a class="headerlink" href="#pca-examples-and-observations" title="Link to this heading">#</a></h1>
 <p>Principle Component Analysis (PCA) is one of the more complex concepts in data science. In this notebook, we look at some examples and make some general observations as to the (beneficial) effects and uses of PCA.</p>
 <p>Working through the examples, observe:</p>
 <ul class="simple">
@@ -576,7 +533,7 @@ document.write(`
 </details>
 </div>
 <section id="example-0-synthetic-data-boxes">
-<h2><span class="section-number">13.1. </span>Example 0: Synthetic data (boxes)<a class="headerlink" href="#example-0-synthetic-data-boxes" title="Link to this heading">#</a></h2>
+<h2>Example 0: Synthetic data (boxes)<a class="headerlink" href="#example-0-synthetic-data-boxes" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_data</span> <span class="o">=</span> <span class="mi">100</span>
@@ -616,28 +573,28 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>3.540936</td>
-      <td>2.273288</td>
+      <td>2.511696</td>
+      <td>7.816657</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>3.289626</td>
-      <td>8.364747</td>
+      <td>4.841553</td>
+      <td>1.213309</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2.959350</td>
-      <td>3.929940</td>
+      <td>4.871580</td>
+      <td>2.235812</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4.867731</td>
-      <td>9.013101</td>
+      <td>2.022584</td>
+      <td>7.672452</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1.395342</td>
-      <td>4.527227</td>
+      <td>0.166706</td>
+      <td>0.679878</td>
     </tr>
     <tr>
       <th>...</th>
@@ -646,28 +603,28 @@ document.write(`
     </tr>
     <tr>
       <th>95</th>
-      <td>0.032938</td>
-      <td>3.917185</td>
+      <td>2.162941</td>
+      <td>4.202675</td>
     </tr>
     <tr>
       <th>96</th>
-      <td>2.418554</td>
-      <td>4.251622</td>
+      <td>2.573747</td>
+      <td>9.544860</td>
     </tr>
     <tr>
       <th>97</th>
-      <td>4.669617</td>
-      <td>6.510215</td>
+      <td>2.885653</td>
+      <td>3.182439</td>
     </tr>
     <tr>
       <th>98</th>
-      <td>4.592853</td>
-      <td>5.790512</td>
+      <td>3.582096</td>
+      <td>7.247243</td>
     </tr>
     <tr>
       <th>99</th>
-      <td>4.829832</td>
-      <td>3.611294</td>
+      <td>0.035258</td>
+      <td>3.773585</td>
     </tr>
   </tbody>
 </table>
@@ -714,48 +671,48 @@ document.write(`
   <tbody>
     <tr>
       <th>0</th>
-      <td>3.540936</td>
-      <td>2.273288</td>
-      <td>42.491227</td>
-      <td>27.279452</td>
-      <td>11.628447</td>
-      <td>139.541358</td>
+      <td>2.511696</td>
+      <td>7.816657</td>
+      <td>30.140350</td>
+      <td>93.799886</td>
+      <td>20.656706</td>
+      <td>247.880473</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>3.289626</td>
-      <td>8.364747</td>
-      <td>39.475517</td>
-      <td>100.376960</td>
-      <td>23.308746</td>
-      <td>279.704955</td>
+      <td>4.841553</td>
+      <td>1.213309</td>
+      <td>58.098638</td>
+      <td>14.559708</td>
+      <td>12.109724</td>
+      <td>145.316692</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>2.959350</td>
-      <td>3.929940</td>
-      <td>35.512199</td>
-      <td>47.159281</td>
-      <td>13.778580</td>
-      <td>165.342960</td>
+      <td>4.871580</td>
+      <td>2.235812</td>
+      <td>58.458963</td>
+      <td>26.829748</td>
+      <td>14.214785</td>
+      <td>170.577421</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4.867731</td>
-      <td>9.013101</td>
-      <td>58.412771</td>
-      <td>108.157216</td>
-      <td>27.761664</td>
-      <td>333.139974</td>
+      <td>2.022584</td>
+      <td>7.672452</td>
+      <td>24.271009</td>
+      <td>92.069423</td>
+      <td>19.390072</td>
+      <td>232.680864</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1.395342</td>
-      <td>4.527227</td>
-      <td>16.744106</td>
-      <td>54.326718</td>
-      <td>11.845137</td>
-      <td>142.141647</td>
+      <td>0.166706</td>
+      <td>0.679878</td>
+      <td>2.000474</td>
+      <td>8.158537</td>
+      <td>1.693168</td>
+      <td>20.318022</td>
     </tr>
     <tr>
       <th>...</th>
@@ -768,48 +725,48 @@ document.write(`
     </tr>
     <tr>
       <th>95</th>
-      <td>0.032938</td>
-      <td>3.917185</td>
-      <td>0.395254</td>
-      <td>47.006226</td>
-      <td>7.900247</td>
-      <td>94.802960</td>
+      <td>2.162941</td>
+      <td>4.202675</td>
+      <td>25.955292</td>
+      <td>50.432103</td>
+      <td>12.731233</td>
+      <td>152.774790</td>
     </tr>
     <tr>
       <th>96</th>
-      <td>2.418554</td>
-      <td>4.251622</td>
-      <td>29.022643</td>
-      <td>51.019462</td>
-      <td>13.340351</td>
-      <td>160.084210</td>
+      <td>2.573747</td>
+      <td>9.544860</td>
+      <td>30.884966</td>
+      <td>114.538316</td>
+      <td>24.237214</td>
+      <td>290.846564</td>
     </tr>
     <tr>
       <th>97</th>
-      <td>4.669617</td>
-      <td>6.510215</td>
-      <td>56.035407</td>
-      <td>78.122581</td>
-      <td>22.359665</td>
-      <td>268.315976</td>
+      <td>2.885653</td>
+      <td>3.182439</td>
+      <td>34.627840</td>
+      <td>38.189267</td>
+      <td>12.136185</td>
+      <td>145.634215</td>
     </tr>
     <tr>
       <th>98</th>
-      <td>4.592853</td>
-      <td>5.790512</td>
-      <td>55.114234</td>
-      <td>69.486147</td>
-      <td>20.766730</td>
-      <td>249.200761</td>
+      <td>3.582096</td>
+      <td>7.247243</td>
+      <td>42.985147</td>
+      <td>86.966914</td>
+      <td>21.658677</td>
+      <td>259.904122</td>
     </tr>
     <tr>
       <th>99</th>
-      <td>4.829832</td>
-      <td>3.611294</td>
-      <td>57.957984</td>
-      <td>43.335525</td>
-      <td>16.882251</td>
-      <td>202.587017</td>
+      <td>0.035258</td>
+      <td>3.773585</td>
+      <td>0.423092</td>
+      <td>45.283023</td>
+      <td>7.617686</td>
+      <td>91.412229</td>
     </tr>
   </tbody>
 </table>
@@ -824,7 +781,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3b86d35ed5db5ad0115178118fd0508f4859fcc61ff7efcb632fae32d1435c38.png" src="../_images/3b86d35ed5db5ad0115178118fd0508f4859fcc61ff7efcb632fae32d1435c38.png" />
+<img alt="../_images/666a7bb2274e1088b3a441ae83321ef2af4cf38dbdba7e26fd3da0d4b19dc392.png" src="../_images/666a7bb2274e1088b3a441ae83321ef2af4cf38dbdba7e26fd3da0d4b19dc392.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -839,7 +796,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/d8a23ec8d5981e6c22039b8c3318307167923a52241329b15a202897acc5ac90.png" src="../_images/d8a23ec8d5981e6c22039b8c3318307167923a52241329b15a202897acc5ac90.png" />
+<img alt="../_images/e0ebbad7f37fb62b282dd357cd77aac6618cfd187d9401afc9ad54be3f69ec30.png" src="../_images/e0ebbad7f37fb62b282dd357cd77aac6618cfd187d9401afc9ad54be3f69ec30.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -850,12 +807,12 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/49ba1a05b9a457bbe3c8a19c7ccc72f5d49133b166dcc4163939b9a5db4f8347.png" src="../_images/49ba1a05b9a457bbe3c8a19c7ccc72f5d49133b166dcc4163939b9a5db4f8347.png" />
+<img alt="../_images/993ad07659630e70634ff351158979216d5ad27c6c72a0eca627b5bd4ede8e27.png" src="../_images/993ad07659630e70634ff351158979216d5ad27c6c72a0eca627b5bd4ede8e27.png" />
 </div>
 </div>
 </section>
 <section id="example-1-macro-nutrients">
-<h2><span class="section-number">13.2. </span>Example 1: Macro-nutrients<a class="headerlink" href="#example-1-macro-nutrients" title="Link to this heading">#</a></h2>
+<h2>Example 1: Macro-nutrients<a class="headerlink" href="#example-1-macro-nutrients" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">macros_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/f-imp/Principal-Component-Analysis-PCA-over-3-datasets/refs/heads/master/datasets/Pizza.csv&#39;</span><span class="p">)</span>
@@ -1122,6 +1079,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: divide by zero encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: overflow encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: invalid value encountered in matmul
+  X_transformed = X @ self.components_.T
+</pre></div>
+</div>
 <div class="output text_html"><div>
 <style scoped>
     .dataframe tbody tr th:only-of-type {
@@ -1225,6 +1190,14 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: divide by zero encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: overflow encountered in matmul
+  X_transformed = X @ self.components_.T
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: invalid value encountered in matmul
+  X_transformed = X @ self.components_.T
+</pre></div>
+</div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
 <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
@@ -1235,12 +1208,12 @@ document.write(`
 <span class="ne">ValueError</span>: too many values to unpack (expected 2)
 </pre></div>
 </div>
-<img alt="../_images/054901d05c5f499c4d24f94b52208e0272cb8a4c1985c6bd9af5c7c349ad4db0.png" src="../_images/054901d05c5f499c4d24f94b52208e0272cb8a4c1985c6bd9af5c7c349ad4db0.png" />
+<img alt="../_images/28e2d78781f8d81821676529151ae968a5ee9deac89d1c20f73ef7b4d8468681.png" src="../_images/28e2d78781f8d81821676529151ae968a5ee9deac89d1c20f73ef7b4d8468681.png" />
 </div>
 </div>
 </section>
 <section id="example-2-automobile-specs">
-<h2><span class="section-number">13.3. </span>Example 2: Automobile specs<a class="headerlink" href="#example-2-automobile-specs" title="Link to this heading">#</a></h2>
+<h2>Example 2: Automobile specs<a class="headerlink" href="#example-2-automobile-specs" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cars_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/shreyamdg/automobile-data-set-analysis/refs/heads/master/cars.csv&#39;</span><span class="p">)</span>
@@ -1510,24 +1483,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="05_knn_pca.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">12. </span>K-Nearest Neighbors (and PCA)</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="06_kmeans.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">14. </span>K-Means Clustering</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1535,7 +1490,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1544,9 +1500,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-0-synthetic-data-boxes">13.1. Example 0: Synthetic data (boxes)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-macro-nutrients">13.2. Example 1: Macro-nutrients</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-automobile-specs">13.3. Example 2: Automobile specs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-0-synthetic-data-boxes">Example 0: Synthetic data (boxes)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-macro-nutrients">Example 1: Macro-nutrients</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-automobile-specs">Example 2: Automobile specs</a></li>
 </ul>
   </nav></div>
 
@@ -1595,8 +1551,8 @@ By Eatai Roth, Gettysburg College
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>

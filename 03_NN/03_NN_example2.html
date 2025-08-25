@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>22. Neural Networks Examples &#8212; My sample book</title>
+    <title>Neural Networks Examples &#8212; My sample book</title>
   
   
   
@@ -16,17 +16,19 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
@@ -45,10 +47,11 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -84,9 +87,9 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="21. Neural Networks with Keras" href="02_NN_example.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -102,19 +105,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -122,7 +114,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -130,8 +121,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -147,7 +138,10 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -177,21 +171,17 @@
     
     
     <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
-    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="My sample book - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -206,36 +196,6 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear Regression</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression_02.html">3. Linear Regression (Part 2)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">5. Polynomial Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/05_reading_review.html">6. Reading Assignments Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/06_exam_review.html">7. Exam 1 Review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/01_classification_intro.html">8. Classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/02_logistic_regression.html">9. Logistic Regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/03_trees_encoding.html">10. Trees and Ensemble methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/04_trees_gridcv.html">11. Ensemble Tree Methods (continued)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05_knn_pca.html">12. K-Nearest Neighbors (and PCA)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05b_pca_examples.html">13. PCA: Examples and Observations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/06_kmeans.html">14. K-Means Clustering</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/07_classification_exercises.html">15. Classification and Clustering Exercises</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/08_review_topics.html">17. Classification Topics - Exam 2 Review</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../02_Classification/09_modeling_process.html">19. Modeling process review</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="01_intro_intuition.html">20. Neural Networks, Intro and Intuition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_NN_example.html">21. Neural Networks with Keras</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">22. Neural Networks Examples</a></li>
-</ul>
 
     </div>
 </nav></div>
@@ -243,9 +203,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -389,24 +354,16 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
+</button>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -430,8 +387,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-regression-on-california-housing-dataset">22.1. Example 1: Regression on California Housing Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-predicting-forest-cover-type">22.2. Example 2: Predicting Forest Cover Type</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-regression-on-california-housing-dataset">Example 1: Regression on California Housing Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-predicting-forest-cover-type">Example 2: Predicting Forest Cover Type</a></li>
 </ul>
             </nav>
         </div>
@@ -444,7 +401,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="neural-networks-examples">
-<h1><span class="section-number">22. </span>Neural Networks Examples<a class="headerlink" href="#neural-networks-examples" title="Link to this heading">#</a></h1>
+<h1>Neural Networks Examples<a class="headerlink" href="#neural-networks-examples" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -467,9 +424,139 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">16</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span> <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">ConfusionMatrixDisplay</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># from keras.datasets import california_housing</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequential</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dense</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># DO NOT EDIT. Generated by api_gen.sh</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">DTypePolicy</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">FloatDTypePolicy</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">Function</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;DO NOT EDIT.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> </span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> This file was autogenerated. Do not edit it by hand,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> since your modifications would be overwritten.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">activations</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">applications</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">backend</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">activations</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">7</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;DO NOT EDIT.</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span><span class="sd"> </span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span><span class="sd"> This file was autogenerated. Do not edit it by hand,</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span><span class="sd"> since your modifications would be overwritten.</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">----&gt; </span><span class="mi">7</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">deserialize</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">get</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">serialize</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">activations</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">applications</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">backend</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">activations</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">types</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">celu</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">elu</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.activations.activations</span><span class="w"> </span><span class="kn">import</span> <span class="n">exponential</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">activations</span><span class="o">/</span><span class="n">activations</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">backend</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">ops</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">10</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+<span class="ne">---&gt; </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.dtypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">result_type</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.keras_tensor</span><span class="w"> </span><span class="kn">import</span> <span class="n">KerasTensor</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.keras_tensor</span><span class="w"> </span><span class="kn">import</span> <span class="n">any_symbolic_tensors</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">2</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common</span><span class="w"> </span><span class="kn">import</span> <span class="n">backend_utils</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.dtypes</span><span class="w"> </span><span class="kn">import</span> <span class="n">result_type</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutocastScope</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">Variable</span> <span class="k">as</span> <span class="n">KerasVariable</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">dtypes</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">5</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.variables</span><span class="w"> </span><span class="kn">import</span> <span class="n">standardize_dtype</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">BOOL_TYPES</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;bool&quot;</span><span class="p">,)</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">INT_TYPES</span> <span class="o">=</span> <span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="s2">&quot;uint8&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="s2">&quot;uint16&quot;</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="s2">&quot;int64&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="p">)</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">backend</span><span class="o">/</span><span class="n">common</span><span class="o">/</span><span class="n">variables</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.stateless_scope</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_stateless_scope</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.backend.common.stateless_scope</span><span class="w"> </span><span class="kn">import</span> <span class="n">in_stateless_scope</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.module_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.naming</span><span class="w"> </span><span class="kn">import</span> <span class="n">auto_name</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="k">class</span><span class="w"> </span><span class="nc">Variable</span><span class="p">:</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.audio_dataset_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">audio_dataset_from_directory</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.dataset_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">split_dataset</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.file_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_file</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">audio_dataset_utils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataset_utils</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.module_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensorflow</span> <span class="k">as</span> <span class="n">tf</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.module_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">tensorflow_io</span> <span class="k">as</span> <span class="n">tfio</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">utils</span><span class="o">/</span><span class="n">dataset_utils</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">9</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing.pool</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPool</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src</span><span class="w"> </span><span class="kn">import</span> <span class="n">tree</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.api_export</span><span class="w"> </span><span class="kn">import</span> <span class="n">keras_export</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">io_utils</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree.tree_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">assert_same_paths</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree.tree_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">assert_same_structure</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree.tree_api</span><span class="w"> </span><span class="kn">import</span> <span class="n">flatten</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">tree_api</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">8</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.utils.module_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">optree</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">if</span> <span class="n">optree</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+<span class="ne">----&gt; </span><span class="mi">8</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">optree_impl</span> <span class="k">as</span> <span class="n">tree_impl</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="k">elif</span> <span class="n">dmtree</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">keras.src.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">dmtree_impl</span> <span class="k">as</span> <span class="n">tree_impl</span>
+
+<span class="n">File</span> <span class="o">~/.</span><span class="n">pyenv</span><span class="o">/</span><span class="n">versions</span><span class="o">/</span><span class="mf">3.13.1</span><span class="o">/</span><span class="n">envs</span><span class="o">/</span><span class="n">datascience</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.13</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">keras</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">tree</span><span class="o">/</span><span class="n">optree_impl</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">13</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="c1"># Register backend-specific node classes</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="k">if</span> <span class="n">backend</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;tensorflow&quot;</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">13</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.trackable.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListWrapper</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.trackable.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">_DictWrapper</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>     <span class="n">optree</span><span class="o">.</span><span class="n">register_pytree_node</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>         <span class="n">ListWrapper</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span>         <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">     </span><span class="mi">19</span>         <span class="k">lambda</span> <span class="n">metadata</span><span class="p">,</span> <span class="n">children</span><span class="p">:</span> <span class="n">ListWrapper</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">children</span><span class="p">)),</span>
+<span class="g g-Whitespace">     </span><span class="mi">20</span>         <span class="n">namespace</span><span class="o">=</span><span class="s2">&quot;keras&quot;</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;tensorflow&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <section id="example-1-regression-on-california-housing-dataset">
-<h2><span class="section-number">22.1. </span>Example 1: Regression on California Housing Dataset<a class="headerlink" href="#example-1-regression-on-california-housing-dataset" title="Link to this heading">#</a></h2>
+<h2>Example 1: Regression on California Housing Dataset<a class="headerlink" href="#example-1-regression-on-california-housing-dataset" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the California housing dataset</span>
@@ -834,27 +921,11 @@ memory usage: 1.3 MB
   super().__init__(activity_regularizer=activity_regularizer, **kwargs)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/516</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">4s</span> 8ms/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">303/516</span> <span class=" -Color -Color-Green">━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 166us/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">516/516</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 168us/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  1/129</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 3ms/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
-<span class=" -Color -Color-Bold">129/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 182us/step
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLP REGRESSION:
-	Training R2: 0.7128819440263263
-	Testing R2: 0.6975734274406061
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">516/516</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 199us/step
+<span class=" -Color -Color-Bold">129/129</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 232us/step
+MLP REGRESSION:
+	Training R2: 0.7032903561375154
+	Testing R2: 0.6869967413626012
 </pre></div>
 </div>
 </div>
@@ -891,7 +962,7 @@ memory usage: 1.3 MB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1cbca02d1405c42bebb1402f776e1fb79078b0a63abed2dbbe26f461d563cdde.png" src="../_images/1cbca02d1405c42bebb1402f776e1fb79078b0a63abed2dbbe26f461d563cdde.png" />
+<img alt="../_images/2f9dab8e8911b85e1bbca33fb7e5f8f1118a6b48dea35b28780bf8394c677bf6.png" src="../_images/2f9dab8e8911b85e1bbca33fb7e5f8f1118a6b48dea35b28780bf8394c677bf6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -923,7 +994,7 @@ memory usage: 1.3 MB
 </div>
 </section>
 <section id="example-2-predicting-forest-cover-type">
-<h2><span class="section-number">22.2. </span>Example 2: Predicting Forest Cover Type<a class="headerlink" href="#example-2-predicting-forest-cover-type" title="Link to this heading">#</a></h2>
+<h2>Example 2: Predicting Forest Cover Type<a class="headerlink" href="#example-2-predicting-forest-cover-type" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">fetch_covtype</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1143,15 +1214,6 @@ Name: Cover_Type, dtype: int32
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="02_NN_example.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">21. </span>Neural Networks with Keras</p>
-      </div>
-    </a>
 </div>
                 </footer>
               
@@ -1159,7 +1221,8 @@ Name: Cover_Type, dtype: int32
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1168,8 +1231,8 @@ Name: Cover_Type, dtype: int32
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-regression-on-california-housing-dataset">22.1. Example 1: Regression on California Housing Dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-predicting-forest-cover-type">22.2. Example 2: Predicting Forest Cover Type</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-regression-on-california-housing-dataset">Example 1: Regression on California Housing Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-predicting-forest-cover-type">Example 2: Predicting Forest Cover Type</a></li>
 </ul>
   </nav></div>
 
@@ -1218,8 +1281,8 @@ By Eatai Roth, Gettysburg College
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
