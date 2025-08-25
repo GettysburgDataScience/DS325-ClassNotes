@@ -142,7 +142,7 @@ If you have any of the following already, you should skip those steps. These ins
 
 Next, we'll install a few useful extensions. On the left-hand side of VSCode, you should see a stack of icons. Select the extensions tab (looks like stacking blocks). You'll search for and install the following extensions:
 
-```{figure} ./images/VSCodeExtensions.png
+```{figure} ../images/VSCodeExtensions.png
 :alt: vscodeextensions
 :width: 400px
 :align: left
