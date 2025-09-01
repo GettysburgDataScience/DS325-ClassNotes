@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>PS00 (Solutions by Prof Roth) &#8212; DS325 Applied Data Science</title>
+    <title>3. PS00 (Solutions by Prof Roth) &#8212; DS325 Applied Data Science</title>
   
   
   
@@ -87,6 +87,7 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="2. PS00" href="ps00.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -137,8 +138,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -197,8 +196,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ps00.html">2. PS00</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. PS00 (Solutions by Prof Roth)</a></li>
 </ul>
 
     </div>
@@ -391,13 +391,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-downloading-this-problem-set-file">Before downloading this Problem Set file</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-review">Jupyter notebook review</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels">Kernels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-grading">Assignment grading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-downloading-this-problem-set-file">3.1. Before downloading this Problem Set file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-review">3.2. Jupyter notebook review</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels">3.2.1. Kernels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-grading">3.2.2. Assignment grading</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">3.3. Practice Problems</a></li>
 </ul>
             </nav>
         </div>
@@ -410,17 +410,17 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ps00-solutions-by-prof-roth">
-<h1>PS00 (Solutions by Prof Roth)<a class="headerlink" href="#ps00-solutions-by-prof-roth" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">3. </span>PS00 (Solutions by Prof Roth)<a class="headerlink" href="#ps00-solutions-by-prof-roth" title="Link to this heading">#</a></h1>
 <p>Prof Eatai Roth<br />
 DS325 F2025<br />
 Gettysburg College</p>
 <section id="before-downloading-this-problem-set-file">
-<h2>Before downloading this Problem Set file<a class="headerlink" href="#before-downloading-this-problem-set-file" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>Before downloading this Problem Set file<a class="headerlink" href="#before-downloading-this-problem-set-file" title="Link to this heading">#</a></h2>
 <p>Let’s set up a Git repository folder on your local computer. This folder will hold all of your assignments and projects for this class and will be linked to a repository that lives on Github.</p>
 <p><a class="reference external" href="https://classroom.github.com/a/L7dbS-Hr">Github Assignments invitation</a></p>
 </section>
 <section id="jupyter-notebook-review">
-<h2>Jupyter notebook review<a class="headerlink" href="#jupyter-notebook-review" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>Jupyter notebook review<a class="headerlink" href="#jupyter-notebook-review" title="Link to this heading">#</a></h2>
 <p>Notebooks comprise two kinds of cells:</p>
 <ul class="simple">
 <li><p><em>Markdown</em> - text annotation (like this cell).</p></li>
@@ -435,12 +435,12 @@ Gettysburg College</p>
 <li><p><em>Esc -&gt; Y</em> - converts a cell to Code</p></li>
 </ul>
 <section id="kernels">
-<h3>Kernels<a class="headerlink" href="#kernels" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.2.1. </span>Kernels<a class="headerlink" href="#kernels" title="Link to this heading">#</a></h3>
 <p>When you first run a cell of code, VS Code will prompt you to select a kernel. You can think of a kernel as a computational session and VS Code wants to know which version of Python you’d like to use to execute your code. It will present a list of installed Python distributions; you should select the one that has ‘Anaconda’ in the path.</p>
 <p>The kernel also keeps track of all the variables you’ve created in the session. If you want to run your code from a clean slate, you can restart the kernel to clear all variables.</p>
 </section>
 <section id="assignment-grading">
-<h3>Assignment grading<a class="headerlink" href="#assignment-grading" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.2.2. </span>Assignment grading<a class="headerlink" href="#assignment-grading" title="Link to this heading">#</a></h3>
 <p>I’ll be using a package called Otter Grader to help automate the grading and feedback you get on assignments. We’ll see how Otter grader works below, but first, we must install the package.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -450,16 +450,16 @@ Gettysburg College</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: otter-grader in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (6.1.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: click&lt;9.0.0,&gt;=8.1.7 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (8.1.8)
+Requirement already satisfied: click&lt;9.0.0,&gt;=8.1.7 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (8.1.8)
 Requirement already satisfied: dill&gt;=0.3.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (0.3.9)
 Requirement already satisfied: fica&gt;=0.4.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (0.4.1)
 Requirement already satisfied: ipylab&lt;2.0.0,&gt;=1.0.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (1.1.0)
 Requirement already satisfied: ipython in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (8.31.0)
 Requirement already satisfied: ipywidgets&lt;9.0.0,&gt;=8.1.5 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (8.1.7)
 Requirement already satisfied: jinja2&lt;4.0,&gt;=3.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (3.1.5)
-Requirement already satisfied: jupytext&lt;2.0.0,&gt;=1.16.4 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (1.17.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: jupytext&lt;2.0.0,&gt;=1.16.4 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (1.17.2)
 Requirement already satisfied: nbconvert&gt;=6.0.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (7.16.6)
 Requirement already satisfied: nbformat&gt;=5.0.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (5.10.4)
 Requirement already satisfied: pandas&gt;=2.0.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from otter-grader) (2.2.3)
@@ -486,7 +486,9 @@ Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/eatai/.pyenv/v
 Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from requests&lt;3.0,&gt;=2.31-&gt;otter-grader) (2024.12.14)
 Requirement already satisfied: docutils in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from fica&gt;=0.4.1-&gt;otter-grader) (0.20.1)
 Requirement already satisfied: sphinx in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from fica&gt;=0.4.1-&gt;otter-grader) (7.4.7)
-Requirement already satisfied: decorator in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ipython-&gt;otter-grader) (5.1.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: decorator in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ipython-&gt;otter-grader) (5.1.1)
 Requirement already satisfied: jedi&gt;=0.16 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ipython-&gt;otter-grader) (0.19.2)
 Requirement already satisfied: matplotlib-inline in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ipython-&gt;otter-grader) (0.1.7)
 Requirement already satisfied: pexpect&gt;4.3 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ipython-&gt;otter-grader) (4.9.0)
@@ -512,23 +514,27 @@ Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/eatai/.pyenv/
 Requirement already satisfied: pyzmq&gt;=23.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.5.0-&gt;nbconvert&gt;=6.0.0-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (26.2.0)
 Requirement already satisfied: tornado&gt;=6.2 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.5.0-&gt;nbconvert&gt;=6.0.0-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (6.4.2)
 Requirement already satisfied: playwright in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (1.51.0)
-Requirement already satisfied: fastjsonschema&gt;=2.15 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from nbformat&gt;=5.0.0-&gt;otter-grader) (2.21.1)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: fastjsonschema&gt;=2.15 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from nbformat&gt;=5.0.0-&gt;otter-grader) (2.21.1)
 Requirement already satisfied: jsonschema&gt;=2.6 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from nbformat&gt;=5.0.0-&gt;otter-grader) (4.23.0)
 Requirement already satisfied: attrs&gt;=22.2.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.0.0-&gt;otter-grader) (24.3.0)
 Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.0.0-&gt;otter-grader) (2024.10.1)
 Requirement already satisfied: referencing&gt;=0.28.4 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.0.0-&gt;otter-grader) (0.36.0)
 Requirement already satisfied: rpds-py&gt;=0.7.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.0.0-&gt;otter-grader) (0.22.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.26.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=2.0.0-&gt;otter-grader) (2.2.1)
+Requirement already satisfied: numpy&gt;=1.26.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=2.0.0-&gt;otter-grader) (2.2.1)
 Requirement already satisfied: pytz&gt;=2020.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=2.0.0-&gt;otter-grader) (2024.2)
 Requirement already satisfied: tzdata&gt;=2022.7 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=2.0.0-&gt;otter-grader) (2024.2)
 Requirement already satisfied: ptyprocess&gt;=0.5 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pexpect&gt;4.3-&gt;ipython-&gt;otter-grader) (0.7.0)
 Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from python-dateutil&gt;=2.8.2-&gt;jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.5.0-&gt;nbconvert&gt;=6.0.0-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (1.17.0)
-Requirement already satisfied: soupsieve&gt;1.2 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from beautifulsoup4-&gt;nbconvert&gt;=6.0.0-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (2.6)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: soupsieve&gt;1.2 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from beautifulsoup4-&gt;nbconvert&gt;=6.0.0-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (2.6)
 Requirement already satisfied: pyee&lt;13,&gt;=12 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from playwright-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (12.1.1)
 Requirement already satisfied: greenlet&lt;4.0.0,&gt;=3.1.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from playwright-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (3.1.1)
-Requirement already satisfied: sphinxcontrib-applehelp in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from sphinx-&gt;fica&gt;=0.4.1-&gt;otter-grader) (2.0.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sphinxcontrib-applehelp in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from sphinx-&gt;fica&gt;=0.4.1-&gt;otter-grader) (2.0.0)
 Requirement already satisfied: sphinxcontrib-devhelp in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from sphinx-&gt;fica&gt;=0.4.1-&gt;otter-grader) (2.0.0)
 Requirement already satisfied: sphinxcontrib-jsmath in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from sphinx-&gt;fica&gt;=0.4.1-&gt;otter-grader) (1.0.1)
 Requirement already satisfied: sphinxcontrib-htmlhelp&gt;=2.0.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from sphinx-&gt;fica&gt;=0.4.1-&gt;otter-grader) (2.1.0)
@@ -560,7 +566,7 @@ Requirement already satisfied: pure-eval in /Users/eatai/.pyenv/versions/datasci
 </section>
 </section>
 <section id="practice-problems">
-<h2>Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
 <p><strong>Problem 1</strong></p>
 <p>Write a function named <code class="docutils literal notranslate"><span class="pre">hello_blank</span></code> that takes as an input any string and returns a new string ‘Hello [input string]!’</p>
 <div class="cell tag_otter_answer_cell docutils container">
@@ -771,6 +777,15 @@ Per scoop, which flavor is most expensive?</p>
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="ps00.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>PS00</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -788,13 +803,13 @@ Per scoop, which flavor is most expensive?</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-downloading-this-problem-set-file">Before downloading this Problem Set file</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-review">Jupyter notebook review</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels">Kernels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-grading">Assignment grading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-downloading-this-problem-set-file">3.1. Before downloading this Problem Set file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-review">3.2. Jupyter notebook review</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels">3.2.1. Kernels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-grading">3.2.2. Assignment grading</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">Practice Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">3.3. Practice Problems</a></li>
 </ul>
   </nav></div>
 
