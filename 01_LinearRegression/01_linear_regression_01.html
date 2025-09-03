@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Linear Regression (Part 1) &#8212; DS325 Applied Data Science</title>
+    <title>4. Linear Regression (Part 1) &#8212; DS325 Applied Data Science</title>
   
   
   
@@ -89,6 +89,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. PS00" href="../00_Assignments/ps00.html" />
+    <link rel="prev" title="3. What is a model?" href="00_what_is_a_model.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -139,8 +141,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -197,6 +197,17 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/genai_policy.html">2. Our course GenAI Policy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="00_what_is_a_model.html">3. What is a model?</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Linear Regression (Part 1)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00.html">5. PS00</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00_Roth.html">6. PS00 (Solutions by Prof Roth)</a></li>
 </ul>
 
     </div>
@@ -389,16 +400,16 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple linear regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">Fitting the model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-functions">Cost functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">Assessing the model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-from-scratch">An Example from Scratch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">4.1. Simple linear regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">4.1.1. Fitting the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-functions">4.1.2. Cost functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">4.1.3. Assessing the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-from-scratch">4.1.4. An Example from Scratch</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-process">Modeling process</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">4.2. Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-process">4.2.1. Modeling process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">4.2.2. Assumptions</a></li>
 </ul>
 </li>
 </ul>
@@ -413,10 +424,10 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="linear-regression-part-1">
-<h1>Linear Regression (Part 1)<a class="headerlink" href="#linear-regression-part-1" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">4. </span>Linear Regression (Part 1)<a class="headerlink" href="#linear-regression-part-1" title="Link to this heading">#</a></h1>
 <p>Often we model the relationship between features and outcomes by fitting a mathematical function to the data. As the name suggests, linear regression fits linear (affine) functions.</p>
 <section id="simple-linear-regression">
-<h2>Simple linear regression<a class="headerlink" href="#simple-linear-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>Simple linear regression<a class="headerlink" href="#simple-linear-regression" title="Link to this heading">#</a></h2>
 <p>A simple linear model relating a single feature to an outcome:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -440,11 +451,11 @@ y_i - \hat{y}_i = \epsilon
 \]</div>
 <p><em>Note</em>: A notational convention is to use lowercase letters with subscripts to denote individual values (e.g. <span class="math notranslate nohighlight">\(x_i\)</span>, <span class="math notranslate nohighlight">\(\theta_i\)</span>) and uppercase letters to represent an array/matrix of values (e.g. <span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(\Theta\)</span>).</p>
 <section id="fitting-the-model">
-<h3>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.1.1. </span>Fitting the model<a class="headerlink" href="#fitting-the-model" title="Link to this heading">#</a></h3>
 <p>We are looking for the “best” values for <span class="math notranslate nohighlight">\(\theta_i\)</span>, but how do we decide what is best?</p>
 </section>
 <section id="cost-functions">
-<h3>Cost functions<a class="headerlink" href="#cost-functions" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.1.2. </span>Cost functions<a class="headerlink" href="#cost-functions" title="Link to this heading">#</a></h3>
 <p>The loss function for a linear regression model is typically either:</p>
 <ul class="simple">
 <li><p><em>squared error</em> (most common),  <span class="math notranslate nohighlight">\(L(\Theta) = (y_i - \hat{y}_i)^2\)</span>
@@ -459,7 +470,7 @@ y_i - \hat{y}_i = \epsilon
 </ul>
 </section>
 <section id="assessing-the-model">
-<h3>Assessing the model<a class="headerlink" href="#assessing-the-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.1.3. </span>Assessing the model<a class="headerlink" href="#assessing-the-model" title="Link to this heading">#</a></h3>
 <p><em>Coefficient of determination (<span class="math notranslate nohighlight">\(R^2\)</span>)</em> quantifies how much of the variation in the data are explained by the linear model.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -480,7 +491,7 @@ y_i - \hat{y}_i = \epsilon
 </ul>
 </section>
 <section id="an-example-from-scratch">
-<h3>An Example from Scratch<a class="headerlink" href="#an-example-from-scratch" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.1.4. </span>An Example from Scratch<a class="headerlink" href="#an-example-from-scratch" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -638,7 +649,7 @@ y_i - \hat{y}_i = \epsilon
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(np.int64(28), np.int64(8))
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_51221/2395495076.py:25: UserWarning: The following kwargs were not used by contour: &#39;shading&#39;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_28057/2395495076.py:25: UserWarning: The following kwargs were not used by contour: &#39;shading&#39;
   c = ax.contourf(Theta_1, Theta_0, MSE, shading=&#39;auto&#39;)
 </pre></div>
 </div>
@@ -698,7 +709,7 @@ y_i - \hat{y}_i = \epsilon
 </section>
 </section>
 <section id="linear-regression-with-scikit-learn">
-<h2>Linear Regression with Scikit-learn<a class="headerlink" href="#linear-regression-with-scikit-learn" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.2. </span>Linear Regression with Scikit-learn<a class="headerlink" href="#linear-regression-with-scikit-learn" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sk</span>
@@ -728,7 +739,7 @@ y_i - \hat{y}_i = \epsilon
 </div>
 </div>
 <section id="modeling-process">
-<h3>Modeling process<a class="headerlink" href="#modeling-process" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.2.1. </span>Modeling process<a class="headerlink" href="#modeling-process" title="Link to this heading">#</a></h3>
 <p>For this example, we are only fitting a simple linear regression. We are not comparing different candidate models, so we will not be conducting any model <em>validation</em>.</p>
 <ul class="simple">
 <li><p>Split the data into training and testing sets.</p></li>
@@ -824,7 +835,7 @@ R2_test = 0.61, R2_train = 0.71
 </div>
 </section>
 <section id="assumptions">
-<h3>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">4.2.2. </span>Assumptions<a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><em>Linearity</em> - the independent and dependent variables are actually linearly related</p></li>
 <li><p><em>Independence</em> - the observations (samples) are independent of each other</p></li>
@@ -891,6 +902,24 @@ R2_test = 0.61, R2_train = 0.71
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="00_what_is_a_model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>What is a model?</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../00_Assignments/ps00.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>PS00</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -908,16 +937,16 @@ R2_test = 0.61, R2_train = 0.71
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">Simple linear regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">Fitting the model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-functions">Cost functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">Assessing the model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-from-scratch">An Example from Scratch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-linear-regression">4.1. Simple linear regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-the-model">4.1.1. Fitting the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-functions">4.1.2. Cost functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">4.1.3. Assessing the model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-from-scratch">4.1.4. An Example from Scratch</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-process">Modeling process</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">Assumptions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-with-scikit-learn">4.2. Linear Regression with Scikit-learn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modeling-process">4.2.1. Modeling process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assumptions">4.2.2. Assumptions</a></li>
 </ul>
 </li>
 </ul>

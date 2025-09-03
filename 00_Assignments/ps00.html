@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. PS00 &#8212; DS325 Applied Data Science</title>
+    <title>5. PS00 &#8212; DS325 Applied Data Science</title>
   
   
   
@@ -87,7 +87,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="1. Setting Up" href="../00_Resources/setup.html" />
+    <link rel="next" title="6. PS00 (Solutions by Prof Roth)" href="ps00_Roth.html" />
+    <link rel="prev" title="4. Linear Regression (Part 1)" href="../01_LinearRegression/01_linear_regression_01.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -194,10 +195,17 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/genai_policy.html">2. Our course GenAI Policy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_what_is_a_model.html">3. What is a model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">4. Linear Regression (Part 1)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. PS00</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. PS00</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ps00_Roth.html">6. PS00 (Solutions by Prof Roth)</a></li>
 </ul>
 
     </div>
@@ -390,13 +398,13 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-downloading-this-problem-set-file">2.1. Before downloading this Problem Set file</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-review">2.2. Jupyter notebook review</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels">2.2.1. Kernels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-grading">2.2.2. Assignment grading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-downloading-this-problem-set-file">5.1. Before downloading this Problem Set file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-review">5.2. Jupyter notebook review</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels">5.2.1. Kernels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-grading">5.2.2. Assignment grading</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">2.3. Practice Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">5.3. Practice Problems</a></li>
 </ul>
             </nav>
         </div>
@@ -409,17 +417,17 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ps00">
-<h1><span class="section-number">2. </span>PS00<a class="headerlink" href="#ps00" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">5. </span>PS00<a class="headerlink" href="#ps00" title="Link to this heading">#</a></h1>
 <p>Prof Eatai Roth<br />
 DS325 F2025<br />
 Gettysburg College</p>
 <section id="before-downloading-this-problem-set-file">
-<h2><span class="section-number">2.1. </span>Before downloading this Problem Set file<a class="headerlink" href="#before-downloading-this-problem-set-file" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.1. </span>Before downloading this Problem Set file<a class="headerlink" href="#before-downloading-this-problem-set-file" title="Link to this heading">#</a></h2>
 <p>Let’s set up a Git repository folder on your local computer. This folder will hold all of your assignments and projects for this class and will be linked to a repository that lives on Github.</p>
 <p><a class="reference external" href="https://classroom.github.com/a/L7dbS-Hr">Github Assignments invitation</a></p>
 </section>
 <section id="jupyter-notebook-review">
-<h2><span class="section-number">2.2. </span>Jupyter notebook review<a class="headerlink" href="#jupyter-notebook-review" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Jupyter notebook review<a class="headerlink" href="#jupyter-notebook-review" title="Link to this heading">#</a></h2>
 <p>Notebooks comprise two kinds of cells:</p>
 <ul class="simple">
 <li><p><em>Markdown</em> - text annotation (like this cell).</p></li>
@@ -434,12 +442,12 @@ Gettysburg College</p>
 <li><p><em>Esc -&gt; Y</em> - converts a cell to Code</p></li>
 </ul>
 <section id="kernels">
-<h3><span class="section-number">2.2.1. </span>Kernels<a class="headerlink" href="#kernels" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.2.1. </span>Kernels<a class="headerlink" href="#kernels" title="Link to this heading">#</a></h3>
 <p>When you first run a cell of code, VS Code will prompt you to select a kernel. You can think of a kernel as a computational session and VS Code wants to know which version of Python you’d like to use to execute your code. It will present a list of installed Python distributions; you should select the one that has ‘Anaconda’ in the path.</p>
 <p>The kernel also keeps track of all the variables you’ve created in the session. If you want to run your code from a clean slate, you can restart the kernel to clear all variables.</p>
 </section>
 <section id="assignment-grading">
-<h3><span class="section-number">2.2.2. </span>Assignment grading<a class="headerlink" href="#assignment-grading" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.2.2. </span>Assignment grading<a class="headerlink" href="#assignment-grading" title="Link to this heading">#</a></h3>
 <p>I’ll be using a package called Otter Grader to help automate the grading and feedback you get on assignments. We’ll see how Otter grader works below, but first, we must install the package.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -559,7 +567,7 @@ Requirement already satisfied: pure-eval in /Users/eatai/.pyenv/versions/datasci
 </section>
 </section>
 <section id="practice-problems">
-<h2><span class="section-number">2.3. </span>Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>Practice Problems<a class="headerlink" href="#practice-problems" title="Link to this heading">#</a></h2>
 <p><strong>Problem 1</strong></p>
 <p>Write a function named <code class="docutils literal notranslate"><span class="pre">hello_blank</span></code> that takes as an input any string and returns a new string ‘Hello [input string]!’</p>
 <div class="cell tag_otter_answer_cell docutils container">
@@ -748,13 +756,22 @@ Per scoop, which flavor is most expensive?</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../00_Resources/setup.html"
+       href="../01_LinearRegression/01_linear_regression_01.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Setting Up</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Linear Regression (Part 1)</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="ps00_Roth.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>PS00 (Solutions by Prof Roth)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -773,13 +790,13 @@ Per scoop, which flavor is most expensive?</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-downloading-this-problem-set-file">2.1. Before downloading this Problem Set file</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-review">2.2. Jupyter notebook review</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels">2.2.1. Kernels</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-grading">2.2.2. Assignment grading</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-downloading-this-problem-set-file">5.1. Before downloading this Problem Set file</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-notebook-review">5.2. Jupyter notebook review</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels">5.2.1. Kernels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment-grading">5.2.2. Assignment grading</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">2.3. Practice Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practice-problems">5.3. Practice Problems</a></li>
 </ul>
   </nav></div>
 
