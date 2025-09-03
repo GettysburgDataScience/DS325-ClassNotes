@@ -195,6 +195,17 @@
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/genai_policy.html">2. Our course GenAI Policy</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_what_is_a_model.html">1. What is a model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00.html">PS00</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00_Roth.html">PS00 (Solutions by Prof Roth)</a></li>
 </ul>
 
     </div>
@@ -503,21 +514,9 @@
   ret = a @ b
 /Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
   ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
-  ret = a @ b
 </pre></div>
 </div>
-<img alt="../_images/cffeb7a2f71421a7845d6824d07e581dfe81a07bea691b571cc213a045241e6c.png" src="../_images/cffeb7a2f71421a7845d6824d07e581dfe81a07bea691b571cc213a045241e6c.png" />
+<img alt="../_images/fd59f707d37d0b7fbfa34f972605f466df24cd3bef0f4d5c0965b1867c80baeb.png" src="../_images/fd59f707d37d0b7fbfa34f972605f466df24cd3bef0f4d5c0965b1867c80baeb.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -777,7 +776,7 @@
   current_pot = closest_dist_sq @ sample_weight
 </pre></div>
 </div>
-<img alt="../_images/8825cf7a93b2ad50d9d5df7f204d99ad592a55ef04f0b31c9aa6994c00ad3293.png" src="../_images/8825cf7a93b2ad50d9d5df7f204d99ad592a55ef04f0b31c9aa6994c00ad3293.png" />
+<img alt="../_images/5f537cec81f92d6a912bf264482199a1eefc72ebe55a6f378f54f19fccd9d49c.png" src="../_images/5f537cec81f92d6a912bf264482199a1eefc72ebe55a6f378f54f19fccd9d49c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -789,12 +788,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label
-1    99605
-2    29397
-5    24811
-0    22601
-3    11825
-4     8369
+2    101767
+4     32146
+0     23899
+1     18613
+3     11862
+5      8321
 Name: count, dtype: int64
 </pre></div>
 </div>
@@ -836,44 +835,44 @@ Name: count, dtype: int64
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>0.937182</td>
-      <td>0.488815</td>
-      <td>0.125474</td>
+      <td>0.615063</td>
+      <td>0.097750</td>
+      <td>0.108618</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>0.265980</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>0.891331</td>
+      <td>0.293571</td>
+      <td>0.168791</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
-      <td>0.680920</td>
-      <td>0.126982</td>
-      <td>0.122486</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
-      <td>0.494849</td>
-      <td>0.336414</td>
-      <td>0.520139</td>
+      <td>0.934059</td>
+      <td>0.634662</td>
+      <td>0.074020</td>
     </tr>
     <tr>
       <th>4</th>
       <td>4</td>
-      <td>0.928921</td>
-      <td>0.811007</td>
-      <td>0.670364</td>
+      <td>0.492096</td>
+      <td>0.427475</td>
+      <td>0.230897</td>
     </tr>
     <tr>
       <th>5</th>
       <td>5</td>
-      <td>0.477072</td>
-      <td>0.448932</td>
-      <td>0.099590</td>
+      <td>0.922794</td>
+      <td>0.804023</td>
+      <td>0.677489</td>
     </tr>
   </tbody>
 </table>
@@ -927,10 +926,10 @@ Name: count, dtype: int64
       <td>0</td>
       <td>0</td>
       <td>[0.24313725490196078, 0.11372549019607843, 0.2...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>1</th>
@@ -940,10 +939,10 @@ Name: count, dtype: int64
       <td>1</td>
       <td>0</td>
       <td>[0.24705882352941178, 0.12156862745098039, 0.2...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>2</th>
@@ -953,10 +952,10 @@ Name: count, dtype: int64
       <td>2</td>
       <td>0</td>
       <td>[0.24705882352941178, 0.13333333333333333, 0.2...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>3</th>
@@ -966,10 +965,10 @@ Name: count, dtype: int64
       <td>3</td>
       <td>0</td>
       <td>[0.2549019607843137, 0.11764705882352941, 0.23...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>4</th>
@@ -979,10 +978,10 @@ Name: count, dtype: int64
       <td>4</td>
       <td>0</td>
       <td>[0.25882352941176473, 0.10588235294117647, 0.2...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1005,10 +1004,10 @@ Name: count, dtype: int64
       <td>507</td>
       <td>383</td>
       <td>[0.16862745098039217, 0.0784313725490196, 0.17...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>196604</th>
@@ -1018,10 +1017,10 @@ Name: count, dtype: int64
       <td>508</td>
       <td>383</td>
       <td>[0.1607843137254902, 0.07450980392156863, 0.15...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>196605</th>
@@ -1031,10 +1030,10 @@ Name: count, dtype: int64
       <td>509</td>
       <td>383</td>
       <td>[0.1568627450980392, 0.0784313725490196, 0.160...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>196606</th>
@@ -1044,10 +1043,10 @@ Name: count, dtype: int64
       <td>510</td>
       <td>383</td>
       <td>[0.16470588235294117, 0.08235294117647059, 0.1...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
     <tr>
       <th>196607</th>
@@ -1057,10 +1056,10 @@ Name: count, dtype: int64
       <td>511</td>
       <td>383</td>
       <td>[0.1803921568627451, 0.09019607843137255, 0.19...</td>
-      <td>1</td>
-      <td>0.26598</td>
-      <td>0.145962</td>
-      <td>0.238631</td>
+      <td>2</td>
+      <td>0.267588</td>
+      <td>0.151471</td>
+      <td>0.243282</td>
     </tr>
   </tbody>
 </table>
@@ -1078,7 +1077,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/708edeb07595d166e8e70e0f772c565cd1f6e3594605c533be37f98f1b938a90.png" src="../_images/708edeb07595d166e8e70e0f772c565cd1f6e3594605c533be37f98f1b938a90.png" />
+<img alt="../_images/f15a3776eeff8fc4bb83dd6fa9c2657f74b5c505029041e7c0ef10bd1bca14a8.png" src="../_images/f15a3776eeff8fc4bb83dd6fa9c2657f74b5c505029041e7c0ef10bd1bca14a8.png" />
 </div>
 </div>
 </section>
@@ -1252,9 +1251,7 @@ Name: count, dtype: int64
   current_pot = closest_dist_sq @ sample_weight
 /Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/cluster/_kmeans.py:237: RuntimeWarning: invalid value encountered in matmul
   current_pot = closest_dist_sq @ sample_weight
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_51268/4191165465.py:9: SettingWithCopyWarning: 
+/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_32887/4191165465.py:9: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame.
 Try using .loc[row_indexer,col_indexer] = value instead
 
@@ -1262,7 +1259,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
   peppers_df[&#39;label&#39;] = labels
 </pre></div>
 </div>
-<img alt="../_images/cd30fc55968835f3dee7cb324d8dafcc23c9cf7e8606934b0e0806590e134535.png" src="../_images/cd30fc55968835f3dee7cb324d8dafcc23c9cf7e8606934b0e0806590e134535.png" />
+<img alt="../_images/29d5dc26c048c2dd2cd42843ca659d54ba51ac3cb064a1e0ba93d20dfbe693a7.png" src="../_images/29d5dc26c048c2dd2cd42843ca659d54ba51ac3cb064a1e0ba93d20dfbe693a7.png" />
 </div>
 </div>
 </section>

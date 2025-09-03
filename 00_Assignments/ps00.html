@@ -88,7 +88,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="PS00 (Solutions by Prof Roth)" href="ps00_Roth.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="../blank.html" />
+    <link rel="prev" title="2. Linear Regression (Part 1)" href="../01_LinearRegression/01_linear_regression_01.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -199,8 +199,8 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_what_is_a_model.html">3. What is a model?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">4. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_what_is_a_model.html">1. What is a model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="current nav bd-sidenav">
@@ -480,9 +480,7 @@ Requirement already satisfied: MarkupSafe&gt;=2.0 in /Users/eatai/.pyenv/version
 Requirement already satisfied: markdown-it-py&gt;=1.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jupytext&lt;2.0.0,&gt;=1.16.4-&gt;otter-grader) (3.0.0)
 Requirement already satisfied: mdit-py-plugins in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jupytext&lt;2.0.0,&gt;=1.16.4-&gt;otter-grader) (0.4.2)
 Requirement already satisfied: packaging in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jupytext&lt;2.0.0,&gt;=1.16.4-&gt;otter-grader) (24.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pydantic!=2.0.*,&lt;3,&gt;=2 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from python-on-whales&lt;1.0.0,&gt;=0.72.0-&gt;otter-grader) (2.11.7)
+Requirement already satisfied: pydantic!=2.0.*,&lt;3,&gt;=2 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from python-on-whales&lt;1.0.0,&gt;=0.72.0-&gt;otter-grader) (2.11.7)
 Requirement already satisfied: typing-extensions in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from python-on-whales&lt;1.0.0,&gt;=0.72.0-&gt;otter-grader) (4.12.2)
 Requirement already satisfied: annotated-types&gt;=0.6.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pydantic!=2.0.*,&lt;3,&gt;=2-&gt;python-on-whales&lt;1.0.0,&gt;=0.72.0-&gt;otter-grader) (0.7.0)
 Requirement already satisfied: pydantic-core==2.33.2 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pydantic!=2.0.*,&lt;3,&gt;=2-&gt;python-on-whales&lt;1.0.0,&gt;=0.72.0-&gt;otter-grader) (2.33.2)
@@ -492,7 +490,9 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /Users/eatai/.pyenv/version
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from requests&lt;3.0,&gt;=2.31-&gt;otter-grader) (2.3.0)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from requests&lt;3.0,&gt;=2.31-&gt;otter-grader) (2024.12.14)
 Requirement already satisfied: docutils in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from fica&gt;=0.4.1-&gt;otter-grader) (0.20.1)
-Requirement already satisfied: sphinx in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from fica&gt;=0.4.1-&gt;otter-grader) (7.4.7)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sphinx in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from fica&gt;=0.4.1-&gt;otter-grader) (7.4.7)
 Requirement already satisfied: decorator in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ipython-&gt;otter-grader) (5.1.1)
 Requirement already satisfied: jedi&gt;=0.16 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ipython-&gt;otter-grader) (0.19.2)
 Requirement already satisfied: matplotlib-inline in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ipython-&gt;otter-grader) (0.1.7)
@@ -525,13 +525,13 @@ Requirement already satisfied: attrs&gt;=22.2.0 in /Users/eatai/.pyenv/versions/
 Requirement already satisfied: jsonschema-specifications&gt;=2023.03.6 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.0.0-&gt;otter-grader) (2024.10.1)
 Requirement already satisfied: referencing&gt;=0.28.4 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.0.0-&gt;otter-grader) (0.36.0)
 Requirement already satisfied: rpds-py&gt;=0.7.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from jsonschema&gt;=2.6-&gt;nbformat&gt;=5.0.0-&gt;otter-grader) (0.22.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.26.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=2.0.0-&gt;otter-grader) (2.2.1)
+Requirement already satisfied: numpy&gt;=1.26.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=2.0.0-&gt;otter-grader) (2.2.1)
 Requirement already satisfied: pytz&gt;=2020.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=2.0.0-&gt;otter-grader) (2024.2)
 Requirement already satisfied: tzdata&gt;=2022.7 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=2.0.0-&gt;otter-grader) (2024.2)
 Requirement already satisfied: ptyprocess&gt;=0.5 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pexpect&gt;4.3-&gt;ipython-&gt;otter-grader) (0.7.0)
-Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from python-dateutil&gt;=2.8.2-&gt;jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.5.0-&gt;nbconvert&gt;=6.0.0-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (1.17.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from python-dateutil&gt;=2.8.2-&gt;jupyter-client&gt;=6.1.12-&gt;nbclient&gt;=0.5.0-&gt;nbconvert&gt;=6.0.0-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (1.17.0)
 Requirement already satisfied: soupsieve&gt;1.2 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from beautifulsoup4-&gt;nbconvert&gt;=6.0.0-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (2.6)
 Requirement already satisfied: pyee&lt;13,&gt;=12 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from playwright-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (12.1.1)
 Requirement already satisfied: greenlet&lt;4.0.0,&gt;=3.1.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from playwright-&gt;nbconvert[webpdf]&gt;=6.0.0; sys_platform != &quot;emscripten&quot; and sys_platform != &quot;wasi&quot;-&gt;otter-grader) (3.1.1)
@@ -756,12 +756,12 @@ Per scoop, which flavor is most expensive?</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../blank.html"
+       href="../01_LinearRegression/01_linear_regression_01.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Linear Regression (Part 1)</p>
       </div>
     </a>
     <a class="right-next"
