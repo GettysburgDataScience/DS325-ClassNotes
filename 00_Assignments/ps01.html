@@ -201,14 +201,14 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_what_is_a_model.html">1. What is a model?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression.html">3. Linear Regression (Part 2)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="ps00.html">PS00</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ps00_Roth.html">PS00 (Solutions by Prof Roth)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">PS01 - (Not so) Simple Linear Regression</a></li>
-
 
 </ul>
 
@@ -416,9 +416,6 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing">Visualizing</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#your-tasks-begin-here">YOUR TASKS BEGIN HERE</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a">a.</a></li>
 </ul>
 </li>
@@ -807,11 +804,7 @@ memory usage: 125.2+ KB
 <img alt="../_images/d1fef8ec813becbdec8d1b147c9112322abbf55136255d794b164292e1f353f7.png" src="../_images/d1fef8ec813becbdec8d1b147c9112322abbf55136255d794b164292e1f353f7.png" />
 </div>
 </div>
-</section>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="your-tasks-begin-here">
-<h1>YOUR TASKS BEGIN HERE<a class="headerlink" href="#your-tasks-begin-here" title="Link to this heading">#</a></h1>
+<p><strong>YOUR TASKS BEGIN HERE</strong></p>
 <p>You will use the Price (Adj Closing value) as the target (y) and DateNum as the feature (x) to fit a linear regression.</p>
 <p>BUT THESE DATA SURE DON’T LOOK LINEAR!?</p>
 <p>No, they aren’t. The market grows exponentially. So in order to fit a linear regression, we will first transform the target data using a log. We’ll then fit the regression on the tranformed data and subsequently re-exponentiate the outputs.</p>
@@ -820,6 +813,8 @@ memory usage: 125.2+ KB
 \hat{y} = e^{\theta_1 \cdot x + \theta_0}\\
 ln(\hat{y}) = \theta_1 \cdot x + \theta_0
 \end{split}\]</div>
+</section>
+</section>
 <section id="a">
 <h2>a.<a class="headerlink" href="#a" title="Link to this heading">#</a></h2>
 <ul class="simple">
@@ -962,9 +957,6 @@ ln(\hat{y}) = \theta_1 \cdot x + \theta_0
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing">Visualizing</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#your-tasks-begin-here">YOUR TASKS BEGIN HERE</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a">a.</a></li>
 </ul>
 </li>
