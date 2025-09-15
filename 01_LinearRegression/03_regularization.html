@@ -412,7 +412,6 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">4.4. Regularization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">4.5. Feature Scaling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-king-county-housing">4.6. Example: King County housing</a></li>
 </ul>
             </nav>
         </div>
@@ -486,7 +485,7 @@
 \[
 J(\Theta) = \frac{1}{m}\sum_{i=0}^m(y_i - \hat{y}_i)^2
 \]</div>
-<p>Regularization adds a term to the cost function that penalizes large feature weights (<span class="math notranslate nohighlight">\(w_i\)</span>). Two common regularization algorithms are:</p>
+<p>Regularization adds a term to the cost function that penalizes large feature weights (<span class="math notranslate nohighlight">\(\theta_i\)</span>). Two common regularization algorithms are:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html">Ridge regression</a>:</p></li>
 </ul>
@@ -559,9 +558,6 @@ J_{\text{elastic net}}(\Theta) = \underbrace{\frac{1}{m}\sum_{i=0}^m(y_i - \hat{
 \[
  x_{i,\text{scaled}} = \frac{x_i - \min{(X)}}{\max{(X)}-\min{(X)}}
  \]</div>
-</section>
-<section id="example-king-county-housing">
-<h2><span class="section-number">4.6. </span>Example: King County housing<a class="headerlink" href="#example-king-county-housing" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -638,7 +634,6 @@ J_{\text{elastic net}}(\Theta) = \underbrace{\frac{1}{m}\sum_{i=0}^m(y_i - \hat{
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization">4.4. Regularization</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-scaling">4.5. Feature Scaling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-king-county-housing">4.6. Example: King County housing</a></li>
 </ul>
   </nav></div>
 
