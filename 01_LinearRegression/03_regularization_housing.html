@@ -87,7 +87,7 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PS00" href="../00_Assignments/ps00.html" />
+    <link rel="next" title="6. Polynomial Regression" href="04_polynomial_regression.html" />
     <link rel="prev" title="4. Bias, Variance, and Regularization" href="03_regularization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -196,6 +196,7 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/genai_policy.html">2. Our course GenAI Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="00_reviewtopics.html">3. Study Guide Contents</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
 <ul class="current nav bd-sidenav">
@@ -204,6 +205,7 @@
 <li class="toctree-l1"><a class="reference internal" href="02_linear_regression.html">3. Linear Regression (Part 2)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_regularization.html">4. Bias, Variance, and Regularization</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Regularization Example: King County housing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_polynomial_regression.html">6. Polynomial Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -812,10 +814,10 @@ memory usage: 3.5+ MB
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">ElasticNet</span><span class="p">,</span> <span class="n">RidgeCV</span><span class="p">,</span> <span class="n">LassoCV</span><span class="p">,</span> <span class="n">ElasticNetCV</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
@@ -850,6 +852,25 @@ memory usage: 3.5+ MB
 <span class="n">y_pred_lr</span> <span class="o">=</span> <span class="n">ss_y</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_pred_lr_scaled</span><span class="p">)</span>
 
 <span class="n">R2_lr</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test_scaled</span><span class="p">,</span> <span class="n">y_pred_lr_scaled</span><span class="p">)</span>
+
+<span class="n">R2_lr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6956974268521209
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.e+00, 1.e+01, 1.e+02, 1.e+03, 1.e+04, 1.e+05])
 </pre></div>
 </div>
 </div>
@@ -1887,6 +1908,48 @@ memory usage: 3.5+ MB
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lasso</span><span class="o">.</span><span class="vm">__dict__</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;eps&#39;: 0.001,
+ &#39;n_alphas&#39;: 100,
+ &#39;alphas&#39;: array([1.e-03, 1.e-02, 1.e-01, 1.e+00, 1.e+01, 1.e+02, 1.e+03]),
+ &#39;fit_intercept&#39;: True,
+ &#39;precompute&#39;: &#39;auto&#39;,
+ &#39;max_iter&#39;: 10000,
+ &#39;tol&#39;: 0.0001,
+ &#39;copy_X&#39;: True,
+ &#39;cv&#39;: 5,
+ &#39;verbose&#39;: False,
+ &#39;n_jobs&#39;: None,
+ &#39;positive&#39;: False,
+ &#39;random_state&#39;: None,
+ &#39;selection&#39;: &#39;cyclic&#39;,
+ &#39;n_features_in_&#39;: 18,
+ &#39;mse_path_&#39;: array([[1.17493944, 1.08348981, 0.91379629, 0.94334548, 0.88546225],
+        [1.17493944, 1.08348981, 0.91379629, 0.94334548, 0.88546225],
+        [1.17493944, 1.08348981, 0.91379629, 0.94334548, 0.88546225],
+        [1.17493944, 1.08348981, 0.91379629, 0.94334548, 0.88546225],
+        [0.47139429, 0.39173577, 0.31993276, 0.3258653 , 0.31450938],
+        [0.391673  , 0.31529641, 0.27752907, 0.27940606, 0.27739959],
+        [0.38621254, 0.31204547, 0.27755557, 0.27871435, 0.27824047]]),
+ &#39;alpha_&#39;: np.float64(0.001),
+ &#39;alphas_&#39;: array([1.e+03, 1.e+02, 1.e+01, 1.e+00, 1.e-01, 1.e-02, 1.e-03]),
+ &#39;coef_&#39;: array([-0.08903972,  0.09425803,  0.38298852,  0.00168326,  0.00694186,
+         0.13634189,  0.11170771,  0.05152892,  0.33509464,  0.03526533,
+         0.        ,  0.20924649, -0.02938209,  0.03984716, -0.02259535,
+         0.03311764,  0.2397004 , -0.03350463]),
+ &#39;intercept_&#39;: np.float64(-2.1721301169984707e-15),
+ &#39;dual_gap_&#39;: np.float64(8.889033968068597e-05),
+ &#39;n_iter_&#39;: 202}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Vanilla linear</span>
 <span class="n">rmse_lr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lr</span><span class="p">))</span>
 <span class="n">r2_lr</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred_lr</span><span class="p">)</span>
@@ -2246,11 +2309,11 @@ memory usage: 3.5+ MB
       </div>
     </a>
     <a class="right-next"
-       href="../00_Assignments/ps00.html"
+       href="04_polynomial_regression.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">PS00</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Polynomial Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
