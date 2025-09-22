@@ -1,6 +1,4 @@
-## Study Guide Contents
-
-The study guide includes:
+# Linear Regression Review Topics
 
 **Core Concepts:**
 - Introduction to models and their purpose
