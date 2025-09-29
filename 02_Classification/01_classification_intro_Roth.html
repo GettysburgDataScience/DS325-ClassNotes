@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Classification &#8212; DS325 Applied Data Science</title>
+    <title>Classification &#8212; DS325 Applied Data Science</title>
   
   
   
@@ -71,7 +71,7 @@
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '02_Classification/01_classification_intro';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_Classification/01_classification_intro_Roth';</script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/searchtools.js?v=63a53a7d"></script>
@@ -89,8 +89,6 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="PS00" href="../00_Assignments/ps00.html" />
-    <link rel="prev" title="6. Polynomial Regression" href="../01_LinearRegression/04_polynomial_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -141,6 +139,8 @@
     <div class="bd-container__inner bd-page-width">
       
       
+      
+        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -210,8 +210,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">6. Polynomial Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Classification</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">1. Classification</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -296,7 +296,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F02_Classification/01_classification_intro.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F02_Classification/01_classification_intro_Roth.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -326,7 +326,7 @@
       
       
       
-      <li><a href="../_sources/02_Classification/01_classification_intro.ipynb" target="_blank"
+      <li><a href="../_sources/02_Classification/01_classification_intro_Roth.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -412,10 +412,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">1.1. Binary classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">1.1.1. An example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">1.1.2. Confusion Matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-metrics">1.1.3. Binary classification metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">Binary classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-metrics">Binary classification metrics</a></li>
 </ul>
 </li>
 </ul>
@@ -430,11 +430,11 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="classification">
-<h1><span class="section-number">1. </span>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h1>
+<h1>Classification<a class="headerlink" href="#classification" title="Link to this heading">#</a></h1>
 <p>Classification tasks predict the categories, classes, or bins that data fall into. Classification tasks can be binary (e.g. deciding whether a product review was written by an actual customer or is AI-generated/paid review, identifying bank transactaions as legitimate or fraud, predicting how a registered voter will vote…assuming two political parties, etc.) or multi-class (e.g. what bird is making that call, what varietal of wine goes best with this meal, what major should a student pursue, etc).</p>
 <p>We’ll start by focusing on binary classification tasks, introducing some concepts that apply to all such tasks. We’ll introduce some ways we assess classification models.</p>
 <section id="binary-classification">
-<h2><span class="section-number">1.1. </span>Binary classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h2>
+<h2>Binary classification<a class="headerlink" href="#binary-classification" title="Link to this heading">#</a></h2>
 <p>Binary classification assigns each data point (feature vector) to one of two categories, often referred to as <em>Positive</em> and <em>Negative</em>. It is important to define which of the two categories corresponds to Positive and which to Negative.</p>
 <ul class="simple">
 <li><p>Mushroom id: P = poisonous, N = edible</p></li>
@@ -459,7 +459,7 @@
 <li><p>Come up with two novel examples, one in which FP is the worse error and another in which FN is the worse error? Can you think of a general rule for which kind of error should be avoided?</p></li>
 </ul>
 <section id="an-example">
-<h3><span class="section-number">1.1.1. </span>An example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h3>
+<h3>An example<a class="headerlink" href="#an-example" title="Link to this heading">#</a></h3>
 <p>In the following example, we’ll use Logistic Regression (we’ll go into detail about this algorithm in the next lecture) to classify breast tumors as malignant or benign based on the physical properties of the tumor (e.g. size, shape, texture).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -740,22 +740,68 @@ Name: target, dtype: float64
 </div>
 </div>
 </div>
-<p>What are the most important features?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-<span class="n">feature_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bc_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="c1"># Split the dataset into training and testing sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">bc_df</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Standardize the features</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Train a logistic regression model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Make predictions</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">y_prob</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="vm">__dict__</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">coefs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">feature_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bc_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;model&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;penalty&#39;: &#39;l2&#39;,
+ &#39;dual&#39;: False,
+ &#39;tol&#39;: 0.0001,
+ &#39;C&#39;: 1.0,
+ &#39;fit_intercept&#39;: True,
+ &#39;intercept_scaling&#39;: 1,
+ &#39;class_weight&#39;: None,
+ &#39;random_state&#39;: None,
+ &#39;solver&#39;: &#39;lbfgs&#39;,
+ &#39;max_iter&#39;: 100,
+ &#39;multi_class&#39;: &#39;deprecated&#39;,
+ &#39;verbose&#39;: 0,
+ &#39;warm_start&#39;: False,
+ &#39;n_jobs&#39;: None,
+ &#39;l1_ratio&#39;: None,
+ &#39;n_features_in_&#39;: 30,
+ &#39;classes_&#39;: array([0, 1]),
+ &#39;n_iter_&#39;: array([20], dtype=int32),
+ &#39;coef_&#39;: array([[ 0.43190368,  0.38732553,  0.39343248,  0.46521006,  0.07166728,
+         -0.54016395,  0.8014581 ,  1.11980408, -0.23611852, -0.07592093,
+          1.26817815, -0.18887738,  0.61058302,  0.9071857 ,  0.31330675,
+         -0.68249145, -0.17527452,  0.3112999 , -0.50042502, -0.61622993,
+          0.87984024,  1.35060559,  0.58945273,  0.84184594,  0.54416967,
+         -0.01611019,  0.94305313,  0.77821726,  1.20820031,  0.15741387]]),
+ &#39;intercept_&#39;: array([-0.44558453])}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bc_df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -837,7 +883,7 @@ Name: target, dtype: float64
 </div>
 </section>
 <section id="confusion-matrix">
-<h3><span class="section-number">1.1.2. </span>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
+<h3>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Link to this heading">#</a></h3>
 <p>The <em>Confusion Matrix</em> is a graphical representation of the predictions a classifier has made on the data set. The confusion matrix is an nxn grid where n is the number of categories; for binary classification, the confusion matrix is always 2x2.</p>
 <p>Let’s look at the confusion matrix for the breast tumor classification above.</p>
 <div class="cell docutils container">
@@ -858,7 +904,7 @@ Name: target, dtype: float64
 </div>
 </section>
 <section id="binary-classification-metrics">
-<h3><span class="section-number">1.1.3. </span>Binary classification metrics<a class="headerlink" href="#binary-classification-metrics" title="Link to this heading">#</a></h3>
+<h3>Binary classification metrics<a class="headerlink" href="#binary-classification-metrics" title="Link to this heading">#</a></h3>
 <p>There are also several metrics commonly used in binary classification: Accuracy, Precision, Recall, F1 score</p>
 <ul>
 <li><p><em>Accuracy</em> - The percentage of correct predictions overall</p>
@@ -918,13 +964,13 @@ weighted avg       0.97      0.97      0.97       114
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages/sklearn/utils/validation.py:2732: UserWarning: X has feature names, but LogisticRegression was fitted without feature names
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/validation.py:2732: UserWarning: X has feature names, but LogisticRegression was fitted without feature names
   warnings.warn(
-/Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
   ret = a @ b
-/Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
   ret = a @ b
-/Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
   ret = a @ b
 </pre></div>
 </div>
@@ -965,24 +1011,6 @@ weighted avg       0.97      0.97      0.97       114
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="../01_LinearRegression/04_polynomial_regression.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">6. </span>Polynomial Regression</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../00_Assignments/ps00.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">PS00</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -1000,10 +1028,10 @@ weighted avg       0.97      0.97      0.97       114
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">1.1. Binary classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">1.1.1. An example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">1.1.2. Confusion Matrix</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-metrics">1.1.3. Binary classification metrics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification">Binary classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example">An example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#binary-classification-metrics">Binary classification metrics</a></li>
 </ul>
 </li>
 </ul>
