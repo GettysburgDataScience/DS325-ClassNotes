@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Logistic Regression &#8212; DS325 Applied Data Science</title>
+    <title>2. Logistic Regression &#8212; DS325 Applied Data Science</title>
   
   
   
@@ -89,6 +89,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PS00" href="../00_Assignments/ps00.html" />
+    <link rel="prev" title="1. Classification" href="01_classification_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -139,8 +141,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -198,16 +198,29 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/genai_policy.html">2. Our course GenAI Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_reviewtopics.html">3. Linear Regression Review Topics</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_what_is_a_model.html">1. What is a model?</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression_01.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression.html">3. Linear Regression (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization_housing.html">5. Regularization Example: King County housing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">6. Polynomial Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">1. Classification</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Logistic Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00.html">PS00</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00_Roth.html">PS00 (Solutions by Prof Roth)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps01.html">PS01 - (Not so) Simple Linear Regression</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps02.html">PS02 - Regularization</a></li>
 </ul>
 
     </div>
@@ -400,22 +413,22 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simple-logistic-regression-as-a-classifier">Example: Simple Logistic Regression as a Classifier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">The Logistic Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-and-linear-regression">Logistic and Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-function">Cost Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simple-logistic-regression-as-a-classifier">2.1. Example: Simple Logistic Regression as a Classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">2.2. The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-and-linear-regression">2.3. Logistic and Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-function">2.3.1. Cost Function</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-the-example">Back to the Example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">Assessing the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-the-example">2.4. Back to the Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">2.4.1. Assessing the model</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-in-logistic-regression">Regularization in Logistic Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improving-our-model">Improving our model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Assessing the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-in-logistic-regression">2.5. Regularization in Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improving-our-model">2.5.1. Improving our model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.5.2. Assessing the model</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example-classifying-wines">Another Example: Classifying Wines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example-classifying-wines">2.6. Another Example: Classifying Wines</a></li>
 </ul>
             </nav>
         </div>
@@ -428,11 +441,11 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="logistic-regression">
-<h1>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Logistic Regression<a class="headerlink" href="#logistic-regression" title="Link to this heading">#</a></h1>
 <p>Is it regression or classification? Yes.</p>
 <p>Let’s start differently, with an example.</p>
 <section id="example-simple-logistic-regression-as-a-classifier">
-<h2>Example: Simple Logistic Regression as a Classifier<a class="headerlink" href="#example-simple-logistic-regression-as-a-classifier" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Example: Simple Logistic Regression as a Classifier<a class="headerlink" href="#example-simple-logistic-regression-as-a-classifier" title="Link to this heading">#</a></h2>
 <p>Let’s revisit the breast cancer dataset. The data comprise numerous physical features of a tumor (e.g. area, texture, symmetry, etc.) and each feature set is labeled with a binary target, benign or malignant.</p>
 <p><strong>Note</strong>: In the original data set, benign tumors are labeled 1 and malignant tumors 0. This seems backwards to me and every time I look at these data, my wrong intuition beats out my terrible memory. So, in the example below, I’ve swapped the labeling so that 1 and 0 correspond to malignant and benign, respectively. So:</p>
 <ul class="simple">
@@ -1095,19 +1108,20 @@ Name: y, dtype: float64
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">feature</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Malignancy (Prob %)&#39;</span><span class="p">)</span>
 
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/338aee83f1a31d6a5013f6ae9a1472717c3ff293a11c3d2568fd550e96fca22f.png" src="../_images/338aee83f1a31d6a5013f6ae9a1472717c3ff293a11c3d2568fd550e96fca22f.png" />
+<img alt="../_images/db537de884e922fdcc50f13ddbb052da546b696bfdffaa39ba917c5a594d2a74.png" src="../_images/db537de884e922fdcc50f13ddbb052da546b696bfdffaa39ba917c5a594d2a74.png" />
 </div>
 </div>
 <p>What is this shape?</p>
 </section>
 <section id="the-logistic-function">
-<h2>The Logistic Function<a class="headerlink" href="#the-logistic-function" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>The Logistic Function<a class="headerlink" href="#the-logistic-function" title="Link to this heading">#</a></h2>
 <p>The logistic function is a smooth monotonically increasing (means goes up as x goes up) curve with a range of (0, 1). It trends to 0 as x decreases and trends to 1 as x increases with a value of 0.5 at x=0.</p>
 <p>This is the logistic function:</p>
 <div class="math notranslate nohighlight">
@@ -1155,7 +1169,7 @@ Name: y, dtype: float64
 </ul>
 </section>
 <section id="logistic-and-linear-regression">
-<h2>Logistic and Linear Regression<a class="headerlink" href="#logistic-and-linear-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>Logistic and Linear Regression<a class="headerlink" href="#logistic-and-linear-regression" title="Link to this heading">#</a></h2>
 <p>Why are these two topics in the same chapter?</p>
 <p>Let’s look back at the logistic function?</p>
 <div class="math notranslate nohighlight">
@@ -1170,7 +1184,7 @@ t = \theta_0 + \theta_1 \cdot x_1 + \cdots + \theta_n \cdot x_n
 <p>The value of <span class="math notranslate nohighlight">\(t\)</span> is the output of a linear model (and it can be any flavor of regularized linear model too!). So the parameters of a logistic regression are actually the coefficients of a linear regression (or Lasso or Ridge or ElasticNet). What does this linear model do?</p>
 <p>The linear equation maps feature vectors to the range <span class="math notranslate nohighlight">\((-\infty, +\infty)\)</span>. Features that should be classified as 1 get assigned positive numbers, larger for more certain classifications; features that should be classified as 0 get assigned negative numbers, larger negative for more certain classifications.</p>
 <section id="cost-function">
-<h3>Cost Function<a class="headerlink" href="#cost-function" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.3.1. </span>Cost Function<a class="headerlink" href="#cost-function" title="Link to this heading">#</a></h3>
 <p>The <em>loss function</em> minimized for any prediction is:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1209,11 +1223,12 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </section>
 </section>
 <section id="back-to-the-example">
-<h2>Back to the Example<a class="headerlink" href="#back-to-the-example" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>Back to the Example<a class="headerlink" href="#back-to-the-example" title="Link to this heading">#</a></h2>
 <p>Now, let’s use all of our features.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
 
 <span class="n">X</span> <span class="o">=</span> <span class="n">bc_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">bc_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
@@ -1236,40 +1251,6 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_LogReg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
 
 <span class="n">y_pred_prob</span> <span class="o">=</span> <span class="n">model_LogReg</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:200: RuntimeWarning: divide by zero encountered in matmul
-  raw_prediction = X @ weights + intercept
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:200: RuntimeWarning: overflow encountered in matmul
-  raw_prediction = X @ weights + intercept
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:200: RuntimeWarning: invalid value encountered in matmul
-  raw_prediction = X @ weights + intercept
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:330: RuntimeWarning: divide by zero encountered in matmul
-  grad[:n_features] = X.T @ grad_pointwise + l2_reg_strength * weights
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:330: RuntimeWarning: overflow encountered in matmul
-  grad[:n_features] = X.T @ grad_pointwise + l2_reg_strength * weights
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:330: RuntimeWarning: invalid value encountered in matmul
-  grad[:n_features] = X.T @ grad_pointwise + l2_reg_strength * weights
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
-  ret = a @ b
 </pre></div>
 </div>
 </div>
@@ -1296,7 +1277,7 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </div>
 </div>
 <section id="assessing-the-model">
-<h3>Assessing the model<a class="headerlink" href="#assessing-the-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.4.1. </span>Assessing the model<a class="headerlink" href="#assessing-the-model" title="Link to this heading">#</a></h3>
 <p>How’d we do?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1322,7 +1303,7 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </section>
 </section>
 <section id="regularization-in-logistic-regression">
-<h2>Regularization in Logistic Regression<a class="headerlink" href="#regularization-in-logistic-regression" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>Regularization in Logistic Regression<a class="headerlink" href="#regularization-in-logistic-regression" title="Link to this heading">#</a></h2>
 <p>Take a look at the documentation for <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">LogisticRegression</a>.</p>
 <p>The four hyper-parameters you will likely use:</p>
 <ul class="simple">
@@ -1342,14 +1323,16 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </ul>
 </li>
 <li><p><strong>max_iter</strong> - sometimes, fitting the model won’t converge. Try increasing the value of max_iters (default is 100) and see if that fixes the problem.</p></li>
+<li><p><strong>solver</strong> - different regularizations may require different solvers (how the optimal parameters are found). Let’s look at the documentation.</p></li>
 </ul>
 <section id="improving-our-model">
-<h3>Improving our model<a class="headerlink" href="#improving-our-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.5.1. </span>Improving our model<a class="headerlink" href="#improving-our-model" title="Link to this heading">#</a></h3>
 <p>The model we fit seems to be over-fitting the data. How do I know this from the confusion matrix?</p>
 <p>Let’s use some regularization to see if we can improve the fit.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train a logistic regression model</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
+<span class="c1"># Train a logistic regression model</span>
 <span class="n">model_LogReg_Ridge</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">penalty</span> <span class="o">=</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
 <span class="n">model_LogReg_Ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
@@ -1358,8 +1341,13 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_LogReg_Ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
 
 <span class="n">y_pred_prob</span> <span class="o">=</span> <span class="n">model_LogReg_Ridge</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
-
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">ConfusionMatrixDisplay</span><span class="o">.</span><span class="n">from_predictions</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_pred_train</span><span class="p">,</span> 
                                         <span class="c1"># normalize = &#39;true&#39;,</span>
                                         <span class="n">display_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Benign&#39;</span><span class="p">,</span> <span class="s1">&#39;Malignant&#39;</span><span class="p">],</span>
@@ -1375,44 +1363,12 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:200: RuntimeWarning: divide by zero encountered in matmul
-  raw_prediction = X @ weights + intercept
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:200: RuntimeWarning: overflow encountered in matmul
-  raw_prediction = X @ weights + intercept
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:200: RuntimeWarning: invalid value encountered in matmul
-  raw_prediction = X @ weights + intercept
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:330: RuntimeWarning: divide by zero encountered in matmul
-  grad[:n_features] = X.T @ grad_pointwise + l2_reg_strength * weights
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:330: RuntimeWarning: overflow encountered in matmul
-  grad[:n_features] = X.T @ grad_pointwise + l2_reg_strength * weights
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/linear_model/_linear_loss.py:330: RuntimeWarning: invalid value encountered in matmul
-  grad[:n_features] = X.T @ grad_pointwise + l2_reg_strength * weights
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: divide by zero encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: overflow encountered in matmul
-  ret = a @ b
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/utils/extmath.py:203: RuntimeWarning: invalid value encountered in matmul
-  ret = a @ b
-</pre></div>
-</div>
 <img alt="../_images/4883b4d1cde3fd258a7579559a53f3b0f9a19cc894667320d505ad64857b3057.png" src="../_images/4883b4d1cde3fd258a7579559a53f3b0f9a19cc894667320d505ad64857b3057.png" />
 </div>
 </div>
 </section>
 <section id="id1">
-<h3>Assessing the model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.5.2. </span>Assessing the model<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>What were our most significant features?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1672,7 +1628,7 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </section>
 </section>
 <section id="another-example-classifying-wines">
-<h2>Another Example: Classifying Wines<a class="headerlink" href="#another-example-classifying-wines" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.6. </span>Another Example: Classifying Wines<a class="headerlink" href="#another-example-classifying-wines" title="Link to this heading">#</a></h2>
 <p>In this classification problem, we are given chemical properties of wine as well as a target value corresponding to the vineyard the wine came from. Can we identify which vineyard a wine came from by analyzing the chemical content of the wine itself?</p>
 <p>There are three categories of wine in this classification (0,1,2). Below, I’ve set up the problem so that you can fit a binary logistic regression or a multi-class just by toggling the comments on a few lines of code in the next cell. Everything else can stay the same; the LogisticRegression model will handle both cases.</p>
 <p>For multi-class classification, we can leave the target variable as it is in the original data set.</p>
@@ -1687,13 +1643,13 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 
 <span class="n">wine_df</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># Multi-class (3) problem</span>
-<span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
-<span class="n">vineyard_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vineyard 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Vineyard 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Vineyard 2&#39;</span><span class="p">]</span>
+<span class="c1"># # Multi-class (3) problem</span>
+<span class="c1"># wine_df[&#39;y&#39;] = y</span>
+<span class="c1"># vineyard_labels = [&#39;Vineyard 0&#39;, &#39;Vineyard 1&#39;, &#39;Vineyard 2&#39;]</span>
 
-<span class="c1"># # Binary Classification problem</span>
-<span class="c1"># vineyard_labels = [&#39;Not Vineyard 1&#39;, &#39;Vineyard 1&#39;]</span>
-<span class="c1"># wine_df[&#39;y&#39;] = 1 * (y==1)</span>
+<span class="c1"># Binary Classification problem</span>
+<span class="n">vineyard_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Not Vineyard 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Vineyard 1&#39;</span><span class="p">]</span>
+<span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 
@@ -1704,7 +1660,7 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1]
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1834,38 +1790,23 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split the data into features and target</span>
-
-<span class="n">X</span> <span class="o">=</span> <span class="n">wine_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
-
-<span class="n">y</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2])
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train_test_split</span>
 
-<span class="n">ss</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 
-<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="c1"># Scale the data</span>
+
 
 <span class="c1"># I&#39;m choosing to use logistic regression with Lasso (L1) penalty</span>
-<span class="n">model_Lasso</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">penalty</span> <span class="o">=</span> <span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">model_Lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="c1"># One hyper-parameter is solver and not all solvers work for all parameters</span>
+
 
 <span class="c1"># Make predictions</span>
-<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">model_Lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">)</span>
-<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_Lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
-
-<span class="n">y_pred_prob</span> <span class="o">=</span> <span class="n">model_Lasso</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1888,125 +1829,22 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/0f700f0ded9953b5654769f12ee59f5c2234625f4c8ffca559354affaa234304.png" src="../_images/0f700f0ded9953b5654769f12ee59f5c2234625f4c8ffca559354affaa234304.png" />
+<img alt="../_images/054bd01e42cc333a2767cdfa2518d9a6e7605ede80eca57f18ceae5fff60f278.png" src="../_images/054bd01e42cc333a2767cdfa2518d9a6e7605ede80eca57f18ceae5fff60f278.png" />
 </div>
 </div>
+<p><strong>What were the most important features?</strong></p>
+<ul class="simple">
+<li><p>Get the feature names from the columns of X</p></li>
+<li><p>Get the coefficients from the model and calculate their absolute values</p></li>
+<li><p>Create a dataframe with columns: features, weights, abs weights</p></li>
+<li><p>Sort by abs weight</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coefs</span> <span class="o">=</span> <span class="n">model_Lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
-
-<span class="n">feature_weights_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;features&#39;</span><span class="p">:</span><span class="n">features</span><span class="p">,</span> <span class="s1">&#39;weights&#39;</span><span class="p">:</span><span class="n">coefs</span><span class="p">,</span> <span class="s1">&#39;abs weights&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coefs</span><span class="p">)})</span>
-<span class="n">feature_weights_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;abs weights&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Follow the instructions above</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>features</th>
-      <th>weights</th>
-      <th>abs weights</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>12</th>
-      <td>proline</td>
-      <td>2.781661</td>
-      <td>2.781661</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>alcalinity_of_ash</td>
-      <td>-1.842262</td>
-      <td>1.842262</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>alcohol</td>
-      <td>1.745347</td>
-      <td>1.745347</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>flavanoids</td>
-      <td>1.243606</td>
-      <td>1.243606</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>od280/od315_of_diluted_wines</td>
-      <td>1.193966</td>
-      <td>1.193966</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>ash</td>
-      <td>1.168553</td>
-      <td>1.168553</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>malic_acid</td>
-      <td>0.522307</td>
-      <td>0.522307</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>magnesium</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>total_phenols</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>nonflavanoid_phenols</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>proanthocyanins</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>color_intensity</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>hue</td>
-      <td>0.000000</td>
-      <td>0.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 </section>
@@ -2041,6 +1879,24 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="01_classification_intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Classification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../00_Assignments/ps00.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">PS00</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -2058,22 +1914,22 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simple-logistic-regression-as-a-classifier">Example: Simple Logistic Regression as a Classifier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">The Logistic Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-and-linear-regression">Logistic and Linear Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-function">Cost Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simple-logistic-regression-as-a-classifier">2.1. Example: Simple Logistic Regression as a Classifier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-logistic-function">2.2. The Logistic Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logistic-and-linear-regression">2.3. Logistic and Linear Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cost-function">2.3.1. Cost Function</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-the-example">Back to the Example</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">Assessing the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-the-example">2.4. Back to the Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assessing-the-model">2.4.1. Assessing the model</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-in-logistic-regression">Regularization in Logistic Regression</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improving-our-model">Improving our model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Assessing the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-in-logistic-regression">2.5. Regularization in Logistic Regression</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#improving-our-model">2.5.1. Improving our model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.5.2. Assessing the model</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example-classifying-wines">Another Example: Classifying Wines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-example-classifying-wines">2.6. Another Example: Classifying Wines</a></li>
 </ul>
   </nav></div>
 
