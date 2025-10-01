@@ -963,12 +963,13 @@ Name: y, dtype: float64
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">FP</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">FP</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="n">wrong</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="n">positive</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;False Positive&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">FN</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">FN</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="n">wrong</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="n">negative</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;False Negative&#39;</span><span class="p">)</span>
 
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/598c616b27b94897c0d478b088c2bfa28c110c7d5659488d942bc52c26474808.png" src="../_images/598c616b27b94897c0d478b088c2bfa28c110c7d5659488d942bc52c26474808.png" />
+<img alt="../_images/d6c3e7c84a9ef183b0ed8ca3e84d2f931104eaadc645acf14986fa96b1ed3688.png" src="../_images/d6c3e7c84a9ef183b0ed8ca3e84d2f931104eaadc645acf14986fa96b1ed3688.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1201,6 +1202,18 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-0.6931471805599453)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
@@ -1331,9 +1344,16 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 <p>Let’s use some regularization to see if we can improve the fit.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegressionCV</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%capture</span>
 <span class="c1"># Train a logistic regression model</span>
-<span class="n">model_LogReg_Ridge</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">penalty</span> <span class="o">=</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
+<span class="n">model_LogReg_Ridge</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span><span class="n">penalty</span> <span class="o">=</span> <span class="s1">&#39;l2&#39;</span><span class="p">,</span> <span class="n">Cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">max_iter</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">)</span>
 <span class="n">model_LogReg_Ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="c1"># Make predictions</span>
@@ -1363,7 +1383,7 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/4883b4d1cde3fd258a7579559a53f3b0f9a19cc894667320d505ad64857b3057.png" src="../_images/4883b4d1cde3fd258a7579559a53f3b0f9a19cc894667320d505ad64857b3057.png" />
+<img alt="../_images/feb96d9bcdab9ae234ea661e12a11691551e1a68a73603d937a8fd42f2d456c6.png" src="../_images/feb96d9bcdab9ae234ea661e12a11691551e1a68a73603d937a8fd42f2d456c6.png" />
 </div>
 </div>
 </section>
@@ -1377,31 +1397,124 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;penalty&#39;: &#39;l2&#39;,
- &#39;dual&#39;: False,
- &#39;tol&#39;: 0.0001,
- &#39;C&#39;: 0.1,
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;Cs&#39;: array([1.00000000e-02, 3.16227766e-02, 1.00000000e-01, 3.16227766e-01,
+        1.00000000e+00, 3.16227766e+00, 1.00000000e+01, 3.16227766e+01,
+        1.00000000e+02]),
  &#39;fit_intercept&#39;: True,
- &#39;intercept_scaling&#39;: 1,
- &#39;class_weight&#39;: None,
- &#39;random_state&#39;: None,
- &#39;solver&#39;: &#39;lbfgs&#39;,
+ &#39;cv&#39;: 5,
+ &#39;dual&#39;: False,
+ &#39;penalty&#39;: &#39;l2&#39;,
+ &#39;scoring&#39;: None,
+ &#39;tol&#39;: 0.0001,
  &#39;max_iter&#39;: 10000,
- &#39;multi_class&#39;: &#39;deprecated&#39;,
- &#39;verbose&#39;: 0,
- &#39;warm_start&#39;: False,
+ &#39;class_weight&#39;: None,
  &#39;n_jobs&#39;: None,
- &#39;l1_ratio&#39;: None,
+ &#39;verbose&#39;: 0,
+ &#39;solver&#39;: &#39;lbfgs&#39;,
+ &#39;refit&#39;: True,
+ &#39;intercept_scaling&#39;: 1.0,
+ &#39;multi_class&#39;: &#39;deprecated&#39;,
+ &#39;random_state&#39;: None,
+ &#39;l1_ratios&#39;: None,
  &#39;n_features_in_&#39;: 30,
  &#39;classes_&#39;: array([0, 1]),
- &#39;n_iter_&#39;: array([13], dtype=int32),
- &#39;coef_&#39;: array([[ 0.37087111,  0.4192871 ,  0.35886982,  0.355747  ,  0.14327852,
-         -0.01300224,  0.35494654,  0.46485547,  0.02751616, -0.1944205 ,
-          0.46217896, -0.0351985 ,  0.32444403,  0.34457813,  0.06423173,
-         -0.25745119, -0.05938632,  0.11795601, -0.17901571, -0.26046698,
-          0.48940432,  0.60052475,  0.43407476,  0.43543002,  0.37447289,
-          0.14985419,  0.40737255,  0.46444327,  0.47890389,  0.10609777]]),
- &#39;intercept_&#39;: array([-0.63452897])}
+ &#39;Cs_&#39;: array([1.00000000e-02, 3.16227766e-02, 1.00000000e-01, 3.16227766e-01,
+        1.00000000e+00, 3.16227766e+00, 1.00000000e+01, 3.16227766e+01,
+        1.00000000e+02]),
+ &#39;n_iter_&#39;: array([[[10,  7,  8, 12, 12, 16, 21, 23, 29],
+         [ 9,  7,  8,  9, 10, 14, 14, 20, 17],
+         [10,  7,  8, 10, 11, 16, 22, 26, 26],
+         [10,  6,  7,  9, 11, 13, 21, 30, 26],
+         [ 9,  8,  8, 12, 11, 15, 20, 15, 11]]], dtype=int32),
+ &#39;scores_&#39;: {np.int64(1): array([[0.93406593, 0.97802198, 0.98901099, 0.98901099, 0.97802198,
+          0.98901099, 0.98901099, 0.96703297, 0.93406593],
+         [0.94505495, 0.96703297, 0.96703297, 0.96703297, 0.96703297,
+          0.97802198, 0.96703297, 0.95604396, 0.95604396],
+         [0.97802198, 0.98901099, 0.98901099, 1.        , 1.        ,
+          1.        , 1.        , 1.        , 1.        ],
+         [0.93406593, 0.95604396, 0.96703297, 0.97802198, 0.97802198,
+          0.97802198, 0.97802198, 0.97802198, 0.97802198],
+         [0.93406593, 0.94505495, 0.94505495, 0.93406593, 0.94505495,
+          0.94505495, 0.94505495, 0.94505495, 0.94505495]])},
+ &#39;coefs_paths_&#39;: {np.int64(1): array([[[ 0.18877931,  0.15354924,  0.18835075, ...,  0.15799421,
+            0.05308207, -0.62707392],
+          [ 0.26001545,  0.25317046,  0.25722958, ...,  0.26765068,
+            0.06680208, -0.62149993],
+          [ 0.32315174,  0.36240604,  0.31657734, ...,  0.45050076,
+            0.07887859, -0.58505505],
+          ...,
+          [-0.19992366, -0.18313838, -0.24642842, ...,  2.79406576,
+           -0.05705654,  0.22982167],
+          [-0.72115368, -0.18133544, -0.8247711 , ...,  4.61597812,
+           -0.33770871,  0.73177235],
+          [-1.27061238,  0.50945972, -1.6081652 , ...,  7.68106288,
+           -1.3848245 ,  0.88623181]],
+  
+         [[ 0.19407935,  0.1610312 ,  0.19282929, ...,  0.15803426,
+            0.06208549, -0.71466605],
+          [ 0.2782481 ,  0.26927561,  0.27376116, ...,  0.27343663,
+            0.07898245, -0.74263137],
+          [ 0.37187738,  0.38911002,  0.36187733, ...,  0.45587393,
+            0.09207409, -0.76980897],
+          ...,
+          [ 0.48720426, -0.0536111 ,  0.31852832, ...,  2.67600778,
+           -0.53317192, -0.68615334],
+          [ 0.39188048,  0.03247218,  0.0542682 , ...,  4.11402491,
+           -1.36680146, -0.3901461 ],
+          [ 0.22874718,  0.44243786, -0.29121275, ...,  6.33994447,
+           -2.42184226,  0.22317786]],
+  
+         [[ 0.18850543,  0.17367384,  0.1880179 , ...,  0.15486926,
+            0.07403958, -0.59769658],
+          [ 0.2711116 ,  0.29088627,  0.26713907, ...,  0.25437626,
+            0.10366637, -0.59128212],
+          [ 0.35563314,  0.41306985,  0.34485634, ...,  0.41666843,
+            0.14372282, -0.58508927],
+          ...,
+          [ 0.16359844,  0.09733587, -0.07076539, ...,  2.52569141,
+           -0.01463229,  0.23649025],
+          [-0.282397  ,  0.29898835, -0.80273291, ...,  3.84916428,
+           -0.4422473 ,  0.94181455],
+          [-1.02417092,  0.93962937, -2.05384819, ...,  5.80342855,
+           -1.18953451,  1.68586285]],
+  
+         [[ 0.19997914,  0.15811623,  0.19773728, ...,  0.16137979,
+            0.06280437, -0.65213172],
+          [ 0.28459406,  0.26940186,  0.27864513, ...,  0.26870448,
+            0.08220969, -0.66336185],
+          [ 0.36637957,  0.4077656 ,  0.35470213, ...,  0.42896016,
+            0.097046  , -0.66788239],
+          ...,
+          [-0.24784738,  0.55084161, -0.40231166, ...,  1.80653513,
+            0.01311299,  0.18548086],
+          [-0.99713236,  0.62963699, -1.34442754, ...,  2.47198482,
+           -0.09830574,  0.79818549],
+          [-2.25795274,  1.15047984, -2.98278922, ...,  3.56491544,
+           -0.40545261,  1.60598903]],
+  
+         [[ 0.19100602,  0.1763199 ,  0.18967846, ...,  0.15504789,
+            0.05368948, -0.67868101],
+          [ 0.2711364 ,  0.29533977,  0.26551771, ...,  0.25671223,
+            0.07234754, -0.68779421],
+          [ 0.35676133,  0.41859913,  0.34305118, ...,  0.42267667,
+            0.1034524 , -0.67676617],
+          ...,
+          [ 0.42997228, -0.08864118,  0.41415401, ...,  2.60677422,
+            1.39493816,  0.55349446],
+          [ 0.48506192, -0.37839758,  0.51076076, ...,  3.80606774,
+            2.300287  ,  1.22929661],
+          [ 0.7696429 , -0.52645044,  0.82005258, ...,  5.46332712,
+            3.50667034,  1.95913911]]], shape=(5, 9, 31))},
+ &#39;C_&#39;: array([3.16227766]),
+ &#39;l1_ratio_&#39;: array([None], dtype=object),
+ &#39;coef_&#39;: array([[ 0.30024566,  0.17240886,  0.2191313 ,  0.38105667, -0.02093164,
+         -1.20860703,  1.10774301,  1.89822535, -0.50315616,  0.27157447,
+          2.04744451, -0.37269222,  0.57003749,  1.4691531 ,  0.52954499,
+         -0.68159526, -0.57761771,  0.52984054, -0.77511646, -0.90946073,
+          1.20043014,  1.96459618,  0.51709265,  1.21674533,  0.43159841,
+         -0.1202286 ,  1.45955511,  0.91213833,  1.78008332,  0.12361707]]),
+ &#39;intercept_&#39;: array([-0.1816065]),
+ &#39;l1_ratios_&#39;: array([None], dtype=object)}
 </pre></div>
 </div>
 </div>
@@ -1442,184 +1555,184 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
   </thead>
   <tbody>
     <tr>
+      <th>10</th>
+      <td>radius error</td>
+      <td>2.047445</td>
+      <td>2.047445</td>
+    </tr>
+    <tr>
       <th>21</th>
       <td>worst texture</td>
-      <td>0.600525</td>
-      <td>0.600525</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>worst radius</td>
-      <td>0.489404</td>
-      <td>0.489404</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>worst symmetry</td>
-      <td>0.478904</td>
-      <td>0.478904</td>
+      <td>1.964596</td>
+      <td>1.964596</td>
     </tr>
     <tr>
       <th>7</th>
       <td>mean concave points</td>
-      <td>0.464855</td>
-      <td>0.464855</td>
+      <td>1.898225</td>
+      <td>1.898225</td>
     </tr>
     <tr>
-      <th>27</th>
-      <td>worst concave points</td>
-      <td>0.464443</td>
-      <td>0.464443</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>radius error</td>
-      <td>0.462179</td>
-      <td>0.462179</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>worst area</td>
-      <td>0.435430</td>
-      <td>0.435430</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>worst perimeter</td>
-      <td>0.434075</td>
-      <td>0.434075</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>mean texture</td>
-      <td>0.419287</td>
-      <td>0.419287</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>worst concavity</td>
-      <td>0.407373</td>
-      <td>0.407373</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>worst smoothness</td>
-      <td>0.374473</td>
-      <td>0.374473</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>mean radius</td>
-      <td>0.370871</td>
-      <td>0.370871</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>mean perimeter</td>
-      <td>0.358870</td>
-      <td>0.358870</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>mean area</td>
-      <td>0.355747</td>
-      <td>0.355747</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>mean concavity</td>
-      <td>0.354947</td>
-      <td>0.354947</td>
+      <th>28</th>
+      <td>worst symmetry</td>
+      <td>1.780083</td>
+      <td>1.780083</td>
     </tr>
     <tr>
       <th>13</th>
       <td>area error</td>
-      <td>0.344578</td>
-      <td>0.344578</td>
+      <td>1.469153</td>
+      <td>1.469153</td>
     </tr>
     <tr>
-      <th>12</th>
-      <td>perimeter error</td>
-      <td>0.324444</td>
-      <td>0.324444</td>
+      <th>26</th>
+      <td>worst concavity</td>
+      <td>1.459555</td>
+      <td>1.459555</td>
     </tr>
     <tr>
-      <th>19</th>
-      <td>fractal dimension error</td>
-      <td>-0.260467</td>
-      <td>0.260467</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>compactness error</td>
-      <td>-0.257451</td>
-      <td>0.257451</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>mean fractal dimension</td>
-      <td>-0.194421</td>
-      <td>0.194421</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>symmetry error</td>
-      <td>-0.179016</td>
-      <td>0.179016</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>worst compactness</td>
-      <td>0.149854</td>
-      <td>0.149854</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>mean smoothness</td>
-      <td>0.143279</td>
-      <td>0.143279</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>concave points error</td>
-      <td>0.117956</td>
-      <td>0.117956</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>worst fractal dimension</td>
-      <td>0.106098</td>
-      <td>0.106098</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>smoothness error</td>
-      <td>0.064232</td>
-      <td>0.064232</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>concavity error</td>
-      <td>-0.059386</td>
-      <td>0.059386</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>texture error</td>
-      <td>-0.035199</td>
-      <td>0.035199</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>mean symmetry</td>
-      <td>0.027516</td>
-      <td>0.027516</td>
+      <th>23</th>
+      <td>worst area</td>
+      <td>1.216745</td>
+      <td>1.216745</td>
     </tr>
     <tr>
       <th>5</th>
       <td>mean compactness</td>
-      <td>-0.013002</td>
-      <td>0.013002</td>
+      <td>-1.208607</td>
+      <td>1.208607</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>worst radius</td>
+      <td>1.200430</td>
+      <td>1.200430</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>mean concavity</td>
+      <td>1.107743</td>
+      <td>1.107743</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>worst concave points</td>
+      <td>0.912138</td>
+      <td>0.912138</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>fractal dimension error</td>
+      <td>-0.909461</td>
+      <td>0.909461</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>symmetry error</td>
+      <td>-0.775116</td>
+      <td>0.775116</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>compactness error</td>
+      <td>-0.681595</td>
+      <td>0.681595</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>concavity error</td>
+      <td>-0.577618</td>
+      <td>0.577618</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>perimeter error</td>
+      <td>0.570037</td>
+      <td>0.570037</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>concave points error</td>
+      <td>0.529841</td>
+      <td>0.529841</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>smoothness error</td>
+      <td>0.529545</td>
+      <td>0.529545</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>worst perimeter</td>
+      <td>0.517093</td>
+      <td>0.517093</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>mean symmetry</td>
+      <td>-0.503156</td>
+      <td>0.503156</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>worst smoothness</td>
+      <td>0.431598</td>
+      <td>0.431598</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>mean area</td>
+      <td>0.381057</td>
+      <td>0.381057</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>texture error</td>
+      <td>-0.372692</td>
+      <td>0.372692</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>mean radius</td>
+      <td>0.300246</td>
+      <td>0.300246</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>mean fractal dimension</td>
+      <td>0.271574</td>
+      <td>0.271574</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>mean perimeter</td>
+      <td>0.219131</td>
+      <td>0.219131</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>mean texture</td>
+      <td>0.172409</td>
+      <td>0.172409</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>worst fractal dimension</td>
+      <td>0.123617</td>
+      <td>0.123617</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>worst compactness</td>
+      <td>-0.120229</td>
+      <td>0.120229</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>mean smoothness</td>
+      <td>-0.020932</td>
+      <td>0.020932</td>
     </tr>
   </tbody>
 </table>
@@ -1643,24 +1756,24 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 
 <span class="n">wine_df</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># # Multi-class (3) problem</span>
-<span class="c1"># wine_df[&#39;y&#39;] = y</span>
-<span class="c1"># vineyard_labels = [&#39;Vineyard 0&#39;, &#39;Vineyard 1&#39;, &#39;Vineyard 2&#39;]</span>
+<span class="c1"># Multi-class (3) problem</span>
+<span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+<span class="n">vineyard_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vineyard 0&#39;</span><span class="p">,</span> <span class="s1">&#39;Vineyard 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Vineyard 2&#39;</span><span class="p">]</span>
 
-<span class="c1"># Binary Classification problem</span>
-<span class="n">vineyard_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Not Vineyard 1&#39;</span><span class="p">,</span> <span class="s1">&#39;Vineyard 1&#39;</span><span class="p">]</span>
-<span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># # Binary Classification problem</span>
+<span class="c1"># vineyard_labels = [&#39;Not Vineyard 1&#39;, &#39;Vineyard 1&#39;]</span>
+<span class="c1"># wine_df[&#39;y&#39;] = 1 * (y==1)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
 
 
 
-<span class="n">wine_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">wine_df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0 1 2]
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -1699,6 +1812,225 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
   </thead>
   <tbody>
     <tr>
+      <th>6</th>
+      <td>14.39</td>
+      <td>1.87</td>
+      <td>2.45</td>
+      <td>14.6</td>
+      <td>96.0</td>
+      <td>2.50</td>
+      <td>2.52</td>
+      <td>0.30</td>
+      <td>1.98</td>
+      <td>5.25</td>
+      <td>1.02</td>
+      <td>3.58</td>
+      <td>1290.0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>160</th>
+      <td>12.36</td>
+      <td>3.83</td>
+      <td>2.38</td>
+      <td>21.0</td>
+      <td>88.0</td>
+      <td>2.30</td>
+      <td>0.92</td>
+      <td>0.50</td>
+      <td>1.04</td>
+      <td>7.65</td>
+      <td>0.56</td>
+      <td>1.58</td>
+      <td>520.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>81</th>
+      <td>12.72</td>
+      <td>1.81</td>
+      <td>2.20</td>
+      <td>18.8</td>
+      <td>86.0</td>
+      <td>2.20</td>
+      <td>2.53</td>
+      <td>0.26</td>
+      <td>1.77</td>
+      <td>3.90</td>
+      <td>1.16</td>
+      <td>3.14</td>
+      <td>714.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>115</th>
+      <td>11.03</td>
+      <td>1.51</td>
+      <td>2.20</td>
+      <td>21.5</td>
+      <td>85.0</td>
+      <td>2.46</td>
+      <td>2.17</td>
+      <td>0.52</td>
+      <td>2.01</td>
+      <td>1.90</td>
+      <td>1.71</td>
+      <td>2.87</td>
+      <td>407.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>85</th>
+      <td>12.67</td>
+      <td>0.98</td>
+      <td>2.24</td>
+      <td>18.0</td>
+      <td>99.0</td>
+      <td>2.20</td>
+      <td>1.94</td>
+      <td>0.30</td>
+      <td>1.46</td>
+      <td>2.62</td>
+      <td>1.23</td>
+      <td>3.16</td>
+      <td>450.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>112</th>
+      <td>11.76</td>
+      <td>2.68</td>
+      <td>2.92</td>
+      <td>20.0</td>
+      <td>103.0</td>
+      <td>1.75</td>
+      <td>2.03</td>
+      <td>0.60</td>
+      <td>1.05</td>
+      <td>3.80</td>
+      <td>1.23</td>
+      <td>2.50</td>
+      <td>607.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>177</th>
+      <td>14.13</td>
+      <td>4.10</td>
+      <td>2.74</td>
+      <td>24.5</td>
+      <td>96.0</td>
+      <td>2.05</td>
+      <td>0.76</td>
+      <td>0.56</td>
+      <td>1.35</td>
+      <td>9.20</td>
+      <td>0.61</td>
+      <td>1.60</td>
+      <td>560.0</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>65</th>
+      <td>12.37</td>
+      <td>1.21</td>
+      <td>2.56</td>
+      <td>18.1</td>
+      <td>98.0</td>
+      <td>2.42</td>
+      <td>2.65</td>
+      <td>0.37</td>
+      <td>2.08</td>
+      <td>4.60</td>
+      <td>1.19</td>
+      <td>2.30</td>
+      <td>678.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>100</th>
+      <td>12.08</td>
+      <td>2.08</td>
+      <td>1.70</td>
+      <td>17.5</td>
+      <td>97.0</td>
+      <td>2.23</td>
+      <td>2.17</td>
+      <td>0.26</td>
+      <td>1.40</td>
+      <td>3.30</td>
+      <td>1.27</td>
+      <td>2.96</td>
+      <td>710.0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>114</th>
+      <td>12.08</td>
+      <td>1.39</td>
+      <td>2.50</td>
+      <td>22.5</td>
+      <td>84.0</td>
+      <td>2.56</td>
+      <td>2.29</td>
+      <td>0.43</td>
+      <td>1.04</td>
+      <td>2.90</td>
+      <td>0.93</td>
+      <td>3.19</td>
+      <td>385.0</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split the data into features and target</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">wine_df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">wine_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>alcohol</th>
+      <th>malic_acid</th>
+      <th>ash</th>
+      <th>alcalinity_of_ash</th>
+      <th>magnesium</th>
+      <th>total_phenols</th>
+      <th>flavanoids</th>
+      <th>nonflavanoid_phenols</th>
+      <th>proanthocyanins</th>
+      <th>color_intensity</th>
+      <th>hue</th>
+      <th>od280/od315_of_diluted_wines</th>
+      <th>proline</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
       <th>0</th>
       <td>14.23</td>
       <td>1.71</td>
@@ -1713,7 +2045,6 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
       <td>1.04</td>
       <td>3.92</td>
       <td>1065.0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>1</th>
@@ -1730,7 +2061,6 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
       <td>1.05</td>
       <td>3.40</td>
       <td>1050.0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -1747,7 +2077,6 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
       <td>1.03</td>
       <td>3.17</td>
       <td>1185.0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
@@ -1764,7 +2093,6 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
       <td>0.86</td>
       <td>3.45</td>
       <td>1480.0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>4</th>
@@ -1781,32 +2109,129 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
       <td>1.04</td>
       <td>2.93</td>
       <td>735.0</td>
-      <td>0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>173</th>
+      <td>13.71</td>
+      <td>5.65</td>
+      <td>2.45</td>
+      <td>20.5</td>
+      <td>95.0</td>
+      <td>1.68</td>
+      <td>0.61</td>
+      <td>0.52</td>
+      <td>1.06</td>
+      <td>7.70</td>
+      <td>0.64</td>
+      <td>1.74</td>
+      <td>740.0</td>
+    </tr>
+    <tr>
+      <th>174</th>
+      <td>13.40</td>
+      <td>3.91</td>
+      <td>2.48</td>
+      <td>23.0</td>
+      <td>102.0</td>
+      <td>1.80</td>
+      <td>0.75</td>
+      <td>0.43</td>
+      <td>1.41</td>
+      <td>7.30</td>
+      <td>0.70</td>
+      <td>1.56</td>
+      <td>750.0</td>
+    </tr>
+    <tr>
+      <th>175</th>
+      <td>13.27</td>
+      <td>4.28</td>
+      <td>2.26</td>
+      <td>20.0</td>
+      <td>120.0</td>
+      <td>1.59</td>
+      <td>0.69</td>
+      <td>0.43</td>
+      <td>1.35</td>
+      <td>10.20</td>
+      <td>0.59</td>
+      <td>1.56</td>
+      <td>835.0</td>
+    </tr>
+    <tr>
+      <th>176</th>
+      <td>13.17</td>
+      <td>2.59</td>
+      <td>2.37</td>
+      <td>20.0</td>
+      <td>120.0</td>
+      <td>1.65</td>
+      <td>0.68</td>
+      <td>0.53</td>
+      <td>1.46</td>
+      <td>9.30</td>
+      <td>0.60</td>
+      <td>1.62</td>
+      <td>840.0</td>
+    </tr>
+    <tr>
+      <th>177</th>
+      <td>14.13</td>
+      <td>4.10</td>
+      <td>2.74</td>
+      <td>24.5</td>
+      <td>96.0</td>
+      <td>2.05</td>
+      <td>0.76</td>
+      <td>0.56</td>
+      <td>1.35</td>
+      <td>9.20</td>
+      <td>0.61</td>
+      <td>1.60</td>
+      <td>560.0</td>
     </tr>
   </tbody>
 </table>
+<p>178 rows × 13 columns</p>
 </div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Split the data into features and target</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># train_test_split</span>
-
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># Scale the data</span>
-
+<span class="n">ss</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">ss</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
 <span class="c1"># I&#39;m choosing to use logistic regression with Lasso (L1) penalty</span>
 <span class="c1"># One hyper-parameter is solver and not all solvers work for all parameters</span>
+<span class="n">logreg_lasso</span> <span class="o">=</span> <span class="n">LogisticRegressionCV</span><span class="p">(</span><span class="n">penalty</span> <span class="o">=</span> <span class="s1">&#39;l1&#39;</span><span class="p">,</span> <span class="n">Cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">13</span><span class="p">),</span> <span class="n">solver</span> <span class="o">=</span> <span class="s1">&#39;liblinear&#39;</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">logreg_lasso</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span><span class="n">y_train</span><span class="p">)</span>
 
 
 <span class="c1"># Make predictions</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">logreg_lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+<span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">logreg_lasso</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">)</span>
+
+<span class="n">y_proba</span> <span class="o">=</span> <span class="n">logreg_lasso</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1829,7 +2254,7 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/054bd01e42cc333a2767cdfa2518d9a6e7605ede80eca57f18ceae5fff60f278.png" src="../_images/054bd01e42cc333a2767cdfa2518d9a6e7605ede80eca57f18ceae5fff60f278.png" />
+<img alt="../_images/01a9e352853d1a2fdfeb1bb82d0c059508e0cac5d87a8b6018f61d703f740875.png" src="../_images/01a9e352853d1a2fdfeb1bb82d0c059508e0cac5d87a8b6018f61d703f740875.png" />
 </div>
 </div>
 <p><strong>What were the most important features?</strong></p>
@@ -1842,6 +2267,176 @@ J_{\text{LogLoss}}(\Theta) = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{p}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Follow the instructions above</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="c1"># When we perform multiple logistic regressions, we get multiple sets of coefficients</span>
+<span class="c1"># The algorithm fits several binary logistic regressions to solve the multi-class problem</span>
+<span class="n">coefs</span> <span class="o">=</span> <span class="n">logreg_lasso</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="n">features_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;features&#39;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span> <span class="s1">&#39;coef&#39;</span><span class="p">:</span><span class="n">coefs</span><span class="p">,</span> <span class="s1">&#39;abs coef&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">coefs</span><span class="p">)})</span>
+<span class="n">features_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span> <span class="o">=</span> <span class="s1">&#39;abs coef&#39;</span><span class="p">,</span> <span class="n">ascending</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>features</th>
+      <th>coef</th>
+      <th>abs coef</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>6</th>
+      <td>flavanoids</td>
+      <td>-1.266564</td>
+      <td>1.266564</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>color_intensity</td>
+      <td>1.207416</td>
+      <td>1.207416</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>od280/od315_of_diluted_wines</td>
+      <td>-0.628598</td>
+      <td>0.628598</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>hue</td>
+      <td>-0.526170</td>
+      <td>0.526170</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>malic_acid</td>
+      <td>0.199551</td>
+      <td>0.199551</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ash</td>
+      <td>0.081775</td>
+      <td>0.081775</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>alcohol</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>alcalinity_of_ash</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>magnesium</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>total_phenols</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>nonflavanoid_phenols</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>proanthocyanins</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>proline</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_proba</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.63635768e-05, 6.83141639e-03, 9.93142220e-01],
+       [5.87221604e-05, 9.62576633e-01, 3.73646453e-02],
+       [7.48558128e-02, 9.12445543e-01, 1.26986441e-02],
+       [2.67024892e-03, 2.19642687e-02, 9.75365482e-01],
+       [9.88570728e-01, 5.72631344e-05, 1.13720091e-02],
+       [2.94514870e-05, 8.93887668e-01, 1.06082881e-01],
+       [4.94008496e-04, 9.81600752e-01, 1.79052390e-02],
+       [9.80838128e-01, 1.61551617e-05, 1.91457171e-02],
+       [9.65410714e-01, 1.60773613e-03, 3.29815498e-02],
+       [9.20671083e-01, 1.06383122e-05, 7.93182784e-02],
+       [1.12663861e-01, 2.01958821e-06, 8.87334119e-01],
+       [9.60587629e-01, 1.82297873e-06, 3.94105485e-02],
+       [9.48829925e-01, 6.37443373e-05, 5.11063305e-02],
+       [3.52892761e-05, 8.59316635e-01, 1.40648075e-01],
+       [9.51367373e-04, 9.69359211e-03, 9.89355041e-01],
+       [2.62438679e-02, 8.98266544e-01, 7.54895879e-02],
+       [9.54591371e-01, 4.12063628e-05, 4.53674225e-02],
+       [2.08156301e-05, 9.47582099e-01, 5.23970849e-02],
+       [8.76518566e-02, 8.61125954e-01, 5.12221897e-02],
+       [9.32253473e-01, 5.22351179e-07, 6.77460045e-02],
+       [1.02982092e-02, 1.12608695e-06, 9.89700665e-01],
+       [9.49421632e-01, 7.90510398e-05, 5.04993169e-02],
+       [6.48950866e-02, 9.31340269e-01, 3.76464427e-03],
+       [5.36451624e-02, 2.42919629e-07, 9.46354595e-01],
+       [9.02516532e-01, 8.09656311e-02, 1.65178367e-02],
+       [8.42255325e-03, 3.36973596e-02, 9.57880087e-01],
+       [1.59323122e-02, 9.50778123e-01, 3.32895652e-02],
+       [3.61851148e-04, 2.61325197e-01, 7.38312952e-01],
+       [9.43706749e-01, 2.85540029e-03, 5.34378508e-02],
+       [4.07636657e-02, 6.47996230e-04, 9.58588338e-01],
+       [9.83777336e-01, 9.46908206e-03, 6.75358197e-03],
+       [2.70639170e-02, 6.02944767e-09, 9.72936077e-01],
+       [9.60851305e-01, 6.89601057e-05, 3.90797350e-02],
+       [8.15361693e-05, 1.93566285e-01, 8.06352179e-01],
+       [1.83769763e-04, 9.53100330e-01, 4.67159000e-02],
+       [4.87220031e-04, 6.87817036e-01, 3.11695744e-01],
+       [7.17662513e-04, 9.61062607e-01, 3.82197300e-02],
+       [7.07452974e-04, 6.49352485e-03, 9.92799022e-01],
+       [4.77311833e-05, 9.69856472e-01, 3.00957968e-02],
+       [9.24560348e-01, 6.46607786e-05, 7.53749916e-02],
+       [1.31416780e-02, 9.70465581e-01, 1.63927414e-02],
+       [9.69257834e-01, 1.40717814e-08, 3.07421515e-02],
+       [3.07982795e-04, 9.60599369e-01, 3.90926481e-02],
+       [9.71673314e-01, 6.55654366e-05, 2.82611207e-02],
+       [2.69976015e-05, 9.59408013e-01, 4.05649892e-02]])
 </pre></div>
 </div>
 </div>
