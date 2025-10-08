@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Trees and Ensemble methods &#8212; DS325 Applied Data Science</title>
+    <title>3. Trees and Ensemble methods &#8212; DS325 Applied Data Science</title>
   
   
   
@@ -89,6 +89,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PS00" href="../00_Assignments/ps00.html" />
+    <link rel="prev" title="2. Logistic Regression" href="02_logistic_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -139,8 +141,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -210,9 +210,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">6. Polynomial Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">1. Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">2. Logistic Regression</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Trees and Ensemble methods</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -414,17 +415,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-discrete-data-ordinal-and-categorical">Dealing with discrete data: Ordinal and Categorical</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-classification-trees">Decision/Classification Trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-tree">Anatomy of a tree</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-choose-what-a-good-condition-for-a-node-would-be">How do we choose what a good condition for a node would be?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-impurity">Gini Impurity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-discrete-data-ordinal-and-categorical">3.1. Dealing with discrete data: Ordinal and Categorical</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-classification-trees">3.2. Decision/Classification Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-tree">3.2.1. Anatomy of a tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-choose-what-a-good-condition-for-a-node-would-be">3.2.2. How do we choose what a good condition for a node would be?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-impurity">3.2.3. Gini Impurity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-gain">Information Gain</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-drug-prescriptions">Example: Drug prescriptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-encode-the-data">Transform (Encode) the data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-a-decision-tree-model">Fit a decision tree model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-gain">3.3. Information Gain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-drug-prescriptions">3.4. Example: Drug prescriptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-encode-the-data">3.4.1. Transform (Encode) the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-a-decision-tree-model">3.4.2. Fit a decision tree model</a></li>
 </ul>
 </li>
 </ul>
@@ -439,10 +440,10 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="trees-and-ensemble-methods">
-<h1>Trees and Ensemble methods<a class="headerlink" href="#trees-and-ensemble-methods" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">3. </span>Trees and Ensemble methods<a class="headerlink" href="#trees-and-ensemble-methods" title="Link to this heading">#</a></h1>
 <p>But first…</p>
 <section id="dealing-with-discrete-data-ordinal-and-categorical">
-<h2>Dealing with discrete data: Ordinal and Categorical<a class="headerlink" href="#dealing-with-discrete-data-ordinal-and-categorical" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>Dealing with discrete data: Ordinal and Categorical<a class="headerlink" href="#dealing-with-discrete-data-ordinal-and-categorical" title="Link to this heading">#</a></h2>
 <p>Discrete data come in two flavors, <em>ordinal</em> and <em>categorical</em>:</p>
 <ul class="simple">
 <li><p><em>ordinal data</em> - can be ordered</p>
@@ -696,12 +697,12 @@
 </div>
 </section>
 <section id="decision-classification-trees">
-<h2>Decision/Classification Trees<a class="headerlink" href="#decision-classification-trees" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>Decision/Classification Trees<a class="headerlink" href="#decision-classification-trees" title="Link to this heading">#</a></h2>
 <p>Tree-based models — Decision/Classification Trees and Regression Trees — are a family of algorithms that approach classification and regression using a heirarchy of conditional/if-else statements (imagine a flow chart or a game of 20 questions). You might describe tree-based models as human-like in their approach to problem solving. And these models are not only intuitive and interpretable, they are some of the most ubiquitous and powerful algorithms in ML.</p>
 <p>We’ll start by looking at a cartoon example of a decision tree, this one predicts whether a casual golfer is expected to shoot below or above par on a given outing.</p>
 <p><img alt="tree" src="../_images/tree-graphic.png" /></p>
 <section id="anatomy-of-a-tree">
-<h3>Anatomy of a tree<a class="headerlink" href="#anatomy-of-a-tree" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.2.1. </span>Anatomy of a tree<a class="headerlink" href="#anatomy-of-a-tree" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><em>Decision node</em> - a binary question that divides the data set</p></li>
 <li><p><em>Root node</em> - the top decision node in the tree</p></li>
@@ -723,7 +724,7 @@
 </ul>
 </section>
 <section id="how-do-we-choose-what-a-good-condition-for-a-node-would-be">
-<h3>How do we choose what a good condition for a node would be?<a class="headerlink" href="#how-do-we-choose-what-a-good-condition-for-a-node-would-be" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.2.2. </span>How do we choose what a good condition for a node would be?<a class="headerlink" href="#how-do-we-choose-what-a-good-condition-for-a-node-would-be" title="Link to this heading">#</a></h3>
 <p>It is preferable for tree-models to have fewer nodes; smaller models are better. And ideally, each leaf node would represent a set of samples that all belonged to the same class, that is to say, if you followed the branches down to that leaf node, your classification would be correct (and this is not always possible).</p>
 <p>Intuitively, what questions might you ask to classify:</p>
 <ul class="simple">
@@ -735,7 +736,7 @@
 <p>Towards this ideal, at each node, we would want a conditional statement that split the set in a way so that the resulting subsets are as homogeneous (mostly or all one class) as possible. This homogeneity is referred to as the “purity” of the node, and there are different ways of quantifying said purity: <em>Gini Impurity</em> and <em>Information Gain</em>.</p>
 </section>
 <section id="gini-impurity">
-<h3>Gini Impurity<a class="headerlink" href="#gini-impurity" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.2.3. </span>Gini Impurity<a class="headerlink" href="#gini-impurity" title="Link to this heading">#</a></h3>
 <p><em>Gini impurity</em> is the likelihood of randomly misclassifying a randomly selected sample given the distribution of samples in the set; that is, if you randomly select a sample and randomly select a label, Gini impurity is the likelihood of a mismatch. A Gini impurity of zero represents a perfectly homogeneous set (all the same class).</p>
 <p>If using Gini impurity as the criterion, the fitting algorithm will choose conditions to minimize the Gini impurity at each successive split (using a greedy algorithm).</p>
 <p>The Gini index for a <em>sub-node</em> is:</p>
@@ -764,7 +765,7 @@
 </section>
 </section>
 <section id="information-gain">
-<h2>Information Gain<a class="headerlink" href="#information-gain" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>Information Gain<a class="headerlink" href="#information-gain" title="Link to this heading">#</a></h2>
 <p><em>Entropy</em> in physics quantifies dis-order. Analagously, <em>entropy</em> in information theory quantifies uncertainty.</p>
 <p>Entropy (H) of a set is defined as:</p>
 <div class="math notranslate nohighlight">
@@ -781,7 +782,7 @@ IG(p) = H_{\text{parent}}(p) - \sum H_{\text{children}}(p)
 <p>If using Information Gain as the criterion, the fitting algorithm will choose conditions to maximize Information Gain (reduce entropy) at each successive split (using a greedy algorithm).</p>
 </section>
 <section id="example-drug-prescriptions">
-<h2>Example: Drug prescriptions<a class="headerlink" href="#example-drug-prescriptions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.4. </span>Example: Drug prescriptions<a class="headerlink" href="#example-drug-prescriptions" title="Link to this heading">#</a></h2>
 <p>For this example, we’ll be looking at the drug200 data set (<a class="reference external" href="https://www.kaggle.com/datasets/prathamtripathi/drug-classification">https://www.kaggle.com/datasets/prathamtripathi/drug-classification</a>).</p>
 <p>The dataset summarizes the demographics and health condition of 200 patients (Age, sex, blood, pressure, cholesterol, and sodium/potassium ratio) as well as which of five drugs had best results with the patient. The goal is to build a classifier to choose which drug to prescribe to a future patient.</p>
 <div class="cell docutils container">
@@ -894,7 +895,7 @@ memory usage: 9.5+ KB
 </div></div></div>
 </div>
 <section id="transform-encode-the-data">
-<h3>Transform (Encode) the data<a class="headerlink" href="#transform-encode-the-data" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.4.1. </span>Transform (Encode) the data<a class="headerlink" href="#transform-encode-the-data" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
@@ -1066,7 +1067,7 @@ memory usage: 9.5+ KB
 </div>
 </section>
 <section id="fit-a-decision-tree-model">
-<h3>Fit a decision tree model<a class="headerlink" href="#fit-a-decision-tree-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">3.4.2. </span>Fit a decision tree model<a class="headerlink" href="#fit-a-decision-tree-model" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span><span class="p">,</span> <span class="n">plot_tree</span>
@@ -1096,7 +1097,7 @@ memory usage: 9.5+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/863551e341ba6a6d9441185bf147b4a40983b0f954ac71c95cdfc994c087d031.png" src="../_images/863551e341ba6a6d9441185bf147b4a40983b0f954ac71c95cdfc994c087d031.png" />
+<img alt="../_images/b9e4cecfef4a869837924e92bceb06e22c957ef1edc48a63b197b8982455970d.png" src="../_images/b9e4cecfef4a869837924e92bceb06e22c957ef1edc48a63b197b8982455970d.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1110,7 +1111,7 @@ memory usage: 9.5+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f48366ceba7f146bf1839f08520ff0b0e3b6dde28d3460910120fa1a3f979597.png" src="../_images/f48366ceba7f146bf1839f08520ff0b0e3b6dde28d3460910120fa1a3f979597.png" />
+<img alt="../_images/bd6471169e09d7bf5babca9aa369ab29ce01807d42e2805b85c800e3b8003936.png" src="../_images/bd6471169e09d7bf5babca9aa369ab29ce01807d42e2805b85c800e3b8003936.png" />
 </div>
 </div>
 </section>
@@ -1147,6 +1148,24 @@ memory usage: 9.5+ KB
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="02_logistic_regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Logistic Regression</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../00_Assignments/ps00.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">PS00</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1164,17 +1183,17 @@ memory usage: 9.5+ KB
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-discrete-data-ordinal-and-categorical">Dealing with discrete data: Ordinal and Categorical</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-classification-trees">Decision/Classification Trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-tree">Anatomy of a tree</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-choose-what-a-good-condition-for-a-node-would-be">How do we choose what a good condition for a node would be?</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-impurity">Gini Impurity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dealing-with-discrete-data-ordinal-and-categorical">3.1. Dealing with discrete data: Ordinal and Categorical</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-classification-trees">3.2. Decision/Classification Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anatomy-of-a-tree">3.2.1. Anatomy of a tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-we-choose-what-a-good-condition-for-a-node-would-be">3.2.2. How do we choose what a good condition for a node would be?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gini-impurity">3.2.3. Gini Impurity</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-gain">Information Gain</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-drug-prescriptions">Example: Drug prescriptions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-encode-the-data">Transform (Encode) the data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-a-decision-tree-model">Fit a decision tree model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-gain">3.3. Information Gain</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-drug-prescriptions">3.4. Example: Drug prescriptions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-encode-the-data">3.4.1. Transform (Encode) the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit-a-decision-tree-model">3.4.2. Fit a decision tree model</a></li>
 </ul>
 </li>
 </ul>
