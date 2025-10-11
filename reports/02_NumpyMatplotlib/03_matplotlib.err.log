@@ -1,0 +1,240 @@
+Traceback (most recent call last):
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pandas as pd
+
+elec_df = pd.read_csv(data_url)
+
+elec_df
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mPermissionError[0m                           Traceback (most recent call last)
+Cell [0;32mIn[20], line 1[0m
+[0;32m----> 1[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mpd[39;00m
+[1;32m      3[0m elec_df [38;5;241m=[39m pd[38;5;241m.[39mread_csv(data_url)
+[1;32m      5[0m elec_df
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/__init__.py:49[0m
+[1;32m     46[0m [38;5;66;03m# let init-time option registration happen[39;00m
+[1;32m     47[0m [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mconfig_init[39;00m  [38;5;66;03m# pyright: ignore[reportUnusedImport] # noqa: F401[39;00m
+[0;32m---> 49[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m     50[0m     [38;5;66;03m# dtype[39;00m
+[1;32m     51[0m     ArrowDtype,
+[1;32m     52[0m     Int8Dtype,
+[1;32m     53[0m     Int16Dtype,
+[1;32m     54[0m     Int32Dtype,
+[1;32m     55[0m     Int64Dtype,
+[1;32m     56[0m     UInt8Dtype,
+[1;32m     57[0m     UInt16Dtype,
+[1;32m     58[0m     UInt32Dtype,
+[1;32m     59[0m     UInt64Dtype,
+[1;32m     60[0m     Float32Dtype,
+[1;32m     61[0m     Float64Dtype,
+[1;32m     62[0m     CategoricalDtype,
+[1;32m     63[0m     PeriodDtype,
+[1;32m     64[0m     IntervalDtype,
+[1;32m     65[0m     DatetimeTZDtype,
+[1;32m     66[0m     StringDtype,
+[1;32m     67[0m     BooleanDtype,
+[1;32m     68[0m     [38;5;66;03m# missing[39;00m
+[1;32m     69[0m     NA,
+[1;32m     70[0m     isna,
+[1;32m     71[0m     isnull,
+[1;32m     72[0m     notna,
+[1;32m     73[0m     notnull,
+[1;32m     74[0m     [38;5;66;03m# indexes[39;00m
+[1;32m     75[0m     Index,
+[1;32m     76[0m     CategoricalIndex,
+[1;32m     77[0m     RangeIndex,
+[1;32m     78[0m     MultiIndex,
+[1;32m     79[0m     IntervalIndex,
+[1;32m     80[0m     TimedeltaIndex,
+[1;32m     81[0m     DatetimeIndex,
+[1;32m     82[0m     PeriodIndex,
+[1;32m     83[0m     IndexSlice,
+[1;32m     84[0m     [38;5;66;03m# tseries[39;00m
+[1;32m     85[0m     NaT,
+[1;32m     86[0m     Period,
+[1;32m     87[0m     period_range,
+[1;32m     88[0m     Timedelta,
+[1;32m     89[0m     timedelta_range,
+[1;32m     90[0m     Timestamp,
+[1;32m     91[0m     date_range,
+[1;32m     92[0m     bdate_range,
+[1;32m     93[0m     Interval,
+[1;32m     94[0m     interval_range,
+[1;32m     95[0m     DateOffset,
+[1;32m     96[0m     [38;5;66;03m# conversion[39;00m
+[1;32m     97[0m     to_numeric,
+[1;32m     98[0m     to_datetime,
+[1;32m     99[0m     to_timedelta,
+[1;32m    100[0m     [38;5;66;03m# misc[39;00m
+[1;32m    101[0m     Flags,
+[1;32m    102[0m     Grouper,
+[1;32m    103[0m     factorize,
+[1;32m    104[0m     unique,
+[1;32m    105[0m     value_counts,
+[1;32m    106[0m     NamedAgg,
+[1;32m    107[0m     array,
+[1;32m    108[0m     Categorical,
+[1;32m    109[0m     set_eng_float_format,
+[1;32m    110[0m     Series,
+[1;32m    111[0m     DataFrame,
+[1;32m    112[0m )
+[1;32m    114[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m SparseDtype
+[1;32m    116[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mtseries[39;00m[38;5;21;01m.[39;00m[38;5;21;01mapi[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m infer_freq
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/core/api.py:28[0m
+[1;32m     16[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmissing[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m     17[0m     isna,
+[1;32m     18[0m     isnull,
+[1;32m     19[0m     notna,
+[1;32m     20[0m     notnull,
+[1;32m     21[0m )
+[1;32m     23[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01malgorithms[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m     24[0m     factorize,
+[1;32m     25[0m     unique,
+[1;32m     26[0m     value_counts,
+[1;32m     27[0m )
+[0;32m---> 28[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrays[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m Categorical
+[1;32m     29[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrays[39;00m[38;5;21;01m.[39;00m[38;5;21;01mboolean[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m BooleanDtype
+[1;32m     30[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrays[39;00m[38;5;21;01m.[39;00m[38;5;21;01mfloating[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m     31[0m     Float32Dtype,
+[1;32m     32[0m     Float64Dtype,
+[1;32m     33[0m )
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/core/arrays/__init__.py:1[0m
+[0;32m----> 1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrays[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrow[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m ArrowExtensionArray
+[1;32m      2[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrays[39;00m[38;5;21;01m.[39;00m[38;5;21;01mbase[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m      3[0m     ExtensionArray,
+[1;32m      4[0m     ExtensionOpsMixin,
+[1;32m      5[0m     ExtensionScalarOpsMixin,
+[1;32m      6[0m )
+[1;32m      7[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrays[39;00m[38;5;21;01m.[39;00m[38;5;21;01mboolean[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m BooleanArray
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/core/arrays/arrow/__init__.py:5[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrays[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrow[39;00m[38;5;21;01m.[39;00m[38;5;21;01maccessors[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m      2[0m     ListAccessor,
+[1;32m      3[0m     StructAccessor,
+[1;32m      4[0m )
+[0;32m----> 5[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrays[39;00m[38;5;21;01m.[39;00m[38;5;21;01marrow[39;00m[38;5;21;01m.[39;00m[38;5;21;01marray[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m ArrowExtensionArray
+[1;32m      7[0m __all__ [38;5;241m=[39m [[38;5;124m"[39m[38;5;124mArrowExtensionArray[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mStructAccessor[39m[38;5;124m"[39m, [38;5;124m"[39m[38;5;124mListAccessor[39m[38;5;124m"[39m]
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/core/arrays/arrow/array.py:50[0m
+[1;32m     47[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m DatetimeTZDtype
+[1;32m     48[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmissing[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m isna
+[0;32m---> 50[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m     51[0m     algorithms [38;5;28;01mas[39;00m algos,
+[1;32m     52[0m     missing,
+[1;32m     53[0m     ops,
+[1;32m     54[0m     roperator,
+[1;32m     55[0m )
+[1;32m     56[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01malgorithms[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m map_array
+[1;32m     57[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01marraylike[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m OpsMixin
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/core/ops/__init__.py:8[0m
+[1;32m      1[0m [38;5;124;03m"""[39;00m
+[1;32m      2[0m [38;5;124;03mArithmetic operations for PandasObjects[39;00m
+[1;32m      3[0m 
+[1;32m      4[0m [38;5;124;03mThis is not a public API.[39;00m
+[1;32m      5[0m [38;5;124;03m"""[39;00m
+[1;32m      6[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01m__future__[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m annotations
+[0;32m----> 8[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mops[39;00m[38;5;21;01m.[39;00m[38;5;21;01marray_ops[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m      9[0m     arithmetic_op,
+[1;32m     10[0m     comp_method_OBJECT_ARRAY,
+[1;32m     11[0m     comparison_op,
+[1;32m     12[0m     fill_binop,
+[1;32m     13[0m     get_array_op,
+[1;32m     14[0m     logical_op,
+[1;32m     15[0m     maybe_prepare_scalar_for_op,
+[1;32m     16[0m )
+[1;32m     17[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mops[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcommon[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m     18[0m     get_op_result_name,
+[1;32m     19[0m     unpack_zerodim_and_defer,
+[1;32m     20[0m )
+[1;32m     21[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mops[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdocstrings[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m make_flex_doc
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/core/ops/array_ops.py:56[0m
+[1;32m     50[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdtypes[39;00m[38;5;21;01m.[39;00m[38;5;21;01mmissing[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m (
+[1;32m     51[0m     isna,
+[1;32m     52[0m     notna,
+[1;32m     53[0m )
+[1;32m     55[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m roperator
+[0;32m---> 56[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcomputation[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m expressions
+[1;32m     57[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mconstruction[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m ensure_wrapped_if_datetimelike
+[1;32m     58[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mops[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m missing
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/core/computation/expressions.py:21[0m
+[1;32m     18[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mutil[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_exceptions[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m find_stack_level
+[1;32m     20[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m roperator
+[0;32m---> 21[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcore[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcomputation[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcheck[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m NUMEXPR_INSTALLED
+[1;32m     23[0m [38;5;28;01mif[39;00m NUMEXPR_INSTALLED:
+[1;32m     24[0m     [38;5;28;01mimport[39;00m[38;5;250m [39m[38;5;21;01mnumexpr[39;00m[38;5;250m [39m[38;5;28;01mas[39;00m[38;5;250m [39m[38;5;21;01mne[39;00m
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/core/computation/check.py:5[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01m__future__[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m annotations
+[1;32m      3[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01mpandas[39;00m[38;5;21;01m.[39;00m[38;5;21;01mcompat[39;00m[38;5;21;01m.[39;00m[38;5;21;01m_optional[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m import_optional_dependency
+[0;32m----> 5[0m ne [38;5;241m=[39m [43mimport_optional_dependency[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mnumexpr[39;49m[38;5;124;43m"[39;49m[43m,[49m[43m [49m[43merrors[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mwarn[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[1;32m      6[0m NUMEXPR_INSTALLED [38;5;241m=[39m ne [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m
+[1;32m      8[0m __all__ [38;5;241m=[39m [[38;5;124m"[39m[38;5;124mNUMEXPR_INSTALLED[39m[38;5;124m"[39m]
+
+File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/compat/_optional.py:135[0m, in [0;36mimport_optional_dependency[0;34m(name, extra, errors, min_version)[0m
+[1;32m    130[0m msg [38;5;241m=[39m (
+[1;32m    131[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;124mMissing optional dependency [39m[38;5;124m'[39m[38;5;132;01m{[39;00minstall_name[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m. [39m[38;5;132;01m{[39;00mextra[38;5;132;01m}[39;00m[38;5;124m [39m[38;5;124m"[39m
+[1;32m    132[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;124mUse pip or conda to install [39m[38;5;132;01m{[39;00minstall_name[38;5;132;01m}[39;00m[38;5;124m.[39m[38;5;124m"[39m
+[1;32m    133[0m )
+[1;32m    134[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 135[0m     module [38;5;241m=[39m [43mimportlib[49m[38;5;241;43m.[39;49m[43mimport_module[49m[43m([49m[43mname[49m[43m)[49m
+[1;32m    136[0m [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m:
+[1;32m    137[0m     [38;5;28;01mif[39;00m errors [38;5;241m==[39m [38;5;124m"[39m[38;5;124mraise[39m[38;5;124m"[39m:
+
+File [0;32m~/.pyenv/versions/3.13.1/lib/python3.13/importlib/__init__.py:88[0m, in [0;36mimport_module[0;34m(name, package)[0m
+[1;32m     86[0m             [38;5;28;01mbreak[39;00m
+[1;32m     87[0m         level [38;5;241m+[39m[38;5;241m=[39m [38;5;241m1[39m
+[0;32m---> 88[0m [38;5;28;01mreturn[39;00m [43m_bootstrap[49m[38;5;241;43m.[39;49m[43m_gcd_import[49m[43m([49m[43mname[49m[43m[[49m[43mlevel[49m[43m:[49m[43m][49m[43m,[49m[43m [49m[43mpackage[49m[43m,[49m[43m [49m[43mlevel[49m[43m)[49m
+
+File [0;32m<frozen importlib._bootstrap>:1387[0m, in [0;36m_gcd_import[0;34m(name, package, level)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1360[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1322[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
+
+File [0;32m<frozen importlib._bootstrap>:1262[0m, in [0;36m_find_spec[0;34m(name, path, target)[0m
+
+File [0;32m<frozen importlib._bootstrap_external>:1559[0m, in [0;36mfind_spec[0;34m(cls, fullname, path, target)[0m
+
+File [0;32m<frozen importlib._bootstrap_external>:1531[0m, in [0;36m_get_spec[0;34m(cls, fullname, path, target)[0m
+
+File [0;32m<frozen importlib._bootstrap_external>:1510[0m, in [0;36m_path_importer_cache[0;34m(cls, path)[0m
+
+[0;31mPermissionError[0m: [Errno 1] Operation not permitted
+

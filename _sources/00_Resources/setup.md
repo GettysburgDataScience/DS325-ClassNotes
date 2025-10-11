@@ -128,7 +128,7 @@ If you have any of the following already, you should skip those steps. These ins
   - First, we'll change a setting so that VSCode opens in your Data Science folder by default. Open settings, (<kbd>Ctrl</kbd>+<kbd>,</kbd> on PC, <kbd>Cmd</kbd>+<kbd>,</kbd> on Mac) or through the top menu bar Code > Settings > Settings.
   - At the top of Settings is a search bar. Type "dialog default path". You should see this:
   
-```{figure} ../images/VSCodeDefaultFolder.png
+  ```{figure} ../images/VSCodeDefaultFolder.png
 :alt: vscodefolder
 :width: 700px
 :align: center
@@ -154,8 +154,6 @@ Next, we'll install a few useful extensions. On the left-hand side of VSCode, yo
  - Jupyter
  - Data Wrangler - a colorful viewer for .csvs and other data table formats.
  - GitHub Repositories - will allow you to clone, commit, and push repositories from VSCode
- - GitHub Copilot - an LLM for coding
-
 
 
 

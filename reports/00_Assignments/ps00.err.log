@@ -28,55 +28,14 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-grader.check("q1")
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mValueError[0m                                Traceback (most recent call last)
-Cell [0;32mIn[4], line 1[0m
-[0;32m----> 1[0m [43mgrader[49m[38;5;241;43m.[39;49m[43mcheck[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mq1[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[1], line 1[0m
+[0;32m----> 1[0m [38;5;28mbin[39m[38;5;241m/[39m[43mbash[49m([38;5;241m-[39mc, [38;5;124m"[39m[38;5;124m$(curl, -fsSL, https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)[39m[38;5;124m"[39m)
 
-File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/otter/check/utils.py:242[0m, in [0;36mlogs_event.<locals>.event_logger[0;34m(wrapped, self, args, kwargs)[0m
-[1;32m    240[0m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m e:
-[1;32m    241[0m     [38;5;28mself[39m[38;5;241m.[39m_log_event(event_type, success[38;5;241m=[39m[38;5;28;01mFalse[39;00m, error[38;5;241m=[39me)
-[0;32m--> 242[0m     [38;5;28;01mraise[39;00m e
-[1;32m    244[0m [38;5;28;01mif[39;00m ret [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
-[1;32m    245[0m     ret [38;5;241m=[39m LoggedEventReturnValue([38;5;28;01mNone[39;00m)
-
-File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/otter/check/utils.py:238[0m, in [0;36mlogs_event.<locals>.event_logger[0;34m(wrapped, self, args, kwargs)[0m
-[1;32m    233[0m [38;5;250m[39m[38;5;124;03m"""[39;00m
-[1;32m    234[0m [38;5;124;03mRuns a method, catching any errors and logging the call. Returns the unwrapped return value[39;00m
-[1;32m    235[0m [38;5;124;03mof the wrapped function.[39;00m
-[1;32m    236[0m [38;5;124;03m"""[39;00m
-[1;32m    237[0m [38;5;28;01mtry[39;00m:
-[0;32m--> 238[0m     ret: Optional[LoggedEventReturnValue[T]] [38;5;241m=[39m [43mwrapped[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
-[1;32m    240[0m [38;5;28;01mexcept[39;00m [38;5;167;01mException[39;00m [38;5;28;01mas[39;00m e:
-[1;32m    241[0m     [38;5;28mself[39m[38;5;241m.[39m_log_event(event_type, success[38;5;241m=[39m[38;5;28;01mFalse[39;00m, error[38;5;241m=[39me)
-
-File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/otter/check/notebook.py:256[0m, in [0;36mNotebook.check[0;34m(self, question, global_env)[0m
-[1;32m    243[0m [38;5;250m[39m[38;5;124;03m"""[39;00m
-[1;32m    244[0m [38;5;124;03mRuns tests for a specific question against a global environment. If no global environment[39;00m
-[1;32m    245[0m [38;5;124;03mis provided, the test is run against the calling frame's environment.[39;00m
-[0;32m   (...)[0m
-[1;32m    253[0m [38;5;124;03m    ``otter.test_files.abstract_test.TestFile``: the grade for the question[39;00m
-[1;32m    254[0m [38;5;124;03m"""[39;00m
-[1;32m    255[0m [38;5;28mself[39m[38;5;241m.[39m_logger[38;5;241m.[39minfo([38;5;124mf[39m[38;5;124m"[39m[38;5;124mRunning check for question: [39m[38;5;132;01m{[39;00mquestion[38;5;132;01m}[39;00m[38;5;124m"[39m)
-[0;32m--> 256[0m test_path, test_name [38;5;241m=[39m [43mresolve_test_info[49m[43m([49m
-[1;32m    257[0m [43m    [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_tests_dir[49m[43m,[49m
-[1;32m    258[0m [43m    [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_notebook[49m[43m,[49m
-[1;32m    259[0m [43m    [49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_tests_url_prefix[49m[43m,[49m
-[1;32m    260[0m [43m    [49m[43mquestion[49m[43m,[49m
-[1;32m    261[0m [43m[49m[43m)[49m
-[1;32m    263[0m [38;5;28mself[39m[38;5;241m.[39m_logger[38;5;241m.[39mdebug([38;5;124mf[39m[38;5;124m"[39m[38;5;124mResolved test path: [39m[38;5;132;01m{[39;00mtest_path[38;5;132;01m}[39;00m[38;5;124m"[39m)
-[1;32m    264[0m [38;5;28mself[39m[38;5;241m.[39m_logger[38;5;241m.[39mdebug([38;5;124mf[39m[38;5;124m"[39m[38;5;124mResolved test name: [39m[38;5;132;01m{[39;00mtest_name[38;5;132;01m}[39;00m[38;5;124m"[39m)
-
-File [0;32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/otter/check/utils.py:351[0m, in [0;36mresolve_test_info[0;34m(tests_dir, nb_path, tests_url_prefix, question)[0m
-[1;32m    349[0m [38;5;28;01melse[39;00m:
-[1;32m    350[0m     [38;5;28;01mif[39;00m nb_path [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
-[0;32m--> 351[0m         [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124m"[39m[38;5;124mTests directory does not exist and no notebook path provided[39m[38;5;124m"[39m)
-[1;32m    353[0m     test_path [38;5;241m=[39m nb_path
-[1;32m    354[0m     test_name [38;5;241m=[39m question
-
-[0;31mValueError[0m: Tests directory does not exist and no notebook path provided
+[0;31mNameError[0m: name 'bash' is not defined
 

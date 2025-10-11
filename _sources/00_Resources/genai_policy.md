@@ -19,7 +19,7 @@ Imagine that behind genAI is another student; if the kind of help you are asking
 
 **Unacceptable**
  - Writing significant segments of code or text for submitted assignments
- - Using assignment problems or questions directly as 
+ - Using assignment problems or questions directly as prompts 
  - Passing off genAI-produced work as your own without sufficient attribution
 
 ## My rationale
@@ -28,4 +28,4 @@ Generative AI can be an incredibly useful tool, both in school and in the workpl
 
 Moreover, the concepts and problems we'll tackle in this class have been tackled by millions of students, and there are thousands of examples available online. Generative AIs are trained on these examples. So genAI is not providing you novel solutions, rather it's feeding you plagiarized work anonymized through aggregation and algorithm. You are responsible for the content of submitted work; genAI's plagiarism is your plagiarism.
 
-Yes, you could produce more work faster using genAI, but you will learn less.You are here to learn. And I would rather grade your imperfect work and help you progress than waste my own time reading AI-created content.
+Yes, you could produce more work faster using genAI, but you will learn less. You are here to learn. And I would rather grade your imperfect work and help you progress than waste my own time reading AI-created content.
