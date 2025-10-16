@@ -213,6 +213,9 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">1. Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">2. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">3. Trees and Ensemble methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">4. Tree Methods (continued)</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -221,6 +224,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps01.html">PS01 - (Not so) Simple Linear Regression</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps02.html">PS02 - Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/mp01.html">Mini-Project 1 (and examples!)</a></li>
 </ul>
 
     </div>
@@ -778,12 +782,12 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.50257162,  0.38010715,  0.49845153,  0.52153692, -0.1856075 ,
-       -0.27555087,  0.91456846,  0.88263984,  0.40469388, -0.5332779 ,
-        0.54702439, -0.57582803,  0.28743761,  0.62330932,  0.61037421,
-       -0.58140472, -0.04117895, -0.16267701, -0.12194924, -0.49122959,
-        1.14690124,  1.63059253,  0.96558811,  1.0186296 ,  0.75206287,
-        0.05365593,  0.93092113,  1.00832584,  0.72491096,  0.45734369])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.35430846,  0.3365256 ,  0.32539369,  0.41354177,  0.15042836,
+       -0.74559636,  0.75581877,  0.84790944, -0.17412303, -0.21133532,
+        1.18825549, -0.17363323,  0.59330565,  0.93096466,  0.21896298,
+       -0.74308596,  0.11134336,  0.42967113, -0.26738943, -0.78953292,
+        0.94097504,  1.14133512,  0.68740095,  0.93493098,  0.48650385,
+       -0.0775034 ,  0.98712671,  0.89415999,  0.87055023,  0.49216681])
 </pre></div>
 </div>
 </div>
@@ -801,36 +805,36 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1.631	worst texture
- 1.147	worst radius
- 1.019	worst area
- 1.008	worst concave points
- 0.966	worst perimeter
- 0.931	worst concavity
- 0.915	mean concavity
- 0.883	mean concave points
- 0.752	worst smoothness
- 0.725	worst symmetry
- 0.623	area error
- 0.610	smoothness error
--0.581	compactness error
--0.576	texture error
- 0.547	radius error
--0.533	mean fractal dimension
- 0.522	mean area
- 0.503	mean radius
- 0.498	mean perimeter
--0.491	fractal dimension error
- 0.457	worst fractal dimension
- 0.405	mean symmetry
- 0.380	mean texture
- 0.287	perimeter error
--0.276	mean compactness
--0.186	mean smoothness
--0.163	concave points error
--0.122	symmetry error
- 0.054	worst compactness
--0.041	concavity error
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1.188	radius error
+ 1.141	worst texture
+ 0.987	worst concavity
+ 0.941	worst radius
+ 0.935	worst area
+ 0.931	area error
+ 0.894	worst concave points
+ 0.871	worst symmetry
+ 0.848	mean concave points
+-0.790	fractal dimension error
+ 0.756	mean concavity
+-0.746	mean compactness
+-0.743	compactness error
+ 0.687	worst perimeter
+ 0.593	perimeter error
+ 0.492	worst fractal dimension
+ 0.487	worst smoothness
+ 0.430	concave points error
+ 0.414	mean area
+ 0.354	mean radius
+ 0.337	mean texture
+ 0.325	mean perimeter
+-0.267	symmetry error
+ 0.219	smoothness error
+-0.211	mean fractal dimension
+-0.174	mean symmetry
+-0.174	texture error
+ 0.150	mean smoothness
+ 0.111	concavity error
+-0.078	worst compactness
 </pre></div>
 </div>
 </div>
@@ -862,7 +866,7 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ba47c16794ab3fa5cbcd9e21cc8afc9cbcb6c183145950a56934842e6db64170.png" src="../_images/ba47c16794ab3fa5cbcd9e21cc8afc9cbcb6c183145950a56934842e6db64170.png" />
+<img alt="../_images/902911908ec7352f8f2cb5ebd833251cbda6e7e15dffef24c0e8535302073d5f.png" src="../_images/902911908ec7352f8f2cb5ebd833251cbda6e7e15dffef24c0e8535302073d5f.png" />
 </div>
 </div>
 </section>
@@ -883,7 +887,7 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/880da2c34402f0763df454e343bd5798c49bbeec16630c99abb0304b0c698e3f.png" src="../_images/880da2c34402f0763df454e343bd5798c49bbeec16630c99abb0304b0c698e3f.png" />
+<img alt="../_images/9bf0d0af1859e253060fcc26bdf2012fe60d8734012fc58bb86f24ef890e0642.png" src="../_images/9bf0d0af1859e253060fcc26bdf2012fe60d8734012fc58bb86f24ef890e0642.png" />
 </div>
 </div>
 </section>
@@ -930,12 +934,12 @@ Name: target, dtype: float64
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-      Benign       0.96      0.97      0.96        70
-   Malignant       0.95      0.93      0.94        44
+      Benign       1.00      0.99      0.99        71
+   Malignant       0.98      1.00      0.99        43
 
-    accuracy                           0.96       114
-   macro avg       0.96      0.95      0.95       114
-weighted avg       0.96      0.96      0.96       114
+    accuracy                           0.99       114
+   macro avg       0.99      0.99      0.99       114
+weighted avg       0.99      0.99      0.99       114
 </pre></div>
 </div>
 </div>
@@ -958,7 +962,7 @@ weighted avg       0.96      0.96      0.96       114
   ret = a @ b
 </pre></div>
 </div>
-<img alt="../_images/b62eb13465dd337a74316085383815ecab3d811c26bbfaff7e0387613b0dcc6c.png" src="../_images/b62eb13465dd337a74316085383815ecab3d811c26bbfaff7e0387613b0dcc6c.png" />
+<img alt="../_images/3a1b0539bf51af1ed6a09c74224c0c3a0c0d0ef3f349d15e0b9b9e64feb192e1.png" src="../_images/3a1b0539bf51af1ed6a09c74224c0c3a0c0d0ef3f349d15e0b9b9e64feb192e1.png" />
 </div>
 </div>
 </section>
