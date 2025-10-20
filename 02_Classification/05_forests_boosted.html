@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Ensemble Methods (finally) &#8212; DS325 Applied Data Science</title>
+    <title>6. Ensemble Methods (finally) &#8212; DS325 Applied Data Science</title>
   
   
   
@@ -87,6 +87,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Github Submission Guide" href="../00_Assignments/submitting.html" />
+    <link rel="prev" title="4. Tree Methods (continued)" href="04_trees_gridcv.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -137,8 +139,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -208,12 +208,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">6. Polynomial Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">1. Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">2. Logistic Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">3. Trees and Ensemble methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">4. Tree Methods (continued)</a></li>
 
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Ensemble Methods (finally)</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -417,17 +418,17 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests-randomforestclassifier">Random Forests (RandomForestClassifier)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-feature-subsets">Random feature subsets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-bootstrap-aggregating">Bagging (<ins>B</ins>ootstrap <ins>agg</ins>regat<ins>ing</ins>)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-works">Why it works?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests-randomforestclassifier">6.1. Random Forests (RandomForestClassifier)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-feature-subsets">6.1.1. Random feature subsets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-bootstrap-aggregating">6.1.2. Bagging (<ins>B</ins>ootstrap <ins>agg</ins>regat<ins>ing</ins>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-works">6.1.3. Why it works?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">Gradient Boosted Trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaboost-adaptive-boosting-gradientboostingclassifier">AdaBoost (<ins>Ada</ins>ptive <ins>Boost</ins>ing) ( <code class="docutils literal notranslate"><span class="pre">GradientBoostingClassifier</span></code>)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-email-prediction">Example: Spam email prediction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-palmer-penguins">Example: Palmer Penguins</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-class-exercise">In class exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">6.2. Gradient Boosted Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaboost-adaptive-boosting-gradientboostingclassifier">6.2.1. AdaBoost (<ins>Ada</ins>ptive <ins>Boost</ins>ing) ( <code class="docutils literal notranslate"><span class="pre">GradientBoostingClassifier</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-email-prediction">6.2.2. Example: Spam email prediction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-palmer-penguins">6.2.3. Example: Palmer Penguins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-class-exercise">6.2.4. In class exercise</a></li>
 </ul>
 </li>
 </ul>
@@ -442,38 +443,38 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="ensemble-methods-finally">
-<h1>Ensemble Methods (finally)<a class="headerlink" href="#ensemble-methods-finally" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Ensemble Methods (finally)<a class="headerlink" href="#ensemble-methods-finally" title="Link to this heading">#</a></h1>
 <p>Ensemble methods combine predictions across multiple models to improve prediction.</p>
 <ul class="simple">
 <li><p><em>weak learners</em> - simple models that predict slightly better than random guessing</p></li>
 <li><p><em>strong learners</em> - more complex models that predict significantly better than chance</p></li>
 </ul>
 <section id="random-forests-randomforestclassifier">
-<h2>Random Forests (RandomForestClassifier)<a class="headerlink" href="#random-forests-randomforestclassifier" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Random Forests (RandomForestClassifier)<a class="headerlink" href="#random-forests-randomforestclassifier" title="Link to this heading">#</a></h2>
 <p>A random forest creates numerous trees in parallel (at the same time). Each tree is relatively shallow, sometimes only a single node (called a stump).</p>
 <p>To make a prediction, a sample is processed by each tree, each tree makes a prediction, and the majority vote wins. But what makes the trees in the forest different from each other?</p>
 <p>In fitting, diversity of trees is created using two methods: feature selection and bagging.</p>
 <section id="random-feature-subsets">
-<h3>Random feature subsets<a class="headerlink" href="#random-feature-subsets" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Random feature subsets<a class="headerlink" href="#random-feature-subsets" title="Link to this heading">#</a></h3>
 <p>Each tree only gets a subset of the features. For example, in a random forest deciding whether or not you should buy a car, one tree might make a prediction based on [‘reliability’, ‘feul economy’, ‘price’], while another uses [‘top speed’, ‘interior room’, ‘cost to repair’], and another uses [‘resale value’, ‘feul economy’, ‘value of standard tech’] and another…</p>
 </section>
 <section id="bagging-bootstrap-aggregating">
-<h3>Bagging (<ins>B</ins>ootstrap <ins>agg</ins>regat<ins>ing</ins>)<a class="headerlink" href="#bagging-bootstrap-aggregating" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.2. </span>Bagging (<ins>B</ins>ootstrap <ins>agg</ins>regat<ins>ing</ins>)<a class="headerlink" href="#bagging-bootstrap-aggregating" title="Link to this heading">#</a></h3>
 <p><em>Bootstrapping</em> is a method for creating new data sets by sampling existing data sets. In bootstrapping, you select samples randomly and allow a sample to be selected multiple times (called sampling with replacement).</p>
 <p><em>Bagging</em> is a method that uses bootstrapping to create different training sets for each tree, and then aggregating the results.</p>
 </section>
 <section id="why-it-works">
-<h3>Why it works?<a class="headerlink" href="#why-it-works" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.3. </span>Why it works?<a class="headerlink" href="#why-it-works" title="Link to this heading">#</a></h3>
 <p>The idea is that no one tree will be great, but they’ll all make different mistakes. But there’ll be more overlap in correct guesses than in mistakes. So for any given sample, the majority vote is more likely to be correct than any one tree.</p>
 </section>
 </section>
 <section id="gradient-boosted-trees">
-<h2>Gradient Boosted Trees<a class="headerlink" href="#gradient-boosted-trees" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Gradient Boosted Trees<a class="headerlink" href="#gradient-boosted-trees" title="Link to this heading">#</a></h2>
 <p>Whereas Random Forests fit trees in parallel and every tree gets an equal vote, Boosted trees create trees sequentially, each new tree focusing on the shortcomings of the previous. And at the voting stage, some trees get more say than others.</p>
 <p>There are many flavors of Boosted trees: AdaBoost, XGBoost, CatBoost</p>
 <p>They all work a little differently, but here’s an outline of AdaBoost as an example:</p>
 <section id="adaboost-adaptive-boosting-gradientboostingclassifier">
-<h3>AdaBoost (<ins>Ada</ins>ptive <ins>Boost</ins>ing) ( <code class="docutils literal notranslate"><span class="pre">GradientBoostingClassifier</span></code>)<a class="headerlink" href="#adaboost-adaptive-boosting-gradientboostingclassifier" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.1. </span>AdaBoost (<ins>Ada</ins>ptive <ins>Boost</ins>ing) ( <code class="docutils literal notranslate"><span class="pre">GradientBoostingClassifier</span></code>)<a class="headerlink" href="#adaboost-adaptive-boosting-gradientboostingclassifier" title="Link to this heading">#</a></h3>
 <p>In AdaBoost, a tree comprises only one decision node; this kind of tree is called a stump. In each iteration, a new stump is created that splits the data based on a different condition. As the algorithm iterates, it keeps track of:</p>
 <ul class="simple">
 <li><p>Sample Weight - each iteration, the algorithm focuses more on misclassified samples.</p>
@@ -501,7 +502,7 @@
 <p>When you predict, you feed the sample through all the stumps and each votes according to their influence.</p>
 </section>
 <section id="example-spam-email-prediction">
-<h3>Example: Spam email prediction<a class="headerlink" href="#example-spam-email-prediction" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.2. </span>Example: Spam email prediction<a class="headerlink" href="#example-spam-email-prediction" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>ucimlrepo
@@ -737,7 +738,7 @@ Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datas
 </div>
 </section>
 <section id="example-palmer-penguins">
-<h3>Example: Palmer Penguins<a class="headerlink" href="#example-palmer-penguins" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.3. </span>Example: Palmer Penguins<a class="headerlink" href="#example-palmer-penguins" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># palmer = pd.read_csv(&#39;https://gist.githubusercontent.com/slopp/ce3b90b9168f2f921784de84fa445651/raw/4ecf3041f0ed4913e7c230758733948bc561f434/penguins.csv&#39;, index_col = &#39;rowid&#39;)</span>
@@ -1013,7 +1014,7 @@ Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 1
 </div>
 </section>
 <section id="in-class-exercise">
-<h3>In class exercise<a class="headerlink" href="#in-class-exercise" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.2.4. </span>In class exercise<a class="headerlink" href="#in-class-exercise" title="Link to this heading">#</a></h3>
 <p>The following dataset can be found at <a class="reference external" href="https://archive.ics.uci.edu/dataset/2/adult">UCI ML repository</a></p>
 <p>Based on census information, can we predict whether an individual makes over $50K/yr?</p>
 <div class="cell docutils container">
@@ -1293,6 +1294,24 @@ Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 1
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="04_trees_gridcv.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Tree Methods (continued)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../00_Assignments/submitting.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Github Submission Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1310,17 +1329,17 @@ Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 1
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests-randomforestclassifier">Random Forests (RandomForestClassifier)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-feature-subsets">Random feature subsets</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-bootstrap-aggregating">Bagging (<ins>B</ins>ootstrap <ins>agg</ins>regat<ins>ing</ins>)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-works">Why it works?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forests-randomforestclassifier">6.1. Random Forests (RandomForestClassifier)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#random-feature-subsets">6.1.1. Random feature subsets</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bagging-bootstrap-aggregating">6.1.2. Bagging (<ins>B</ins>ootstrap <ins>agg</ins>regat<ins>ing</ins>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-works">6.1.3. Why it works?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">Gradient Boosted Trees</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaboost-adaptive-boosting-gradientboostingclassifier">AdaBoost (<ins>Ada</ins>ptive <ins>Boost</ins>ing) ( <code class="docutils literal notranslate"><span class="pre">GradientBoostingClassifier</span></code>)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-email-prediction">Example: Spam email prediction</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-palmer-penguins">Example: Palmer Penguins</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-class-exercise">In class exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-boosted-trees">6.2. Gradient Boosted Trees</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaboost-adaptive-boosting-gradientboostingclassifier">6.2.1. AdaBoost (<ins>Ada</ins>ptive <ins>Boost</ins>ing) ( <code class="docutils literal notranslate"><span class="pre">GradientBoostingClassifier</span></code>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-spam-email-prediction">6.2.2. Example: Spam email prediction</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-palmer-penguins">6.2.3. Example: Palmer Penguins</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-class-exercise">6.2.4. In class exercise</a></li>
 </ul>
 </li>
 </ul>
