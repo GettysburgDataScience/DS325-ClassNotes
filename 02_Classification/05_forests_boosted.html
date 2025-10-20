@@ -505,21 +505,7 @@
 <h3><span class="section-number">6.2.2. </span>Example: Spam email prediction<a class="headerlink" href="#example-spam-email-prediction" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>ucimlrepo
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: ucimlrepo in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (0.0.7)
-Requirement already satisfied: pandas&gt;=1.0.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ucimlrepo) (2.2.3)
-Requirement already satisfied: certifi&gt;=2020.12.5 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from ucimlrepo) (2024.12.14)
-Requirement already satisfied: numpy&gt;=1.26.0 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2.2.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2.9.0.post0)
-Requirement already satisfied: pytz&gt;=2020.1 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2024.2)
-Requirement already satisfied: tzdata&gt;=2022.7 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from pandas&gt;=1.0.0-&gt;ucimlrepo) (2024.2)
-Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datascience/lib/python3.13/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.0.0-&gt;ucimlrepo) (1.17.0)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># !pip install ucimlrepo</span>
 </pre></div>
 </div>
 </div>
@@ -675,7 +661,7 @@ Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datas
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -698,44 +684,225 @@ Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datas
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>Class</th>
+      <th>word_freq_make</th>
+      <th>word_freq_address</th>
+      <th>word_freq_all</th>
+      <th>word_freq_3d</th>
+      <th>word_freq_our</th>
+      <th>word_freq_over</th>
+      <th>word_freq_remove</th>
+      <th>word_freq_internet</th>
+      <th>word_freq_order</th>
+      <th>word_freq_mail</th>
+      <th>...</th>
+      <th>word_freq_conference</th>
+      <th>char_freq_;</th>
+      <th>char_freq_(</th>
+      <th>char_freq_[</th>
+      <th>char_freq_!</th>
+      <th>char_freq_$</th>
+      <th>char_freq_#</th>
+      <th>capital_run_length_average</th>
+      <th>capital_run_length_longest</th>
+      <th>capital_run_length_total</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>count</th>
       <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>...</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
+      <td>4601.000000</td>
     </tr>
     <tr>
       <th>mean</th>
-      <td>0.394045</td>
+      <td>0.104553</td>
+      <td>0.213015</td>
+      <td>0.280656</td>
+      <td>0.065425</td>
+      <td>0.312223</td>
+      <td>0.095901</td>
+      <td>0.114208</td>
+      <td>0.105295</td>
+      <td>0.090067</td>
+      <td>0.239413</td>
+      <td>...</td>
+      <td>0.031869</td>
+      <td>0.038575</td>
+      <td>0.139030</td>
+      <td>0.016976</td>
+      <td>0.269071</td>
+      <td>0.075811</td>
+      <td>0.044238</td>
+      <td>5.191515</td>
+      <td>52.172789</td>
+      <td>283.289285</td>
     </tr>
     <tr>
       <th>std</th>
-      <td>0.488698</td>
+      <td>0.305358</td>
+      <td>1.290575</td>
+      <td>0.504143</td>
+      <td>1.395151</td>
+      <td>0.672513</td>
+      <td>0.273824</td>
+      <td>0.391441</td>
+      <td>0.401071</td>
+      <td>0.278616</td>
+      <td>0.644755</td>
+      <td>...</td>
+      <td>0.285735</td>
+      <td>0.243471</td>
+      <td>0.270355</td>
+      <td>0.109394</td>
+      <td>0.815672</td>
+      <td>0.245882</td>
+      <td>0.429342</td>
+      <td>31.729449</td>
+      <td>194.891310</td>
+      <td>606.347851</td>
     </tr>
     <tr>
       <th>min</th>
       <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
     </tr>
     <tr>
       <th>25%</th>
       <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.588000</td>
+      <td>6.000000</td>
+      <td>35.000000</td>
     </tr>
     <tr>
       <th>50%</th>
       <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.065000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>2.276000</td>
+      <td>15.000000</td>
+      <td>95.000000</td>
     </tr>
     <tr>
       <th>75%</th>
-      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.420000</td>
+      <td>0.000000</td>
+      <td>0.380000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.160000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.188000</td>
+      <td>0.000000</td>
+      <td>0.315000</td>
+      <td>0.052000</td>
+      <td>0.000000</td>
+      <td>3.706000</td>
+      <td>43.000000</td>
+      <td>266.000000</td>
     </tr>
     <tr>
       <th>max</th>
-      <td>1.000000</td>
+      <td>4.540000</td>
+      <td>14.280000</td>
+      <td>5.100000</td>
+      <td>42.810000</td>
+      <td>10.000000</td>
+      <td>5.880000</td>
+      <td>7.270000</td>
+      <td>11.110000</td>
+      <td>5.260000</td>
+      <td>18.180000</td>
+      <td>...</td>
+      <td>10.000000</td>
+      <td>4.385000</td>
+      <td>9.752000</td>
+      <td>4.081000</td>
+      <td>32.478000</td>
+      <td>6.003000</td>
+      <td>19.829000</td>
+      <td>1102.500000</td>
+      <td>9989.000000</td>
+      <td>15841.000000</td>
     </tr>
   </tbody>
 </table>
+<p>8 rows × 57 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -771,7 +938,7 @@ Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datas
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 
 <span class="c1"># Decision Tree</span>
-<span class="n">dt_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
+<span class="n">dt_params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="s1">&#39;min_samples_split&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">]}</span>
 <span class="n">dt_grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="n">dt_params</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">dt_grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
@@ -798,7 +965,7 @@ Requirement already satisfied: six&gt;=1.5 in /Users/eatai/.pyenv/versions/datas
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Decision Tree params: {&#39;max_depth&#39;: 5, &#39;min_samples_split&#39;: 2}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Decision Tree params: {&#39;max_depth&#39;: 6, &#39;min_samples_split&#39;: 10}
 Best Random Forest params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 100}
 Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 100}
 </pre></div>
@@ -851,7 +1018,7 @@ Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/19fc3d1ad042e7a18c41f53995de6cd445ea7e93f40af8c95ca500acb8294b83.png" src="../_images/19fc3d1ad042e7a18c41f53995de6cd445ea7e93f40af8c95ca500acb8294b83.png" />
+<img alt="../_images/90d5b6c7d339ad08ef7fa1d751fd96e96a00c8a47e5dd49cc9ca2cf79eaf5bbc.png" src="../_images/90d5b6c7d339ad08ef7fa1d751fd96e96a00c8a47e5dd49cc9ca2cf79eaf5bbc.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -868,6 +1035,7 @@ Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 1
     
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">imp</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">imps</span><span class="p">),</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s1">&gt;3</span><span class="si">}</span><span class="s1">. </span><span class="si">{</span><span class="n">feature</span><span class="si">:</span><span class="s1">_&lt;30</span><span class="si">}{</span><span class="n">imp</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        
 </pre></div>
 </div>
 </div>
@@ -882,62 +1050,62 @@ Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 1
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>DECISION TREE
 ====================================
-  1. char_freq_$___________________0.4686
-  2. word_freq_remove______________0.2149
-  3. char_freq_!___________________0.0984
-  4. word_freq_hp__________________0.0622
-  5. capital_run_length_total______0.0397
-  6. word_freq_free________________0.0333
-  7. word_freq_edu_________________0.0175
-  8. word_freq_george______________0.0169
-  9. word_freq_000_________________0.0125
- 10. capital_run_length_longest____0.0115
- 11. word_freq_1999________________0.0085
- 12. word_freq_hpl_________________0.0069
- 13. word_freq_you_________________0.0045
- 14. word_freq_over________________0.0024
- 15. word_freq_mail________________0.0023
- 16. word_freq_order_______________0.0000
- 17. word_freq_address_____________0.0000
- 18. word_freq_money_______________0.0000
- 19. word_freq_all_________________0.0000
- 20. word_freq_3d__________________0.0000
- 21. word_freq_font________________0.0000
- 22. word_freq_your________________0.0000
- 23. word_freq_credit______________0.0000
- 24. word_freq_email_______________0.0000
- 25. word_freq_business____________0.0000
- 26. word_freq_our_________________0.0000
- 27. word_freq_addresses___________0.0000
- 28. word_freq_report______________0.0000
- 29. word_freq_internet____________0.0000
- 30. word_freq_will________________0.0000
- 31. word_freq_receive_____________0.0000
- 32. word_freq_people______________0.0000
- 33. word_freq_lab_________________0.0000
- 34. word_freq_650_________________0.0000
- 35. word_freq_labs________________0.0000
- 36. capital_run_length_average____0.0000
+  1. char_freq_$___________________0.4501
+  2. word_freq_remove______________0.2068
+  3. char_freq_!___________________0.0992
+  4. word_freq_hp__________________0.0598
+  5. capital_run_length_total______0.0470
+  6. word_freq_free________________0.0320
+  7. word_freq_edu_________________0.0168
+  8. word_freq_george______________0.0163
+  9. word_freq_000_________________0.0162
+ 10. capital_run_length_longest____0.0110
+ 11. word_freq_you_________________0.0108
+ 12. capital_run_length_average____0.0089
+ 13. word_freq_1999________________0.0081
+ 14. word_freq_hpl_________________0.0066
+ 15. word_freq_email_______________0.0038
+ 16. word_freq_over________________0.0023
+ 17. word_freq_conference__________0.0022
+ 18. word_freq_mail________________0.0022
+ 19. word_freq_font________________0.0000
+ 20. word_freq_business____________0.0000
+ 21. word_freq_your________________0.0000
+ 22. word_freq_credit______________0.0000
+ 23. word_freq_address_____________0.0000
+ 24. word_freq_report______________0.0000
+ 25. word_freq_addresses___________0.0000
+ 26. word_freq_all_________________0.0000
+ 27. word_freq_people______________0.0000
+ 28. word_freq_will________________0.0000
+ 29. word_freq_order_______________0.0000
+ 30. word_freq_internet____________0.0000
+ 31. word_freq_our_________________0.0000
+ 32. word_freq_3d__________________0.0000
+ 33. word_freq_receive_____________0.0000
+ 34. word_freq_lab_________________0.0000
+ 35. word_freq_money_______________0.0000
+ 36. word_freq_cs__________________0.0000
  37. char_freq_#___________________0.0000
  38. char_freq_[___________________0.0000
  39. char_freq_(___________________0.0000
  40. char_freq_;___________________0.0000
- 41. word_freq_conference__________0.0000
- 42. word_freq_table_______________0.0000
- 43. word_freq_re__________________0.0000
- 44. word_freq_project_____________0.0000
- 45. word_freq_original____________0.0000
- 46. word_freq_meeting_____________0.0000
- 47. word_freq_cs__________________0.0000
- 48. word_freq_direct______________0.0000
- 49. word_freq_pm__________________0.0000
- 50. word_freq_parts_______________0.0000
- 51. word_freq_technology__________0.0000
- 52. word_freq_85__________________0.0000
- 53. word_freq_415_________________0.0000
- 54. word_freq_data________________0.0000
- 55. word_freq_857_________________0.0000
- 56. word_freq_telnet______________0.0000
+ 41. word_freq_table_______________0.0000
+ 42. word_freq_re__________________0.0000
+ 43. word_freq_project_____________0.0000
+ 44. word_freq_original____________0.0000
+ 45. word_freq_meeting_____________0.0000
+ 46. word_freq_direct______________0.0000
+ 47. word_freq_650_________________0.0000
+ 48. word_freq_pm__________________0.0000
+ 49. word_freq_parts_______________0.0000
+ 50. word_freq_technology__________0.0000
+ 51. word_freq_85__________________0.0000
+ 52. word_freq_415_________________0.0000
+ 53. word_freq_data________________0.0000
+ 54. word_freq_857_________________0.0000
+ 55. word_freq_telnet______________0.0000
+ 56. word_freq_labs________________0.0000
  57. word_freq_make________________0.0000
 </pre></div>
 </div>
@@ -1010,6 +1178,77 @@ Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 1
  55. word_freq_857_________________0.0000
  56. word_freq_data________________0.0000
  57. word_freq_email_______________0.0000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">BOOSTED TREE</span><span class="se">\n</span><span class="s1">====================================&#39;</span><span class="p">)</span>
+<span class="n">display_feature_importance</span><span class="p">(</span><span class="n">boosted</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BOOSTED TREE
+====================================
+  1. char_freq_$___________________0.2472
+  2. char_freq_!___________________0.2080
+  3. word_freq_remove______________0.1500
+  4. word_freq_free________________0.0722
+  5. word_freq_hp__________________0.0679
+  6. capital_run_length_average____0.0658
+  7. capital_run_length_longest____0.0375
+  8. word_freq_george______________0.0357
+  9. word_freq_your________________0.0247
+ 10. word_freq_money_______________0.0200
+ 11. word_freq_our_________________0.0175
+ 12. capital_run_length_total______0.0100
+ 13. word_freq_edu_________________0.0094
+ 14. word_freq_650_________________0.0068
+ 15. word_freq_re__________________0.0041
+ 16. word_freq_meeting_____________0.0032
+ 17. word_freq_000_________________0.0032
+ 18. word_freq_1999________________0.0031
+ 19. word_freq_receive_____________0.0026
+ 20. word_freq_internet____________0.0020
+ 21. word_freq_you_________________0.0018
+ 22. word_freq_business____________0.0017
+ 23. word_freq_over________________0.0015
+ 24. char_freq_;___________________0.0012
+ 25. word_freq_3d__________________0.0008
+ 26. word_freq_font________________0.0008
+ 27. word_freq_project_____________0.0004
+ 28. word_freq_conference__________0.0004
+ 29. word_freq_report______________0.0003
+ 30. word_freq_will________________0.0002
+ 31. word_freq_addresses___________0.0000
+ 32. word_freq_people______________0.0000
+ 33. word_freq_email_______________0.0000
+ 34. word_freq_all_________________0.0000
+ 35. word_freq_address_____________0.0000
+ 36. word_freq_mail________________0.0000
+ 37. word_freq_order_______________0.0000
+ 38. word_freq_lab_________________0.0000
+ 39. word_freq_credit______________0.0000
+ 40. word_freq_pm__________________0.0000
+ 41. char_freq_#___________________0.0000
+ 42. char_freq_[___________________0.0000
+ 43. char_freq_(___________________0.0000
+ 44. word_freq_table_______________0.0000
+ 45. word_freq_original____________0.0000
+ 46. word_freq_cs__________________0.0000
+ 47. word_freq_direct______________0.0000
+ 48. word_freq_parts_______________0.0000
+ 49. word_freq_hpl_________________0.0000
+ 50. word_freq_technology__________0.0000
+ 51. word_freq_85__________________0.0000
+ 52. word_freq_415_________________0.0000
+ 53. word_freq_data________________0.0000
+ 54. word_freq_857_________________0.0000
+ 55. word_freq_telnet______________0.0000
+ 56. word_freq_labs________________0.0000
+ 57. word_freq_make________________0.0000
 </pre></div>
 </div>
 </div>
@@ -1261,6 +1500,69 @@ Best Gradient Boosted params: {&#39;max_depth&#39;: 2, &#39;n_estimators&#39;: 1
 </table>
 <p>48842 rows × 14 columns</p>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;&lt;=50K.&#39;</span><span class="p">:</span><span class="s1">&#39;&lt;=50K&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;50K.&#39;</span><span class="p">:</span><span class="s1">&#39;&gt;50K&#39;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_11747/2185987382.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  y.replace({&#39;&lt;=50K.&#39;:&#39;&lt;=50K&#39;, &#39;&gt;50K.&#39;:&#39;&gt;50K&#39;}, inplace = True)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;education&#39;</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">:</span><span class="s1">&#39;?&#39;</span><span class="p">},</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrdinalEncoder</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">,</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.compose</span><span class="w"> </span><span class="kn">import</span> <span class="n">ColumnTransformer</span>
+
+<span class="n">ord_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sex&#39;</span><span class="p">]</span>
+<span class="n">oe</span> <span class="o">=</span> <span class="n">OrdinalEncoder</span><span class="p">(</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[[</span><span class="s1">&#39;Male&#39;</span><span class="p">,</span> <span class="s1">&#39;Female&#39;</span><span class="p">]])</span>
+
+<span class="n">cat_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;workclass&#39;</span><span class="p">,</span> <span class="s1">&#39;marital-status&#39;</span><span class="p">,</span> <span class="s1">&#39;occupation&#39;</span><span class="p">,</span> <span class="s1">&#39;relationship&#39;</span><span class="p">,</span> <span class="s1">&#39;race&#39;</span><span class="p">,</span> <span class="s1">&#39;native-country&#39;</span><span class="p">]</span>
+<span class="n">oh</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">()</span>
+
+<span class="n">ss</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="n">num_features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;fnlwgt&#39;</span><span class="p">,</span> <span class="s1">&#39;education-num&#39;</span><span class="p">,</span> <span class="s1">&#39;capital-gain&#39;</span><span class="p">,</span> <span class="s1">&#39;capital-loss&#39;</span><span class="p">,</span> <span class="s1">&#39;hours-per-week&#39;</span><span class="p">]</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">([</span>
+    <span class="p">(</span><span class="s1">&#39;ord&#39;</span><span class="p">,</span> <span class="n">oe</span><span class="p">,</span> <span class="n">ord_features</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;oh&#39;</span><span class="p">,</span> <span class="n">oh</span><span class="p">,</span> <span class="n">cat_features</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;ss&#39;</span><span class="p">,</span> <span class="n">ss</span><span class="p">,</span> <span class="n">num_features</span><span class="p">)</span>
+<span class="p">],</span>
+    <span class="n">sparse_threshold</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">verbose_feature_names_out</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">Xt</span> <span class="o">=</span> <span class="n">ct</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xt</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(48842, 91)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
