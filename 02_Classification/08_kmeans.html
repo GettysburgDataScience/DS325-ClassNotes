@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>K-Means Clustering &#8212; DS325 Applied Data Science</title>
+    <title>10. K-Means Clustering &#8212; DS325 Applied Data Science</title>
   
   
   
@@ -87,6 +87,8 @@
     <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="11. Data Storytelling" href="09_datastorytelling.html" />
+    <link rel="prev" title="9. K-Nearest Neighbors (KNN) (a lazy learner)" href="07_knn.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -137,8 +139,6 @@
     <div class="bd-container__inner bd-page-width">
       
       
-      
-        
       
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
@@ -208,7 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">6. Polynomial Regression</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">1. Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">2. Logistic Regression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">3. Trees and Ensemble methods</a></li>
@@ -218,6 +218,8 @@
 <li class="toctree-l1"><a class="reference internal" href="06_pca.html">7. Principle Component Analysis (PCA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06b_pca_examples.html">8. PCA: Examples and Observations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_knn.html">9. K-Nearest Neighbors (KNN) (a lazy learner)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">10. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datastorytelling.html">11. Data Storytelling</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -422,10 +424,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">An Example with Synthetic Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">Example: Extracting a Color Palette from a Photo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">Example: Segmenting Objects in an Image (kinda)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">10.1. An Example with Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">10.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">10.2.1. Example: Extracting a Color Palette from a Photo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">10.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
 </ul>
 </li>
 </ul>
@@ -440,7 +442,7 @@
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="k-means-clustering">
-<h1>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">10. </span>K-Means Clustering<a class="headerlink" href="#k-means-clustering" title="Link to this heading">#</a></h1>
 <p>Clustering refers to an <em>unsupervised</em> learning algorithms that partition data into groups by similarity. Clustering can be used to identify categories from and assign classes/labels to unlabeled data (perhaps for classification).</p>
 <p>We’ll only introduce K-means clustering, but alternative clustering methods include:</p>
 <ul class="simple">
@@ -448,7 +450,7 @@
 <li><p>Agglomerative Clustering (Hierarchical Clustering)</p></li>
 </ul>
 <section id="an-example-with-synthetic-data">
-<h2>An Example with Synthetic Data<a class="headerlink" href="#an-example-with-synthetic-data" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>An Example with Synthetic Data<a class="headerlink" href="#an-example-with-synthetic-data" title="Link to this heading">#</a></h2>
 <p>To demonstrate K-Means, we’ll first create a synthetic dataset of 5 clusters using the sklearn make_blobs function. Remember, because we create this dataset, we know it should have 5 clusters. BUT that does not mean that the best partitioning will be into 5 groupings.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -542,7 +544,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5252989f575f13597884d3b2769c3f99502a78d28012286736d49646b947eb7f.png" src="../_images/5252989f575f13597884d3b2769c3f99502a78d28012286736d49646b947eb7f.png" />
+<img alt="../_images/e8ed07b102ea768aa373625e5fe77068a4b7dbbc8328136d9a68fe2461f487ba.png" src="../_images/e8ed07b102ea768aa373625e5fe77068a4b7dbbc8328136d9a68fe2461f487ba.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -556,7 +558,7 @@
 </div>
 </section>
 <section id="example-color-extraction-and-image-segmentation">
-<h2>Example: Color Extraction and Image Segmentation<a class="headerlink" href="#example-color-extraction-and-image-segmentation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">10.2. </span>Example: Color Extraction and Image Segmentation<a class="headerlink" href="#example-color-extraction-and-image-segmentation" title="Link to this heading">#</a></h2>
 <p>In this example, we’ll apply K-Means to image data. First, we’ll use K-Means to extract a color palette for a photograph. Then we’ll use K-Means to do a crude segmentation of the image, identifying the pixels that belong to different objects in the image.</p>
 <p>First, let’s inspect the image and describe our features.</p>
 <div class="cell docutils container">
@@ -753,7 +755,7 @@
 </div></div></div>
 </div>
 <section id="example-extracting-a-color-palette-from-a-photo">
-<h3>Example: Extracting a Color Palette from a Photo<a class="headerlink" href="#example-extracting-a-color-palette-from-a-photo" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.2.1. </span>Example: Extracting a Color Palette from a Photo<a class="headerlink" href="#example-extracting-a-color-palette-from-a-photo" title="Link to this heading">#</a></h3>
 <p>If you look at the photograph, you see various shades of reds, yellows, greens, whites, and purples. A color palette represents the colors in the image as a discrete set of representative colors. To build this palette, we’ll apply K-means to the color of each pixel and extract the centroids.</p>
 <p>Let’s see.</p>
 <div class="cell docutils container">
@@ -776,7 +778,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/663373e850d41ae61d9b83d935b5f2b970f27074676b92620c0c6c5a42ff7c0e.png" src="../_images/663373e850d41ae61d9b83d935b5f2b970f27074676b92620c0c6c5a42ff7c0e.png" />
+<img alt="../_images/c6fb29c6e0c8a893cf63725152d9cdf3b8b058045e37ed81b81c6b2a3c6c967e.png" src="../_images/c6fb29c6e0c8a893cf63725152d9cdf3b8b058045e37ed81b81c6b2a3c6c967e.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -788,12 +790,12 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>label
-0    99503
-5    29226
-4    24801
-2    22832
-1    11818
-3     8428
+0    99520
+5    29287
+3    24814
+1    22733
+2    11817
+4     8437
 Name: count, dtype: int64
 </pre></div>
 </div>
@@ -835,44 +837,44 @@ Name: count, dtype: int64
     <tr>
       <th>0</th>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.146090</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>1</th>
       <td>1</td>
-      <td>0.494644</td>
-      <td>0.336229</td>
-      <td>0.520177</td>
+      <td>0.936843</td>
+      <td>0.485048</td>
+      <td>0.125121</td>
     </tr>
     <tr>
       <th>2</th>
       <td>2</td>
-      <td>0.936421</td>
-      <td>0.483393</td>
-      <td>0.125343</td>
+      <td>0.493489</td>
+      <td>0.334808</td>
+      <td>0.519937</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
-      <td>0.928746</td>
-      <td>0.810312</td>
-      <td>0.667565</td>
+      <td>0.477799</td>
+      <td>0.449659</td>
+      <td>0.100019</td>
     </tr>
     <tr>
       <th>4</th>
       <td>4</td>
-      <td>0.477651</td>
-      <td>0.449597</td>
-      <td>0.099822</td>
+      <td>0.927969</td>
+      <td>0.809618</td>
+      <td>0.667368</td>
     </tr>
     <tr>
       <th>5</th>
       <td>5</td>
-      <td>0.676419</td>
-      <td>0.124570</td>
-      <td>0.121691</td>
+      <td>0.677994</td>
+      <td>0.125414</td>
+      <td>0.122032</td>
     </tr>
   </tbody>
 </table>
@@ -927,9 +929,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.24313725490196078, 0.11372549019607843, 0.2...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>1</th>
@@ -940,9 +942,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.24705882352941178, 0.12156862745098039, 0.2...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>2</th>
@@ -953,9 +955,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.24705882352941178, 0.13333333333333333, 0.2...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>3</th>
@@ -966,9 +968,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.2549019607843137, 0.11764705882352941, 0.23...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>4</th>
@@ -979,9 +981,9 @@ Name: count, dtype: int64
       <td>0</td>
       <td>[0.25882352941176473, 0.10588235294117647, 0.2...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>...</th>
@@ -1005,9 +1007,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.16862745098039217, 0.0784313725490196, 0.17...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>196604</th>
@@ -1018,9 +1020,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.1607843137254902, 0.07450980392156863, 0.15...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>196605</th>
@@ -1031,9 +1033,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.1568627450980392, 0.0784313725490196, 0.160...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>196606</th>
@@ -1044,9 +1046,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.16470588235294117, 0.08235294117647059, 0.1...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
     <tr>
       <th>196607</th>
@@ -1057,9 +1059,9 @@ Name: count, dtype: int64
       <td>383</td>
       <td>[0.1803921568627451, 0.09019607843137255, 0.19...</td>
       <td>0</td>
-      <td>0.265674</td>
-      <td>0.146174</td>
-      <td>0.238862</td>
+      <td>0.265736</td>
+      <td>0.14609</td>
+      <td>0.238657</td>
     </tr>
   </tbody>
 </table>
@@ -1077,12 +1079,12 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c38c3c3a730d5cab02dbd0086851d803a90bdf0b262d9b6420e3ce494b64d60e.png" src="../_images/c38c3c3a730d5cab02dbd0086851d803a90bdf0b262d9b6420e3ce494b64d60e.png" />
+<img alt="../_images/569db8489463e911e2a874d49f343f23f8b86c856e304b1341790975610ee1a5.png" src="../_images/569db8489463e911e2a874d49f343f23f8b86c856e304b1341790975610ee1a5.png" />
 </div>
 </div>
 </section>
 <section id="example-segmenting-objects-in-an-image-kinda">
-<h3>Example: Segmenting Objects in an Image (kinda)<a class="headerlink" href="#example-segmenting-objects-in-an-image-kinda" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">10.2.2. </span>Example: Segmenting Objects in an Image (kinda)<a class="headerlink" href="#example-segmenting-objects-in-an-image-kinda" title="Link to this heading">#</a></h3>
 <p>Image segmentation refers to the process of partitioning an image into the objects in the image. We’ll attempt an image segmentation by incorporating pixel position and pixel color. The idea is that an object is represented by a blob of pixels that are near each other and of similar color.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1239,7 +1241,7 @@ Name: count, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/de265462b550d7954fe52e60457672ca80fb00e253a4cecf96bb0128fee18cb1.png" src="../_images/de265462b550d7954fe52e60457672ca80fb00e253a4cecf96bb0128fee18cb1.png" />
+<img alt="../_images/701c5059423b6fca6c8271673e4bd42090281d2bce99a0c9ede2f4760c580552.png" src="../_images/701c5059423b6fca6c8271673e4bd42090281d2bce99a0c9ede2f4760c580552.png" />
 </div>
 </div>
 </section>
@@ -1276,6 +1278,24 @@ Name: count, dtype: int64
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="07_knn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">9. </span>K-Nearest Neighbors (KNN) (a lazy learner)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="09_datastorytelling.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>Data Storytelling</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -1293,10 +1313,10 @@ Name: count, dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">An Example with Synthetic Data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">Example: Extracting a Color Palette from a Photo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">Example: Segmenting Objects in an Image (kinda)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-with-synthetic-data">10.1. An Example with Synthetic Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-color-extraction-and-image-segmentation">10.2. Example: Color Extraction and Image Segmentation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-extracting-a-color-palette-from-a-photo">10.2.1. Example: Extracting a Color Palette from a Photo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-segmenting-objects-in-an-image-kinda">10.2.2. Example: Segmenting Objects in an Image (kinda)</a></li>
 </ul>
 </li>
 </ul>
