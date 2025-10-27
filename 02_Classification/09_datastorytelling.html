@@ -1,0 +1,2484 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Data Storytelling &#8212; DS325 Applied Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=fb9458d3" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02_Classification/09_datastorytelling';</script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/searchtools.js?v=63a53a7d"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/language_data.js?v=d4673a71"></script>
+    <script src="../_static/copybutton_funcs.js?v=776a791e"></script>
+    <script src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/bootstrap.js?v=7583a70d"></script>
+    <script src="../_static/scripts/fontawesome.js?v=9b125980"></script>
+    <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds325_sticker.png" class="logo__image only-light" alt="DS325 Applied Data Science - Home"/>
+    <img src="../_static/ds325_sticker.png" class="logo__image only-dark pst-js-only" alt="DS325 Applied Data Science - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to DS325 Applied Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/genai_policy.html">2. Our course GenAI Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_reviewtopics.html">3. Linear Regression Review Topics</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_what_is_a_model.html">1. What is a model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression.html">3. Linear Regression (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization_housing.html">5. Regularization Example: King County housing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">6. Polynomial Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_classification_intro.html">1. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_logistic_regression.html">2. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">3. Trees and Ensemble methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">4. Tree Methods (continued)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="05_forests_boosted.html">6. Forests and Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_pca.html">7. Principle Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06b_pca_examples.html">8. PCA: Examples and Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_knn.html">9. K-Nearest Neighbors (KNN) (a lazy learner)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/submitting.html">Github Submission Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00.html">PS00</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00_Roth.html">PS00 (Solutions by Prof Roth)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps01.html">PS01 - (Not so) Simple Linear Regression</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps02.html">PS02 - Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/mp01.html">Mini-Project 1 (and examples!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps03.html">PS03 - Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/02_crackthecode.html">Crack the Code!</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F02_Classification/09_datastorytelling.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/02_Classification/09_datastorytelling.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Data Storytelling</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#election-data">Election Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#county-age-sex-data">County Age-Sex Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">County Age-Sex Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#county-race-data">County Race Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#county-social-leanings-data">County Social Leanings Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#county-development-metrics-data">County Development Metrics Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">County Age-Sex Data</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="data-storytelling">
+<h1>Data Storytelling<a class="headerlink" href="#data-storytelling" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Explore the data below (ie features, stats, and visualizations).</p></li>
+<li><p>Develop 2-3 questions/theses that might be addressed by these data.</p></li>
+<li><p>Clean and combine data sources.</p></li>
+<li><p>Choose a model. What aspects of the model will help support your thesis or answer your question?</p></li>
+<li><p>Assess and interpret your model.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://github.com/GettysburgDataScience/datasets/tree/main/us_political">data repository</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elec_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/countypres_2000-2024.csv&#39;</span><span class="p">)</span>
+<span class="n">health_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/countyHealth_2025.csv&#39;</span><span class="p">,</span> <span class="n">skiprows</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">agesex_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/stats_america/Population-by-Age-and-Sex/Population%20by%20Age</span><span class="si">%20a</span><span class="s1">nd%20Sex%20-%20US%2C%20States%2C%20Counties.csv&#39;</span><span class="p">)</span>
+<span class="n">race_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/stats_america/Population-by-Race/Population%20by%20Race%20-%20US%2C%20States%2C%20Counties.csv&#39;</span><span class="p">)</span>
+<span class="n">social_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/stats_america/Social-Context/Social%20Context.csv&#39;</span><span class="p">)</span>
+<span class="n">dev_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/stats_america/Metrics-For-Development/Metrics</span><span class="si">%20F</span><span class="s1">or%20Development.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">6</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">race_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/stats_america/Population-by-Race/Population%20by%20Race%20-%20US%2C%20States%2C%20Counties.csv&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">social_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/stats_america/Social-Context/Social%20Context.csv&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">6</span> <span class="n">dev_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/us_political/stats_america/Metrics-For-Development/Metrics</span><span class="si">%20F</span><span class="s1">or%20Development.csv&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/io/parsers/readers.py:1026,</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1013</span> <span class="n">kwds_defaults</span> <span class="o">=</span> <span class="n">_refine_defaults_read</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1014</span>     <span class="n">dialect</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1015</span>     <span class="n">delimiter</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1022</span>     <span class="n">dtype_backend</span><span class="o">=</span><span class="n">dtype_backend</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1023</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1024</span> <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1026</span> <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/io/parsers/readers.py:620,</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">617</span> <span class="n">_validate_names</span><span class="p">(</span><span class="n">kwds</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;names&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">619</span> <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">620</span> <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">622</span> <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">623</span>     <span class="k">return</span> <span class="n">parser</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/io/parsers/readers.py:1620,</span> in <span class="ni">TextFileReader.__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1617</span>     <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwds</span><span class="p">[</span><span class="s2">&quot;has_index_names&quot;</span><span class="p">]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1619</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1620</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/io/parsers/readers.py:1880,</span> in <span class="ni">TextFileReader._make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1878</span>     <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1879</span>         <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1880</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1881</span>     <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1882</span>     <span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1883</span>     <span class="n">encoding</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1884</span>     <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;compression&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1885</span>     <span class="n">memory_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;memory_map&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1886</span>     <span class="n">is_text</span><span class="o">=</span><span class="n">is_text</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1887</span>     <span class="n">errors</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;encoding_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;strict&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1888</span>     <span class="n">storage_options</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;storage_options&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1889</span> <span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1890</span> <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+<span class="g g-Whitespace">   </span><span class="mi">1891</span> <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="o">.</span><span class="n">handle</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/io/common.py:728,</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">725</span>     <span class="n">codecs</span><span class="o">.</span><span class="n">lookup_error</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">727</span> <span class="c1"># open URLs</span>
+<span class="ne">--&gt; </span><span class="mi">728</span> <span class="n">ioargs</span> <span class="o">=</span> <span class="n">_get_filepath_or_buffer</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">729</span>     <span class="n">path_or_buf</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">730</span>     <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">731</span>     <span class="n">compression</span><span class="o">=</span><span class="n">compression</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">732</span>     <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">733</span>     <span class="n">storage_options</span><span class="o">=</span><span class="n">storage_options</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">734</span> <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">736</span> <span class="n">handle</span> <span class="o">=</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">filepath_or_buffer</span>
+<span class="g g-Whitespace">    </span><span class="mi">737</span> <span class="n">handles</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">BaseBuffer</span><span class="p">]</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/pandas/io/common.py:389,</span> in <span class="ni">_get_filepath_or_buffer</span><span class="nt">(filepath_or_buffer, encoding, compression, mode, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">386</span>         <span class="k">if</span> <span class="n">content_encoding</span> <span class="o">==</span> <span class="s2">&quot;gzip&quot;</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">387</span>             <span class="c1"># Override compression based on Content-Encoding header</span>
+<span class="g g-Whitespace">    </span><span class="mi">388</span>             <span class="n">compression</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip&quot;</span><span class="p">}</span>
+<span class="ne">--&gt; </span><span class="mi">389</span>         <span class="n">reader</span> <span class="o">=</span> <span class="n">BytesIO</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="g g-Whitespace">    </span><span class="mi">390</span>     <span class="k">return</span> <span class="n">IOArgs</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">391</span>         <span class="n">filepath_or_buffer</span><span class="o">=</span><span class="n">reader</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">392</span>         <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">395</span>         <span class="n">mode</span><span class="o">=</span><span class="n">fsspec_mode</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">396</span>     <span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">398</span> <span class="k">if</span> <span class="n">is_fsspec_url</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">):</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/http/client.py:495,</span> in <span class="ni">HTTPResponse.read</span><span class="nt">(self, amt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">493</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">494</span>     <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">495</span>         <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_safe_read</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">496</span>     <span class="k">except</span> <span class="n">IncompleteRead</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">497</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_close_conn</span><span class="p">()</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/http/client.py:640,</span> in <span class="ni">HTTPResponse._safe_read</span><span class="nt">(self, amt)</span>
+<span class="g g-Whitespace">    </span><span class="mi">633</span> <span class="k">def</span><span class="w"> </span><span class="nf">_safe_read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amt</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">634</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Read the number of bytes requested.</span>
+<span class="g g-Whitespace">    </span><span class="mi">635</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">636</span><span class="sd">     This function should be used when &lt;amt&gt; bytes &quot;should&quot; be present for</span>
+<span class="g g-Whitespace">    </span><span class="mi">637</span><span class="sd">     reading. If the bytes are truly not available (due to EOF), then the</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span><span class="sd">     IncompleteRead exception can be used to detect the problem.</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">640</span>     <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span>     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">amt</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">642</span>         <span class="k">raise</span> <span class="n">IncompleteRead</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">amt</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/socket.py:719,</span> in <span class="ni">SocketIO.readinto</span><span class="nt">(self, b)</span>
+<span class="g g-Whitespace">    </span><span class="mi">717</span>     <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="s2">&quot;cannot read from timed out object&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">718</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">719</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sock</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">720</span> <span class="k">except</span> <span class="n">timeout</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">721</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_timeout_occurred</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/ssl.py:1304,</span> in <span class="ni">SSLSocket.recv_into</span><span class="nt">(self, buffer, nbytes, flags)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1300</span>     <span class="k">if</span> <span class="n">flags</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1301</span>         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1302</span>           <span class="s2">&quot;non-zero flags not allowed in calls to recv_into() on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+<span class="g g-Whitespace">   </span><span class="mi">1303</span>           <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1304</span>     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">nbytes</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1305</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1306</span>     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">recv_into</span><span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">nbytes</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/lib/python3.13/ssl.py:1138,</span> in <span class="ni">SSLSocket.read</span><span class="nt">(self, len, buffer)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1136</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1137</span>     <span class="k">if</span> <span class="n">buffer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1138</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">buffer</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1139</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1140</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="nb">len</span><span class="p">)</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<section id="election-data">
+<h2>Election Data<a class="headerlink" href="#election-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elec_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>state</th>
+      <th>state_po</th>
+      <th>county_name</th>
+      <th>county_fips</th>
+      <th>office</th>
+      <th>candidate</th>
+      <th>party</th>
+      <th>candidatevotes</th>
+      <th>totalvotes</th>
+      <th>version</th>
+      <th>mode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000</td>
+      <td>ALABAMA</td>
+      <td>AL</td>
+      <td>AUTAUGA</td>
+      <td>1001.0</td>
+      <td>US PRESIDENT</td>
+      <td>AL GORE</td>
+      <td>DEMOCRAT</td>
+      <td>4942</td>
+      <td>17208</td>
+      <td>20250821</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000</td>
+      <td>ALABAMA</td>
+      <td>AL</td>
+      <td>AUTAUGA</td>
+      <td>1001.0</td>
+      <td>US PRESIDENT</td>
+      <td>GEORGE W. BUSH</td>
+      <td>REPUBLICAN</td>
+      <td>11993</td>
+      <td>17208</td>
+      <td>20250821</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000</td>
+      <td>ALABAMA</td>
+      <td>AL</td>
+      <td>AUTAUGA</td>
+      <td>1001.0</td>
+      <td>US PRESIDENT</td>
+      <td>OTHER</td>
+      <td>OTHER</td>
+      <td>113</td>
+      <td>17208</td>
+      <td>20250821</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000</td>
+      <td>ALABAMA</td>
+      <td>AL</td>
+      <td>AUTAUGA</td>
+      <td>1001.0</td>
+      <td>US PRESIDENT</td>
+      <td>RALPH NADER</td>
+      <td>GREEN</td>
+      <td>160</td>
+      <td>17208</td>
+      <td>20250821</td>
+      <td>TOTAL</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000</td>
+      <td>ALABAMA</td>
+      <td>AL</td>
+      <td>BALDWIN</td>
+      <td>1003.0</td>
+      <td>US PRESIDENT</td>
+      <td>AL GORE</td>
+      <td>DEMOCRAT</td>
+      <td>13997</td>
+      <td>56480</td>
+      <td>20250821</td>
+      <td>TOTAL</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;county_fips&#39;</span><span class="p">,</span> <span class="s1">&#39;candidate&#39;</span><span class="p">,</span> <span class="s1">&#39;candidatevotes&#39;</span><span class="p">,</span> <span class="s1">&#39;totalvotes&#39;</span><span class="p">]</span>
+<span class="n">elec_R_df</span> <span class="o">=</span> <span class="n">elec_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;party == &quot;REPUBLICAN&quot; and mode.str.startswith(&quot;TOTAL&quot;)&#39;</span><span class="p">)[</span><span class="n">columns_to_keep</span><span class="p">]</span>
+<span class="n">elec_D_df</span> <span class="o">=</span> <span class="n">elec_df</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;party == &quot;DEMOCRAT&quot; and mode.str.startswith(&quot;TOTAL&quot;)&#39;</span><span class="p">)[</span><span class="n">columns_to_keep</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">elections_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span> <span class="o">=</span> <span class="n">elec_D_df</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">elec_R_df</span><span class="p">,</span>
+         <span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;inner&#39;</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;county_fips&#39;</span><span class="p">],</span> <span class="n">suffixes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_D&#39;</span><span class="p">,</span> <span class="s1">&#39;_R&#39;</span><span class="p">])</span>
+
+<span class="n">elections_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;totalvotes_D&#39;</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">elections_df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;totalvotes_R&#39;</span><span class="p">:</span><span class="s1">&#39;totalvotes&#39;</span><span class="p">})</span>
+
+<span class="n">elections_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>county_fips</th>
+      <th>candidate_D</th>
+      <th>candidatevotes_D</th>
+      <th>candidate_R</th>
+      <th>candidatevotes_R</th>
+      <th>totalvotes_R</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2000</td>
+      <td>1001.0</td>
+      <td>AL GORE</td>
+      <td>4942</td>
+      <td>GEORGE W. BUSH</td>
+      <td>11993</td>
+      <td>17208</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2000</td>
+      <td>1003.0</td>
+      <td>AL GORE</td>
+      <td>13997</td>
+      <td>GEORGE W. BUSH</td>
+      <td>40872</td>
+      <td>56480</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2000</td>
+      <td>1005.0</td>
+      <td>AL GORE</td>
+      <td>5188</td>
+      <td>GEORGE W. BUSH</td>
+      <td>5096</td>
+      <td>10395</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2000</td>
+      <td>1007.0</td>
+      <td>AL GORE</td>
+      <td>2710</td>
+      <td>GEORGE W. BUSH</td>
+      <td>4273</td>
+      <td>7101</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2000</td>
+      <td>1009.0</td>
+      <td>AL GORE</td>
+      <td>4977</td>
+      <td>GEORGE W. BUSH</td>
+      <td>12667</td>
+      <td>17973</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fips_df</span> <span class="o">=</span> <span class="n">elec_df</span><span class="p">[[</span><span class="s1">&#39;state_po&#39;</span><span class="p">,</span> <span class="s1">&#39;county_name&#39;</span><span class="p">,</span> <span class="s1">&#39;county_fips&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">fips_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>state_po</th>
+      <th>county_name</th>
+      <th>county_fips</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AL</td>
+      <td>AUTAUGA</td>
+      <td>1001.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AL</td>
+      <td>BALDWIN</td>
+      <td>1003.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AL</td>
+      <td>BARBOUR</td>
+      <td>1005.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AL</td>
+      <td>BIBB</td>
+      <td>1007.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>AL</td>
+      <td>BLOUNT</td>
+      <td>1009.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## County Health Data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">health_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>State FIPS Code</th>
+      <th>County FIPS Code</th>
+      <th>5-digit FIPS Code</th>
+      <th>State Abbreviation</th>
+      <th>Name</th>
+      <th>Release Year</th>
+      <th>County Clustered (Yes=1/No=0)</th>
+      <th>Premature Death raw value</th>
+      <th>Premature Death numerator</th>
+      <th>Premature Death denominator</th>
+      <th>...</th>
+      <th>% Rural raw value</th>
+      <th>% Rural numerator</th>
+      <th>% Rural denominator</th>
+      <th>% Rural CI low</th>
+      <th>% Rural CI high</th>
+      <th>Population raw value</th>
+      <th>Population numerator</th>
+      <th>Population denominator</th>
+      <th>Population CI low</th>
+      <th>Population CI high</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>US</td>
+      <td>United States</td>
+      <td>2025</td>
+      <td>NaN</td>
+      <td>8351.736549</td>
+      <td>4763989.0</td>
+      <td>925367214.0</td>
+      <td>...</td>
+      <td>0.200031</td>
+      <td>66300254.0</td>
+      <td>331449281.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>334914895.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1000</td>
+      <td>AL</td>
+      <td>Alabama</td>
+      <td>2025</td>
+      <td>NaN</td>
+      <td>11853.247248</td>
+      <td>102760.0</td>
+      <td>13958454.0</td>
+      <td>...</td>
+      <td>0.422628</td>
+      <td>2123399.0</td>
+      <td>5024279.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>5108468.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1001</td>
+      <td>AL</td>
+      <td>Autauga County</td>
+      <td>2025</td>
+      <td>1.0</td>
+      <td>9938.263382</td>
+      <td>1008.0</td>
+      <td>163064.0</td>
+      <td>...</td>
+      <td>0.406768</td>
+      <td>23920.0</td>
+      <td>58805.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60342.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>3 rows × 796 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">print_cols</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">num_cols</span> <span class="o">=</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="n">col_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">):</span>
+        <span class="n">col_str</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s1">&gt;3</span><span class="si">}</span><span class="s1">.  </span><span class="si">{</span><span class="n">col</span><span class="si">:</span><span class="s1">&lt;40</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">%</span> <span class="n">num_cols</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">col_str</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">col_str</span><span class="p">)</span>
+    
+<span class="n">print_cols</span><span class="p">(</span><span class="n">health_df</span><span class="p">,</span> <span class="n">num_cols</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.  State FIPS Code                         
+  1.  County FIPS Code                          2.  5-digit FIPS Code                         3.  State Abbreviation                        4.  Name                                    
+  5.  Release Year                              6.  County Clustered (Yes=1/No=0)             7.  Premature Death raw value                 8.  Premature Death numerator               
+  9.  Premature Death denominator              10.  Premature Death CI low                   11.  Premature Death CI high                  12.  Premature Death flag (0 = No Flag/1=Unreliable/2=Suppressed)
+ 13.  Premature Death (AIAN)                   14.  Premature Death CI low (AIAN)            15.  Premature Death CI high (AIAN)           16.  Premature Death flag (AIAN) (. = No Flag/1=Unreliable/2=Suppressed)
+ 17.  Premature Death (Asian)                  18.  Premature Death CI low (Asian)           19.  Premature Death CI high (Asian)          20.  Premature Death flag (Asian) (. = No Flag/1=Unreliable/2=Suppressed)
+ 21.  Premature Death (Black)                  22.  Premature Death CI low (Black)           23.  Premature Death CI high (Black)          24.  Premature Death flag (Black) (. = No Flag/1=Unreliable/2=Suppressed)
+ 25.  Premature Death (Hispanic)               26.  Premature Death CI low (Hispanic)        27.  Premature Death CI high (Hispanic)       28.  Premature Death flag (Hispanic) (. = No Flag/1=Unreliable/2=Suppressed)
+ 29.  Premature Death (White)                  30.  Premature Death CI low (White)           31.  Premature Death CI high (White)          32.  Premature Death flag (White) (. = No Flag/1=Unreliable/2=Suppressed)
+ 33.  Premature Death (NHOPI)                  34.  Premature Death CI low (NHOPI)           35.  Premature Death CI high (NHOPI)          36.  Premature Death flag (NHOPI) (. = No Flag/1=Unreliable/2=Suppressed)
+ 37.  Premature Death flag (Two or more races) (. = No Flag/1=Unreliable/2=Suppressed) 38.  Poor Physical Health Days raw value      39.  Poor Physical Health Days numerator      40.  Poor Physical Health Days denominator   
+ 41.  Poor Physical Health Days CI low         42.  Poor Physical Health Days CI high        43.  Low Birth Weight raw value               44.  Low Birth Weight numerator              
+ 45.  Low Birth Weight denominator             46.  Low Birth Weight CI low                  47.  Low Birth Weight CI high                 48.  LBW unreliable indicator (Unreliable = Numerator &lt; 20 or relative standard error &gt; 20%)
+ 49.  Low Birth Weight (AIAN)                  50.  Low Birth Weight CI low (AIAN)           51.  Low Birth Weight CI high (AIAN)          52.  Low Birth Weight (Asian)                
+ 53.  Low Birth Weight CI low (Asian)          54.  Low Birth Weight CI high (Asian)         55.  Low Birth Weight (Black)                 56.  Low Birth Weight CI low (Black)         
+ 57.  Low Birth Weight CI high (Black)         58.  Low Birth Weight (Hispanic)              59.  Low Birth Weight CI low (Hispanic)       60.  Low Birth Weight CI high (Hispanic)     
+ 61.  Low Birth Weight (White)                 62.  Low Birth Weight CI low (White)          63.  Low Birth Weight CI high (White)         64.  Low Birth Weight (NHOPI)                
+ 65.  Low Birth Weight CI low (NHOPI)          66.  Low Birth Weight CI high (NHOPI)         67.  Low Birth Weight (Two or more races)     68.  Low Birth Weight CI low (Two or more races)
+ 69.  Low Birth Weight CI high (Two or more races) 70.  Poor Mental Health Days raw value        71.  Poor Mental Health Days numerator        72.  Poor Mental Health Days denominator     
+ 73.  Poor Mental Health Days CI low           74.  Poor Mental Health Days CI high          75.  Poor or Fair Health raw value            76.  Poor or Fair Health numerator           
+ 77.  Poor or Fair Health denominator          78.  Poor or Fair Health CI low               79.  Poor or Fair Health CI high              80.  Flu Vaccinations raw value              
+ 81.  Flu Vaccinations numerator               82.  Flu Vaccinations denominator             83.  Flu Vaccinations CI low                  84.  Flu Vaccinations CI high                
+ 85.  Flu Vaccinations (AIAN)                  86.  Flu Vaccinations (Asian/Pacific Islander) 87.  Flu Vaccinations (Black)                 88.  Flu Vaccinations (Hispanic)             
+ 89.  Flu Vaccinations (White)                 90.  Access to Exercise Opportunities raw value 91.  Access to Exercise Opportunities numerator 92.  Access to Exercise Opportunities denominator
+ 93.  Access to Exercise Opportunities CI low  94.  Access to Exercise Opportunities CI high 95.  Food Environment Index raw value         96.  Food Environment Index numerator        
+ 97.  Food Environment Index denominator       98.  Food Environment Index CI low            99.  Food Environment Index CI high          100.  Primary Care Physicians raw value       
+101.  Primary Care Physicians numerator       102.  Primary Care Physicians denominator     103.  Primary Care Physicians CI low          104.  Primary Care Physicians CI high         
+105.  Ratio of population to primary care physicians.106.  Mental Health Providers raw value       107.  Mental Health Providers numerator       108.  Mental Health Providers denominator     
+109.  Mental Health Providers CI low          110.  Mental Health Providers CI high         111.  Ratio of population to mental health providers.112.  Dentists raw value                      
+113.  Dentists numerator                      114.  Dentists denominator                    115.  Dentists CI low                         116.  Dentists CI high                        
+117.  Ratio of population to dentists.        118.  Preventable Hospital Stays raw value    119.  Preventable Hospital Stays numerator    120.  Preventable Hospital Stays denominator  
+121.  Preventable Hospital Stays CI low       122.  Preventable Hospital Stays CI high      123.  Preventable Hospital Stays (AIAN)       124.  Preventable Hospital Stays (Asian/Pacific Islander)
+125.  Preventable Hospital Stays (Black)      126.  Preventable Hospital Stays (Hispanic)   127.  Preventable Hospital Stays (White)      128.  Mammography Screening raw value         
+129.  Mammography Screening numerator         130.  Mammography Screening denominator       131.  Mammography Screening CI low            132.  Mammography Screening CI high           
+133.  Mammography Screening (AIAN)            134.  Mammography Screening (Asian/Pacific Islander)135.  Mammography Screening (Black)           136.  Mammography Screening (Hispanic)        
+137.  Mammography Screening (White)           138.  Uninsured raw value                     139.  Uninsured numerator                     140.  Uninsured denominator                   
+141.  Uninsured CI low                        142.  Uninsured CI high                       143.  Severe Housing Problems raw value       144.  Severe Housing Problems numerator       
+145.  Severe Housing Problems denominator     146.  Severe Housing Problems CI low          147.  Severe Housing Problems CI high         148.  Percentage of households with high housing costs
+149.  Percentage of households with high housing costs CI low150.  Percentage of households with high housing costs CI high151.  Percentage of households with overcrowding152.  Percentage of households with overcrowding CI low
+153.  Percentage of households with overcrowding CI high154.  Percentage of households with lack of kitchen or plumbing facilities155.  Percentage of households with lack of kitchen or plumbing facilities CI low156.  Percentage of households with lack of kitchen or plumbing facilities CI high
+157.  Driving Alone to Work raw value         158.  Driving Alone to Work numerator         159.  Driving Alone to Work denominator       160.  Driving Alone to Work CI low            
+161.  Driving Alone to Work CI high           162.  Driving Alone to Work (AIAN)            163.  Driving Alone to Work CI low (AIAN)     164.  Driving Alone to Work CI high (AIAN)    
+165.  Driving Alone to Work (Asian/Pacific Islander)166.  Driving Alone to Work CI low (Asian/Pacific Islander)167.  Driving Alone to Work CI high (Asian/Pacific Islander)168.  Driving Alone to Work (Black)           
+169.  Driving Alone to Work CI low (Black)    170.  Driving Alone to Work CI high (Black)   171.  Driving Alone to Work (Hispanic)        172.  Driving Alone to Work CI low (Hispanic) 
+173.  Driving Alone to Work CI high (Hispanic)174.  Driving Alone to Work (White)           175.  Driving Alone to Work CI low (White)    176.  Driving Alone to Work CI high (White)   
+177.  Long Commute - Driving Alone raw value  178.  Long Commute - Driving Alone numerator  179.  Long Commute - Driving Alone denominator180.  Long Commute - Driving Alone CI low     
+181.  Long Commute - Driving Alone CI high    182.  Air Pollution: Particulate Matter raw value183.  Air Pollution: Particulate Matter numerator184.  Air Pollution: Particulate Matter denominator
+185.  Air Pollution: Particulate Matter CI low186.  Air Pollution: Particulate Matter CI high187.  Drinking Water Violations raw value     188.  Drinking Water Violations numerator     
+189.  Drinking Water Violations denominator   190.  Drinking Water Violations CI low        191.  Drinking Water Violations CI high       192.  Broadband Access raw value              
+193.  Broadband Access numerator              194.  Broadband Access denominator            195.  Broadband Access CI low                 196.  Broadband Access CI high                
+197.  Library Access raw value                198.  Library Access numerator                199.  Library Access denominator              200.  Library Access CI low                   
+201.  Library Access CI high                  202.  Some College raw value                  203.  Some College numerator                  204.  Some College denominator                
+205.  Some College CI low                     206.  Some College CI high                    207.  High School Completion raw value        208.  High School Completion numerator        
+209.  High School Completion denominator      210.  High School Completion CI low           211.  High School Completion CI high          212.  Unemployment raw value                  
+213.  Unemployment numerator                  214.  Unemployment denominator                215.  Unemployment CI low                     216.  Unemployment CI high                    
+217.  Income Inequality raw value             218.  Income Inequality numerator             219.  Income Inequality denominator           220.  Income Inequality CI low                
+221.  Income Inequality CI high               222.  Children in Poverty raw value           223.  Children in Poverty numerator           224.  Children in Poverty denominator         
+225.  Children in Poverty CI low              226.  Children in Poverty CI high             227.  Children in Poverty (AIAN)              228.  Children in Poverty CI low (AIAN)       
+229.  Children in Poverty CI high (AIAN)      230.  Children in Poverty (Asian/Pacific Islander)231.  Children in Poverty CI low (Asian/Pacific Islander)232.  Children in Poverty CI high (Asian/Pacific Islander)
+233.  Children in Poverty (Black)             234.  Children in Poverty CI low (Black)      235.  Children in Poverty CI high (Black)     236.  Children in Poverty (Hispanic)          
+237.  Children in Poverty CI low (Hispanic)   238.  Children in Poverty CI high (Hispanic)  239.  Children in Poverty (White)             240.  Children in Poverty CI low (White)      
+241.  Children in Poverty CI high (White)     242.  Injury Deaths raw value                 243.  Injury Deaths numerator                 244.  Injury Deaths denominator               
+245.  Injury Deaths CI low                    246.  Injury Deaths CI high                   247.  Injury Deaths (AIAN)                    248.  Injury Deaths CI low (AIAN)             
+249.  Injury Deaths CI high (AIAN)            250.  Injury Deaths (Asian)                   251.  Injury Deaths CI low (Asian)            252.  Injury Deaths CI high (Asian)           
+253.  Injury Deaths (Black)                   254.  Injury Deaths CI low (Black)            255.  Injury Deaths CI high (Black)           256.  Injury Deaths (Hispanic)                
+257.  Injury Deaths CI low (Hispanic)         258.  Injury Deaths CI high (Hispanic)        259.  Injury Deaths (White)                   260.  Injury Deaths CI low (White)            
+261.  Injury Deaths CI high (White)           262.  Injury Deaths (NHOPI)                   263.  Injury Deaths CI low (NHOPI)            264.  Injury Deaths CI high (NHOPI)           
+265.  Social Associations raw value           266.  Social Associations numerator           267.  Social Associations denominator         268.  Social Associations CI low              
+269.  Social Associations CI high             270.  Child Care Cost Burden raw value        271.  Child Care Cost Burden numerator        272.  Child Care Cost Burden denominator      
+273.  Child Care Cost Burden CI low           274.  Child Care Cost Burden CI high          275.  Life Expectancy raw value               276.  Life Expectancy numerator               
+277.  Life Expectancy denominator             278.  Life Expectancy CI low                  279.  Life Expectancy CI high                 280.  Life Expectancy (AIAN)                  
+281.  Life Expectancy CI low (AIAN)           282.  Life Expectancy CI high (AIAN)          283.  Life Expectancy (Asian)                 284.  Life Expectancy CI low (Asian)          
+285.  Life Expectancy CI high (Asian)         286.  Life Expectancy (Black)                 287.  Life Expectancy CI low (Black)          288.  Life Expectancy CI high (Black)         
+289.  Life Expectancy (Hispanic)              290.  Life Expectancy CI low (Hispanic)       291.  Life Expectancy CI high (Hispanic)      292.  Life Expectancy (White)                 
+293.  Life Expectancy CI low (White)          294.  Life Expectancy CI high (White)         295.  Life Expectancy (NHOPI)                 296.  Life Expectancy CI low (NHOPI)          
+297.  Life Expectancy CI high (NHOPI)         298.  Premature Age-Adjusted Mortality raw value299.  Premature Age-Adjusted Mortality numerator300.  Premature Age-Adjusted Mortality denominator
+301.  Premature Age-Adjusted Mortality CI low 302.  Premature Age-Adjusted Mortality CI high303.  Premature Age-Adjusted Mortality (AIAN) 304.  Premature Age-Adjusted Mortality CI low (AIAN)
+305.  Premature Age-Adjusted Mortality CI high (AIAN)306.  Premature Age-Adjusted Mortality (Asian)307.  Premature Age-Adjusted Mortality CI low (Asian)308.  Premature Age-Adjusted Mortality CI high (Asian)
+309.  Premature Age-Adjusted Mortality (Black)310.  Premature Age-Adjusted Mortality CI low (Black)311.  Premature Age-Adjusted Mortality CI high (Black)312.  Premature Age-Adjusted Mortality (Hispanic)
+313.  Premature Age-Adjusted Mortality CI low (Hispanic)314.  Premature Age-Adjusted Mortality CI high (Hispanic)315.  Premature Age-Adjusted Mortality (White)316.  Premature Age-Adjusted Mortality CI low (White)
+317.  Premature Age-Adjusted Mortality CI high (White)318.  Premature Age-Adjusted Mortality (NHOPI)319.  Premature Age-Adjusted Mortality CI low (NHOPI)320.  Premature Age-Adjusted Mortality CI high (NHOPI)
+321.  Child Mortality raw value               322.  Child Mortality numerator               323.  Child Mortality denominator             324.  Child Mortality CI low                  
+325.  Child Mortality CI high                 326.  Child Mortality (AIAN)                  327.  Child Mortality CI low (AIAN)           328.  Child Mortality CI high (AIAN)          
+329.  Child Mortality (Asian)                 330.  Child Mortality CI low (Asian)          331.  Child Mortality CI high (Asian)         332.  Child Mortality (Black)                 
+333.  Child Mortality CI low (Black)          334.  Child Mortality CI high (Black)         335.  Child Mortality (Hispanic)              336.  Child Mortality CI low (Hispanic)       
+337.  Child Mortality CI high (Hispanic)      338.  Child Mortality (White)                 339.  Child Mortality CI low (White)          340.  Child Mortality CI high (White)         
+341.  Child Mortality (NHOPI)                 342.  Child Mortality CI low (NHOPI)          343.  Child Mortality CI high (NHOPI)         344.  Infant Mortality raw value              
+345.  Infant Mortality numerator              346.  Infant Mortality denominator            347.  Infant Mortality CI low                 348.  Infant Mortality CI high                
+349.  Infant Mortality (AIAN)                 350.  Infant Mortality CI low (AIAN)          351.  Infant Mortality CI high (AIAN)         352.  Infant Mortality (Asian)                
+353.  Infant Mortality CI low (Asian)         354.  Infant Mortality CI high (Asian)        355.  Infant Mortality (Black)                356.  Infant Mortality CI low (Black)         
+357.  Infant Mortality CI high (Black)        358.  Infant Mortality (Hispanic)             359.  Infant Mortality CI low (Hispanic)      360.  Infant Mortality CI high (Hispanic)     
+361.  Infant Mortality (White)                362.  Infant Mortality CI low (White)         363.  Infant Mortality CI high (White)        364.  Infant Mortality (NHOPI)                
+365.  Infant Mortality CI low (NHOPI)         366.  Infant Mortality CI high (NHOPI)        367.  Infant Mortality (Two or more races)    368.  Infant Mortality CI low (Two or more races)
+369.  Infant Mortality CI high (Two or more races)370.  Frequent Physical Distress raw value    371.  Frequent Physical Distress numerator    372.  Frequent Physical Distress denominator  
+373.  Frequent Physical Distress CI low       374.  Frequent Physical Distress CI high      375.  Diabetes Prevalence raw value           376.  Diabetes Prevalence numerator           
+377.  Diabetes Prevalence denominator         378.  Diabetes Prevalence CI low              379.  Diabetes Prevalence CI high             380.  HIV Prevalence raw value                
+381.  HIV Prevalence numerator                382.  HIV Prevalence denominator              383.  HIV Prevalence CI low                   384.  HIV Prevalence CI high                  
+385.  Adult Obesity raw value                 386.  Adult Obesity numerator                 387.  Adult Obesity denominator               388.  Adult Obesity CI low                    
+389.  Adult Obesity CI high                   390.  Frequent Mental Distress raw value      391.  Frequent Mental Distress numerator      392.  Frequent Mental Distress denominator    
+393.  Frequent Mental Distress CI low         394.  Frequent Mental Distress CI high        395.  Suicides raw value                      396.  Suicides numerator                      
+397.  Suicides denominator                    398.  Suicides CI low                         399.  Suicides CI high                        400.  Crude suicide rate                      
+401.  Suicides (AIAN)                         402.  Suicides CI low (AIAN)                  403.  Suicides CI high (AIAN)                 404.  Suicides (Asian)                        
+405.  Suicides CI low (Asian)                 406.  Suicides CI high (Asian)                407.  Suicides (Black)                        408.  Suicides CI low (Black)                 
+409.  Suicides CI high (Black)                410.  Suicides (Hispanic)                     411.  Suicides CI low (Hispanic)              412.  Suicides CI high (Hispanic)             
+413.  Suicides (White)                        414.  Suicides CI low (White)                 415.  Suicides CI high (White)                416.  Suicides (NHOPI)                        
+417.  Suicides CI low (NHOPI)                 418.  Suicides CI high (NHOPI)                419.  Feelings of Loneliness raw value        420.  Feelings of Loneliness numerator        
+421.  Feelings of Loneliness denominator      422.  Feelings of Loneliness CI low           423.  Feelings of Loneliness CI high          424.  Limited Access to Healthy Foods raw value
+425.  Limited Access to Healthy Foods numerator426.  Limited Access to Healthy Foods denominator427.  Limited Access to Healthy Foods CI low  428.  Limited Access to Healthy Foods CI high 
+429.  Food Insecurity raw value               430.  Food Insecurity numerator               431.  Food Insecurity denominator             432.  Food Insecurity CI low                  
+433.  Food Insecurity CI high                 434.  Insufficient Sleep raw value            435.  Insufficient Sleep numerator            436.  Insufficient Sleep denominator          
+437.  Insufficient Sleep CI low               438.  Insufficient Sleep CI high              439.  Teen Births raw value                   440.  Teen Births numerator                   
+441.  Teen Births denominator                 442.  Teen Births CI low                      443.  Teen Births CI high                     444.  Teen Births (AIAN)                      
+445.  Teen Births CI low (AIAN)               446.  Teen Births CI high (AIAN)              447.  Teen Births (Asian)                     448.  Teen Births CI low (Asian)              
+449.  Teen Births CI high (Asian)             450.  Teen Births (Black)                     451.  Teen Births CI low (Black)              452.  Teen Births CI high (Black)             
+453.  Teen Births (Hispanic)                  454.  Teen Births CI low (Hispanic)           455.  Teen Births CI high (Hispanic)          456.  Teen Births (White)                     
+457.  Teen Births CI low (White)              458.  Teen Births CI high (White)             459.  Teen Births (NHOPI)                     460.  Teen Births CI low (NHOPI)              
+461.  Teen Births CI high (NHOPI)             462.  Teen Births (Two or more races)         463.  Teen Births CI low (Two or more races)  464.  Teen Births CI high (Two or more races) 
+465.  Sexually Transmitted Infections raw value466.  Sexually Transmitted Infections numerator467.  Sexually Transmitted Infections denominator468.  Sexually Transmitted Infections CI low  
+469.  Sexually Transmitted Infections CI high 470.  Excessive Drinking raw value            471.  Excessive Drinking numerator            472.  Excessive Drinking denominator          
+473.  Excessive Drinking CI low               474.  Excessive Drinking CI high              475.  Alcohol-Impaired Driving Deaths raw value476.  Alcohol-Impaired Driving Deaths numerator
+477.  Alcohol-Impaired Driving Deaths denominator478.  Alcohol-Impaired Driving Deaths CI low  479.  Alcohol-Impaired Driving Deaths CI high 480.  Drug Overdose Deaths raw value          
+481.  Drug Overdose Deaths numerator          482.  Drug Overdose Deaths denominator        483.  Drug Overdose Deaths CI low             484.  Drug Overdose Deaths CI high            
+485.  Drug Overdose Deaths (AIAN)             486.  Drug Overdose Deaths CI low (AIAN)      487.  Drug Overdose Deaths CI high (AIAN)     488.  Drug Overdose Deaths (Asian)            
+489.  Drug Overdose Deaths CI low (Asian)     490.  Drug Overdose Deaths CI high (Asian)    491.  Drug Overdose Deaths (Black)            492.  Drug Overdose Deaths CI low (Black)     
+493.  Drug Overdose Deaths CI high (Black)    494.  Drug Overdose Deaths (Hispanic)         495.  Drug Overdose Deaths CI low (Hispanic)  496.  Drug Overdose Deaths CI high (Hispanic) 
+497.  Drug Overdose Deaths (White)            498.  Drug Overdose Deaths CI low (White)     499.  Drug Overdose Deaths CI high (White)    500.  Drug Overdose Deaths (NHOPI)            
+501.  Drug Overdose Deaths CI low (NHOPI)     502.  Drug Overdose Deaths CI high (NHOPI)    503.  Adult Smoking raw value                 504.  Adult Smoking numerator                 
+505.  Adult Smoking denominator               506.  Adult Smoking CI low                    507.  Adult Smoking CI high                   508.  Physical Inactivity raw value           
+509.  Physical Inactivity numerator           510.  Physical Inactivity denominator         511.  Physical Inactivity CI low              512.  Physical Inactivity CI high             
+513.  Uninsured Adults raw value              514.  Uninsured Adults numerator              515.  Uninsured Adults denominator            516.  Uninsured Adults CI low                 
+517.  Uninsured Adults CI high                518.  Uninsured Children raw value            519.  Uninsured Children numerator            520.  Uninsured Children denominator          
+521.  Uninsured Children CI low               522.  Uninsured Children CI high              523.  Other Primary Care Providers raw value  524.  Other Primary Care Providers numerator  
+525.  Other Primary Care Providers denominator526.  Other Primary Care Providers CI low     527.  Other Primary Care Providers CI high    528.  Ratio of population to primary care providers other than physicians.
+529.  Traffic Volume raw value                530.  Traffic Volume numerator                531.  Traffic Volume denominator              532.  Traffic Volume CI low                   
+533.  Traffic Volume CI high                  534.  Homeownership raw value                 535.  Homeownership numerator                 536.  Homeownership denominator               
+537.  Homeownership CI low                    538.  Homeownership CI high                   539.  Severe Housing Cost Burden raw value    540.  Severe Housing Cost Burden numerator    
+541.  Severe Housing Cost Burden denominator  542.  Severe Housing Cost Burden CI low       543.  Severe Housing Cost Burden CI high      544.  Access to Parks raw value               
+545.  Access to Parks numerator               546.  Access to Parks denominator             547.  Access to Parks CI low                  548.  Access to Parks CI high                 
+549.  Adverse Climate Events raw value        550.  Adverse Climate Events numerator        551.  Adverse Climate Events denominator      552.  Adverse Climate Events CI low           
+553.  Adverse Climate Events CI high          554.  Adverse Climate Events (Drought)        555.  Adverse Climate Events (Heat)           556.  Adverse Climate Events (Disasters)      
+557.  Census Participation raw value          558.  Census Participation numerator          559.  Census Participation denominator        560.  Census Participation CI low             
+561.  Census Participation CI high            562.  Voter Turnout raw value                 563.  Voter Turnout numerator                 564.  Voter Turnout denominator               
+565.  Voter Turnout CI low                    566.  Voter Turnout CI high                   567.  High School Graduation raw value        568.  High School Graduation numerator        
+569.  High School Graduation denominator      570.  High School Graduation CI low           571.  High School Graduation CI high          572.  Reading Scores raw value                
+573.  Reading Scores numerator                574.  Reading Scores denominator              575.  Reading Scores CI low                   576.  Reading Scores CI high                  
+577.  Reading Scores (AIAN)                   578.  Reading Scores (Asian/Pacific Islander) 579.  Reading Scores (Black)                  580.  Reading Scores (Hispanic)               
+581.  Reading Scores (White)                  582.  Math Scores raw value                   583.  Math Scores numerator                   584.  Math Scores denominator                 
+585.  Math Scores CI low                      586.  Math Scores CI high                     587.  Math Scores (AIAN)                      588.  Math Scores (Asian/Pacific Islander)    
+589.  Math Scores (Black)                     590.  Math Scores (Hispanic)                  591.  Math Scores (White)                     592.  School Segregation raw value            
+593.  School Segregation numerator            594.  School Segregation denominator          595.  School Segregation CI low               596.  School Segregation CI high              
+597.  School Funding Adequacy raw value       598.  School Funding Adequacy numerator       599.  School Funding Adequacy denominator     600.  School Funding Adequacy CI low          
+601.  School Funding Adequacy CI high         602.  Children Eligible for Free or Reduced Price Lunch raw value603.  Children Eligible for Free or Reduced Price Lunch numerator604.  Children Eligible for Free or Reduced Price Lunch denominator
+605.  Children Eligible for Free or Reduced Price Lunch CI low606.  Children Eligible for Free or Reduced Price Lunch CI high607.  Gender Pay Gap raw value                608.  Gender Pay Gap numerator                
+609.  Gender Pay Gap denominator              610.  Gender Pay Gap CI low                   611.  Gender Pay Gap CI high                  612.  Median Household Income raw value       
+613.  Median Household Income numerator       614.  Median Household Income denominator     615.  Median Household Income CI low          616.  Median Household Income CI high         
+617.  Median Household Income (AIAN)          618.  Median Household Income CI low (AIAN)   619.  Median Household Income CI high (AIAN)  620.  Median household income (Asian)         
+621.  Median household income CI low (Asian)  622.  Median household income CI high (Asian) 623.  Median Household Income (Black)         624.  Median Household Income CI low (Black)  
+625.  Median Household Income CI high (Black) 626.  Median Household Income (Hispanic)      627.  Median Household Income CI low (Hispanic)628.  Median Household Income CI high (Hispanic)
+629.  Median Household Income (White)         630.  Median Household Income CI low (White)  631.  Median Household Income CI high (White) 632.  Living Wage raw value                   
+633.  Living Wage numerator                   634.  Living Wage denominator                 635.  Living Wage CI low                      636.  Living Wage CI high                     
+637.  Child Care Centers raw value            638.  Child Care Centers numerator            639.  Child Care Centers denominator          640.  Child Care Centers CI low               
+641.  Child Care Centers CI high              642.  Residential Segregation - Black/White raw value643.  Residential Segregation - Black/White numerator644.  Residential Segregation - Black/White denominator
+645.  Residential Segregation - Black/White CI low646.  Residential Segregation - Black/White CI high647.  Homicides raw value                     648.  Homicides numerator                     
+649.  Homicides denominator                   650.  Homicides CI low                        651.  Homicides CI high                       652.  Homicides (AIAN)                        
+653.  Homicides CI low (AIAN)                 654.  Homicides CI high (AIAN)                655.  Homicides (Asian)                       656.  Homicides CI low (Asian)                
+657.  Homicides CI high (Asian)               658.  Homicides (Black)                       659.  Homicides CI low (Black)                660.  Homicides CI high (Black)               
+661.  Homicides (Hispanic)                    662.  Homicides CI low (Hispanic)             663.  Homicides CI high (Hispanic)            664.  Homicides (White)                       
+665.  Homicides CI low (White)                666.  Homicides CI high (White)               667.  Homicides (NHOPI)                       668.  Homicides CI low (NHOPI)                
+669.  Homicides CI high (NHOPI)               670.  Motor Vehicle Crash Deaths raw value    671.  Motor Vehicle Crash Deaths numerator    672.  Motor Vehicle Crash Deaths denominator  
+673.  Motor Vehicle Crash Deaths CI low       674.  Motor Vehicle Crash Deaths CI high      675.  Motor Vehicle Crash Deaths (AIAN)       676.  Motor Vehicle Crash Deaths CI low (AIAN)
+677.  Motor Vehicle Crash Deaths CI high (AIAN)678.  Motor Vehicle Crash Deaths (Asian)      679.  Motor Vehicle Crash Deaths CI low (Asian)680.  Motor Vehicle Crash Deaths CI high (Asian)
+681.  Motor Vehicle Crash Deaths (Black)      682.  Motor Vehicle Crash Deaths CI low (Black)683.  Motor Vehicle Crash Deaths CI high (Black)684.  Motor Vehicle Crash Deaths (Hispanic)   
+685.  Motor Vehicle Crash Deaths CI low (Hispanic)686.  Motor Vehicle Crash Deaths CI high (Hispanic)687.  Motor Vehicle Crash Deaths (White)      688.  Motor Vehicle Crash Deaths CI low (White)
+689.  Motor Vehicle Crash Deaths CI high (White)690.  Motor Vehicle Crash Deaths (NHOPI)      691.  Motor Vehicle Crash Deaths CI low (NHOPI)692.  Motor Vehicle Crash Deaths CI high (NHOPI)
+693.  Firearm Fatalities raw value            694.  Firearm Fatalities numerator            695.  Firearm Fatalities denominator          696.  Firearm Fatalities CI low               
+697.  Firearm Fatalities CI high              698.  Firearm Fatalities (AIAN)               699.  Firearm Fatalities CI low (AIAN)        700.  Firearm Fatalities CI high (AIAN)       
+701.  Firearm Fatalities (Asian)              702.  Firearm Fatalities CI low (Asian)       703.  Firearm Fatalities CI high (Asian)      704.  Firearm Fatalities (Black)              
+705.  Firearm Fatalities CI low (Black)       706.  Firearm Fatalities CI high (Black)      707.  Firearm Fatalities (Hispanic)           708.  Firearm Fatalities CI low (Hispanic)    
+709.  Firearm Fatalities CI high (Hispanic)   710.  Firearm Fatalities (White)              711.  Firearm Fatalities CI low (White)       712.  Firearm Fatalities CI high (White)      
+713.  Firearm Fatalities (NHOPI)              714.  Firearm Fatalities CI low (NHOPI)       715.  Firearm Fatalities CI high (NHOPI)      716.  Disconnected Youth raw value            
+717.  Disconnected Youth numerator            718.  Disconnected Youth denominator          719.  Disconnected Youth CI low               720.  Disconnected Youth CI high              
+721.  Lack of Social and Emotional Support raw value722.  Lack of Social and Emotional Support numerator723.  Lack of Social and Emotional Support denominator724.  Lack of Social and Emotional Support CI low
+725.  Lack of Social and Emotional Support CI high726.  % Below 18 Years of Age raw value       727.  % Below 18 Years of Age numerator       728.  % Below 18 Years of Age denominator     
+729.  % Below 18 Years of Age CI low          730.  % Below 18 Years of Age CI high         731.  % 65 and Older raw value                732.  % 65 and Older numerator                
+733.  % 65 and Older denominator              734.  % 65 and Older CI low                   735.  % 65 and Older CI high                  736.  % Female raw value                      
+737.  % Female numerator                      738.  % Female denominator                    739.  % Female CI low                         740.  % Female CI high                        
+741.  % American Indian or Alaska Native raw value742.  % American Indian or Alaska Native numerator743.  % American Indian or Alaska Native denominator744.  % American Indian or Alaska Native CI low
+745.  % American Indian or Alaska Native CI high746.  % Asian raw value                       747.  % Asian numerator                       748.  % Asian denominator                     
+749.  % Asian CI low                          750.  % Asian CI high                         751.  % Hispanic raw value                    752.  % Hispanic numerator                    
+753.  % Hispanic denominator                  754.  % Hispanic CI low                       755.  % Hispanic CI high                      756.  % Native Hawaiian or Other Pacific Islander raw value
+757.  % Native Hawaiian or Other Pacific Islander numerator758.  % Native Hawaiian or Other Pacific Islander denominator759.  % Native Hawaiian or Other Pacific Islander CI low760.  % Native Hawaiian or Other Pacific Islander CI high
+761.  % Non-Hispanic Black raw value          762.  % Non-Hispanic Black numerator          763.  % Non-Hispanic Black denominator        764.  % Non-Hispanic Black CI low             
+765.  % Non-Hispanic Black CI high            766.  % Non-Hispanic White raw value          767.  % Non-Hispanic White numerator          768.  % Non-Hispanic White denominator        
+769.  % Non-Hispanic White CI low             770.  % Non-Hispanic White CI high            771.  % Disability: Functional Limitations raw value772.  % Disability: Functional Limitations numerator
+773.  % Disability: Functional Limitations denominator774.  % Disability: Functional Limitations CI low775.  % Disability: Functional Limitations CI high776.  % Not Proficient in English raw value   
+777.  % Not Proficient in English numerator   778.  % Not Proficient in English denominator 779.  % Not Proficient in English CI low      780.  % Not Proficient in English CI high     
+781.  Children in Single-Parent Households raw value782.  Children in Single-Parent Households numerator783.  Children in Single-Parent Households denominator784.  Children in Single-Parent Households CI low
+785.  Children in Single-Parent Households CI high786.  % Rural raw value                       787.  % Rural numerator                       788.  % Rural denominator                     
+789.  % Rural CI low                          790.  % Rural CI high                         791.  Population raw value                    792.  Population numerator                    
+793.  Population denominator                  794.  Population CI low                       795.  Population CI high                      
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="county-age-sex-data">
+<h2>County Age-Sex Data<a class="headerlink" href="#county-age-sex-data" title="Link to this heading">#</a></h2>
+</section>
+<section id="id1">
+<h2>County Age-Sex Data<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agesex_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">40</span><span class="p">:</span><span class="mi">60</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>IBRC_Geo_ID</th>
+      <th>Statefips</th>
+      <th>Countyfips</th>
+      <th>Description</th>
+      <th>Year</th>
+      <th>Total Population</th>
+      <th>Population 0-4</th>
+      <th>Population 5-17</th>
+      <th>Population 18-24</th>
+      <th>Population 25-44</th>
+      <th>Population 45-64</th>
+      <th>Population 65+</th>
+      <th>Population Under 18</th>
+      <th>Population 18-54</th>
+      <th>Population 55+</th>
+      <th>Male Population</th>
+      <th>Female Population</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>40</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2015</td>
+      <td>4854803</td>
+      <td>294097</td>
+      <td>809062</td>
+      <td>471910</td>
+      <td>1230689</td>
+      <td>1286744</td>
+      <td>762301</td>
+      <td>1103159</td>
+      <td>2351777</td>
+      <td>1399867.0</td>
+      <td>2352806</td>
+      <td>2501997</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2016</td>
+      <td>4866824</td>
+      <td>294616</td>
+      <td>805845</td>
+      <td>462098</td>
+      <td>1231213</td>
+      <td>1289047</td>
+      <td>784005</td>
+      <td>1100461</td>
+      <td>2337301</td>
+      <td>1429062.0</td>
+      <td>2357211</td>
+      <td>2509613</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2017</td>
+      <td>4877989</td>
+      <td>294572</td>
+      <td>802005</td>
+      <td>455547</td>
+      <td>1233167</td>
+      <td>1287432</td>
+      <td>805266</td>
+      <td>1096577</td>
+      <td>2325223</td>
+      <td>1456189.0</td>
+      <td>2360503</td>
+      <td>2517486</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2018</td>
+      <td>4891628</td>
+      <td>295520</td>
+      <td>797079</td>
+      <td>453230</td>
+      <td>1236516</td>
+      <td>1282303</td>
+      <td>826980</td>
+      <td>1092599</td>
+      <td>2316986</td>
+      <td>1482043.0</td>
+      <td>2365445</td>
+      <td>2526183</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2019</td>
+      <td>4907965</td>
+      <td>294274</td>
+      <td>794453</td>
+      <td>450764</td>
+      <td>1242294</td>
+      <td>1274660</td>
+      <td>851520</td>
+      <td>1088727</td>
+      <td>2309910</td>
+      <td>1509328.0</td>
+      <td>2371832</td>
+      <td>2536133</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2020</td>
+      <td>5033094</td>
+      <td>297347</td>
+      <td>832329</td>
+      <td>467246</td>
+      <td>1270670</td>
+      <td>1299444</td>
+      <td>866058</td>
+      <td>1129676</td>
+      <td>2364124</td>
+      <td>1539193.0</td>
+      <td>2446816</td>
+      <td>2586278</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2021</td>
+      <td>5049196</td>
+      <td>294227</td>
+      <td>833920</td>
+      <td>475424</td>
+      <td>1277137</td>
+      <td>1287898</td>
+      <td>880590</td>
+      <td>1128147</td>
+      <td>2372657</td>
+      <td>1550979.0</td>
+      <td>2453002</td>
+      <td>2596194</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2022</td>
+      <td>5076181</td>
+      <td>293480</td>
+      <td>836216</td>
+      <td>478391</td>
+      <td>1285214</td>
+      <td>1279704</td>
+      <td>903176</td>
+      <td>1129696</td>
+      <td>2382840</td>
+      <td>1566349.0</td>
+      <td>2465853</td>
+      <td>2610328</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2023</td>
+      <td>5117673</td>
+      <td>294447</td>
+      <td>839471</td>
+      <td>482743</td>
+      <td>1296732</td>
+      <td>1274413</td>
+      <td>929867</td>
+      <td>1133918</td>
+      <td>2399292</td>
+      <td>1586378.0</td>
+      <td>2484555</td>
+      <td>2633118</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>1000</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Alabama</td>
+      <td>2024</td>
+      <td>5157699</td>
+      <td>295446</td>
+      <td>839411</td>
+      <td>488175</td>
+      <td>1309411</td>
+      <td>1269355</td>
+      <td>955901</td>
+      <td>1134857</td>
+      <td>2417153</td>
+      <td>1605689.0</td>
+      <td>2503170</td>
+      <td>2654529</td>
+    </tr>
+    <tr>
+      <th>50</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2000</td>
+      <td>44021</td>
+      <td>3029</td>
+      <td>9538</td>
+      <td>3520</td>
+      <td>13444</td>
+      <td>9959</td>
+      <td>4531</td>
+      <td>12567</td>
+      <td>22673</td>
+      <td>8781.0</td>
+      <td>21385</td>
+      <td>22636</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2001</td>
+      <td>44889</td>
+      <td>3120</td>
+      <td>9574</td>
+      <td>3654</td>
+      <td>13507</td>
+      <td>10367</td>
+      <td>4667</td>
+      <td>12694</td>
+      <td>23155</td>
+      <td>9040.0</td>
+      <td>21813</td>
+      <td>23076</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2002</td>
+      <td>45909</td>
+      <td>3191</td>
+      <td>9864</td>
+      <td>3661</td>
+      <td>13696</td>
+      <td>10680</td>
+      <td>4817</td>
+      <td>13055</td>
+      <td>23444</td>
+      <td>9410.0</td>
+      <td>22362</td>
+      <td>23547</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2003</td>
+      <td>46800</td>
+      <td>3192</td>
+      <td>10110</td>
+      <td>3768</td>
+      <td>13713</td>
+      <td>11023</td>
+      <td>4994</td>
+      <td>13302</td>
+      <td>23783</td>
+      <td>9715.0</td>
+      <td>22760</td>
+      <td>24040</td>
+    </tr>
+    <tr>
+      <th>54</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2004</td>
+      <td>48366</td>
+      <td>3353</td>
+      <td>10389</td>
+      <td>4015</td>
+      <td>13958</td>
+      <td>11461</td>
+      <td>5190</td>
+      <td>13742</td>
+      <td>24593</td>
+      <td>10031.0</td>
+      <td>23512</td>
+      <td>24854</td>
+    </tr>
+    <tr>
+      <th>55</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2005</td>
+      <td>49676</td>
+      <td>3487</td>
+      <td>10662</td>
+      <td>4100</td>
+      <td>14114</td>
+      <td>11940</td>
+      <td>5373</td>
+      <td>14149</td>
+      <td>25121</td>
+      <td>10406.0</td>
+      <td>24200</td>
+      <td>25476</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2006</td>
+      <td>51328</td>
+      <td>3492</td>
+      <td>10947</td>
+      <td>4255</td>
+      <td>14497</td>
+      <td>12467</td>
+      <td>5670</td>
+      <td>14439</td>
+      <td>25973</td>
+      <td>10916.0</td>
+      <td>24988</td>
+      <td>26340</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2007</td>
+      <td>52405</td>
+      <td>3485</td>
+      <td>11264</td>
+      <td>4290</td>
+      <td>14584</td>
+      <td>12931</td>
+      <td>5851</td>
+      <td>14749</td>
+      <td>26384</td>
+      <td>11272.0</td>
+      <td>25468</td>
+      <td>26937</td>
+    </tr>
+    <tr>
+      <th>58</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2008</td>
+      <td>53277</td>
+      <td>3437</td>
+      <td>11411</td>
+      <td>4427</td>
+      <td>14615</td>
+      <td>13331</td>
+      <td>6056</td>
+      <td>14848</td>
+      <td>26845</td>
+      <td>11584.0</td>
+      <td>25873</td>
+      <td>27404</td>
+    </tr>
+    <tr>
+      <th>59</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2009</td>
+      <td>54135</td>
+      <td>3584</td>
+      <td>11312</td>
+      <td>4545</td>
+      <td>14637</td>
+      <td>13715</td>
+      <td>6342</td>
+      <td>14896</td>
+      <td>27213</td>
+      <td>12026.0</td>
+      <td>26364</td>
+      <td>27771</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="county-race-data">
+<h2>County Race Data<a class="headerlink" href="#county-race-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">race_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>IBRC_Geo_ID</th>
+      <th>Statefips</th>
+      <th>Countyfips</th>
+      <th>Description</th>
+      <th>Year</th>
+      <th>Total Population</th>
+      <th>White Alone</th>
+      <th>Black Alone</th>
+      <th>American Indian or Alaskan Native</th>
+      <th>Asian Alone</th>
+      <th>Hawaiian or Pacific Islander Alone</th>
+      <th>Two or More Races</th>
+      <th>Not Hispanic</th>
+      <th>Hispanic</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>U.S.</td>
+      <td>1990</td>
+      <td>249622814</td>
+      <td>209366661.0</td>
+      <td>30648345.0</td>
+      <td>2058726.0</td>
+      <td>7549082.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>227049976.0</td>
+      <td>22572838.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>U.S.</td>
+      <td>1991</td>
+      <td>252980941</td>
+      <td>211606011.0</td>
+      <td>31290743.0</td>
+      <td>2126968.0</td>
+      <td>7957219.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>229425951.0</td>
+      <td>23554990.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>U.S.</td>
+      <td>1992</td>
+      <td>256514224</td>
+      <td>213945622.0</td>
+      <td>31979982.0</td>
+      <td>2202176.0</td>
+      <td>8386444.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>231894879.0</td>
+      <td>24619345.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>U.S.</td>
+      <td>1993</td>
+      <td>259918588</td>
+      <td>216187073.0</td>
+      <td>32634735.0</td>
+      <td>2282052.0</td>
+      <td>8814728.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>234141927.0</td>
+      <td>25776661.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>U.S.</td>
+      <td>1994</td>
+      <td>263125821</td>
+      <td>218304774.0</td>
+      <td>33258981.0</td>
+      <td>2361078.0</td>
+      <td>9200988.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>236179888.0</td>
+      <td>26945933.0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="county-social-leanings-data">
+<h2>County Social Leanings Data<a class="headerlink" href="#county-social-leanings-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">social_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>IBRC_Geo_ID</th>
+      <th>Statefips</th>
+      <th>Countyfips</th>
+      <th>Description</th>
+      <th>Year</th>
+      <th>Social_Context_Code</th>
+      <th>Social_Context_Code_Description</th>
+      <th>Social_Context_Domain_Data</th>
+      <th>Time_Period</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10001</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Kent County, DE</td>
+      <td>2019</td>
+      <td>211</td>
+      <td>Hopefulness</td>
+      <td>87.332678</td>
+      <td>1972-2017</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10001</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Kent County, DE</td>
+      <td>2019</td>
+      <td>104</td>
+      <td>Employment Rate</td>
+      <td>95.300000</td>
+      <td>2017</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>10001</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Kent County, DE</td>
+      <td>2019</td>
+      <td>103</td>
+      <td>Income Per Capita</td>
+      <td>26118.000000</td>
+      <td>2017</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10001</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Kent County, DE</td>
+      <td>2019</td>
+      <td>102</td>
+      <td>Income Mobility</td>
+      <td>-0.441463</td>
+      <td>2017</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>10001</td>
+      <td>10</td>
+      <td>1</td>
+      <td>Kent County, DE</td>
+      <td>2019</td>
+      <td>101</td>
+      <td>Entrepreneurship</td>
+      <td>10.732984</td>
+      <td>2013</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">social_df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;IBRC_Geo_ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Time_Period&#39;</span><span class="p">],</span> <span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;Social_Context_Code_Description&#39;</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="s1">&#39;Social_Context_Domain_Data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Social_Context_Code_Description</th>
+      <th>Agreeableness</th>
+      <th>Belief In Science</th>
+      <th>Collectivism</th>
+      <th>Conflict Awareness</th>
+      <th>Conscientiousness</th>
+      <th>Empathy</th>
+      <th>Employment Rate</th>
+      <th>Entrepreneurship</th>
+      <th>Extraversion</th>
+      <th>Gender Equality</th>
+      <th>Hopefulness</th>
+      <th>Income Mobility</th>
+      <th>Income Per Capita</th>
+      <th>Neuroticism</th>
+      <th>Openness</th>
+      <th>Religiosity</th>
+      <th>Risk Taking</th>
+      <th>Selflessness</th>
+      <th>Tolerance</th>
+      <th>Work Ethic</th>
+    </tr>
+    <tr>
+      <th>IBRC_Geo_ID</th>
+      <th>Time_Period</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">1001</th>
+      <th>1972-2017</th>
+      <td>NaN</td>
+      <td>70.833333</td>
+      <td>57.142857</td>
+      <td>63.444323</td>
+      <td>NaN</td>
+      <td>83.308726</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>77.063492</td>
+      <td>91.163142</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>91.106719</td>
+      <td>53.333333</td>
+      <td>82.142857</td>
+      <td>70.000000</td>
+      <td>60.380952</td>
+    </tr>
+    <tr>
+      <th>1999-2017</th>
+      <td>86.279655</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>84.113820</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>86.112526</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>77.925476</td>
+      <td>78.222354</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12.968300</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>94.7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>-0.209446</td>
+      <td>26168.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1003</th>
+      <th>1972-2017</th>
+      <td>NaN</td>
+      <td>63.268161</td>
+      <td>67.948815</td>
+      <td>63.751017</td>
+      <td>NaN</td>
+      <td>78.187835</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69.016011</td>
+      <td>82.484017</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>71.771566</td>
+      <td>67.272980</td>
+      <td>75.586018</td>
+      <td>66.983549</td>
+      <td>70.972246</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>56043</th>
+      <th>2017</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>95.3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.527082</td>
+      <td>26325.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">56045</th>
+      <th>1972-2017</th>
+      <td>NaN</td>
+      <td>67.710969</td>
+      <td>69.084172</td>
+      <td>56.654563</td>
+      <td>NaN</td>
+      <td>81.012828</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>69.933697</td>
+      <td>80.975991</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>71.535519</td>
+      <td>75.406846</td>
+      <td>76.730879</td>
+      <td>68.422269</td>
+      <td>69.413532</td>
+    </tr>
+    <tr>
+      <th>1999-2017</th>
+      <td>88.251855</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>84.263823</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>87.006078</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>79.961075</td>
+      <td>76.977099</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2013</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>7.446809</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2017</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>95.1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.315518</td>
+      <td>29493.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>12435 rows × 20 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="county-development-metrics-data">
+<h2>County Development Metrics Data<a class="headerlink" href="#county-development-metrics-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dev_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>IBRC_Geo_ID</th>
+      <th>Statefips</th>
+      <th>Countyfips</th>
+      <th>Description</th>
+      <th>Year</th>
+      <th>M4D_Code</th>
+      <th>Code Description</th>
+      <th>M4D_Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2019</td>
+      <td>100</td>
+      <td>Headline M4D Index</td>
+      <td>0.666112</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2019</td>
+      <td>1000</td>
+      <td>Full-Time Work</td>
+      <td>0.661573</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2019</td>
+      <td>10000</td>
+      <td>Grocery stores per capita</td>
+      <td>0.072548</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2019</td>
+      <td>10100</td>
+      <td>Farmers' markets per capita</td>
+      <td>0.018166</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1001</td>
+      <td>1</td>
+      <td>1</td>
+      <td>Autauga County, AL</td>
+      <td>2019</td>
+      <td>10200</td>
+      <td>SNAP benefits per capita</td>
+      <td>17.905272</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># dev_df.drop_duplicates(inplace=True)</span>
+<span class="c1"># dev_df.pivot(index = [&#39;IBRC_Geo_ID&#39;, &#39;Year&#39;], columns = &#39;Code Description&#39;, values = &#39;M4D_Data&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h2>County Age-Sex Data<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./02_Classification"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#election-data">Election Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#county-age-sex-data">County Age-Sex Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">County Age-Sex Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#county-race-data">County Race Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#county-social-leanings-data">County Social Leanings Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#county-development-metrics-data">County Development Metrics Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">County Age-Sex Data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eatai Roth, Gettysburg College
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
