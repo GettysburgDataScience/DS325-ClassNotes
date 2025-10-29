@@ -216,6 +216,12 @@
 <li class="toctree-l1"><a class="reference internal" href="03_trees_encoding.html">3. Trees and Ensemble methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_trees_gridcv.html">4. Tree Methods (continued)</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="05_forests_boosted.html">6. Forests and Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_pca.html">7. Principle Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06b_pca_examples.html">8. PCA: Examples and Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_knn.html">9. K-Nearest Neighbors (KNN) (a lazy learner)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_kmeans.html">10. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datastorytelling.html">11. Data Storytelling</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -227,6 +233,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps02.html">PS02 - Regularization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/mp01.html">Mini-Project 1 (and examples!)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps03.html">PS03 - Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/02_crackthecode.html">Crack the Code!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps04.html">Group data storytelling</a></li>
 </ul>
 
     </div>
@@ -784,12 +792,14 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.49728042,  0.18388253,  0.46347528,  0.52233907,  0.01839469,
-       -0.30030612,  0.84060993,  0.94764742,  0.01998883, -0.43351028,
-        0.66938045, -0.41389502,  0.13434153,  0.73131249,  0.51196951,
-       -0.59527581,  0.0449081 , -0.13740682, -0.11011738, -0.67479456,
-        1.24629012,  1.55563213,  0.96342664,  1.12372954,  0.91458778,
-        0.02703914,  0.72750484,  0.97502063,  0.9056323 ,  0.24440571])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 5.38733663e-01,  5.81571477e-01,  5.36600479e-01,  5.33223709e-01,
+        2.29948747e-01, -3.80079183e-01,  7.47684135e-01,  8.45286099e-01,
+        3.56331659e-02, -4.59441838e-01,  1.00995221e+00, -5.05716390e-01,
+        7.36091942e-01,  9.07791457e-01,  4.07375583e-01, -5.78048693e-01,
+        8.94196735e-02,  8.29171653e-04, -4.94021414e-01, -5.72457863e-01,
+        1.06838015e+00,  1.40869138e+00,  9.05755806e-01,  9.79360950e-01,
+        9.12508135e-01, -5.86830220e-03,  8.29441387e-01,  6.43499793e-01,
+        7.77923089e-01,  4.04105778e-01])
 </pre></div>
 </div>
 </div>
@@ -807,36 +817,36 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1.556	worst texture
- 1.246	worst radius
- 1.124	worst area
- 0.975	worst concave points
- 0.963	worst perimeter
- 0.948	mean concave points
- 0.915	worst smoothness
- 0.906	worst symmetry
- 0.841	mean concavity
- 0.731	area error
- 0.728	worst concavity
--0.675	fractal dimension error
- 0.669	radius error
--0.595	compactness error
- 0.522	mean area
- 0.512	smoothness error
- 0.497	mean radius
- 0.463	mean perimeter
--0.434	mean fractal dimension
--0.414	texture error
--0.300	mean compactness
- 0.244	worst fractal dimension
- 0.184	mean texture
--0.137	concave points error
- 0.134	perimeter error
--0.110	symmetry error
- 0.045	concavity error
- 0.027	worst compactness
- 0.020	mean symmetry
- 0.018	mean smoothness
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> 1.409	worst texture
+ 1.068	worst radius
+ 1.010	radius error
+ 0.979	worst area
+ 0.913	worst smoothness
+ 0.908	area error
+ 0.906	worst perimeter
+ 0.845	mean concave points
+ 0.829	worst concavity
+ 0.778	worst symmetry
+ 0.748	mean concavity
+ 0.736	perimeter error
+ 0.643	worst concave points
+ 0.582	mean texture
+-0.578	compactness error
+-0.572	fractal dimension error
+ 0.539	mean radius
+ 0.537	mean perimeter
+ 0.533	mean area
+-0.506	texture error
+-0.494	symmetry error
+-0.459	mean fractal dimension
+ 0.407	smoothness error
+ 0.404	worst fractal dimension
+-0.380	mean compactness
+ 0.230	mean smoothness
+ 0.089	concavity error
+ 0.036	mean symmetry
+-0.006	worst compactness
+ 0.001	concave points error
 </pre></div>
 </div>
 </div>
@@ -868,7 +878,7 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/30a7bfdf50eeb97b8ad31c8e75124c67fde4ff0f2a8889038b078bd0f43ce080.png" src="../_images/30a7bfdf50eeb97b8ad31c8e75124c67fde4ff0f2a8889038b078bd0f43ce080.png" />
+<img alt="../_images/ae8aaec7f473186ae7eaa26f038768e636bd67c13fdbbf2891347df092777e92.png" src="../_images/ae8aaec7f473186ae7eaa26f038768e636bd67c13fdbbf2891347df092777e92.png" />
 </div>
 </div>
 </section>
@@ -889,7 +899,7 @@ Name: target, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ee589ac9c67c3850bb3459bfca706e1a3e438e98cdc6d562f6e5a5fdea1c4e04.png" src="../_images/ee589ac9c67c3850bb3459bfca706e1a3e438e98cdc6d562f6e5a5fdea1c4e04.png" />
+<img alt="../_images/56474b95fd3b5e3cbe24563b16968669cb7a56ef8f9b6b08937a419232da95fb.png" src="../_images/56474b95fd3b5e3cbe24563b16968669cb7a56ef8f9b6b08937a419232da95fb.png" />
 </div>
 </div>
 </section>
@@ -936,12 +946,12 @@ Name: target, dtype: float64
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-      Benign       0.97      0.99      0.98        67
-   Malignant       0.98      0.96      0.97        47
+      Benign       0.97      0.97      0.97        75
+   Malignant       0.95      0.95      0.95        39
 
-    accuracy                           0.97       114
-   macro avg       0.97      0.97      0.97       114
-weighted avg       0.97      0.97      0.97       114
+    accuracy                           0.96       114
+   macro avg       0.96      0.96      0.96       114
+weighted avg       0.96      0.96      0.96       114
 </pre></div>
 </div>
 </div>
@@ -964,7 +974,7 @@ weighted avg       0.97      0.97      0.97       114
   ret = a @ b
 </pre></div>
 </div>
-<img alt="../_images/669c9a2484646d30488a5ea5a94557bf48ca2ab9f7d94241b175c03c9cfc8536.png" src="../_images/669c9a2484646d30488a5ea5a94557bf48ca2ab9f7d94241b175c03c9cfc8536.png" />
+<img alt="../_images/cc12ba5512a2c1695b4f5dc055fd52d5520713f7aab14719e4ff54d89d4837c4.png" src="../_images/cc12ba5512a2c1695b4f5dc055fd52d5520713f7aab14719e4ff54d89d4837c4.png" />
 </div>
 </div>
 </section>

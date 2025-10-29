@@ -218,6 +218,8 @@
 <li class="toctree-l1"><a class="reference internal" href="06_pca.html">7. Principle Component Analysis (PCA)</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">8. PCA: Examples and Observations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_knn.html">9. K-Nearest Neighbors (KNN) (a lazy learner)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_kmeans.html">10. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datastorytelling.html">11. Data Storytelling</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -230,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/mp01.html">Mini-Project 1 (and examples!)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps03.html">PS03 - Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/02_crackthecode.html">Crack the Code!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps04.html">Group data storytelling</a></li>
 </ul>
 
     </div>
@@ -609,28 +612,28 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>-3.799786</td>
-      <td>1.491786</td>
+      <td>-4.862324</td>
+      <td>5.956622</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>6.050738</td>
-      <td>-4.238306</td>
+      <td>4.223847</td>
+      <td>-5.502742</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-11.037197</td>
-      <td>6.851790</td>
+      <td>-3.511979</td>
+      <td>12.367555</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>6.792352</td>
-      <td>-4.045675</td>
+      <td>-1.441177</td>
+      <td>-3.803802</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>-6.838963</td>
-      <td>-5.197603</td>
+      <td>3.980618</td>
+      <td>17.554239</td>
     </tr>
     <tr>
       <th>...</th>
@@ -639,28 +642,28 @@
     </tr>
     <tr>
       <th>95</th>
-      <td>2.344248</td>
-      <td>-11.745888</td>
+      <td>2.389524</td>
+      <td>9.786656</td>
     </tr>
     <tr>
       <th>96</th>
-      <td>-3.561784</td>
-      <td>-0.456870</td>
+      <td>0.436759</td>
+      <td>5.795354</td>
     </tr>
     <tr>
       <th>97</th>
-      <td>-2.896416</td>
-      <td>8.947900</td>
+      <td>-4.995251</td>
+      <td>9.727724</td>
     </tr>
     <tr>
       <th>98</th>
-      <td>-1.264895</td>
-      <td>18.349202</td>
+      <td>2.919706</td>
+      <td>5.448734</td>
     </tr>
     <tr>
       <th>99</th>
-      <td>2.268445</td>
-      <td>1.091549</td>
+      <td>-8.626068</td>
+      <td>1.912061</td>
     </tr>
   </tbody>
 </table>
@@ -707,48 +710,48 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>-3.799786</td>
-      <td>1.491786</td>
-      <td>-45.597430</td>
-      <td>17.901432</td>
-      <td>-4.616000</td>
-      <td>-55.391995</td>
+      <td>-4.862324</td>
+      <td>5.956622</td>
+      <td>-58.347890</td>
+      <td>71.479462</td>
+      <td>2.188595</td>
+      <td>26.263145</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>6.050738</td>
-      <td>-4.238306</td>
-      <td>72.608856</td>
-      <td>-50.859672</td>
-      <td>3.624864</td>
-      <td>43.498368</td>
+      <td>4.223847</td>
+      <td>-5.502742</td>
+      <td>50.686167</td>
+      <td>-66.032899</td>
+      <td>-2.557789</td>
+      <td>-30.693465</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>-11.037197</td>
-      <td>6.851790</td>
-      <td>-132.446362</td>
-      <td>82.221484</td>
-      <td>-8.370813</td>
-      <td>-100.449757</td>
+      <td>-3.511979</td>
+      <td>12.367555</td>
+      <td>-42.143750</td>
+      <td>148.410655</td>
+      <td>17.711151</td>
+      <td>212.533809</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>6.792352</td>
-      <td>-4.045675</td>
-      <td>81.508220</td>
-      <td>-48.548094</td>
-      <td>5.493354</td>
-      <td>65.920251</td>
+      <td>-1.441177</td>
+      <td>-3.803802</td>
+      <td>-17.294130</td>
+      <td>-45.645628</td>
+      <td>-10.489960</td>
+      <td>-125.879516</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>-6.838963</td>
-      <td>-5.197603</td>
-      <td>-82.067555</td>
-      <td>-62.371241</td>
-      <td>-24.073133</td>
-      <td>-288.877592</td>
+      <td>3.980618</td>
+      <td>17.554239</td>
+      <td>47.767413</td>
+      <td>210.650866</td>
+      <td>43.069713</td>
+      <td>516.836560</td>
     </tr>
     <tr>
       <th>...</th>
@@ -761,48 +764,48 @@
     </tr>
     <tr>
       <th>95</th>
-      <td>2.344248</td>
-      <td>-11.745888</td>
-      <td>28.130974</td>
-      <td>-140.950657</td>
-      <td>-18.803280</td>
-      <td>-225.639366</td>
+      <td>2.389524</td>
+      <td>9.786656</td>
+      <td>28.674284</td>
+      <td>117.439875</td>
+      <td>24.352360</td>
+      <td>292.228319</td>
     </tr>
     <tr>
       <th>96</th>
-      <td>-3.561784</td>
-      <td>-0.456870</td>
-      <td>-42.741409</td>
-      <td>-5.482442</td>
-      <td>-8.037308</td>
-      <td>-96.447701</td>
+      <td>0.436759</td>
+      <td>5.795354</td>
+      <td>5.241108</td>
+      <td>69.544247</td>
+      <td>12.464226</td>
+      <td>149.570710</td>
     </tr>
     <tr>
       <th>97</th>
-      <td>-2.896416</td>
-      <td>8.947900</td>
-      <td>-34.756995</td>
-      <td>107.374806</td>
-      <td>12.102968</td>
-      <td>145.235621</td>
+      <td>-4.995251</td>
+      <td>9.727724</td>
+      <td>-59.943010</td>
+      <td>116.732693</td>
+      <td>9.464947</td>
+      <td>113.579365</td>
     </tr>
     <tr>
       <th>98</th>
-      <td>-1.264895</td>
-      <td>18.349202</td>
-      <td>-15.178746</td>
-      <td>220.190428</td>
-      <td>34.168614</td>
-      <td>410.023365</td>
+      <td>2.919706</td>
+      <td>5.448734</td>
+      <td>35.036471</td>
+      <td>65.384807</td>
+      <td>16.736880</td>
+      <td>200.842557</td>
     </tr>
     <tr>
       <th>99</th>
-      <td>2.268445</td>
-      <td>1.091549</td>
-      <td>27.221338</td>
-      <td>13.098589</td>
-      <td>6.719988</td>
-      <td>80.639853</td>
+      <td>-8.626068</td>
+      <td>1.912061</td>
+      <td>-103.512816</td>
+      <td>22.944727</td>
+      <td>-13.428015</td>
+      <td>-161.136176</td>
     </tr>
   </tbody>
 </table>
@@ -817,7 +820,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3e2e611e7eb38c5711b78a240fc5c0f3dcd122098f283fd1e787902548e37b80.png" src="../_images/3e2e611e7eb38c5711b78a240fc5c0f3dcd122098f283fd1e787902548e37b80.png" />
+<img alt="../_images/d22544ac5208ac934b31fcfe86e8cce454ab2186f9e18601441548ee2066df45.png" src="../_images/d22544ac5208ac934b31fcfe86e8cce454ab2186f9e18601441548ee2066df45.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -832,7 +835,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/536e775ac1679d46f1be0ed7eb2f7a093f57bc8420fd474972ec22265ea165b6.png" src="../_images/536e775ac1679d46f1be0ed7eb2f7a093f57bc8420fd474972ec22265ea165b6.png" />
+<img alt="../_images/7437987cf62f5098fe089a15c1af4db8f1f7f3dcec0f3becbabcd074efc29453.png" src="../_images/7437987cf62f5098fe089a15c1af4db8f1f7f3dcec0f3becbabcd074efc29453.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -843,7 +846,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/61cc133dce2f60f8dd4c2ae7df0c02c512b54eee59d561dfe89b109eafc22bba.png" src="../_images/61cc133dce2f60f8dd4c2ae7df0c02c512b54eee59d561dfe89b109eafc22bba.png" />
+<img alt="../_images/ad409b96fbafae54cd8cd588b6c9c9f2c4044de95b6eff18ae4dff801be70d39.png" src="../_images/ad409b96fbafae54cd8cd588b6c9c9f2c4044de95b6eff18ae4dff801be70d39.png" />
 </div>
 </div>
 </section>

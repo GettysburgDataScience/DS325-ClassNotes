@@ -218,6 +218,8 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Principle Component Analysis (PCA)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="06b_pca_examples.html">8. PCA: Examples and Observations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="07_knn.html">9. K-Nearest Neighbors (KNN) (a lazy learner)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_kmeans.html">10. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_datastorytelling.html">11. Data Storytelling</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
@@ -230,6 +232,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/mp01.html">Mini-Project 1 (and examples!)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps03.html">PS03 - Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/02_crackthecode.html">Crack the Code!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps04.html">Group data storytelling</a></li>
 </ul>
 
     </div>
@@ -739,20 +742,20 @@
   <tbody>
     <tr>
       <th>0</th>
-      <td>-1.336025</td>
-      <td>0.182257</td>
+      <td>-1.245679</td>
+      <td>0.115279</td>
       <td>3</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.182345</td>
-      <td>-1.113848</td>
+      <td>0.278348</td>
+      <td>-1.098142</td>
       <td>2</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1.710653</td>
-      <td>1.610000</td>
+      <td>1.766660</td>
+      <td>1.648169</td>
       <td>0</td>
     </tr>
   </tbody>
@@ -779,7 +782,7 @@
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/dbd9c4c44414c70b608b6d5563167b144418efe0d24555ce16a7bb9af4bf3a7d.png" src="../_images/dbd9c4c44414c70b608b6d5563167b144418efe0d24555ce16a7bb9af4bf3a7d.png" />
-<img alt="../_images/cfc750a2a4de942ca7b2153f7335088d1d4552b9c2ad3607935885f83c8b1ad9.png" src="../_images/cfc750a2a4de942ca7b2153f7335088d1d4552b9c2ad3607935885f83c8b1ad9.png" />
+<img alt="../_images/00f8b9f22d516a2487caf2a73bb5ba2c9364d92704f0ff531f19908581ba33b5.png" src="../_images/00f8b9f22d516a2487caf2a73bb5ba2c9364d92704f0ff531f19908581ba33b5.png" />
 </div>
 </div>
 <p>Notice that in the original data, the distributions (density plots) for both features overlap significantly for at least two groups. After we’ve applied PCA, the distribution for the first principle component shows more separated peaks. The distribution for the second component overlaps MORE, but we would be discarding that feature if we were using PCA for dimensionality reduction.</p>
@@ -823,8 +826,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2c6a6378c52288b5371bf291acbba5fb14465f48ec6e70caaea5f4440d213170.png" src="../_images/2c6a6378c52288b5371bf291acbba5fb14465f48ec6e70caaea5f4440d213170.png" />
-<img alt="../_images/cf97b57fb0c311baceac2d08f257ba777f1c49fac40c2f09b0e2e2a8e57728be.png" src="../_images/cf97b57fb0c311baceac2d08f257ba777f1c49fac40c2f09b0e2e2a8e57728be.png" />
+<img alt="../_images/2d054364a8164c9095712e005f8a2a73720d247d989a8abf7361f1dd9339d879.png" src="../_images/2d054364a8164c9095712e005f8a2a73720d247d989a8abf7361f1dd9339d879.png" />
+<img alt="../_images/ea8346c42e386d827c0b6dafd7aa6aa06ad661566eb2411f0fed6a0d015707d4.png" src="../_images/ea8346c42e386d827c0b6dafd7aa6aa06ad661566eb2411f0fed6a0d015707d4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -849,7 +852,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ddd485ca30d416625b57d8eec7d1e895de879f27c351c4356af719aaf78b7bba.png" src="../_images/ddd485ca30d416625b57d8eec7d1e895de879f27c351c4356af719aaf78b7bba.png" />
+<img alt="../_images/baa41f5b840332dee5324e41b87a0756b1ae7467681fedbdf1cb268d1a3143de.png" src="../_images/baa41f5b840332dee5324e41b87a0756b1ae7467681fedbdf1cb268d1a3143de.png" />
 </div>
 </div>
 <p>Decision trees dissect the feature space with horizontal and vertical lines. In the original data, the boundaries between groups are oriented on a diagonal; as a result, the decision tree creates a stair-step partition of the space.</p>

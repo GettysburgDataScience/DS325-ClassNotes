@@ -1,0 +1,75 @@
+Traceback (most recent call last):
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+a = 11111
+b = 11111
+c = 11111
+d = 11111
+e = 11111
+f = 11111
+g = 11111
+
+secret_message_a = '337441104950 408257150263 219369496363323 239258148425 528627614268370149549110116630 587425214627386 524614272370563576'
+secret_message_b = '535617254379549 632425139627366 551624618263368930 272254 200376495363324 434254150253 379435970149323146'
+
+ans = [a, b, c, d, e, f, g]
+
+message_a = decode_message(secret_message_a, ans)
+message_b = decode_message(secret_message_b, ans)
+
+print(message_a)
+print(message_b)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[4], line 14[0m
+[1;32m     10[0m secret_message_b [38;5;241m=[39m [38;5;124m'[39m[38;5;124m535617254379549 632425139627366 551624618263368930 272254 200376495363324 434254150253 379435970149323146[39m[38;5;124m'[39m
+[1;32m     12[0m ans [38;5;241m=[39m [a, b, c, d, e, f, g]
+[0;32m---> 14[0m message_a [38;5;241m=[39m [43mdecode_message[49m[43m([49m[43msecret_message_a[49m[43m,[49m[43m [49m[43mans[49m[43m)[49m
+[1;32m     15[0m message_b [38;5;241m=[39m decode_message(secret_message_b, ans)
+[1;32m     17[0m [38;5;28mprint[39m(message_a)
+
+Cell [0;32mIn[3], line 32[0m, in [0;36mdecode_message[0;34m(encoded_message, ans_list)[0m
+[1;32m     30[0m word_list [38;5;241m=[39m []
+[1;32m     31[0m [38;5;28;01mfor[39;00m code, ans [38;5;129;01min[39;00m [38;5;28mzip[39m(code_list, ans_list):
+[0;32m---> 32[0m     word_list[38;5;241m.[39mappend([43mdecode_word[49m[43m([49m[43mcode[49m[43m,[49m[43m [49m[43mans[49m[43m)[49m)
+[1;32m     34[0m [38;5;28;01mreturn[39;00m [38;5;124m'[39m[38;5;124m [39m[38;5;124m'[39m[38;5;241m.[39mjoin(word_list)
+
+Cell [0;32mIn[3], line 13[0m, in [0;36mdecode_word[0;34m(codestr, ans)[0m
+[1;32m     10[0m code [38;5;241m=[39m [38;5;28mint[39m(codestr[[38;5;241m0[39m:[38;5;241m3[39m])
+[1;32m     11[0m num [38;5;241m=[39m numberstr[[38;5;241m0[39m]
+[0;32m---> 13[0m char [38;5;241m=[39m [38;5;28;43mchr[39;49m[43m([49m[43mcode[49m[43m [49m[38;5;241;43m-[39;49m[43m [49m[38;5;28;43mint[39;49m[43m([49m[43mnum[49m[43m)[49m[38;5;241;43m*[39;49m[38;5;28;43mord[39;49m[43m([49m[43mnum[49m[43m)[49m[43m)[49m
+[1;32m     14[0m decoded [38;5;241m+[39m[38;5;241m=[39m char
+[1;32m     16[0m [38;5;28;01mtry[39;00m:
+
+[0;31mValueError[0m: chr() arg not in range(0x110000)
+
