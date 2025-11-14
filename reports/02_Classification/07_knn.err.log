@@ -55,13 +55,13 @@ plt.show()
 ------------------
 
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-Cell [0;32mIn[1], line 3[0m
-[1;32m      1[0m [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;21;01msklearn[39;00m[38;5;21;01m.[39;00m[38;5;21;01mneighbors[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m KNeighborsClassifier
-[0;32m----> 3[0m fig, ax [38;5;241m=[39m [43mplt[49m[38;5;241m.[39msubplots([38;5;241m1[39m,[38;5;241m1[39m, figsize [38;5;241m=[39m ([38;5;241m5[39m,[38;5;241m5[39m))
-[1;32m      5[0m knn [38;5;241m=[39m KNeighborsClassifier(n_neighbors [38;5;241m=[39m [38;5;241m3[39m)
-[1;32m      7[0m knn[38;5;241m.[39mfit(X_train, y_train)
+[31m---------------------------------------------------------------------------[39m
+[31mNameError[39m                                 Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[1][39m[32m, line 3[39m
+[32m      1[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01msklearn[39;00m[34;01m.[39;00m[34;01mneighbors[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m KNeighborsClassifier
+[32m----> [39m[32m3[39m fig, ax = [43mplt[49m.subplots([32m1[39m,[32m1[39m, figsize = ([32m5[39m,[32m5[39m))
+[32m      5[39m knn = KNeighborsClassifier(n_neighbors = [32m3[39m)
+[32m      7[39m knn.fit(X_train, y_train)
 
-[0;31mNameError[0m: name 'plt' is not defined
+[31mNameError[39m: name 'plt' is not defined
 

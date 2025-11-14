@@ -16,25 +16,23 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!--
-    this give us a css class that will be invisible only if js is disabled
-  -->
-  <noscript>
-    <style>
-      .pst-js-only { display: none !important; }
-
-    </style>
-  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -47,11 +45,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
   
-  <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
@@ -91,7 +88,6 @@
     <link rel="prev" title="3. Trees and Ensemble methods" href="03_trees_encoding.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -107,8 +103,19 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <dialog id="pst-search-dialog">
-    
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -116,6 +123,7 @@
   <input type="search"
          class="form-control"
          name="q"
+         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -123,8 +131,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form>
-  </dialog>
+</form></div>
+  </div>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -140,8 +148,7 @@
       
       
       
-      <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -171,17 +178,21 @@
     
     
     <img src="../_static/ds325_sticker.png" class="logo__image only-light" alt="DS325 Applied Data Science - Home"/>
-    <img src="../_static/ds325_sticker.png" class="logo__image only-dark pst-js-only" alt="DS325 Applied Data Science - Home"/>
+    <script>document.write(`<img src="../_static/ds325_sticker.png" class="logo__image only-dark" alt="DS325 Applied Data Science - Home"/>`);</script>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button></div>
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -197,6 +208,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Resources/genai_policy.html">2. Our course GenAI Policy</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_reviewtopics.html">3. Linear Regression Review Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/exam2_review.html">4. Review Materials</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
 <ul class="nav bd-sidenav">
@@ -221,6 +233,11 @@
 <li class="toctree-l1"><a class="reference internal" href="08_kmeans.html">10. K-Means Clustering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="09_datastorytelling.html">11. Data Storytelling</a></li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../03_NN/01_intro_intuition.html">1. Neural Networks, Intro and Intuition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_NN/02_NN_example.html">2. Neural Networks with Keras</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/submitting.html">Github Submission Guide</a></li>
@@ -232,7 +249,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/mp01.html">Mini-Project 1 (and examples!)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps03.html">PS03 - Classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../00_Assignments/02_crackthecode.html">Crack the Code!</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps04.html">Group data storytelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps04.html">ps04 - Group data storytelling</a></li>
 </ul>
 
     </div>
@@ -241,14 +258,9 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
-      <div class="sidebar-primary-item">
-<div id="ethical-ad-placement"
-      class="flat"
-      data-ea-publisher="readthedocs"
-      data-ea-type="readthedocs-sidebar"
-      data-ea-manual="true">
-</div></div>
   </div>
+  
+  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -392,16 +404,24 @@
 
 
 
-<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
-  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
-  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
-</button>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
 
 
-<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-</button>
+  </button>
+`);
+</script>
 <button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
@@ -661,114 +681,114 @@
   </thead>
   <tbody>
     <tr>
-      <th>29</th>
-      <td>Adelie</td>
-      <td>Biscoe</td>
-      <td>37.9</td>
-      <td>18.6</td>
-      <td>172.0</td>
-      <td>3150.0</td>
-      <td>female</td>
-      <td>2007</td>
-    </tr>
-    <tr>
-      <th>55</th>
-      <td>Adelie</td>
-      <td>Biscoe</td>
-      <td>34.5</td>
-      <td>18.1</td>
-      <td>187.0</td>
-      <td>2900.0</td>
-      <td>female</td>
-      <td>2008</td>
-    </tr>
-    <tr>
-      <th>313</th>
+      <th>304</th>
       <td>Chinstrap</td>
       <td>Dream</td>
-      <td>47.6</td>
-      <td>18.3</td>
-      <td>195.0</td>
-      <td>3850.0</td>
-      <td>female</td>
+      <td>49.5</td>
+      <td>19.0</td>
+      <td>200.0</td>
+      <td>3800.0</td>
+      <td>male</td>
       <td>2008</td>
     </tr>
     <tr>
-      <th>243</th>
+      <th>154</th>
       <td>Gentoo</td>
       <td>Biscoe</td>
-      <td>47.5</td>
-      <td>15.0</td>
-      <td>218.0</td>
-      <td>4950.0</td>
-      <td>female</td>
-      <td>2009</td>
+      <td>50.0</td>
+      <td>16.3</td>
+      <td>230.0</td>
+      <td>5700.0</td>
+      <td>male</td>
+      <td>2007</td>
     </tr>
     <tr>
-      <th>129</th>
+      <th>72</th>
       <td>Adelie</td>
       <td>Torgersen</td>
-      <td>39.0</td>
-      <td>17.1</td>
-      <td>191.0</td>
-      <td>3050.0</td>
-      <td>female</td>
-      <td>2009</td>
+      <td>39.7</td>
+      <td>18.4</td>
+      <td>190.0</td>
+      <td>3900.0</td>
+      <td>male</td>
+      <td>2008</td>
     </tr>
     <tr>
-      <th>46</th>
+      <th>296</th>
+      <td>Chinstrap</td>
+      <td>Dream</td>
+      <td>49.2</td>
+      <td>18.2</td>
+      <td>195.0</td>
+      <td>4400.0</td>
+      <td>male</td>
+      <td>2007</td>
+    </tr>
+    <tr>
+      <th>90</th>
       <td>Adelie</td>
       <td>Dream</td>
-      <td>39.6</td>
+      <td>38.9</td>
       <td>18.8</td>
       <td>190.0</td>
-      <td>4600.0</td>
-      <td>male</td>
-      <td>2007</td>
+      <td>3600.0</td>
+      <td>female</td>
+      <td>2008</td>
     </tr>
     <tr>
-      <th>161</th>
+      <th>198</th>
       <td>Gentoo</td>
       <td>Biscoe</td>
-      <td>43.3</td>
-      <td>13.4</td>
-      <td>209.0</td>
-      <td>4400.0</td>
+      <td>43.6</td>
+      <td>13.9</td>
+      <td>217.0</td>
+      <td>4900.0</td>
       <td>female</td>
-      <td>2007</td>
+      <td>2008</td>
     </tr>
     <tr>
-      <th>80</th>
+      <th>107</th>
       <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>42.1</td>
-      <td>19.1</td>
-      <td>195.0</td>
-      <td>4000.0</td>
+      <td>Biscoe</td>
+      <td>38.6</td>
+      <td>17.2</td>
+      <td>199.0</td>
+      <td>3750.0</td>
+      <td>female</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>116</th>
+      <td>Adelie</td>
+      <td>Biscoe</td>
+      <td>42.7</td>
+      <td>18.3</td>
+      <td>196.0</td>
+      <td>4075.0</td>
+      <td>male</td>
+      <td>2009</td>
+    </tr>
+    <tr>
+      <th>202</th>
+      <td>Gentoo</td>
+      <td>Biscoe</td>
+      <td>45.2</td>
+      <td>15.8</td>
+      <td>215.0</td>
+      <td>5300.0</td>
       <td>male</td>
       <td>2008</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>47</th>
       <td>Adelie</td>
-      <td>Torgersen</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>2007</td>
-    </tr>
-    <tr>
-      <th>258</th>
-      <td>Gentoo</td>
-      <td>Biscoe</td>
-      <td>46.8</td>
-      <td>16.1</td>
-      <td>215.0</td>
-      <td>5500.0</td>
+      <td>Dream</td>
+      <td>41.1</td>
+      <td>19.0</td>
+      <td>182.0</td>
+      <td>3425.0</td>
       <td>male</td>
-      <td>2009</td>
+      <td>2007</td>
     </tr>
   </tbody>
 </table>
@@ -795,7 +815,7 @@ memory usage: 24.2+ KB
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39;Adelie&#39;, &#39;Gentoo&#39;, &#39;Chinstrap&#39;], dtype=object)
 </pre></div>
 </div>
-<img alt="../_images/c177248edabe2a32d015fed01064e957b30c5a01504749a314c4c9fdba63a5fb.png" src="../_images/c177248edabe2a32d015fed01064e957b30c5a01504749a314c4c9fdba63a5fb.png" />
+<img alt="../_images/4bbab521610980bcc75457da5188422ea7f68d335a341bbf6696847bc6493a18.png" src="../_images/4bbab521610980bcc75457da5188422ea7f68d335a341bbf6696847bc6493a18.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -859,7 +879,19 @@ memory usage: 24.2+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/ed986f628349a5346deb450cf6e71329101720ba6bbf2b98bf4036cd1c0b051b.png" src="../_images/ed986f628349a5346deb450cf6e71329101720ba6bbf2b98bf4036cd1c0b051b.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/inspection/_plot/decision_boundary.py:226: UserWarning: &#39;cmap&#39; is ignored in favor of &#39;multiclass_colors&#39; in the multiclass case when the response method is &#39;decision_function&#39; or &#39;predict_proba&#39;.
+  warnings.warn(
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/inspection/_plot/decision_boundary.py:226: UserWarning: &#39;cmap&#39; is ignored in favor of &#39;multiclass_colors&#39; in the multiclass case when the response method is &#39;decision_function&#39; or &#39;predict_proba&#39;.
+  warnings.warn(
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/inspection/_plot/decision_boundary.py:226: UserWarning: &#39;cmap&#39; is ignored in favor of &#39;multiclass_colors&#39; in the multiclass case when the response method is &#39;decision_function&#39; or &#39;predict_proba&#39;.
+  warnings.warn(
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/inspection/_plot/decision_boundary.py:226: UserWarning: &#39;cmap&#39; is ignored in favor of &#39;multiclass_colors&#39; in the multiclass case when the response method is &#39;decision_function&#39; or &#39;predict_proba&#39;.
+  warnings.warn(
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/inspection/_plot/decision_boundary.py:226: UserWarning: &#39;cmap&#39; is ignored in favor of &#39;multiclass_colors&#39; in the multiclass case when the response method is &#39;decision_function&#39; or &#39;predict_proba&#39;.
+  warnings.warn(
+</pre></div>
+</div>
+<img alt="../_images/3b03d9c5e33df1176a2400938cf7859bdd92245c73f43dfab3a46cc93aea54a1.png" src="../_images/3b03d9c5e33df1176a2400938cf7859bdd92245c73f43dfab3a46cc93aea54a1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -877,7 +909,7 @@ memory usage: 24.2+ KB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2cbe1ba393c828e630d9e098226904d11921ad027ffbce5a3cdc645d86e6411a.png" src="../_images/2cbe1ba393c828e630d9e098226904d11921ad027ffbce5a3cdc645d86e6411a.png" />
+<img alt="../_images/55b860d17fc9bbf8e7ad26c738dc65dab70fc34a0e32ff9ff647066953858f8d.png" src="../_images/55b860d17fc9bbf8e7ad26c738dc65dab70fc34a0e32ff9ff647066953858f8d.png" />
 </div>
 </div>
 <p>Now let’s find the best-fit tree for these data using GridsearchCV. Our modeling pipeline:</p>
@@ -1046,124 +1078,124 @@ memory usage: 24.2+ KB
   </thead>
   <tbody>
     <tr>
-      <th>290</th>
+      <th>272</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>52.0</td>
-      <td>19.0</td>
+      <td>51.3</td>
+      <td>18.2</td>
       <td>197.0</td>
-      <td>4150.0</td>
+      <td>3750.0</td>
       <td>2007.0</td>
     </tr>
     <tr>
-      <th>314</th>
+      <th>219</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>48.6</td>
+      <td>16.0</td>
+      <td>230.0</td>
+      <td>5800.0</td>
+      <td>2008.0</td>
+    </tr>
+    <tr>
+      <th>209</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>45.8</td>
+      <td>14.2</td>
+      <td>219.0</td>
+      <td>4700.0</td>
+      <td>2008.0</td>
+    </tr>
+    <tr>
+      <th>277</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>49.8</td>
+      <td>47.0</td>
       <td>17.3</td>
-      <td>198.0</td>
-      <td>3675.0</td>
-      <td>2009.0</td>
-    </tr>
-    <tr>
-      <th>228</th>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>44.9</td>
-      <td>13.8</td>
-      <td>212.0</td>
-      <td>4750.0</td>
-      <td>2009.0</td>
-    </tr>
-    <tr>
-      <th>114</th>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>36.2</td>
-      <td>17.2</td>
-      <td>187.0</td>
-      <td>3150.0</td>
-      <td>2009.0</td>
-    </tr>
-    <tr>
-      <th>269</th>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>52.7</td>
-      <td>19.8</td>
-      <td>197.0</td>
-      <td>3725.0</td>
+      <td>185.0</td>
+      <td>3700.0</td>
       <td>2007.0</td>
     </tr>
     <tr>
-      <th>204</th>
+      <th>196</th>
       <td>1.0</td>
       <td>0.0</td>
       <td>0.0</td>
       <td>0.0</td>
-      <td>50.4</td>
-      <td>15.3</td>
-      <td>224.0</td>
-      <td>5550.0</td>
+      <td>48.5</td>
+      <td>14.1</td>
+      <td>220.0</td>
+      <td>5300.0</td>
       <td>2008.0</td>
     </tr>
     <tr>
-      <th>268</th>
+      <th>79</th>
       <td>0.0</td>
       <td>1.0</td>
       <td>0.0</td>
+      <td>0.0</td>
+      <td>41.3</td>
+      <td>20.3</td>
+      <td>194.0</td>
+      <td>3550.0</td>
+      <td>2008.0</td>
+    </tr>
+    <tr>
+      <th>45</th>
       <td>1.0</td>
-      <td>45.4</td>
-      <td>18.7</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>40.1</td>
+      <td>18.9</td>
       <td>188.0</td>
-      <td>3525.0</td>
-      <td>2007.0</td>
-    </tr>
-    <tr>
-      <th>304</th>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>53.5</td>
-      <td>19.9</td>
-      <td>205.0</td>
-      <td>4500.0</td>
+      <td>4300.0</td>
       <td>2008.0</td>
     </tr>
     <tr>
-      <th>41</th>
+      <th>66</th>
+      <td>0.0</td>
       <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>41.1</td>
-      <td>19.0</td>
-      <td>182.0</td>
-      <td>3425.0</td>
-      <td>2007.0</td>
-    </tr>
-    <tr>
-      <th>307</th>
-      <td>0.0</td>
       <td>1.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>50.9</td>
-      <td>19.1</td>
+      <td>39.6</td>
+      <td>17.2</td>
       <td>196.0</td>
       <td>3550.0</td>
       <td>2008.0</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>50.8</td>
+      <td>15.7</td>
+      <td>226.0</td>
+      <td>5200.0</td>
+      <td>2009.0</td>
+    </tr>
+    <tr>
+      <th>117</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>41.4</td>
+      <td>18.5</td>
+      <td>202.0</td>
+      <td>3875.0</td>
+      <td>2009.0</td>
     </tr>
   </tbody>
 </table>
@@ -1379,9 +1411,7 @@ clickable and can be expanded/collapsed.
 /* Toggleable content - dropdown */
 
 #sk-container-id-1 div.sk-toggleable__content {
-  max-height: 0;
-  max-width: 0;
-  overflow: hidden;
+  display: none;
   text-align: left;
   /* unfitted */
   background-color: var(--sklearn-color-unfitted-level-0);
@@ -1407,9 +1437,9 @@ clickable and can be expanded/collapsed.
 
 #sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {
   /* Expand drop-down */
-  max-height: 200px;
-  max-width: 100%;
-  overflow: auto;
+  display: block;
+  width: 100%;
+  overflow: visible;
 }
 
 #sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {
@@ -1614,15 +1644,367 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
   /* fitted */
   background-color: var(--sklearn-color-fitted-level-3);
 }
-</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=5, estimator=DecisionTreeClassifier(),
+
+.estimator-table summary {
+    padding: .5rem;
+    font-family: monospace;
+    cursor: pointer;
+}
+
+.estimator-table details[open] {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    padding-bottom: 0.3rem;
+}
+
+.estimator-table .parameters-table {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.estimator-table .parameters-table tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.estimator-table .parameters-table tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
+.estimator-table .parameters-table tr:hover {
+    background-color: #e0e0e0;
+}
+
+.estimator-table table td {
+    border: 1px solid rgba(106, 105, 104, 0.232);
+}
+
+.user-set td {
+    color:rgb(255, 94, 0);
+    text-align: left;
+}
+
+.user-set td.value pre {
+    color:rgb(255, 94, 0) !important;
+    background-color: transparent !important;
+}
+
+.default td {
+    color: black;
+    text-align: left;
+}
+
+.user-set td i,
+.default td i {
+    color: black;
+}
+
+.copy-paste-icon {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0NDggNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTIwOCAwTDMzMi4xIDBjMTIuNyAwIDI0LjkgNS4xIDMzLjkgMTQuMWw2Ny45IDY3LjljOSA5IDE0LjEgMjEuMiAxNC4xIDMzLjlMNDQ4IDMzNmMwIDI2LjUtMjEuNSA0OC00OCA0OGwtMTkyIDBjLTI2LjUgMC00OC0yMS41LTQ4LTQ4bDAtMjg4YzAtMjYuNSAyMS41LTQ4IDQ4LTQ4ek00OCAxMjhsODAgMCAwIDY0LTY0IDAgMCAyNTYgMTkyIDAgMC0zMiA2NCAwIDAgNDhjMCAyNi41LTIxLjUgNDgtNDggNDhMNDggNTEyYy0yNi41IDAtNDgtMjEuNS00OC00OEwwIDE3NmMwLTI2LjUgMjEuNS00OCA0OC00OHoiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 14px 14px;
+    background-position: 0;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+}
+</style><body><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>GridSearchCV(cv=5, estimator=DecisionTreeClassifier(),
              param_grid={&#x27;max_depth&#x27;: [2, 4, 6],
                          &#x27;min_impurity_decrease&#x27;: [0.01, 0.1, 0.2, 0.5],
-                         &#x27;min_samples_leaf&#x27;: [2, 5, 10, 20]})</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>GridSearchCV</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.model_selection.GridSearchCV.html">?<span>Documentation for GridSearchCV</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted"><pre>GridSearchCV(cv=5, estimator=DecisionTreeClassifier(),
-             param_grid={&#x27;max_depth&#x27;: [2, 4, 6],
-                         &#x27;min_impurity_decrease&#x27;: [0.01, 0.1, 0.2, 0.5],
-                         &#x27;min_samples_leaf&#x27;: [2, 5, 10, 20]})</pre></div> </div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: DecisionTreeClassifier</div></div></label><div class="sk-toggleable__content fitted"><pre>DecisionTreeClassifier(max_depth=4, min_impurity_decrease=0.01,
-                       min_samples_leaf=2)</pre></div> </div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DecisionTreeClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.6/modules/generated/sklearn.tree.DecisionTreeClassifier.html">?<span>Documentation for DecisionTreeClassifier</span></a></div></label><div class="sk-toggleable__content fitted"><pre>DecisionTreeClassifier(max_depth=4, min_impurity_decrease=0.01,
-                       min_samples_leaf=2)</pre></div> </div></div></div></div></div></div></div></div></div></div></div>
+                         &#x27;min_samples_leaf&#x27;: [2, 5, 10, 20]})</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" ><label for="sk-estimator-id-1" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>GridSearchCV</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.model_selection.GridSearchCV.html">?<span>Documentation for GridSearchCV</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('estimator',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">estimator&nbsp;</td>
+            <td class="value">DecisionTreeClassifier()</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('param_grid',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">param_grid&nbsp;</td>
+            <td class="value">{&#x27;max_depth&#x27;: [2, 4, ...], &#x27;min_impurity_decrease&#x27;: [0.01, 0.1, ...], &#x27;min_samples_leaf&#x27;: [2, 5, ...]}</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('scoring',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">scoring&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('n_jobs',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">n_jobs&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('refit',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">refit&nbsp;</td>
+            <td class="value">True</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('cv',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">cv&nbsp;</td>
+            <td class="value">5</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('verbose',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">verbose&nbsp;</td>
+            <td class="value">0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('pre_dispatch',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">pre_dispatch&nbsp;</td>
+            <td class="value">&#x27;2*n_jobs&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('error_score',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">error_score&nbsp;</td>
+            <td class="value">nan</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('return_train_score',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">return_train_score&nbsp;</td>
+            <td class="value">False</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div><div class="sk-parallel"><div class="sk-parallel-item"><div class="sk-item"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-2" type="checkbox" ><label for="sk-estimator-id-2" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>best_estimator_: DecisionTreeClassifier</div></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___"><pre>DecisionTreeClassifier(max_depth=4, min_impurity_decrease=0.01,
+                       min_samples_leaf=2)</pre></div></div></div><div class="sk-serial"><div class="sk-item"><div class="sk-estimator fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-3" type="checkbox" ><label for="sk-estimator-id-3" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>DecisionTreeClassifier</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.7/modules/generated/sklearn.tree.DecisionTreeClassifier.html">?<span>Documentation for DecisionTreeClassifier</span></a></div></label><div class="sk-toggleable__content fitted" data-param-prefix="best_estimator___">
+        <div class="estimator-table">
+            <details>
+                <summary>Parameters</summary>
+                <table class="parameters-table">
+                  <tbody>
+                    
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('criterion',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">criterion&nbsp;</td>
+            <td class="value">&#x27;gini&#x27;</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('splitter',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">splitter&nbsp;</td>
+            <td class="value">&#x27;best&#x27;</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('max_depth',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">max_depth&nbsp;</td>
+            <td class="value">4</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_samples_split',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_samples_split&nbsp;</td>
+            <td class="value">2</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_samples_leaf',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_samples_leaf&nbsp;</td>
+            <td class="value">2</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_weight_fraction_leaf',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_weight_fraction_leaf&nbsp;</td>
+            <td class="value">0.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('max_features',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">max_features&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('random_state',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">random_state&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('max_leaf_nodes',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">max_leaf_nodes&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="user-set">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('min_impurity_decrease',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">min_impurity_decrease&nbsp;</td>
+            <td class="value">0.01</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('class_weight',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">class_weight&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('ccp_alpha',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">ccp_alpha&nbsp;</td>
+            <td class="value">0.0</td>
+        </tr>
+    
+
+        <tr class="default">
+            <td><i class="copy-paste-icon"
+                 onclick="copyToClipboard('monotonic_cst',
+                          this.parentElement.nextElementSibling)"
+            ></i></td>
+            <td class="param">monotonic_cst&nbsp;</td>
+            <td class="value">None</td>
+        </tr>
+    
+                  </tbody>
+                </table>
+            </details>
+        </div>
+    </div></div></div></div></div></div></div></div></div></div><script>function copyToClipboard(text, element) {
+    // Get the parameter prefix from the closest toggleable content
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const fullParamName = paramPrefix ? `${paramPrefix}${text}` : text;
+
+    const originalStyle = element.style;
+    const computedStyle = window.getComputedStyle(element);
+    const originalWidth = computedStyle.width;
+    const originalHTML = element.innerHTML.replace('Copied!', '');
+
+    navigator.clipboard.writeText(fullParamName)
+        .then(() => {
+            element.style.width = originalWidth;
+            element.style.color = 'green';
+            element.innerHTML = "Copied!";
+
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        })
+        .catch(err => {
+            console.error('Failed to copy:', err);
+            element.style.color = 'red';
+            element.innerHTML = "Failed!";
+            setTimeout(() => {
+                element.innerHTML = originalHTML;
+                element.style = originalStyle;
+            }, 2000);
+        });
+    return false;
+}
+
+document.querySelectorAll('.fa-regular.fa-copy').forEach(function(element) {
+    const toggleableContent = element.closest('.sk-toggleable__content');
+    const paramPrefix = toggleableContent ? toggleableContent.dataset.paramPrefix : '';
+    const paramName = element.parentElement.nextElementSibling.textContent.trim();
+    const fullParamName = paramPrefix ? `${paramPrefix}${paramName}` : paramName;
+
+    element.setAttribute('title', fullParamName);
+});
+</script></body></div></div>
 </div>
 <p>The grid object stores the info for all fit models, and we may choose to compare them at some point, but for now, we just want to get the best of the models it tested.</p>
 <p>We can extract the best model using <code class="docutils literal notranslate"><span class="pre">.best_estimator_</span></code>.</p>
@@ -1639,7 +2021,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/f8f62f0c0755704fa6f86228e6425ac03f97b013e132218a2cdfed417a4bdec9.png" src="../_images/f8f62f0c0755704fa6f86228e6425ac03f97b013e132218a2cdfed417a4bdec9.png" />
+<img alt="../_images/2e77a36706e1fa222b05b63ba76d320dbaf9ef22c15f61b07594155d296f703b.png" src="../_images/2e77a36706e1fa222b05b63ba76d320dbaf9ef22c15f61b07594155d296f703b.png" />
 </div>
 </div>
 <p>Interpret the confusion matrix above (for the test data). Which species get mistaken for other species?</p>
@@ -1661,7 +2043,7 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/abae5e42b38e21205cd976fe3b79832200a8e5764f064177e8abbc2a0f35068f.png" src="../_images/abae5e42b38e21205cd976fe3b79832200a8e5764f064177e8abbc2a0f35068f.png" />
+<img alt="../_images/8ad43bb9dbb3df05ba24593ac93eaabb3c012f157ef6bb75d46dafc45223b9de.png" src="../_images/8ad43bb9dbb3df05ba24593ac93eaabb3c012f157ef6bb75d46dafc45223b9de.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1679,15 +2061,15 @@ div.sk-label-container:hover .sk-estimator-doc-link.fitted:hover,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>flipper_length_mm_____________0.538
-bill_length_mm________________0.356
-bill_depth_mm_________________0.061
-island_Dream__________________0.046
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>flipper_length_mm_____________0.536
+bill_length_mm________________0.360
+island_Biscoe_________________0.049
+sex___________________________0.029
+island_Dream__________________0.026
 year__________________________0.000
 body_mass_g___________________0.000
-sex___________________________0.000
+bill_depth_mm_________________0.000
 island_Torgersen______________0.000
-island_Biscoe_________________0.000
 </pre></div>
 </div>
 </div>
@@ -1848,8 +2230,7 @@ island_Biscoe_________________0.000
             
             
               
-                <dialog id="pst-secondary-sidebar-modal"></dialog>
-                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -1935,8 +2316,8 @@ By Eatai Roth, Gettysburg College
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
   <footer class="bd-footer">
   </footer>

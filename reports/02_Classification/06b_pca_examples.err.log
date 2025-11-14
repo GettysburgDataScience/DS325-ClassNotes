@@ -35,21 +35,13 @@ X = ss.fit_transform(macros_df)
 fig, ax = plotPCA(X, feature_names = feature_names)
 ------------------
 
------ stderr -----
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: divide by zero encountered in matmul
-  X_transformed = X @ self.components_.T
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: overflow encountered in matmul
-  X_transformed = X @ self.components_.T
-/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/sklearn/decomposition/_base.py:148: RuntimeWarning: invalid value encountered in matmul
-  X_transformed = X @ self.components_.T
-------------------
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mValueError[0m                                Traceback (most recent call last)
-Cell [0;32mIn[11], line 5[0m
-[1;32m      2[0m ss [38;5;241m=[39m StandardScaler()
-[1;32m      4[0m X [38;5;241m=[39m ss[38;5;241m.[39mfit_transform(macros_df)
-[0;32m----> 5[0m fig, ax [38;5;241m=[39m plotPCA(X, feature_names [38;5;241m=[39m feature_names)
+[31m---------------------------------------------------------------------------[39m
+[31mValueError[39m                                Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[11][39m[32m, line 5[39m
+[32m      2[39m ss = StandardScaler()
+[32m      4[39m X = ss.fit_transform(macros_df)
+[32m----> [39m[32m5[39m fig, ax = plotPCA(X, feature_names = feature_names)
 
-[0;31mValueError[0m: too many values to unpack (expected 2)
+[31mValueError[39m: too many values to unpack (expected 2)
 

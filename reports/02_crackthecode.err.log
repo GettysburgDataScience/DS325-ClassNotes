@@ -49,27 +49,27 @@ print(message_b)
 ------------------
 
 
-[0;31m---------------------------------------------------------------------------[0m
-[0;31mValueError[0m                                Traceback (most recent call last)
-Cell [0;32mIn[4], line 14[0m
-[1;32m     10[0m secret_message_b [38;5;241m=[39m [38;5;124m'[39m[38;5;124m535617254379549 632425139627366 551624618263368930 272254 200376495363324 434254150253 379435970149323146[39m[38;5;124m'[39m
-[1;32m     12[0m ans [38;5;241m=[39m [a, b, c, d, e, f, g]
-[0;32m---> 14[0m message_a [38;5;241m=[39m [43mdecode_message[49m[43m([49m[43msecret_message_a[49m[43m,[49m[43m [49m[43mans[49m[43m)[49m
-[1;32m     15[0m message_b [38;5;241m=[39m decode_message(secret_message_b, ans)
-[1;32m     17[0m [38;5;28mprint[39m(message_a)
+[31m---------------------------------------------------------------------------[39m
+[31mValueError[39m                                Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[4][39m[32m, line 14[39m
+[32m     10[39m secret_message_b = [33m'[39m[33m535617254379549 632425139627366 551624618263368930 272254 200376495363324 434254150253 379435970149323146[39m[33m'[39m
+[32m     12[39m ans = [a, b, c, d, e, f, g]
+[32m---> [39m[32m14[39m message_a = [43mdecode_message[49m[43m([49m[43msecret_message_a[49m[43m,[49m[43m [49m[43mans[49m[43m)[49m
+[32m     15[39m message_b = decode_message(secret_message_b, ans)
+[32m     17[39m [38;5;28mprint[39m(message_a)
 
-Cell [0;32mIn[3], line 32[0m, in [0;36mdecode_message[0;34m(encoded_message, ans_list)[0m
-[1;32m     30[0m word_list [38;5;241m=[39m []
-[1;32m     31[0m [38;5;28;01mfor[39;00m code, ans [38;5;129;01min[39;00m [38;5;28mzip[39m(code_list, ans_list):
-[0;32m---> 32[0m     word_list[38;5;241m.[39mappend([43mdecode_word[49m[43m([49m[43mcode[49m[43m,[49m[43m [49m[43mans[49m[43m)[49m)
-[1;32m     34[0m [38;5;28;01mreturn[39;00m [38;5;124m'[39m[38;5;124m [39m[38;5;124m'[39m[38;5;241m.[39mjoin(word_list)
+[36mCell[39m[36m [39m[32mIn[3][39m[32m, line 32[39m, in [36mdecode_message[39m[34m(encoded_message, ans_list)[39m
+[32m     30[39m word_list = []
+[32m     31[39m [38;5;28;01mfor[39;00m code, ans [38;5;129;01min[39;00m [38;5;28mzip[39m(code_list, ans_list):
+[32m---> [39m[32m32[39m     word_list.append([43mdecode_word[49m[43m([49m[43mcode[49m[43m,[49m[43m [49m[43mans[49m[43m)[49m)
+[32m     34[39m [38;5;28;01mreturn[39;00m [33m'[39m[33m [39m[33m'[39m.join(word_list)
 
-Cell [0;32mIn[3], line 13[0m, in [0;36mdecode_word[0;34m(codestr, ans)[0m
-[1;32m     10[0m code [38;5;241m=[39m [38;5;28mint[39m(codestr[[38;5;241m0[39m:[38;5;241m3[39m])
-[1;32m     11[0m num [38;5;241m=[39m numberstr[[38;5;241m0[39m]
-[0;32m---> 13[0m char [38;5;241m=[39m [38;5;28;43mchr[39;49m[43m([49m[43mcode[49m[43m [49m[38;5;241;43m-[39;49m[43m [49m[38;5;28;43mint[39;49m[43m([49m[43mnum[49m[43m)[49m[38;5;241;43m*[39;49m[38;5;28;43mord[39;49m[43m([49m[43mnum[49m[43m)[49m[43m)[49m
-[1;32m     14[0m decoded [38;5;241m+[39m[38;5;241m=[39m char
-[1;32m     16[0m [38;5;28;01mtry[39;00m:
+[36mCell[39m[36m [39m[32mIn[3][39m[32m, line 13[39m, in [36mdecode_word[39m[34m(codestr, ans)[39m
+[32m     10[39m code = [38;5;28mint[39m(codestr[[32m0[39m:[32m3[39m])
+[32m     11[39m num = numberstr[[32m0[39m]
+[32m---> [39m[32m13[39m char = [38;5;28;43mchr[39;49m[43m([49m[43mcode[49m[43m [49m[43m-[49m[43m [49m[38;5;28;43mint[39;49m[43m([49m[43mnum[49m[43m)[49m[43m*[49m[38;5;28;43mord[39;49m[43m([49m[43mnum[49m[43m)[49m[43m)[49m
+[32m     14[39m decoded += char
+[32m     16[39m [38;5;28;01mtry[39;00m:
 
-[0;31mValueError[0m: chr() arg not in range(0x110000)
+[31mValueError[39m: chr() arg not in range(0x110000)
 
