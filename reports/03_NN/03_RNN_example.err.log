@@ -1,0 +1,142 @@
+Traceback (most recent call last):
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+    ~~~~~~~~~^
+        nb,
+        ^^^
+    ...<4 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/base_events.py", line 720, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+        cell, index, execution_count=self.code_cells_executed + 1
+    )
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+rnn = Sequential([
+    SimpleRNN(20, return_sequences = True, input_shape = [None, 1]),
+    Dropout(0.2),
+    SimpleRNN(20, return_sequences = True),
+    Dropout(0.2),
+    TimeDistributed(Dense(10, activation = 'linear'))
+    ]
+)
+
+rnn.compile(loss = 'MeanSquaredError', metrics=['MAE'], optimizer='Adam')
+rnn.fit(Xs)
+------------------
+
+----- stderr -----
+/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/layers/rnn/rnn.py:199: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(**kwargs)
+----- stderr -----
+2025-11-20 08:30:06.783914: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: INVALID_ARGUMENT: Incompatible shapes: [128,1] vs. [128,10,10]
+	 [[{{function_node __inference_one_step_on_data_3632}}{{node gradient_tape/compile_loss/mean_squared_error/sub/BroadcastGradientArgs}}]]
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mInvalidArgumentError[39m                      Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[7][39m[32m, line 11[39m
+[32m      1[39m rnn = Sequential([
+[32m      2[39m     SimpleRNN([32m20[39m, return_sequences = [38;5;28;01mTrue[39;00m, input_shape = [[38;5;28;01mNone[39;00m, [32m1[39m]),
+[32m      3[39m     Dropout([32m0.2[39m),
+[32m   (...)[39m[32m      7[39m     ]
+[32m      8[39m )
+[32m     10[39m rnn.compile(loss = [33m'[39m[33mMeanSquaredError[39m[33m'[39m, metrics=[[33m'[39m[33mMAE[39m[33m'[39m], optimizer=[33m'[39m[33mAdam[39m[33m'[39m)
+[32m---> [39m[32m11[39m [43mrnn[49m[43m.[49m[43mfit[49m[43m([49m[43mXs[49m[43m)[49m
+
+[36mFile [39m[32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/utils/traceback_utils.py:122[39m, in [36mfilter_traceback.<locals>.error_handler[39m[34m(*args, **kwargs)[39m
+[32m    119[39m     filtered_tb = _process_traceback_frames(e.__traceback__)
+[32m    120[39m     [38;5;66;03m# To get the full stack trace, call:[39;00m
+[32m    121[39m     [38;5;66;03m# `keras.config.disable_traceback_filtering()`[39;00m
+[32m--> [39m[32m122[39m     [38;5;28;01mraise[39;00m e.with_traceback(filtered_tb) [38;5;28;01mfrom[39;00m[38;5;250m [39m[38;5;28;01mNone[39;00m
+[32m    123[39m [38;5;28;01mfinally[39;00m:
+[32m    124[39m     [38;5;28;01mdel[39;00m filtered_tb
+
+[36mFile [39m[32m~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/tensorflow/python/eager/execute.py:53[39m, in [36mquick_execute[39m[34m(op_name, num_outputs, inputs, attrs, ctx, name)[39m
+[32m     51[39m [38;5;28;01mtry[39;00m:
+[32m     52[39m   ctx.ensure_initialized()
+[32m---> [39m[32m53[39m   tensors = pywrap_tfe.TFE_Py_Execute(ctx._handle, device_name, op_name,
+[32m     54[39m                                       inputs, attrs, num_outputs)
+[32m     55[39m [38;5;28;01mexcept[39;00m core._NotOkStatusException [38;5;28;01mas[39;00m e:
+[32m     56[39m   [38;5;28;01mif[39;00m name [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+
+[31mInvalidArgumentError[39m: Graph execution error:
+
+Detected at node gradient_tape/compile_loss/mean_squared_error/sub/BroadcastGradientArgs defined at (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+
+  File "<frozen runpy>", line 88, in _run_code
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel_launcher.py", line 18, in <module>
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/traitlets/config/application.py", line 1075, in launch_instance
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/kernelapp.py", line 758, in start
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/tornado/platform/asyncio.py", line 211, in start
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/base_events.py", line 678, in run_forever
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/base_events.py", line 2033, in _run_once
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/events.py", line 89, in _run
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/kernelbase.py", line 614, in shell_main
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/kernelbase.py", line 471, in dispatch_shell
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/ipkernel.py", line 366, in execute_request
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/kernelbase.py", line 827, in execute_request
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/ipkernel.py", line 458, in do_execute
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/zmqshell.py", line 663, in run_cell
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 3116, in run_cell
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 3171, in _run_cell
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/async_helpers.py", line 128, in _pseudo_sync_runner
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 3394, in run_cell_async
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 3639, in run_ast_nodes
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py", line 3699, in run_code
+
+  File "/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_88544/2394850586.py", line 11, in <module>
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/utils/traceback_utils.py", line 117, in error_handler
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py", line 399, in fit
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py", line 241, in function
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py", line 154, in multi_step_on_iterator
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py", line 125, in wrapper
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py", line 134, in one_step_on_data
+
+  File "/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py", line 81, in train_step
+
+Incompatible shapes: [128,1] vs. [128,10,10]
+	 [[{{node gradient_tape/compile_loss/mean_squared_error/sub/BroadcastGradientArgs}}]] [Op:__inference_multi_step_on_iterator_3701]
+

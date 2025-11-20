@@ -1,0 +1,1781 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Recurrent Neural Networks &#8212; DS325 Applied Data Science</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=fb9458d3" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=720ed60b" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/theme.css?v=a243ae73" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '03_NN/03_RNN_example';</script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/searchtools.js?v=63a53a7d"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/language_data.js?v=d4673a71"></script>
+    <script src="../_static/copybutton_funcs.js?v=776a791e"></script>
+    <script src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/scripts/bootstrap.js?v=7583a70d"></script>
+    <script src="../_static/scripts/fontawesome.js?v=9b125980"></script>
+    <script src="../_static/scripts/pydata-sphinx-theme.js?v=a1eb5d9f"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/ds325_sticker.png" class="logo__image only-light" alt="DS325 Applied Data Science - Home"/>
+    <script>document.write(`<img src="../_static/ds325_sticker.png" class="logo__image only-dark" alt="DS325 Applied Data Science - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to DS325 Applied Data Science
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Setting Up and Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/setup.html">1. Setting Up</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/genai_policy.html">2. Our course GenAI Policy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_reviewtopics.html">3. Linear Regression Review Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Resources/exam2_review.html">4. Review Materials</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Regression</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/00_what_is_a_model.html">1. What is a model?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/01_linear_regression.html">2. Linear Regression (Part 1)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/02_linear_regression.html">3. Linear Regression (Part 2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization.html">4. Bias, Variance, and Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/03_regularization_housing.html">5. Regularization Example: King County housing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_LinearRegression/04_polynomial_regression.html">6. Polynomial Regression</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Classification</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/01_classification_intro.html">1. Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/02_logistic_regression.html">2. Logistic Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/03_trees_encoding.html">3. Trees and Ensemble methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/04_trees_gridcv.html">4. Tree Methods (continued)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/05_forests_boosted.html">6. Forests and Trees</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/06_pca.html">7. Principle Component Analysis (PCA)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/06b_pca_examples.html">8. PCA: Examples and Observations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/07_knn.html">9. K-Nearest Neighbors (KNN) (a lazy learner)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/08_kmeans.html">10. K-Means Clustering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_Classification/09_datastorytelling.html">11. Data Storytelling</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Neural Networks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="01_intro_intuition.html">1. Neural Networks, Intro and Intuition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_NN_example.html">2. Neural Networks with Keras</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/submitting.html">Github Submission Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00.html">PS00</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps00_Roth.html">PS00 (Solutions by Prof Roth)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps01.html">PS01 - (Not so) Simple Linear Regression</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps02.html">PS02 - Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/mp01.html">Mini-Project 1 (and examples!)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps03.html">PS03 - Classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/02_crackthecode.html">Crack the Code!</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/ps04.html">ps04 - Group data storytelling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/extra_credit.html">Extra Credit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../00_Assignments/final_project.html">Final Project</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F03_NN/03_RNN_example.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/03_NN/03_RNN_example.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Recurrent Neural Networks</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="recurrent-neural-networks">
+<h1>Recurrent Neural Networks<a class="headerlink" href="#recurrent-neural-networks" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp500</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/GettysburgDataScience/datasets/refs/heads/main/sp500_1950_2025_weekly.csv&#39;</span><span class="p">,</span>
+                    <span class="n">thousands</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+                    <span class="n">parse_dates</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="n">sp500</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Price</th>
+      <th>Open</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Vol.</th>
+      <th>Change %</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2025-08-31</td>
+      <td>6437.47</td>
+      <td>6386.45</td>
+      <td>6445.17</td>
+      <td>6360.53</td>
+      <td>NaN</td>
+      <td>-0.35%</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2025-08-24</td>
+      <td>6460.26</td>
+      <td>6457.67</td>
+      <td>6508.23</td>
+      <td>6429.21</td>
+      <td>NaN</td>
+      <td>-0.10%</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2025-08-17</td>
+      <td>6466.91</td>
+      <td>6445.02</td>
+      <td>6478.89</td>
+      <td>6343.86</td>
+      <td>NaN</td>
+      <td>0.27%</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2025-08-10</td>
+      <td>6449.80</td>
+      <td>6389.67</td>
+      <td>6481.34</td>
+      <td>6364.06</td>
+      <td>NaN</td>
+      <td>0.94%</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2025-08-03</td>
+      <td>6389.45</td>
+      <td>6271.71</td>
+      <td>6395.16</td>
+      <td>6271.71</td>
+      <td>NaN</td>
+      <td>2.43%</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">],</span> <span class="n">sp500</span><span class="p">[</span><span class="s1">&#39;Price&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;US Dollars ($)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;S&amp;P 500 price (1970-Present)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/fb1c08372ded0cf19e57ceb0f0a36ed9e253ca340fdf78a9aaf781d85498a710.png" src="../_images/fb1c08372ded0cf19e57ceb0f0a36ed9e253ca340fdf78a9aaf781d85498a710.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dropout</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">SimpleRNN</span><span class="p">,</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">GRU</span><span class="p">,</span> <span class="n">TimeDistributed</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">keras.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">timeseries_dataset_from_array</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cutoff</span> <span class="o">=</span> <span class="mi">1990</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">sp500</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;Date &lt; @cutoff&#39;</span><span class="p">)[[</span><span class="s1">&#39;Price&#39;</span><span class="p">]]</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">sp500</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;Date &gt;= @cutoff&#39;</span><span class="p">)[[</span><span class="s1">&#39;Price&#39;</span><span class="p">]]</span>
+
+<span class="n">mm</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">(</span><span class="n">feature_range</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+
+<span class="n">Xs_train</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">Xs_test</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">Xs_train</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[9777.40303541],
+       [9817.87521079],
+       [9615.5143339 ],
+       ...,
+       [ 903.87858347],
+       [ 964.58684654],
+       [1015.17706577]], shape=(1044, 1))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xs</span> <span class="o">=</span> <span class="n">timeseries_dataset_from_array</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">Xs_train</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">Xs_test</span><span class="p">,</span>
+                              <span class="n">sequence_length</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> 
+                              <span class="n">sequence_stride</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">Xs</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">batch</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">y</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[[1153.45699831]
+  [1102.86677909]
+  [1153.45699831]
+  [1150.08431703]
+  [1183.81112985]
+  [1139.96627319]
+  [1187.18381113]
+  [1200.67453626]
+  [1231.02866779]
+  [1231.02866779]]
+
+ [[1139.96627319]
+  [1187.18381113]
+  [1200.67453626]
+  [1231.02866779]
+  [1231.02866779]
+  [1328.83642496]
+  [1278.24620573]
+  [1264.75548061]
+  [1274.87352445]
+  [1311.97301855]]
+
+ [[1328.83642496]
+  [1278.24620573]
+  [1264.75548061]
+  [1274.87352445]
+  [1311.97301855]
+  [1271.50084317]
+  [1220.91062395]
+  [1193.92917369]
+  [1146.71163575]
+  [1251.26475548]]
+
+ [[1271.50084317]
+  [1220.91062395]
+  [1193.92917369]
+  [1146.71163575]
+  [1251.26475548]
+  [1237.77403035]
+  [1254.63743676]
+  [1217.53794266]
+  [1217.53794266]
+  [1305.22765599]]
+
+ [[1237.77403035]
+  [1254.63743676]
+  [1217.53794266]
+  [1217.53794266]
+  [1305.22765599]
+  [1214.16526138]
+  [1244.51939292]
+  [1241.14671164]
+  [1335.58178752]
+  [1295.10961214]]
+
+ [[1214.16526138]
+  [1244.51939292]
+  [1241.14671164]
+  [1335.58178752]
+  [1295.10961214]
+  [1311.97301855]
+  [1254.63743676]
+  [1288.36424958]
+  [1278.24620573]
+  [1335.58178752]]
+
+ [[1311.97301855]
+  [1254.63743676]
+  [1288.36424958]
+  [1278.24620573]
+  [1335.58178752]
+  [1335.58178752]
+  [1382.79932546]
+  [1406.40809444]
+  [1440.13490725]
+  [1524.45193929]]
+
+ [[1335.58178752]
+  [1382.79932546]
+  [1406.40809444]
+  [1440.13490725]
+  [1524.45193929]
+  [1433.38954469]
+  [1416.52613828]
+  [1430.01686341]
+  [1365.93591906]
+  [1379.42664418]]
+
+ [[1433.38954469]
+  [1416.52613828]
+  [1430.01686341]
+  [1365.93591906]
+  [1379.42664418]
+  [1335.58178752]
+  [1244.51939292]
+  [1298.48229342]
+  [1369.30860034]
+  [1271.50084317]]
+
+ [[1335.58178752]
+  [1244.51939292]
+  [1298.48229342]
+  [1369.30860034]
+  [1271.50084317]
+  [1301.8549747 ]
+  [1359.19055649]
+  [1413.153457  ]
+  [1500.84317032]
+  [1483.97976391]]
+
+ [[1301.8549747 ]
+  [1359.19055649]
+  [1413.153457  ]
+  [1500.84317032]
+  [1483.97976391]
+  [1430.01686341]
+  [1416.52613828]
+  [1322.09106239]
+  [1352.44519393]
+  [1413.153457  ]]
+
+ [[1430.01686341]
+  [1416.52613828]
+  [1322.09106239]
+  [1352.44519393]
+  [1413.153457  ]
+  [1399.66273187]
+  [1386.17200675]
+  [1409.78077572]
+  [1430.01686341]
+  [1440.13490725]]
+
+ [[1399.66273187]
+  [1386.17200675]
+  [1409.78077572]
+  [1430.01686341]
+  [1440.13490725]
+  [1409.78077572]
+  [1396.29005059]
+  [1399.66273187]
+  [1301.8549747 ]
+  [1244.51939292]]
+
+ [[1409.78077572]
+  [1396.29005059]
+  [1399.66273187]
+  [1301.8549747 ]
+  [1244.51939292]
+  [1278.24620573]
+  [1315.34569983]
+  [1315.34569983]
+  [1335.58178752]
+  [1325.46374368]]
+
+ [[1278.24620573]
+  [1315.34569983]
+  [1315.34569983]
+  [1335.58178752]
+  [1325.46374368]
+  [1349.07251265]
+  [1295.10961214]
+  [1281.61888702]
+  [1345.69983137]
+  [1365.93591906]]
+
+ [[1349.07251265]
+  [1295.10961214]
+  [1281.61888702]
+  [1345.69983137]
+  [1365.93591906]
+  [1291.73693086]
+  [1301.8549747 ]
+  [1241.14671164]
+  [1261.38279933]
+  [1342.32715008]]
+
+ [[1291.73693086]
+  [1301.8549747 ]
+  [1241.14671164]
+  [1261.38279933]
+  [1342.32715008]
+  [1261.38279933]
+  [1254.63743676]
+  [1301.8549747 ]
+  [1244.51939292]
+  [1170.32040472]]
+
+ [[1261.38279933]
+  [1254.63743676]
+  [1301.8549747 ]
+  [1244.51939292]
+  [1170.32040472]
+  [1099.49409781]
+  [ 964.58684654]
+  [ 940.97807757]
+  [ 893.76053963]
+  [ 860.03372681]]
+
+ [[1099.49409781]
+  [ 964.58684654]
+  [ 940.97807757]
+  [ 893.76053963]
+  [ 860.03372681]
+  [ 826.306914  ]
+  [ 974.70489039]
+  [ 917.3693086 ]
+  [ 967.95952782]
+  [ 910.62394604]]
+
+ [[ 826.306914  ]
+  [ 974.70489039]
+  [ 917.3693086 ]
+  [ 967.95952782]
+  [ 910.62394604]
+  [ 900.50590219]
+  [ 927.48735245]
+  [ 897.13322091]
+  [ 873.52445194]
+  [ 795.95278246]]
+
+ [[ 900.50590219]
+  [ 927.48735245]
+  [ 897.13322091]
+  [ 873.52445194]
+  [ 795.95278246]
+  [ 806.07082631]
+  [ 795.95278246]
+  [ 708.26306914]
+  [ 785.83473862]
+  [ 829.67959528]]
+
+ [[ 806.07082631]
+  [ 795.95278246]
+  [ 708.26306914]
+  [ 785.83473862]
+  [ 829.67959528]
+  [ 741.98988196]
+  [ 812.81618887]
+  [ 799.32546374]
+  [ 866.77908938]
+  [ 910.62394604]]
+
+ [[ 741.98988196]
+  [ 812.81618887]
+  [ 799.32546374]
+  [ 866.77908938]
+  [ 910.62394604]
+  [1042.15851602]
+  [1092.74873524]
+  [1082.6306914 ]
+  [1096.12141653]
+  [1021.92242833]]
+
+ [[1042.15851602]
+  [1092.74873524]
+  [1082.6306914 ]
+  [1096.12141653]
+  [1021.92242833]
+  [ 951.09612142]
+  [1018.54974705]
+  [ 974.70489039]
+  [ 954.4688027 ]
+  [ 947.72344013]]
+
+ [[ 951.09612142]
+  [1018.54974705]
+  [ 974.70489039]
+  [ 954.4688027 ]
+  [ 947.72344013]
+  [ 951.09612142]
+  [ 907.25126476]
+  [ 819.56155143]
+  [ 809.44350759]
+  [ 738.61720067]]
+
+ [[ 951.09612142]
+  [ 907.25126476]
+  [ 819.56155143]
+  [ 809.44350759]
+  [ 738.61720067]
+  [ 627.31871838]
+  [ 725.12647555]
+  [ 711.63575042]
+  [ 758.85328836]
+  [ 741.98988196]]
+
+ [[ 627.31871838]
+  [ 725.12647555]
+  [ 711.63575042]
+  [ 758.85328836]
+  [ 741.98988196]
+  [ 650.92748735]
+  [ 684.65430017]
+  [ 647.55480607]
+  [ 549.7470489 ]
+  [ 495.7841484 ]]
+
+ [[ 650.92748735]
+  [ 684.65430017]
+  [ 647.55480607]
+  [ 549.7470489 ]
+  [ 495.7841484 ]
+  [ 360.87689713]
+  [ 293.4232715 ]
+  [ 347.38617201]
+  [ 283.30522766]
+  [ 161.88870152]]
+
+ [[ 360.87689713]
+  [ 293.4232715 ]
+  [ 347.38617201]
+  [ 283.30522766]
+  [ 161.88870152]
+  [ 155.14333895]
+  [ 161.88870152]
+  [  91.0623946 ]
+  [ 259.69645868]
+  [ 222.59696459]]
+
+ [[ 155.14333895]
+  [ 161.88870152]
+  [  91.0623946 ]
+  [ 259.69645868]
+  [ 222.59696459]
+  [ 323.77740304]
+  [ 424.95784148]
+  [ 391.23102867]
+  [ 263.06913997]
+  [ 337.26812816]]
+
+ [[ 323.77740304]
+  [ 424.95784148]
+  [ 391.23102867]
+  [ 263.06913997]
+  [ 337.26812816]
+  [ 296.79595278]
+  [   0.        ]
+  [  87.68971332]
+  [ 263.06913997]
+  [  97.80775717]]
+
+ [[ 296.79595278]
+  [   0.        ]
+  [  87.68971332]
+  [ 263.06913997]
+  [  97.80775717]
+  [ 306.91399663]
+  [ 333.89544688]
+  [ 310.28667791]
+  [ 451.93929174]
+  [ 627.31871838]]
+
+ [[ 306.91399663]
+  [ 333.89544688]
+  [ 310.28667791]
+  [ 451.93929174]
+  [ 627.31871838]
+  [ 549.7470489 ]
+  [ 677.90893761]
+  [ 715.0084317 ]
+  [ 704.89038786]
+  [ 721.75379427]]
+
+ [[ 549.7470489 ]
+  [ 677.90893761]
+  [ 715.0084317 ]
+  [ 704.89038786]
+  [ 721.75379427]
+  [ 799.32546374]
+  [ 849.91568297]
+  [ 978.07757167]
+  [1018.54974705]
+  [ 843.1703204 ]]
+
+ [[ 799.32546374]
+  [ 849.91568297]
+  [ 978.07757167]
+  [1018.54974705]
+  [ 843.1703204 ]
+  [ 887.01517707]
+  [ 873.52445194]
+  [ 984.82293423]
+  [ 978.07757167]
+  [ 940.97807757]]
+
+ [[ 887.01517707]
+  [ 873.52445194]
+  [ 984.82293423]
+  [ 978.07757167]
+  [ 940.97807757]
+  [1062.39460371]
+  [1005.05902192]
+  [1035.41315346]
+  [1069.13996627]
+  [1180.43844857]]
+
+ [[1062.39460371]
+  [1005.05902192]
+  [1035.41315346]
+  [1069.13996627]
+  [1180.43844857]
+  [1247.8920742 ]
+  [1200.67453626]
+  [1119.7301855 ]
+  [1116.35750422]
+  [1008.4317032 ]]
+
+ [[1247.8920742 ]
+  [1200.67453626]
+  [1119.7301855 ]
+  [1116.35750422]
+  [1008.4317032 ]
+  [1011.80438449]
+  [1112.98482293]
+  [1156.8296796 ]
+  [1123.10286678]
+  [1089.37605396]]
+
+ [[1011.80438449]
+  [1112.98482293]
+  [1156.8296796 ]
+  [1123.10286678]
+  [1089.37605396]
+  [1234.40134907]
+  [1187.18381113]
+  [1052.27655987]
+  [1045.5311973 ]
+  [1153.45699831]]
+
+ [[1234.40134907]
+  [1187.18381113]
+  [1052.27655987]
+  [1045.5311973 ]
+  [1153.45699831]
+  [1136.59359191]
+  [1251.26475548]
+  [1403.03541315]
+  [1517.70657673]
+  [1510.96121417]]
+
+ [[1136.59359191]
+  [1251.26475548]
+  [1403.03541315]
+  [1517.70657673]
+  [1510.96121417]
+  [1655.98650927]
+  [1615.5143339 ]
+  [1655.98650927]
+  [1625.63237774]
+  [1554.80607083]]
+
+ [[1655.98650927]
+  [1615.5143339 ]
+  [1655.98650927]
+  [1625.63237774]
+  [1554.80607083]
+  [1514.33389545]
+  [1419.89881956]
+  [1433.38954469]
+  [1413.153457  ]
+  [1325.46374368]]
+
+ [[1514.33389545]
+  [1419.89881956]
+  [1433.38954469]
+  [1413.153457  ]
+  [1325.46374368]
+  [1349.07251265]
+  [1433.38954469]
+  [1490.72512648]
+  [1595.27824621]
+  [1510.96121417]]
+
+ [[1349.07251265]
+  [1433.38954469]
+  [1490.72512648]
+  [1595.27824621]
+  [1510.96121417]
+  [1409.78077572]
+  [1315.34569983]
+  [1416.52613828]
+  [1396.29005059]
+  [1443.50758853]]
+
+ [[1409.78077572]
+  [1315.34569983]
+  [1416.52613828]
+  [1396.29005059]
+  [1443.50758853]
+  [1507.58853288]
+  [1403.03541315]
+  [1537.94266442]
+  [1403.03541315]
+  [1548.06070826]]
+
+ [[1507.58853288]
+  [1403.03541315]
+  [1537.94266442]
+  [1403.03541315]
+  [1548.06070826]
+  [1642.49578415]
+  [1514.33389545]
+  [1682.96795953]
+  [1679.59527825]
+  [1585.16020236]]
+
+ [[1642.49578415]
+  [1514.33389545]
+  [1682.96795953]
+  [1679.59527825]
+  [1585.16020236]
+  [1659.35919056]
+  [1571.66947723]
+  [1726.81281619]
+  [1736.93086003]
+  [1686.34064081]]
+
+ [[1659.35919056]
+  [1571.66947723]
+  [1726.81281619]
+  [1736.93086003]
+  [1686.34064081]
+  [1716.69477234]
+  [1777.40303541]
+  [1767.28499157]
+  [1753.79426644]
+  [1827.99325464]]
+
+ [[1716.69477234]
+  [1777.40303541]
+  [1767.28499157]
+  [1753.79426644]
+  [1827.99325464]
+  [1905.56492411]
+  [1922.42833052]
+  [1969.64586847]
+  [1878.58347386]
+  [1804.38448567]]
+
+ [[1905.56492411]
+  [1922.42833052]
+  [1969.64586847]
+  [1878.58347386]
+  [1804.38448567]
+  [1888.70151771]
+  [1929.17369309]
+  [1858.34738617]
+  [1854.97470489]
+  [1794.26644182]]
+
+ [[1888.70151771]
+  [1929.17369309]
+  [1858.34738617]
+  [1854.97470489]
+  [1794.26644182]
+  [1733.55817875]
+  [1750.42158516]
+  [1629.00505902]
+  [1581.78752108]
+  [1537.94266442]]
+
+ [[1733.55817875]
+  [1750.42158516]
+  [1629.00505902]
+  [1581.78752108]
+  [1537.94266442]
+  [1625.63237774]
+  [1625.63237774]
+  [1558.17875211]
+  [1568.29679595]
+  [1615.5143339 ]]
+
+ [[1625.63237774]
+  [1625.63237774]
+  [1558.17875211]
+  [1568.29679595]
+  [1615.5143339 ]
+  [1659.35919056]
+  [1632.3777403 ]
+  [1669.4772344 ]
+  [1676.22259696]
+  [1622.25969646]]
+
+ [[1659.35919056]
+  [1632.3777403 ]
+  [1669.4772344 ]
+  [1676.22259696]
+  [1622.25969646]
+  [1521.07925801]
+  [1497.47048904]
+  [1500.84317032]
+  [1564.92411467]
+  [1510.96121417]]
+
+ [[1521.07925801]
+  [1497.47048904]
+  [1500.84317032]
+  [1564.92411467]
+  [1510.96121417]
+  [1551.43338954]
+  [1554.80607083]
+  [1504.2158516 ]
+  [1598.65092749]
+  [1632.3777403 ]]
+
+ [[1551.43338954]
+  [1554.80607083]
+  [1504.2158516 ]
+  [1598.65092749]
+  [1632.3777403 ]
+  [1575.04215852]
+  [1487.35244519]
+  [1561.55143339]
+  [1531.19730185]
+  [1571.66947723]]
+
+ [[1575.04215852]
+  [1487.35244519]
+  [1561.55143339]
+  [1531.19730185]
+  [1571.66947723]
+  [1602.02360877]
+  [1595.27824621]
+  [1514.33389545]
+  [1524.45193929]
+  [1537.94266442]]
+
+ [[1602.02360877]
+  [1595.27824621]
+  [1514.33389545]
+  [1524.45193929]
+  [1537.94266442]
+  [1571.66947723]
+  [1537.94266442]
+  [1480.60708263]
+  [1450.2529511 ]
+  [1443.50758853]]
+
+ [[1571.66947723]
+  [1537.94266442]
+  [1480.60708263]
+  [1450.2529511 ]
+  [1443.50758853]
+  [1436.76222597]
+  [1413.153457  ]
+  [1396.29005059]
+  [1386.17200675]
+  [1389.54468803]]
+
+ [[1436.76222597]
+  [1413.153457  ]
+  [1396.29005059]
+  [1386.17200675]
+  [1389.54468803]
+  [1342.32715008]
+  [1295.10961214]
+  [1281.61888702]
+  [1193.92917369]
+  [1173.693086  ]]
+
+ [[1342.32715008]
+  [1295.10961214]
+  [1281.61888702]
+  [1193.92917369]
+  [1173.693086  ]
+  [ 998.31365936]
+  [ 988.19561551]
+  [1005.05902192]
+  [1086.00337268]
+  [1075.88532884]]
+
+ [[ 998.31365936]
+  [ 988.19561551]
+  [1005.05902192]
+  [1086.00337268]
+  [1075.88532884]
+  [1119.7301855 ]
+  [1197.30185497]
+  [1251.26475548]
+  [1234.40134907]
+  [1210.7925801 ]]
+
+ [[1119.7301855 ]
+  [1197.30185497]
+  [1251.26475548]
+  [1234.40134907]
+  [1210.7925801 ]
+  [1271.50084317]
+  [1284.9915683 ]
+  [1295.10961214]
+  [1288.36424958]
+  [1214.16526138]]
+
+ [[1271.50084317]
+  [1284.9915683 ]
+  [1295.10961214]
+  [1288.36424958]
+  [1214.16526138]
+  [1126.47554806]
+  [1075.88532884]
+  [1123.10286678]
+  [1234.40134907]
+  [1241.14671164]]
+
+ [[1126.47554806]
+  [1075.88532884]
+  [1123.10286678]
+  [1234.40134907]
+  [1241.14671164]
+  [1295.10961214]
+  [1264.75548061]
+  [1204.04721754]
+  [1237.77403035]
+  [1308.60033727]]
+
+ [[1295.10961214]
+  [1264.75548061]
+  [1204.04721754]
+  [1237.77403035]
+  [1308.60033727]
+  [1315.34569983]
+  [1258.01011804]
+  [1305.22765599]
+  [1345.69983137]
+  [1369.30860034]]
+
+ [[1315.34569983]
+  [1258.01011804]
+  [1305.22765599]
+  [1345.69983137]
+  [1369.30860034]
+  [1406.40809444]
+  [1406.40809444]
+  [1389.54468803]
+  [1342.32715008]
+  [1291.73693086]]
+
+ [[1406.40809444]
+  [1406.40809444]
+  [1389.54468803]
+  [1342.32715008]
+  [1291.73693086]
+  [1271.50084317]
+  [1305.22765599]
+  [1258.01011804]
+  [1237.77403035]
+  [1163.57504216]]
+
+ [[1271.50084317]
+  [1305.22765599]
+  [1258.01011804]
+  [1237.77403035]
+  [1163.57504216]
+  [1160.20236088]
+  [1217.53794266]
+  [1166.94772344]
+  [1133.22091062]
+  [1099.49409781]]
+
+ [[1160.20236088]
+  [1217.53794266]
+  [1166.94772344]
+  [1133.22091062]
+  [1099.49409781]
+  [1035.41315346]
+  [1008.4317032 ]
+  [1008.4317032 ]
+  [ 954.4688027 ]
+  [ 940.97807757]]
+
+ [[1035.41315346]
+  [1008.4317032 ]
+  [1008.4317032 ]
+  [ 954.4688027 ]
+  [ 940.97807757]
+  [ 944.35075885]
+  [ 917.3693086 ]
+  [ 795.95278246]
+  [ 721.75379427]
+  [ 711.63575042]]
+
+ [[ 944.35075885]
+  [ 917.3693086 ]
+  [ 795.95278246]
+  [ 721.75379427]
+  [ 711.63575042]
+  [ 738.61720067]
+  [ 704.89038786]
+  [ 725.12647555]
+  [ 741.98988196]
+  [ 768.97133221]]
+
+ [[ 738.61720067]
+  [ 704.89038786]
+  [ 725.12647555]
+  [ 741.98988196]
+  [ 768.97133221]
+  [ 772.34401349]
+  [ 731.87183811]
+  [ 684.65430017]
+  [ 681.28161889]
+  [ 691.39966273]]
+
+ [[ 772.34401349]
+  [ 731.87183811]
+  [ 684.65430017]
+  [ 681.28161889]
+  [ 691.39966273]
+  [ 661.0455312 ]
+  [ 569.98313659]
+  [ 435.07588533]
+  [ 505.90219224]
+  [ 529.51096121]]
+
+ [[ 661.0455312 ]
+  [ 569.98313659]
+  [ 435.07588533]
+  [ 505.90219224]
+  [ 529.51096121]
+  [ 522.76559865]
+  [ 519.39291737]
+  [ 414.83979764]
+  [ 357.50421585]
+  [ 377.74030354]]
+
+ [[ 522.76559865]
+  [ 519.39291737]
+  [ 414.83979764]
+  [ 357.50421585]
+  [ 377.74030354]
+  [ 495.7841484 ]
+  [ 401.34907251]
+  [ 468.80269815]
+  [ 478.92074199]
+  [ 333.89544688]]
+
+ [[ 495.7841484 ]
+  [ 401.34907251]
+  [ 468.80269815]
+  [ 478.92074199]
+  [ 333.89544688]
+  [ 492.41146712]
+  [ 576.72849916]
+  [ 644.18212479]
+  [ 691.39966273]
+  [ 789.2074199 ]]
+
+ [[ 492.41146712]
+  [ 576.72849916]
+  [ 644.18212479]
+  [ 691.39966273]
+  [ 789.2074199 ]
+  [ 873.52445194]
+  [ 913.99662732]
+  [ 907.25126476]
+  [ 836.42495784]
+  [ 863.40640809]]
+
+ [[ 873.52445194]
+  [ 913.99662732]
+  [ 907.25126476]
+  [ 836.42495784]
+  [ 863.40640809]
+  [ 913.99662732]
+  [ 917.3693086 ]
+  [ 866.77908938]
+  [ 816.18887015]
+  [ 809.44350759]]]
+[[52897.13322091]
+ [51261.38279933]
+ [50408.09443508]
+ [49156.8296796 ]
+ [47544.68802698]
+ [45726.81281619]
+ [45595.27824621]
+ [46489.03878583]
+ [45490.72512648]
+ [43858.34738617]
+ [43187.18381113]
+ [43544.68802698]
+ [45052.27655987]
+ [44091.0623946 ]
+ [42293.4232715 ]
+ [40573.35581788]
+ [38900.50590219]
+ [39200.67453626]
+ [36826.306914  ]
+ [38350.75885329]
+ [43082.6306914 ]
+ [42792.58010118]
+ [43005.05902192]
+ [41042.15851602]
+ [42728.49915683]
+ [40782.46205734]
+ [39204.04721754]
+ [37807.75716695]
+ [36640.80944351]
+ [34043.84485666]
+ [33814.50252951]
+ [34715.0084317 ]
+ [35365.93591906]
+ [37632.3777403 ]
+ [35150.08431703]
+ [34721.75379427]
+ [35082.6306914 ]
+ [34779.08937605]
+ [34037.0994941 ]
+ [32178.75210793]
+ [31204.04721754]
+ [28890.38785835]
+ [27814.50252951]
+ [27227.65598651]
+ [23413.153457  ]
+ [27193.92917369]
+ [29325.46374368]
+ [28124.78920742]
+ [27470.48903879]
+ [40229.34232715]
+ [41682.96795953]
+ [39703.20404722]
+ [43790.89376054]
+ [45585.16020236]
+ [42256.3237774 ]
+ [43534.56998314]
+ [42593.59190556]
+ [47409.78077572]
+ [46927.48735245]
+ [50431.70320405]
+ [47612.14165261]
+ [47106.23946037]
+ [48576.72849916]
+ [49258.01011804]
+ [46897.13322091]
+ [45210.7925801 ]
+ [46748.73524452]
+ [45733.55817875]
+ [45150.08431703]
+ [44057.33558179]
+ [42414.83979764]
+ [40620.57335582]
+ [40580.10118044]
+ [41345.69983137]
+ [42101.18043845]
+ [41844.85666105]
+ [41311.97301855]
+ [41325.46374368]
+ [40374.36762226]]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-11-20 08:30:05.872365: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rnn</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">input_shape</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span> <span class="o">=</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">TimeDistributed</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">activation</span> <span class="o">=</span> <span class="s1">&#39;linear&#39;</span><span class="p">))</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">rnn</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;MeanSquaredError&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MAE&#39;</span><span class="p">],</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Adam&#39;</span><span class="p">)</span>
+<span class="n">rnn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/layers/rnn/rnn.py:199: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.
+  super().__init__(**kwargs)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-11-20 08:30:06.783914: I tensorflow/core/framework/local_rendezvous.cc:407] Local rendezvous is aborting with status: INVALID_ARGUMENT: Incompatible shapes: [128,1] vs. [128,10,10]
+	 [[{{function_node __inference_one_step_on_data_3632}}{{node gradient_tape/compile_loss/mean_squared_error/sub/BroadcastGradientArgs}}]]
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">InvalidArgumentError</span><span class="g g-Whitespace">                      </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">line</span> <span class="mi">11</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">rnn</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span>     <span class="n">SimpleRNN</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">return_sequences</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">input_shape</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span>     <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>      <span class="mi">7</span>     <span class="p">]</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">rnn</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span> <span class="o">=</span> <span class="s1">&#39;MeanSquaredError&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;MAE&#39;</span><span class="p">],</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;Adam&#39;</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">11</span> <span class="n">rnn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xs</span><span class="p">)</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/utils/traceback_utils.py:122,</span> in <span class="ni">filter_traceback.&lt;locals&gt;.error_handler</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">119</span>     <span class="n">filtered_tb</span> <span class="o">=</span> <span class="n">_process_traceback_frames</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__traceback__</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">120</span>     <span class="c1"># To get the full stack trace, call:</span>
+<span class="g g-Whitespace">    </span><span class="mi">121</span>     <span class="c1"># `keras.config.disable_traceback_filtering()`</span>
+<span class="ne">--&gt; </span><span class="mi">122</span>     <span class="k">raise</span> <span class="n">e</span><span class="o">.</span><span class="n">with_traceback</span><span class="p">(</span><span class="n">filtered_tb</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
+<span class="g g-Whitespace">    </span><span class="mi">123</span> <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">124</span>     <span class="k">del</span> <span class="n">filtered_tb</span>
+
+<span class="nn">File ~/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/tensorflow/python/eager/execute.py:53,</span> in <span class="ni">quick_execute</span><span class="nt">(op_name, num_outputs, inputs, attrs, ctx, name)</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span> <span class="k">try</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span>   <span class="n">ctx</span><span class="o">.</span><span class="n">ensure_initialized</span><span class="p">()</span>
+<span class="ne">---&gt; </span><span class="mi">53</span>   <span class="n">tensors</span> <span class="o">=</span> <span class="n">pywrap_tfe</span><span class="o">.</span><span class="n">TFE_Py_Execute</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">_handle</span><span class="p">,</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">op_name</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>                                       <span class="n">inputs</span><span class="p">,</span> <span class="n">attrs</span><span class="p">,</span> <span class="n">num_outputs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">55</span> <span class="k">except</span> <span class="n">core</span><span class="o">.</span><span class="n">_NotOkStatusException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span>   <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="ne">InvalidArgumentError</span>: Graph execution error:
+
+<span class="n">Detected</span> <span class="n">at</span> <span class="n">node</span> <span class="n">gradient_tape</span><span class="o">/</span><span class="n">compile_loss</span><span class="o">/</span><span class="n">mean_squared_error</span><span class="o">/</span><span class="n">sub</span><span class="o">/</span><span class="n">BroadcastGradientArgs</span> <span class="n">defined</span> <span class="n">at</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+  <span class="n">File</span> <span class="s2">&quot;&lt;frozen runpy&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">198</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_module_as_main</span>
+
+  <span class="n">File</span> <span class="s2">&quot;&lt;frozen runpy&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">88</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_code</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel_launcher.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">18</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/traitlets/config/application.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">1075</span><span class="p">,</span> <span class="ow">in</span> <span class="n">launch_instance</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/kernelapp.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">758</span><span class="p">,</span> <span class="ow">in</span> <span class="n">start</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/tornado/platform/asyncio.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">211</span><span class="p">,</span> <span class="ow">in</span> <span class="n">start</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/base_events.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">678</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_forever</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/base_events.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">2033</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_once</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/lib/python3.13/asyncio/events.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">89</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/kernelbase.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">614</span><span class="p">,</span> <span class="ow">in</span> <span class="n">shell_main</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/kernelbase.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">471</span><span class="p">,</span> <span class="ow">in</span> <span class="n">dispatch_shell</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/ipkernel.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">366</span><span class="p">,</span> <span class="ow">in</span> <span class="n">execute_request</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/kernelbase.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">827</span><span class="p">,</span> <span class="ow">in</span> <span class="n">execute_request</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/ipkernel.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">458</span><span class="p">,</span> <span class="ow">in</span> <span class="n">do_execute</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/ipykernel/zmqshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">663</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_cell</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3116</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_cell</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3171</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_run_cell</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/async_helpers.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">128</span><span class="p">,</span> <span class="ow">in</span> <span class="n">_pseudo_sync_runner</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3394</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_cell_async</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3639</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_ast_nodes</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/IPython/core/interactiveshell.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">3699</span><span class="p">,</span> <span class="ow">in</span> <span class="n">run_code</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/var/folders/qm/g7x838zs775f4j_5s231csf80000gn/T/ipykernel_88544/2394850586.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">11</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/utils/traceback_utils.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">117</span><span class="p">,</span> <span class="ow">in</span> <span class="n">error_handler</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">399</span><span class="p">,</span> <span class="ow">in</span> <span class="n">fit</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">241</span><span class="p">,</span> <span class="ow">in</span> <span class="n">function</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">154</span><span class="p">,</span> <span class="ow">in</span> <span class="n">multi_step_on_iterator</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">125</span><span class="p">,</span> <span class="ow">in</span> <span class="n">wrapper</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">134</span><span class="p">,</span> <span class="ow">in</span> <span class="n">one_step_on_data</span>
+
+  <span class="n">File</span> <span class="s2">&quot;/Users/eatai/.pyenv/versions/3.13.1/envs/datascience/lib/python3.13/site-packages/keras/src/backend/tensorflow/trainer.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">81</span><span class="p">,</span> <span class="ow">in</span> <span class="n">train_step</span>
+
+<span class="n">Incompatible</span> <span class="n">shapes</span><span class="p">:</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="n">vs</span><span class="o">.</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span>
+	 <span class="p">[[{{</span><span class="n">node</span> <span class="n">gradient_tape</span><span class="o">/</span><span class="n">compile_loss</span><span class="o">/</span><span class="n">mean_squared_error</span><span class="o">/</span><span class="n">sub</span><span class="o">/</span><span class="n">BroadcastGradientArgs</span><span class="p">}}]]</span> <span class="p">[</span><span class="n">Op</span><span class="p">:</span><span class="n">__inference_multi_step_on_iterator_3701</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./03_NN"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Eatai Roth, Gettysburg College
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
